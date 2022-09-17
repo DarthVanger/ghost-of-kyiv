@@ -1,0 +1,19 @@
+body{
+    margin:0;   
+}
+#wall {
+    position: absolute;
+    height: 700px;
+}
+
+#plane {
+    position: absolute;
+    top: 0;
+    width: 250px;   
+}
+#rocket {
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    width: 100px;
+} 
