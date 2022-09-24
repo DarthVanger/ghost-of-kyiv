@@ -6,7 +6,7 @@ body{
     height: 700px;
 }
 
-#plane {
+#airfighter {
     position: absolute;
     top: 0;
     width: 250px;   
@@ -16,4 +16,4 @@ body{
     top: 70px;
     left: 20px;
     width: 100px;
-} 
+}
