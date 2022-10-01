@@ -6,6 +6,7 @@ let rocketX = 20;
 let rocketY = 70;
 let isRocketMoving = false;
 let ship = document.querySelector('#airfighter');
+let rocket = document.querySelector('#rocket');
 const fps = 60;
 
 function init() {
@@ -16,20 +17,22 @@ function init() {
 
 function Step () {
    // console.log('Step');
-    moveWall();
-    moveRocket();
-    moveShip();
+    renderWall();
+    renderRocket();
+    renderShip();
 }
 
-function moveWall () {
-   // console.log('moveWall');
+function renderWall () {
+   // console.log('renderWall');
 }
 
-function moveRocket () {
-  //  console.log('moveRocket');
+function renderRocket () {
+  //  console.log('renderRocket');
+    rocket.style.left = rocketX;
+    rocket.style.top = rocketY;
 }
 
-function moveShip () {
+function renderShip () {
     ship.style.left = shipX;
     ship.style.top = shipY;
 }
@@ -65,7 +68,7 @@ function handleKeyDown(event) {
 }
 
 /**
- * Move ship left
+ * render ship left
  */
 function moveShipLeft() {
     shipX -= 10; 
