@@ -1,13 +1,14 @@
-let wallX = 600;
-let wallY = 81;
+let groundX = 600;
+let groundY = 81;
 let shipX = 0;
 let shipY = 0;
 let rocketX = 20;
 let rocketY = 70;
 let rocketVelocity = 0;
+let groundVelocity = -2;
 let ship = document.querySelector('#airfighter');
 let rocket = document.querySelector('#rocket');
-let wall = document.querySelector('#wall');
+let ground = document.querySelector('#ground');
 const fps = 60;
 
 function init() {
@@ -18,14 +19,17 @@ function init() {
 
 function Step () {
   renderWall();
+  moveGround();
   moveRocket();
+  checkGroundShipCollision();
+  checkGroundRocketCollision();
   renderRocket();
   renderShip();
 }
 
 function renderWall () {
-  wall.style.left = wallX;
-  wall.style.top = wallY;
+  ground.style.left = groundX;
+  ground.style.top = groundY;
 }
 
 /**
@@ -45,8 +49,27 @@ function initKeybordMovement() {
   console.log('initKeybordMovement');
   document.addEventListener('keydown' , handleKeyDown);
 }
+
+function checkGroundShipCollision() {
+  if (groundX < shipX + 250 && groundY < shipY + 80) {
+    alert('Game Over!');
+  }
+}
+
+function checkGroundRocketCollision() {
+  if (rocketX > groundX) {
+    groundY += 800;
+    console.log('rocketGroundCollision');
+  }
+
+}
+
+/**
+ * Bind all game keyboard controls 
+ */
 function handleKeyDown(event) {
   console.log('handleKeyDown');
+  console.log('key: ', event.key);
   if (event.key == 'r') {
     fireRocket();
   }
@@ -56,28 +79,40 @@ function handleKeyDown(event) {
   }
 
   if (event.key == 's') {
-    shipY += 10;
-    rocketY += 10;
+    moveShipDown();
   }
 
   if (event.key == 'w') {
-    shipY -= 10; 
-    rocketY -= 10;
+    moveShipUp();
   }
 
-  if (event.key == 'd') { 
-    shipX += 10;
-    rocketX += 10;
+  if (event.key == 'd') {
+    moveShipRight(); 
   }
 }
 
-/**
- * render ship left
- */
 function moveShipLeft() {
   shipX -= 10; 
   rocketX -= 10;
   console.log('moveShipLeft');
+}
+
+function moveShipRight() {
+  shipX += 10;
+  rocketX += 10;
+  console.log('moveShipRight');
+}
+
+function moveShipUp() {
+  shipY -= 10; 
+  rocketY -= 10;
+  console.log('moveShipUp');
+}
+
+function moveShipDown() {
+  shipY += 10; 
+  rocketY += 10;
+  console.log('moveShipDown');
 }
 
 /**
@@ -93,6 +128,13 @@ function fireRocket() {
  */
 function moveRocket() {
   rocketX += rocketVelocity;
+}
+
+/**
+ * Change coordinates of ground according to ground velocity
+ */
+ function moveGround() {
+  groundX += groundVelocity;
 }
 
 init();
