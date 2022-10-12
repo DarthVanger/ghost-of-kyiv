@@ -9,11 +9,12 @@ let groundVelocity = -2;
 let ship = document.querySelector('#airfighter');
 let rocket = document.querySelector('#rocket');
 let ground = document.querySelector('#ground');
+let frame = 0;
 const fps = 60;
 
-function init() {
-  console.log('init');
-  setInterval (Step , 1000/fps);
+function startGame() {
+  console.log('startGame');
+  setInterval(Step , 1000/fps);
   initKeybordMovement();
 }
 
@@ -25,6 +26,8 @@ function Step () {
   checkGroundRocketCollision();
   renderRocket();
   renderShip();
+  frame += 1;
+  renderlevelPRBar();
 }
 
 function renderWall () {
@@ -137,4 +140,24 @@ function moveRocket() {
   groundX += groundVelocity;
 }
 
-init();
+
+function handleStartGameBtnClick() {
+  startGame();
+  hideStartScreen();
+}
+
+function hideStartScreen() {
+  let startScreen = document.querySelector("#start-screen");
+  startScreen.remove();
+}
+
+function renderlevelPRBar() {
+  let levelProgressDiv = document.querySelector("#level-progress")
+  levelProgressDiv.style.width = frame + 'px';
+  levelProgressDiv.innerHTML = frame + "%";
+}
+
+
+
+
+

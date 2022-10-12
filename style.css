@@ -32,3 +32,21 @@ p {
     min-height: 100%;
 }
 
+#start-screen {
+    position: fixed;
+    background: black;
+    padding: 200px;
+}
+
+#level-progress {
+    position: absolute;
+    bottom: 37;
+    right: calc(50% - 451px / 2);
+    border: 3px solid greenyellow;
+    color: white;
+    padding: 20px;
+    background: #3d6d6d;
+    font-size: 2em;
+    width: 451px;
+    text-align: center;
+}
