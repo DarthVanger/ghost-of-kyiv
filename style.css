@@ -29,8 +29,6 @@ p {
     position: absolute;
 }
 
-
-
 #ground {
     position: absolute;
     height: 200px;
@@ -56,14 +54,6 @@ p {
     min-width: 100%;
     min-height: 100%;
 }
-
-
-/*
-#start-screenDisplay {
-    position: fixed;
-    padding: 22in;
-    background:black;
-}*/
 
 #level-progress {
     position: absolute;

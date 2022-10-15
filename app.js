@@ -139,20 +139,26 @@ function moveRocket() {
  function moveGround() {
   groundX += groundVelocity;
 }
+
 /**
- * Run 
+ * On button click actions 
  */
 function handleStartGameBtnClick() {
   startGame();
   hideStartScreen();
 }
 
+/**
+ * Remove div of start button screen
+ */
 function hideStartScreen() {
   let startScreen = document.querySelector("#start-screen");
   startScreen.remove();
 }
 
-
+/**
+ * Produces a movement of the progress bar, every second plus a percentage
+ */
 function renderlevelPRBar() {
   let levelProgressDiv = document.querySelector("#level-progress")
   levelProgressDiv.style.width = frame + 'px';
