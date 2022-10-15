@@ -139,8 +139,9 @@ function moveRocket() {
  function moveGround() {
   groundX += groundVelocity;
 }
-
-
+/**
+ * Run 
+ */
 function handleStartGameBtnClick() {
   startGame();
   hideStartScreen();
@@ -151,13 +152,9 @@ function hideStartScreen() {
   startScreen.remove();
 }
 
+
 function renderlevelPRBar() {
   let levelProgressDiv = document.querySelector("#level-progress")
   levelProgressDiv.style.width = frame + 'px';
   levelProgressDiv.innerHTML = frame + "%";
 }
-
-
-
-
-
