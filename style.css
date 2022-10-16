@@ -1,5 +1,5 @@
 #start-screen {
-    padding: 320px;     
+    padding: auto;
     position: fixed;     
     right: 0;
     top: 0;
@@ -55,7 +55,7 @@ p {
     min-height: 100%;
 }
 
-#level-progress {
+#div-progress-bar {
     position: absolute;
     bottom: 37;
     right: calc(50% - 451px / 2);

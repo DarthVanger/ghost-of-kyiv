@@ -27,7 +27,7 @@ function Step () {
   renderRocket();
   renderShip();
   frame += 1;
-  renderlevelPRBar();
+ /* renderlevelPRBar();*/
 }
 
 function renderWall () {
@@ -92,6 +92,10 @@ function handleKeyDown(event) {
   if (event.key == 'd') {
     moveShipRight(); 
   }
+
+  if (event.key == 'p') {
+    stopGame();
+  }
 }
 
 function moveShipLeft() {
@@ -117,6 +121,8 @@ function moveShipDown() {
   rocketY += 10;
   console.log('moveShipDown');
 }
+
+
 
 /**
  * Launch rocket
@@ -158,9 +164,16 @@ function hideStartScreen() {
 
 /**
  * Produces a movement of the progress bar, every second plus a percentage
+ * function renderlevelPRBar() {
+ * let levelProgressDiv = document.querySelector("#level-progress")
+ * levelProgressDiv.style.width = frame + 'px';
+ * levelProgressDiv.innerHTML = frame + "%";
+ * }
  */
-function renderlevelPRBar() {
-  let levelProgressDiv = document.querySelector("#level-progress")
-  levelProgressDiv.style.width = frame + 'px';
-  levelProgressDiv.innerHTML = frame + "%";
+ function stopGame() {
+  console.log("stopGame");
+  clearInterval('startGame');
+  rocketVelocity= 0;
+  groundVelocity= 0;
+  
 }
