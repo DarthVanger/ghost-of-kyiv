@@ -1,5 +1,28 @@
+#start-screen {
+    padding: auto;
+    position: fixed;     
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    background: black;
+}
+
 body {
     margin:0;   
+}
+
+button {
+    display:inline-block;
+    font-size:1.5em;
+    cursor:pointer;
+    text-decoration:none;
+    padding:12px 48px 12px 48px;
+    border-radius:4px;
+    color:#ffffff;
+    background-color:#1bafdb;
+    border: 2px solid #ffffff;
 }
 
 p {
@@ -32,3 +55,16 @@ p {
     min-height: 100%;
 }
 
+#div-progress-bar {
+    position: absolute;
+    bottom: 37;
+    right: calc(50% - 451px / 2);
+    border: 3px solid greenyellow;
+    color: white;
+    padding: 20px;
+    background: #3d6d6d;
+    font-size: 2em;
+    width: 451px;
+    text-align: center;
+    max-width: fit-content;
+}

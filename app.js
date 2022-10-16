@@ -9,11 +9,12 @@ let groundVelocity = -2;
 let ship = document.querySelector('#airfighter');
 let rocket = document.querySelector('#rocket');
 let ground = document.querySelector('#ground');
+let frame = 0;
 const fps = 60;
 
-function init() {
-  console.log('init');
-  setInterval (Step , 1000/fps);
+function startGame() {
+  console.log('startGame');
+  setInterval(Step , 1000/fps);
   initKeybordMovement();
 }
 
@@ -25,6 +26,8 @@ function Step () {
   checkGroundRocketCollision();
   renderRocket();
   renderShip();
+  frame += 1;
+ /* renderlevelPRBar();*/
 }
 
 function renderWall () {
@@ -89,6 +92,10 @@ function handleKeyDown(event) {
   if (event.key == 'd') {
     moveShipRight(); 
   }
+
+  if (event.key == 'p') {
+    stopGame();
+  }
 }
 
 function moveShipLeft() {
@@ -115,6 +122,8 @@ function moveShipDown() {
   console.log('moveShipDown');
 }
 
+
+
 /**
  * Launch rocket
  */
@@ -137,4 +146,34 @@ function moveRocket() {
   groundX += groundVelocity;
 }
 
-init();
+/**
+ * On button click actions 
+ */
+function handleStartGameBtnClick() {
+  startGame();
+  hideStartScreen();
+}
+
+/**
+ * Remove div of start button screen
+ */
+function hideStartScreen() {
+  let startScreen = document.querySelector("#start-screen");
+  startScreen.remove();
+}
+
+/**
+ * Produces a movement of the progress bar, every second plus a percentage
+ * function renderlevelPRBar() {
+ * let levelProgressDiv = document.querySelector("#level-progress")
+ * levelProgressDiv.style.width = frame + 'px';
+ * levelProgressDiv.innerHTML = frame + "%";
+ * }
+ */
+ function stopGame() {
+  console.log("stopGame");
+  clearInterval('startGame');
+  rocketVelocity= 0;
+  groundVelocity= 0;
+  
+}
