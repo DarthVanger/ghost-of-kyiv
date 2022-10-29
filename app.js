@@ -160,3 +160,5 @@ function hideStartScreen() {
   let startScreen = document.querySelector("#start-screen");
   startScreen.remove();
 }
+
+
