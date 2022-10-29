@@ -26,9 +26,6 @@ function Step () {
   checkGroundRocketCollision();
   renderRocket();
   renderShip();
-  renderlevelPRBar();
-  frame += 0.0124;
- /* renderlevelPRBar();*/
 }
 
 function renderWall () {
