@@ -15,8 +15,7 @@ const fps = 60;
 function startGame() {
   console.log('startGame');
   setInterval(Step , 1000/fps);
-  initKeybordMovement();
-}
+ }
 
 function Step () {
   renderWall();
@@ -26,6 +25,7 @@ function Step () {
   checkGroundRocketCollision();
   renderRocket();
   renderShip();
+  initKeybordMovement()
 }
 
 function renderWall () {
