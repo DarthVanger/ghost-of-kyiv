@@ -9,67 +9,67 @@ let rocketY = 70;
 let rocketVelocity = 0;
 let enemy1Velocity = -2;
 let enemy2Velocity = -2;
-let ship = document.querySelector('#airfighter');
-let rocket = document.querySelector('#rocket');
-let enemy1 = document.querySelector('#enemy1');
-let enemy2 = document.querySelector('#enemy2');
+let ship = document.querySelector("#airfighter");
+let rocket = document.querySelector("#rocket");
+let enemy1 = document.querySelector("#enemy1");
+let enemy2 = document.querySelector("#enemy2");
 const fps = 60;
 
 function init() {
-  console.log('init');
-  setInterval (Step , 1000/fps);
+  console.log("init");
+  setInterval(Step, 1000 / fps);
   initKeybordMovement();
 }
 
-function Step () {
+function Step() {
   renderEnemy1();
   renderEnemy2();
   moveEnemy1();
   moveEnemy2();
   moveRocket();
   checkEnemy1ShipCollision();
-  checkEnemy1RocketCollision();
+  // checkEnemy1RocketCollision();
   renderRocket();
   renderShip();
 }
 
-function renderEnemy1 () {
+function renderEnemy1() {
   enemy1.style.left = enemy1X;
   enemy1.style.top = enemy1Y;
 }
 
-function renderEnemy2 () {
+function renderEnemy2() {
   enemy2.style.left = enemy2X;
   enemy2.style.top = enemy2Y;
 }
 
-
 /**
  * Update rocket img coordinates according to variables
  */
-function renderRocket () {
+function renderRocket() {
   rocket.style.left = rocketX;
   rocket.style.top = rocketY;
 }
 
-function renderShip () {
+function renderShip() {
   ship.style.left = shipX;
   ship.style.top = shipY;
 }
 
 function initKeybordMovement() {
-  console.log('initKeybordMovement');
-  document.addEventListener('keydown' , handleKeyDown);
+  console.log("initKeybordMovement");
+  document.addEventListener("keydown", handleKeyDown);
 }
 
 function checkEnemy1ShipCollision() {
+  console.log(enemy1X, shipX);
   if (
-    enemy1X < shipX + 250 &&
-    enemy1Y < shipY + 80 &&
-    enemy1X > shipX + 361 && 
-    enemy1Y > shipX + 200   
+    shipX + 250 > enemy1X &&
+    shipX < enemy1X + 361 &&
+    shipY + 80 > enemy1Y &&
+    shipY < enemy1Y + 200
   ) {
-    alert('Game Over!');
+    alert("Game Over!");
   }
 }
 
@@ -77,70 +77,70 @@ function checkEnemy1RocketCollision() {
   if (
     rocketX > enemy1X &&
     rocketY > enemy1Y &&
-    rocketX < enemy1X+361 &&
-    rocketY < enemy1Y+200
+    rocketX < enemy1X + 361 &&
+    rocketY < enemy1Y + 200
   ) {
     enemy1Y += 800;
-    console.log('rocketenemy1Collision');
+    console.log("rocketenemy1Collision");
   }
 }
 
 /**
- * Bind all game keyboard controls 
+ * Bind all game keyboard controls
  */
 function handleKeyDown(event) {
-  console.log('handleKeyDown');
-  console.log('key: ', event.key);
-  if (event.key == 'r') {
+  console.log("handleKeyDown");
+  console.log("key: ", event.key);
+  if (event.key == "r") {
     fireRocket();
   }
 
-  if (event.key == 'a') {
+  if (event.key == "a") {
     moveShipLeft();
   }
 
-  if (event.key == 's') {
+  if (event.key == "s") {
     moveShipDown();
   }
 
-  if (event.key == 'w') {
+  if (event.key == "w") {
     moveShipUp();
   }
 
-  if (event.key == 'd') {
-    moveShipRight(); 
+  if (event.key == "d") {
+    moveShipRight();
   }
 }
 
 function moveShipLeft() {
-  shipX -= 10; 
+  shipX -= 10;
   rocketX -= 10;
-  console.log('moveShipLeft');
+  console.log("moveShipLeft");
 }
 
 function moveShipRight() {
   shipX += 10;
   rocketX += 10;
-  console.log('moveShipRight');
+  console.log("moveShipRight");
 }
 
 function moveShipUp() {
-  shipY -= 10; 
+  shipY -= 10;
   rocketY -= 10;
-  console.log('moveShipUp');
+  console.log("moveShipUp");
 }
 
 function moveShipDown() {
-  shipY += 10; 
+  shipY += 10;
   rocketY += 10;
-  console.log('moveShipDown');
+  console.log("moveShipDown");
 }
 
 /**
  * Launch rocket
  */
 function fireRocket() {
-  console.log('fireRocket');
+  console.log("fireRocket");
   rocketVelocity += 8;
 }
 
