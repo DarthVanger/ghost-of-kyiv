@@ -1,14 +1,18 @@
-let groundX = 600;
-let groundY = 81;
+let enemy1X = 600;
+let enemy2X = 1600;
+let enemy1Y = 81;
+let enemy2Y = 81;
 let shipX = 0;
 let shipY = 0;
 let rocketX = 20;
 let rocketY = 70;
 let rocketVelocity = 0;
-let groundVelocity = -2;
+let enemy1Velocity = -2;
+let enemy2Velocity = -2;
 let ship = document.querySelector('#airfighter');
 let rocket = document.querySelector('#rocket');
-let ground = document.querySelector('#ground');
+let enemy1 = document.querySelector('#enemy1');
+let enemy2 = document.querySelector('#enemy2');
 const fps = 60;
 
 function init() {
@@ -18,19 +22,27 @@ function init() {
 }
 
 function Step () {
-  renderWall();
-  moveGround();
+  renderEnemy1();
+  renderEnemy2();
+  moveEnemy1();
+  moveEnemy2();
   moveRocket();
-  checkGroundShipCollision();
-  checkGroundRocketCollision();
+  checkEnemy1ShipCollision();
+  checkEnemy1RocketCollision();
   renderRocket();
   renderShip();
 }
 
-function renderWall () {
-  ground.style.left = groundX;
-  ground.style.top = groundY;
+function renderEnemy1 () {
+  enemy1.style.left = enemy1X;
+  enemy1.style.top = enemy1Y;
 }
+
+function renderEnemy2 () {
+  enemy2.style.left = enemy2X;
+  enemy2.style.top = enemy2Y;
+}
+
 
 /**
  * Update rocket img coordinates according to variables
@@ -50,26 +62,26 @@ function initKeybordMovement() {
   document.addEventListener('keydown' , handleKeyDown);
 }
 
-function checkGroundShipCollision() {
+function checkEnemy1ShipCollision() {
   if (
-    groundX < shipX + 250 &&
-    groundY < shipY + 80 &&
-    groundX > shipX + 361 && 
-    groundY > shipX + 200   
+    enemy1X < shipX + 250 &&
+    enemy1Y < shipY + 80 &&
+    enemy1X > shipX + 361 && 
+    enemy1Y > shipX + 200   
   ) {
     alert('Game Over!');
   }
 }
 
-function checkGroundRocketCollision() {
+function checkEnemy1RocketCollision() {
   if (
-    rocketX > groundX &&
-    rocketY > groundY &&
-    rocketX < groundX+361 &&
-    rocketY < groundY+200
+    rocketX > enemy1X &&
+    rocketY > enemy1Y &&
+    rocketX < enemy1X+361 &&
+    rocketY < enemy1Y+200
   ) {
-    groundY += 800;
-    console.log('rocketGroundCollision');
+    enemy1Y += 800;
+    console.log('rocketenemy1Collision');
   }
 }
 
@@ -140,10 +152,14 @@ function moveRocket() {
 }
 
 /**
- * Change coordinates of ground according to ground velocity
+ * Change coordinates of enemy1 according to enemy1 velocity
  */
- function moveGround() {
-  groundX += groundVelocity;
+function moveEnemy1() {
+  enemy1X += enemy1Velocity;
+}
+
+function moveEnemy2() {
+  enemy2X += enemy2Velocity;
 }
 
 init();

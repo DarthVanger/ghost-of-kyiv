@@ -6,9 +6,17 @@ p {
     position: absolute;
 }
 
-#ground {
+#enemy1 {
     position: absolute;
     height: 200px;
+}
+#enemy2 {
+    position: absolute;
+    height: 250px;
+}
+#enemy3 {
+    position: absolute;
+    height: 150px;
 }
 
 #airfighter {
