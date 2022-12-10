@@ -29,9 +29,9 @@ function Step() {
   renderEnemy1();
   renderEnemy2();
   renderEnemy3();
-  moveEnemy1();
-  moveEnemy2();
-  moveEnemy3();
+  enemy1X = moveEnemy(enemy1X,enemy1Velocity);
+  enemy2X = moveEnemy(enemy2X,enemy2Velocity);
+  enemy3X = moveEnemy(enemy3X,enemy3Velocity);
   moveRocket();
   checkEnemy1ShipCollision();
   checkEnemy2ShipCollision();
@@ -223,16 +223,11 @@ function moveRocket() {
 /**
  * Change coordinates of enemy1 according to enemy1 velocity
  */
-function moveEnemy1() {
-  enemy1X += enemy1Velocity;
+
+
+function moveEnemy(enemyx,enemyVelocity) {
+  return enemyx += enemyVelocity;
 }
 
-function moveEnemy2() {
-  enemy2X += enemy2Velocity;
-}
-
-function moveEnemy3() {
-  enemy3X += enemy3Velocity;
-}
 
 init();
