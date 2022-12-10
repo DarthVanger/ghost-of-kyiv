@@ -28,7 +28,9 @@ function Step() {
   moveEnemy2();
   moveRocket();
   checkEnemy1ShipCollision();
+  checkEnemy2ShipCollision();
   checkEnemy1RocketCollision();
+  checkEnemy2RocketCollision();
   renderRocket();
   renderShip();
 }
@@ -73,6 +75,19 @@ function checkEnemy1ShipCollision() {
   }
 }
 
+function checkEnemy2ShipCollision() {
+  console.log(enemy2X, shipX);
+  if (
+    shipX + 250 > enemy2X &&
+    shipX < enemy2X + 361 &&
+    shipY + 80 > enemy2Y &&
+    shipY < enemy2Y + 200
+  ) {
+    alert("Game Over!");
+  }
+}
+
+
 function checkEnemy1RocketCollision() {
   if (
     rocketX > enemy1X &&
@@ -81,6 +96,18 @@ function checkEnemy1RocketCollision() {
     rocketY < enemy1Y + 200
   ) {
     enemy1Y += 800;
+    console.log("rocketenemy1Collision");
+  }
+}
+
+function checkEnemy2RocketCollision() {
+  if (
+    rocketX > enemy2X &&
+    rocketY > enemy2Y &&
+    rocketX < enemy2X + 361 &&
+    rocketY < enemy2Y + 200
+  ) {
+    enemy2Y += 800;
     console.log("rocketenemy1Collision");
   }
 }
