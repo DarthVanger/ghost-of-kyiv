@@ -1,7 +1,9 @@
 let enemy1X = 600;
 let enemy2X = 1600;
+let enemy3X = 2600;
 let enemy1Y = 81;
 let enemy2Y = 81;
+let enemy3Y = 281;
 let shipX = 0;
 let shipY = 0;
 let rocketX = 20;
@@ -9,10 +11,12 @@ let rocketY = 70;
 let rocketVelocity = 0;
 let enemy1Velocity = -2;
 let enemy2Velocity = -2;
+let enemy3Velocity = -2;
 let ship = document.querySelector("#airfighter");
 let rocket = document.querySelector("#rocket");
 let enemy1 = document.querySelector("#enemy1");
 let enemy2 = document.querySelector("#enemy2");
+let enemy3 = document.querySelector("#enemy3");
 const fps = 60;
 
 function init() {
@@ -24,13 +28,17 @@ function init() {
 function Step() {
   renderEnemy1();
   renderEnemy2();
+  renderEnemy3();
   moveEnemy1();
   moveEnemy2();
+  moveEnemy3();
   moveRocket();
   checkEnemy1ShipCollision();
   checkEnemy2ShipCollision();
+  checkEnemy3ShipCollision();
   checkEnemy1RocketCollision();
   checkEnemy2RocketCollision();
+  checkEnemy3RocketCollision();
   renderRocket();
   renderShip();
 }
@@ -43,6 +51,11 @@ function renderEnemy1() {
 function renderEnemy2() {
   enemy2.style.left = enemy2X;
   enemy2.style.top = enemy2Y;
+}
+
+function renderEnemy3() {
+  enemy3.style.left = enemy3X;
+  enemy3.style.top = enemy3Y;
 }
 
 /**
@@ -87,6 +100,17 @@ function checkEnemy2ShipCollision() {
   }
 }
 
+function checkEnemy3ShipCollision() {
+  console.log(enemy3X, shipX);
+  if (
+    shipX + 250 > enemy3X &&
+    shipX < enemy3X + 361 &&
+    shipY + 80 > enemy3Y &&
+    shipY < enemy3Y + 200
+  ) {
+    alert("Game Over!");
+  }
+}
 
 function checkEnemy1RocketCollision() {
   if (
@@ -108,7 +132,19 @@ function checkEnemy2RocketCollision() {
     rocketY < enemy2Y + 200
   ) {
     enemy2Y += 800;
-    console.log("rocketenemy1Collision");
+    console.log("rocketenemy2Collision");
+  }
+}
+
+function checkEnemy3RocketCollision() {
+  if (
+    rocketX > enemy3X &&
+    rocketY > enemy3Y &&
+    rocketX < enemy3X + 361 &&
+    rocketY < enemy3Y + 200
+  ) {
+    enemy3Y += 800;
+    console.log("rocketenemy3Collision");
   }
 }
 
@@ -187,6 +223,10 @@ function moveEnemy1() {
 
 function moveEnemy2() {
   enemy2X += enemy2Velocity;
+}
+
+function moveEnemy3() {
+  enemy3X += enemy3Velocity;
 }
 
 init();
