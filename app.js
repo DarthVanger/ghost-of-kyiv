@@ -28,7 +28,7 @@ function Step() {
   moveEnemy2();
   moveRocket();
   checkEnemy1ShipCollision();
-  // checkEnemy1RocketCollision();
+  checkEnemy1RocketCollision();
   renderRocket();
   renderShip();
 }
