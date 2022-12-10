@@ -205,6 +205,12 @@ function moveShipDown() {
 function fireRocket() {
   console.log("fireRocket");
   rocketVelocity += 8;
+  rocket.src="Rocket.gif";
+  setTimeout(preRocket, 8);
+}
+
+function preRocket () {
+  rocket.src="preRocket.gif";
 }
 
 /**
