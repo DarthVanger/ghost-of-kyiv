@@ -33,9 +33,9 @@ function Step() {
   enemy2X = moveEnemy(enemy2X,enemy2Velocity);
   enemy3X = moveEnemy(enemy3X,enemy3Velocity);
   moveRocket();
-  checkEnemy1ShipCollision();
-  checkEnemy2ShipCollision();
-  checkEnemy3ShipCollision();
+  checkEnemyShipCollision(enemy1X, enemy1Y);
+  checkEnemyShipCollision(enemy2X, enemy2Y);
+  checkEnemyShipCollision(enemy3X, enemy3Y);
   checkEnemy1RocketCollision();
   checkEnemy2RocketCollision();
   checkEnemy3RocketCollision();
@@ -76,37 +76,13 @@ function initKeybordMovement() {
   document.addEventListener("keydown", handleKeyDown);
 }
 
-function checkEnemy1ShipCollision() {
-  console.log(enemy1X, shipX);
+function checkEnemyShipCollision(enemyX, enemyY) {
+  console.log(enemyX, shipX);
   if (
-    shipX + 250 > enemy1X &&
-    shipX < enemy1X + 361 &&
-    shipY + 80 > enemy1Y &&
-    shipY < enemy1Y + 200
-  ) {
-    alert("Game Over!");
-  }
-}
-
-function checkEnemy2ShipCollision() {
-  console.log(enemy2X, shipX);
-  if (
-    shipX + 250 > enemy2X &&
-    shipX < enemy2X + 361 &&
-    shipY + 80 > enemy2Y &&
-    shipY < enemy2Y + 200
-  ) {
-    alert("Game Over!");
-  }
-}
-
-function checkEnemy3ShipCollision() {
-  console.log(enemy3X, shipX);
-  if (
-    shipX + 250 > enemy3X &&
-    shipX < enemy3X + 361 &&
-    shipY + 80 > enemy3Y &&
-    shipY < enemy3Y + 200
+    shipX + 250 > enemyX &&
+    shipX < enemyX + 361 &&
+    shipY + 80 > enemyY &&
+    shipY < enemyY + 200
   ) {
     alert("Game Over!");
   }
