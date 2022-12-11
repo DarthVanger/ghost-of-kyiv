@@ -150,9 +150,6 @@ function handleKeyDown(event) {
     moveShipRight();
   }
 
-  if (event.key == 'p') {
-    stopGame();
-  }
 }
 
 function moveShipLeft() {
