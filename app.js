@@ -19,11 +19,11 @@ let enemy2 = document.querySelector("#enemy2");
 let enemy3 = document.querySelector("#enemy3");
 const fps = 60;
 
-function init() {
-  console.log("init");
-  setInterval(Step, 1000 / fps);
+function startGame() {
+  console.log('startGame');
+  setInterval(Step , 1000/fps);
   initKeybordMovement();
-}
+ }
 
 function Step() {
   renderEnemy1();
@@ -149,6 +149,7 @@ function handleKeyDown(event) {
   if (event.key == "d") {
     moveShipRight();
   }
+
 }
 
 function moveShipLeft() {
@@ -205,5 +206,19 @@ function moveEnemy(enemyx,enemyVelocity) {
   return enemyx += enemyVelocity;
 }
 
+/**
+ * On start screen button click actions 
+ */
+function handleStartGameBtnClick() {
+  startGame();
+  hideStartScreen();
+}
 
-init();
+/**
+ * Remove div of start button screen
+ */
+function hideStartScreen() {
+  let startScreen = document.querySelector("#start-screen");
+  startScreen.remove();
+}
+
