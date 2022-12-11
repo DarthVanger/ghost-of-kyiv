@@ -52,17 +52,26 @@ function initKeybordMovement() {
 }
 
 function checkGroundShipCollision() {
-  if (groundX < shipX + 250 && groundY < shipY + 80) {
+  if (
+    groundX < shipX + 250 &&
+    groundY < shipY + 80 &&
+    groundX > shipX + 361 && 
+    groundY > shipX + 200   
+  ) {
     alert('Game Over!');
   }
 }
 
 function checkGroundRocketCollision() {
-  if (rocketX > groundX) {
+  if (
+    rocketX > groundX &&
+    rocketY > groundY &&
+    rocketX < groundX+361 &&
+    rocketY < groundY+200
+  ) {
     groundY += 800;
     console.log('rocketGroundCollision');
   }
-
 }
 
 /**
