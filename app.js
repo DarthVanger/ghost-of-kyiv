@@ -1,5 +1,7 @@
 const enemyWidth = 361;
 const enemyHeight = 200;
+const shipWidth = 250;
+const shipHeight = 80;
 let enemy1X = 600;
 let enemy2X = 1600;
 let enemy3X = 2600;
@@ -84,9 +86,9 @@ function initKeybordMovement() {
 
 function checkEnemyShipCollision(enemyX, enemyY) {
   if (
-    shipX + 250 > enemyX &&
+    shipX + shipWidth > enemyX &&
     shipX < enemyX + enemyWidth &&
-    shipY + 80 > enemyY &&
+    shipY + shipHeight > enemyY &&
     shipY < enemyY + enemyHeight
   ) {
     alert("Game Over!");
@@ -131,22 +133,34 @@ function handleKeyDown(event) {
 
 function moveShipLeft() {
   shipX -= 10;
-  rocketX -= 10;
+  if (rocketVelocity < 7) {
+    rocketX -= 10;
+  }
+  console.log("moveShipLeft");
 }
 
 function moveShipRight() {
   shipX += 10;
-  rocketX += 10;
+  if (rocketVelocity < 7) {
+    rocketX += 10;
+  }
+  console.log("moveShipRight");
 }
 
 function moveShipUp() {
   shipY -= 10;
-  rocketY -= 10;
+  if (rocketVelocity < 7) {
+    rocketY -= 10;
+  }
+  console.log("moveShipUp");
 }
 
 function moveShipDown() {
   shipY += 10;
-  rocketY += 10; 
+  if (rocketVelocity < 7) {
+    rocketY += 10;
+  }
+  console.log("moveShipDown");
 }
 
 /**
