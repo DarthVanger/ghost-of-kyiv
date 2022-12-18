@@ -2,10 +2,14 @@ const enemyWidth = 361;
 const enemyHeight = 200;
 const shipWidth = 250;
 const shipHeight = 80;
-let enemy1X = 600;
+let enemy1 = {
+  x: 600,
+  y: 81,
+  element: document.querySelector("#enemy1"),
+};
+
 let enemy2X = 1600;
 let enemy3X = 2600;
-let enemy1Y = 81;
 let enemy2Y = 81;
 let enemy3Y = 281;
 let shipX = 0;
@@ -18,7 +22,6 @@ let enemy2Velocity = -2;
 let enemy3Velocity = -2;
 let ship = document.querySelector("#airfighter");
 let rocket = document.querySelector("#rocket");
-let enemy1 = document.querySelector("#enemy1");
 let enemy2 = document.querySelector("#enemy2");
 let enemy3 = document.querySelector("#enemy3");
 const fps = 60;
@@ -32,15 +35,15 @@ function Step() {
   renderEnemy1();
   renderEnemy2();
   renderEnemy3();
-  enemy1X = moveEnemy(enemy1X,enemy1Velocity);
+  enemy1.x = moveEnemy(enemy1.x,enemy1Velocity);
   enemy2X = moveEnemy(enemy2X,enemy2Velocity);
   enemy3X = moveEnemy(enemy3X,enemy3Velocity);
   moveRocket();
-  checkEnemyShipCollision(enemy1X, enemy1Y);
+  checkEnemyShipCollision(enemy1.x, enemy1.y);
   checkEnemyShipCollision(enemy2X, enemy2Y);
   checkEnemyShipCollision(enemy3X, enemy3Y);
-  if (checkEnemyRocketCollision(enemy1X, enemy1Y)) {
-    enemy1Y += 800;
+  if (checkEnemyRocketCollision(enemy1.x, enemy1.y)) {
+    enemy1.y += 800;
   }
   if (checkEnemyRocketCollision(enemy2X, enemy2Y)) {
     enemy2Y += 800;
@@ -53,8 +56,8 @@ function Step() {
 }
 
 function renderEnemy1() {
-  enemy1.style.left = enemy1X;
-  enemy1.style.top = enemy1Y;
+  enemy1.element.style.left = enemy1.x;
+  enemy1.element.style.top = enemy1.y;
 }
 
 function renderEnemy2() {
