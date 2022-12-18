@@ -20,7 +20,6 @@ let enemy3 = document.querySelector("#enemy3");
 const fps = 60;
 
 function startGame() {
-  console.log('startGame');
   setInterval(Step , 1000/fps);
   initKeybordMovement();
  }
@@ -36,9 +35,15 @@ function Step() {
   checkEnemyShipCollision(enemy1X, enemy1Y);
   checkEnemyShipCollision(enemy2X, enemy2Y);
   checkEnemyShipCollision(enemy3X, enemy3Y);
-  checkEnemy1RocketCollision();
-  checkEnemy2RocketCollision();
-  checkEnemy3RocketCollision();
+  if (checkEnemyRocketCollision(enemy1X, enemy1Y)) {
+    enemy1Y += 800;
+  }
+  if (checkEnemyRocketCollision(enemy2X, enemy2Y)) {
+    enemy2Y += 800;
+  }
+  if (checkEnemyRocketCollision(enemy3X, enemy3Y)) {
+    enemy3Y += 800;
+  }
   renderRocket();
   renderShip();
 }
@@ -72,12 +77,10 @@ function renderShip() {
 }
 
 function initKeybordMovement() {
-  console.log("initKeybordMovement");
   document.addEventListener("keydown", handleKeyDown);
 }
 
 function checkEnemyShipCollision(enemyX, enemyY) {
-  console.log(enemyX, shipX);
   if (
     shipX + 250 > enemyX &&
     shipX < enemyX + 361 &&
@@ -88,39 +91,14 @@ function checkEnemyShipCollision(enemyX, enemyY) {
   }
 }
 
-function checkEnemy1RocketCollision() {
+function checkEnemyRocketCollision(enemyX, enemyY) {
   if (
-    rocketX > enemy1X &&
-    rocketY > enemy1Y &&
-    rocketX < enemy1X + 361 &&
-    rocketY < enemy1Y + 200
+    rocketX > enemyX &&
+    rocketY > enemyY &&
+    rocketX < enemyX + 361 &&
+    rocketY < enemyY + 200
   ) {
-    enemy1Y += 800;
-    console.log("rocketenemy1Collision");
-  }
-}
-
-function checkEnemy2RocketCollision() {
-  if (
-    rocketX > enemy2X &&
-    rocketY > enemy2Y &&
-    rocketX < enemy2X + 361 &&
-    rocketY < enemy2Y + 200
-  ) {
-    enemy2Y += 800;
-    console.log("rocketenemy2Collision");
-  }
-}
-
-function checkEnemy3RocketCollision() {
-  if (
-    rocketX > enemy3X &&
-    rocketY > enemy3Y &&
-    rocketX < enemy3X + 361 &&
-    rocketY < enemy3Y + 200
-  ) {
-    enemy3Y += 800;
-    console.log("rocketenemy3Collision");
+    return true;
   }
 }
 
@@ -128,8 +106,6 @@ function checkEnemy3RocketCollision() {
  * Bind all game keyboard controls
  */
 function handleKeyDown(event) {
-  console.log("handleKeyDown");
-  console.log("key: ", event.key);
   if (event.key == "r") {
     fireRocket();
   }
@@ -149,38 +125,32 @@ function handleKeyDown(event) {
   if (event.key == "d") {
     moveShipRight();
   }
-
 }
 
 function moveShipLeft() {
   shipX -= 10;
   rocketX -= 10;
-  console.log("moveShipLeft");
 }
 
 function moveShipRight() {
   shipX += 10;
   rocketX += 10;
-  console.log("moveShipRight");
 }
 
 function moveShipUp() {
   shipY -= 10;
   rocketY -= 10;
-  console.log("moveShipUp");
 }
 
 function moveShipDown() {
   shipY += 10;
-  rocketY += 10;
-  console.log("moveShipDown");
+  rocketY += 10; 
 }
 
 /**
  * Launch rocket
  */
-function fireRocket() {
-  console.log("fireRocket");
+function fireRocket() { 
   rocketVelocity += 8;
   rocket.src="Rocket.gif";
   setTimeout(preRocket, 8);
@@ -221,4 +191,3 @@ function hideStartScreen() {
   let startScreen = document.querySelector("#start-screen");
   startScreen.remove();
 }
-
