@@ -5,7 +5,25 @@ const shipHeight = 80;
 let enemy1 = {
   x: 600,
   y: 81,
+  width: 361,
+  height: 200,
   element: document.querySelector("#enemy1"),
+};
+
+let enemy2 = {
+  x: 1600,
+  y: 81,
+  width: 361,
+  height: 200,
+  element: document.querySelector("#enemy2"),
+};
+
+let enemy3 = {
+  x: 2600,
+  y: 281,
+  width: 361,
+  height: 200,
+  element: document.querySelector("#enemy3"),
 };
 
 let enemy2X = 1600;
@@ -22,34 +40,32 @@ let enemy2Velocity = -2;
 let enemy3Velocity = -2;
 let ship = document.querySelector("#airfighter");
 let rocket = document.querySelector("#rocket");
-let enemy2 = document.querySelector("#enemy2");
-let enemy3 = document.querySelector("#enemy3");
 const fps = 60;
 
 function startGame() {
-  setInterval(Step , 1000/fps);
+  setInterval(Step, 1000 / fps);
   initKeybordMovement();
- }
+}
 
 function Step() {
   renderEnemy1();
   renderEnemy2();
   renderEnemy3();
-  enemy1.x = moveEnemy(enemy1.x,enemy1Velocity);
-  enemy2X = moveEnemy(enemy2X,enemy2Velocity);
-  enemy3X = moveEnemy(enemy3X,enemy3Velocity);
+  enemy1.x = moveEnemy(enemy1.x, enemy1Velocity);
+  enemy2.x = moveEnemy(enemy2.x, enemy2Velocity);
+  enemy3.x = moveEnemy(enemy3.x, enemy3Velocity);
   moveRocket();
-  checkEnemyShipCollision(enemy1.x, enemy1.y);
-  checkEnemyShipCollision(enemy2X, enemy2Y);
-  checkEnemyShipCollision(enemy3X, enemy3Y);
+  checkEnemyShipCollision(enemy1);
+  checkEnemyShipCollision(enemy2);
+  checkEnemyShipCollision(enemy3);
   if (checkEnemyRocketCollision(enemy1.x, enemy1.y)) {
     enemy1.y += 800;
   }
-  if (checkEnemyRocketCollision(enemy2X, enemy2Y)) {
-    enemy2Y += 800;
+  if (checkEnemyRocketCollision(enemy2.x, enemy2.y)) {
+    enemy2.y += 800;
   }
-  if (checkEnemyRocketCollision(enemy3X, enemy3Y)) {
-    enemy3Y += 800;
+  if (checkEnemyRocketCollision(enemy3.x, enemy3.y)) {
+    enemy3.y += 800;
   }
   renderRocket();
   renderShip();
@@ -61,13 +77,13 @@ function renderEnemy1() {
 }
 
 function renderEnemy2() {
-  enemy2.style.left = enemy2X;
-  enemy2.style.top = enemy2Y;
+  enemy2.element.style.left = enemy2.x;
+  enemy2.element.style.top = enemy2.y;
 }
 
 function renderEnemy3() {
-  enemy3.style.left = enemy3X;
-  enemy3.style.top = enemy3Y;
+  enemy3.element.style.left = enemy3.x;
+  enemy3.element.style.top = enemy3.y;
 }
 
 /**
@@ -87,12 +103,12 @@ function initKeybordMovement() {
   document.addEventListener("keydown", handleKeyDown);
 }
 
-function checkEnemyShipCollision(enemyX, enemyY) {
+function checkEnemyShipCollision(enemy) {
   if (
-    shipX + shipWidth > enemyX &&
-    shipX < enemyX + enemyWidth &&
-    shipY + shipHeight > enemyY &&
-    shipY < enemyY + enemyHeight
+    shipX + shipWidth > enemy.x &&
+    shipX < enemy.x + enemy.width &&
+    shipY + shipHeight > enemy.y &&
+    shipY < enemy.y + enemy.height
   ) {
     alert("Game Over!");
   }
@@ -169,14 +185,14 @@ function moveShipDown() {
 /**
  * Launch rocket
  */
-function fireRocket() { 
+function fireRocket() {
   rocketVelocity += 8;
-  rocket.src="Rocket.gif";
+  rocket.src = "Rocket.gif";
   setTimeout(preRocket, 8);
 }
 
-function preRocket () {
-  rocket.src="preRocket.gif";
+function preRocket() {
+  rocket.src = "preRocket.gif";
 }
 
 /**
@@ -190,13 +206,12 @@ function moveRocket() {
  * Change coordinates of enemy1 according to enemy1 velocity
  */
 
-
-function moveEnemy(enemyx,enemyVelocity) {
-  return enemyx += enemyVelocity;
+function moveEnemy(enemyx, enemyVelocity) {
+  return (enemyx += enemyVelocity);
 }
 
 /**
- * On start screen button click actions 
+ * On start screen button click actions
  */
 function handleStartGameBtnClick() {
   startGame();
