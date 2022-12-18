@@ -1,3 +1,5 @@
+const enemyWidth = 361;
+const enemyHeight = 200;
 let enemy1X = 600;
 let enemy2X = 1600;
 let enemy3X = 2600;
@@ -83,9 +85,9 @@ function initKeybordMovement() {
 function checkEnemyShipCollision(enemyX, enemyY) {
   if (
     shipX + 250 > enemyX &&
-    shipX < enemyX + 361 &&
+    shipX < enemyX + enemyWidth &&
     shipY + 80 > enemyY &&
-    shipY < enemyY + 200
+    shipY < enemyY + enemyHeight
   ) {
     alert("Game Over!");
   }
@@ -95,8 +97,8 @@ function checkEnemyRocketCollision(enemyX, enemyY) {
   if (
     rocketX > enemyX &&
     rocketY > enemyY &&
-    rocketX < enemyX + 361 &&
-    rocketY < enemyY + 200
+    rocketX < enemyX + enemyWidth &&
+    rocketY < enemyY + enemyHeight
   ) {
     return true;
   }
