@@ -48,9 +48,9 @@ function startGame() {
 }
 
 function Step() {
-  renderEnemy1();
-  renderEnemy2();
-  renderEnemy3();
+  renderEnemy(enemy1);
+  renderEnemy(enemy2);
+  renderEnemy(enemy3);
   enemy1.x = moveEnemy(enemy1.x, enemy1Velocity);
   enemy2.x = moveEnemy(enemy2.x, enemy2Velocity);
   enemy3.x = moveEnemy(enemy3.x, enemy3Velocity);
@@ -71,19 +71,9 @@ function Step() {
   renderShip();
 }
 
-function renderEnemy1() {
-  enemy1.element.style.left = enemy1.x;
-  enemy1.element.style.top = enemy1.y;
-}
-
-function renderEnemy2() {
-  enemy2.element.style.left = enemy2.x;
-  enemy2.element.style.top = enemy2.y;
-}
-
-function renderEnemy3() {
-  enemy3.element.style.left = enemy3.x;
-  enemy3.element.style.top = enemy3.y;
+function renderEnemy (shitEnemy) {
+  shitEnemy.element.style.left = shitEnemy.x;
+  shitEnemy.element.style.top = shitEnemy.y;
 }
 
 /**
@@ -129,23 +119,24 @@ function checkEnemyRocketCollision(enemyX, enemyY) {
  * Bind all game keyboard controls
  */
 function handleKeyDown(event) {
-  if (event.key == "r") {
+  console.log (event.key);
+  if (event.key == "r" || event.key == 'к') {
     fireRocket();
   }
 
-  if (event.key == "a") {
+  if (event.key == "a" || event.key == 'ф') {
     moveShipLeft();
   }
 
-  if (event.key == "s") {
+  if (event.key == "s" || event.key == 'ы' || event.key == 'і') {
     moveShipDown();
   }
 
-  if (event.key == "w") {
+  if (event.key == "w" || event.key == 'ц') {
     moveShipUp();
   }
 
-  if (event.key == "d") {
+  if (event.key == "d" || event.key == 'в') {
     moveShipRight();
   }
 }
