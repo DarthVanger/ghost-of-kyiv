@@ -1,6 +1,5 @@
 const enemyWidth = 361;
 const enemyHeight = 200;
-const shipWidth = 250;
 const shipHeight = 80;
 let enemy1 = {
   x: 600,
@@ -24,6 +23,14 @@ let enemy3 = {
   width: 361,
   height: 200,
   element: document.querySelector("#enemy3"),
+};
+
+let airfighter = {
+  x: 0,
+  y: 0,
+  width: 250,
+  height: 80,
+  element: document.querySelector('#airfighter'),
 };
 
 let enemy2X = 1600;
@@ -95,7 +102,7 @@ function initKeybordMovement() {
 
 function checkEnemyShipCollision(enemy) {
   if (
-    shipX + shipWidth > enemy.x &&
+    shipX + airfighter.width > enemy.x &&
     shipX < enemy.x + enemy.width &&
     shipY + shipHeight > enemy.y &&
     shipY < enemy.y + enemy.height
