@@ -32,6 +32,15 @@ let airfighter = {
   element: document.querySelector('#airfighter'),
 };
 
+let bullet = {
+  x: 0,
+  y: 0,
+  width: 100,
+  height: 100,
+  element: document.querySelector('#bullet'),
+  velocity: 0,
+};
+
 let enemy2X = 1600;
 let enemy3X = 2600;
 let enemy2Y = 81;
@@ -54,9 +63,11 @@ function Step() {
   renderEnemy(enemy1);
   renderEnemy(enemy2);
   renderEnemy(enemy3);
+  renderBullet (bullet);
   enemy1.x = moveEnemy(enemy1.x, enemy1Velocity);
   enemy2.x = moveEnemy(enemy2.x, enemy2Velocity);
   enemy3.x = moveEnemy(enemy3.x, enemy3Velocity);
+  bullet.x = moveBullet(bullet.x, bullet.velocity);
   moveRocket();
   checkEnemyShipCollision(enemy1);
   checkEnemyShipCollision(enemy2);
@@ -77,6 +88,11 @@ function Step() {
 function renderEnemy (shitEnemy) {
   shitEnemy.element.style.left = shitEnemy.x;
   shitEnemy.element.style.top = shitEnemy.y;
+}
+
+function renderBullet (shitBullet) {
+  shitBullet.element.style.left = shitBullet.x;
+  shitBullet.element.style.top = shitBullet.y;
 }
 
 /**
@@ -125,6 +141,7 @@ function handleKeyDown(event) {
   console.log (event.key);
   if (event.key == "r" || event.key == 'к') {
     fireRocket();
+    fireBullet();
   }
 
   if (event.key == "a" || event.key == 'ф') {
@@ -185,6 +202,10 @@ function fireRocket() {
   setTimeout(preRocket, 8);
 }
 
+function fireBullet() {
+  bullet.velocity += 16;
+}
+
 function preRocket() {
   rocket.src = "preRocket.gif";
 }
@@ -202,6 +223,10 @@ function moveRocket() {
 
 function moveEnemy(enemyx, enemyVelocity) {
   return (enemyx += enemyVelocity);
+}
+
+function moveBullet(x, v) {
+  return (x += v);
 }
 
 /**
