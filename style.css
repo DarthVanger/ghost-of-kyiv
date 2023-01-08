@@ -63,3 +63,8 @@ p {
     min-height: 100%;
 }
 
+#bullet{
+    position: absolute;
+    top: 0;
+    width: 15px;
+}
