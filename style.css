@@ -67,4 +67,5 @@ p {
     position: absolute;
     top: 0;
     width: 15px;
+    transform: rotate(0deg);
 }

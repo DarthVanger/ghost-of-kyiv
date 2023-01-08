@@ -40,6 +40,7 @@ let bullet = {
   element: document.querySelector('#bullet'),
   velocityX: 0,
   velocityY: 0,
+  rotation: 0,
 };
 
 let enemy2X = 1600;
@@ -95,6 +96,7 @@ function renderEnemy (shitEnemy) {
 function renderBullet (shitBullet) {
   shitBullet.element.style.left = shitBullet.x;
   shitBullet.element.style.top = shitBullet.y;
+  shitBullet.element.style.transform = `rotate(${shitBullet.rotation}rad)`;
 }
 
 /**
@@ -207,7 +209,8 @@ function fireRocket() {
 function fireBullet() {
   bullet.velocityX += airfighter.x / Math.hypot(airfighter.x, airfighter.y) * 10;
   bullet.velocityY += airfighter.y / Math.hypot(airfighter.x, airfighter.y) * 10;
-  console.log('fireBullet');
+  bullet.rotation += Math.PI / 2 - Math.atan(airfighter.x / airfighter.y);
+  console.log((Math.PI / 2 - Math.atan(airfighter.x / airfighter.y ))*180 / Math.PI);
 }
 
 
