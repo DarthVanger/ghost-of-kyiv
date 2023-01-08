@@ -38,7 +38,8 @@ let bullet = {
   width: 100,
   height: 100,
   element: document.querySelector('#bullet'),
-  velocity: 0,
+  velocityX: 0,
+  velocityY: 0,
 };
 
 let enemy2X = 1600;
@@ -67,7 +68,8 @@ function Step() {
   enemy1.x = moveEnemy(enemy1.x, enemy1Velocity);
   enemy2.x = moveEnemy(enemy2.x, enemy2Velocity);
   enemy3.x = moveEnemy(enemy3.x, enemy3Velocity);
-  bullet.x = moveBullet(bullet.x, bullet.velocity);
+  bullet.x += bullet.velocityX;
+  bullet.y += bullet.velocityY;
   moveRocket();
   checkEnemyShipCollision(enemy1);
   checkEnemyShipCollision(enemy2);
@@ -203,8 +205,11 @@ function fireRocket() {
 }
 
 function fireBullet() {
-  bullet.velocity += 16;
+  bullet.velocityX += airfighter.x / 100;
+  bullet.velocityY += airfighter.y / 100;
+  console.log('fireBullet');
 }
+
 
 function preRocket() {
   rocket.src = "preRocket.gif";
@@ -223,10 +228,6 @@ function moveRocket() {
 
 function moveEnemy(enemyx, enemyVelocity) {
   return (enemyx += enemyVelocity);
-}
-
-function moveBullet(x, v) {
-  return (x += v);
 }
 
 /**
