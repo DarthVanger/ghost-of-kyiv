@@ -205,8 +205,8 @@ function fireRocket() {
 }
 
 function fireBullet() {
-  bullet.velocityX += airfighter.x / 100;
-  bullet.velocityY += airfighter.y / 100;
+  bullet.velocityX += airfighter.x / Math.hypot(airfighter.x, airfighter.y) * 10;
+  bullet.velocityY += airfighter.y / Math.hypot(airfighter.x, airfighter.y) * 10;
   console.log('fireBullet');
 }
 
