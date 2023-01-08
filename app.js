@@ -1,6 +1,5 @@
 const enemyWidth = 361;
 const enemyHeight = 200;
-const shipHeight = 80;
 let enemy1 = {
   x: 600,
   y: 81,
@@ -37,15 +36,12 @@ let enemy2X = 1600;
 let enemy3X = 2600;
 let enemy2Y = 81;
 let enemy3Y = 281;
-let shipX = 0;
-let shipY = 0;
 let rocketX = 20;
 let rocketY = 70;
 let rocketVelocity = 0;
 let enemy1Velocity = -2;
 let enemy2Velocity = -2;
 let enemy3Velocity = -2;
-let ship = document.querySelector("#airfighter");
 let rocket = document.querySelector("#rocket");
 const fps = 60;
 
@@ -92,8 +88,8 @@ function renderRocket() {
 }
 
 function renderShip() {
-  ship.style.left = shipX;
-  ship.style.top = shipY;
+  airfighter.element.style.left = airfighter.x;
+  airfighter.element.style.top = airfighter.y;
 }
 
 function initKeybordMovement() {
@@ -102,10 +98,10 @@ function initKeybordMovement() {
 
 function checkEnemyShipCollision(enemy) {
   if (
-    shipX + airfighter.width > enemy.x &&
-    shipX < enemy.x + enemy.width &&
-    shipY + shipHeight > enemy.y &&
-    shipY < enemy.y + enemy.height
+    airfighter.x + airfighter.width > enemy.x &&
+    airfighter.x < enemy.x + enemy.width &&
+    airfighter.y + airfighter.height > enemy.y &&
+    airfighter.y < enemy.y + enemy.height
   ) {
     alert("Game Over!");
   }
@@ -149,7 +145,7 @@ function handleKeyDown(event) {
 }
 
 function moveShipLeft() {
-  shipX -= 10;
+  airfighter.x -= 10;
   if (rocketVelocity < 7) {
     rocketX -= 10;
   }
@@ -157,7 +153,7 @@ function moveShipLeft() {
 }
 
 function moveShipRight() {
-  shipX += 10;
+  airfighter.x += 10;
   if (rocketVelocity < 7) {
     rocketX += 10;
   }
@@ -165,7 +161,7 @@ function moveShipRight() {
 }
 
 function moveShipUp() {
-  shipY -= 10;
+  airfighter.y -= 10;
   if (rocketVelocity < 7) {
     rocketY -= 10;
   }
@@ -173,7 +169,7 @@ function moveShipUp() {
 }
 
 function moveShipDown() {
-  shipY += 10;
+  airfighter.y += 10;
   if (rocketVelocity < 7) {
     rocketY += 10;
   }
