@@ -1,25 +1,25 @@
-const enemyWidth = 361;
+const enemyWidth = 360;
 const enemyHeight = 200;
 let enemy1 = {
   x: 600,
-  y: 81,
-  width: 361,
+  y: 90,
+  width: 360,
   height: 200,
   element: document.querySelector("#enemy1"),
 };
 
 let enemy2 = {
   x: 1600,
-  y: 81,
-  width: 361,
+  y: 90,
+  width: 360,
   height: 200,
   element: document.querySelector("#enemy2"),
 };
 
 let enemy3 = {
   x: 2600,
-  y: 281,
-  width: 361,
+  y: 290,
+  width: 360,
   height: 200,
   element: document.querySelector("#enemy3"),
 };
@@ -43,16 +43,21 @@ let bullet = {
   rotation: 0,
 };
 
-let enemy2X = 1600;
-let enemy3X = 2600;
-let enemy2Y = 81;
-let enemy3Y = 281;
-let rocketX = 20;
-let rocketY = 70;
+let enemyHealth = {
+  x: 600,
+  y: 90,
+  width: 360,
+  height: 10,
+  element: document.querySelector('#healthBar'),
+};
+
+let rocketX = 5;
+let rocketY = 67;
 let rocketVelocity = 0;
 let enemy1Velocity = -2;
 let enemy2Velocity = -2;
 let enemy3Velocity = -2;
+let enemyHealthVelocity = -2;
 let rocket = document.querySelector("#rocket");
 const fps = 60;
 
@@ -65,10 +70,12 @@ function Step() {
   renderEnemy(enemy1);
   renderEnemy(enemy2);
   renderEnemy(enemy3);
+  renderEnemy(enemyHealth);
   renderBullet (bullet);
   enemy1.x = moveEnemy(enemy1.x, enemy1Velocity);
   enemy2.x = moveEnemy(enemy2.x, enemy2Velocity);
   enemy3.x = moveEnemy(enemy3.x, enemy3Velocity);
+  enemyHealth.x = moveEnemy(enemyHealth.x, enemyHealthVelocity);
   bullet.x += bullet.velocityX;
   bullet.y += bullet.velocityY;
   moveRocket();
@@ -76,7 +83,11 @@ function Step() {
   checkEnemyShipCollision(enemy2);
   checkEnemyShipCollision(enemy3);
   if (checkEnemyRocketCollision(enemy1.x, enemy1.y)) {
-    enemy1.y += 800;
+    healthBar.value -= 4;
+    if (healthBar.value === 0) {
+      enemy1.y += 9999;
+      enemyHealth.y +=9999;
+    }
   }
   if (checkEnemyRocketCollision(enemy2.x, enemy2.y)) {
     enemy2.y += 800;
@@ -91,6 +102,8 @@ function Step() {
 function renderEnemy (shitEnemy) {
   shitEnemy.element.style.left = shitEnemy.x;
   shitEnemy.element.style.top = shitEnemy.y;
+  enemyHealth.element.style.left = shitEnemy.x;
+  enemyHealth.element.style.top = shitEnemy.y;
 }
 
 function renderBullet (shitBullet) {

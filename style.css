@@ -52,7 +52,7 @@ p {
     position: absolute;
     top: 70px;
     left: 20px;
-    width: 100px;
+    width: 120px;
 }
 
 #game-background {
@@ -63,9 +63,16 @@ p {
     min-height: 100%;
 }
 
-#bullet{
+#bullet {
     position: absolute;
     top: 0;
-    width: 15px;
+    height: 3px;
     transform: rotate(0deg);
+}
+
+#healthBar {
+    position: absolute;
+    width: 361;
+    height: 10;
+    background: rgb(0, 160, 3);
 }
