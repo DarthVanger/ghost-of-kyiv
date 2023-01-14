@@ -143,7 +143,7 @@ function checkEnemyRocketCollision(enemyX, enemyY) {
  */
 function handleKeyDown(event) {
   console.log (event.key);
-  if (event.key == "r" || event.key == 'к') {
+  if (event.key == "r" || event.key == 'к' || event.key == ' ') {
     fireRocket();
     fireBullet();
   }
