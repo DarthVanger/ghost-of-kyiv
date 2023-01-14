@@ -207,8 +207,10 @@ function fireRocket() {
 }
 
 function fireBullet() {
-  bullet.velocityX += airfighter.x / Math.hypot(airfighter.x, airfighter.y) * 10;
-  bullet.velocityY += airfighter.y / Math.hypot(airfighter.x, airfighter.y) * 10;
+  const distanceToAirfighter = Math.hypot(airfighter.x, airfighter.y);
+  const bulletSpeed = 10;
+  bullet.velocityX += airfighter.x / distanceToAirfighter * bulletSpeed;
+  bullet.velocityY += airfighter.y / distanceToAirfighter * bulletSpeed;
   bullet.rotation += Math.PI / 2 - Math.atan(airfighter.x / airfighter.y);
   console.log((Math.PI / 2 - Math.atan(airfighter.x / airfighter.y ))*180 / Math.PI);
 }
