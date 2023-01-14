@@ -43,6 +43,10 @@ let bullet = {
   rotation: 0,
 };
 
+let isShipMovingUp = false;
+let isShipMovingLeft = false;
+let isShipMovingRight = false;
+let isShipMovingDown = false;
 let enemy2X = 1600;
 let enemy3X = 2600;
 let enemy2Y = 81;
@@ -86,6 +90,18 @@ function Step() {
   }
   renderRocket();
   renderShip();
+  if (isShipMovingUp) {
+    moveShipUp();
+  }
+  if (isShipMovingDown) {
+    moveShipDown();
+  }
+  if (isShipMovingLeft) {
+    moveShipLeft();
+  }
+  if (isShipMovingRight) {
+    moveShipRight();
+  }
 }
 
 function renderEnemy (shitEnemy) {
@@ -114,6 +130,7 @@ function renderShip() {
 
 function initKeybordMovement() {
   document.addEventListener("keydown", handleKeyDown);
+  document.addEventListener("keyup", handleKeyUp);
 }
 
 function checkEnemyShipCollision(enemy) {
@@ -123,7 +140,8 @@ function checkEnemyShipCollision(enemy) {
     airfighter.y + airfighter.height > enemy.y &&
     airfighter.y < enemy.y + enemy.height
   ) {
-    alert("Game Over!");
+    //alert("Game Over!");
+    document.body.innerHTML = "gameover";
   }
 }
 
@@ -149,20 +167,48 @@ function handleKeyDown(event) {
   }
 
   if (event.key == "a" || event.key == 'ф') {
-    moveShipLeft();
+    //moveShipLeft();
+    isShipMovingLeft = true;
   }
 
   if (event.key == "s" || event.key == 'ы' || event.key == 'і') {
-    moveShipDown();
+    //moveShipDown();
+    isShipMovingDown = true;
   }
 
   if (event.key == "w" || event.key == 'ц') {
-    moveShipUp();
+    //moveShipUp();
+    isShipMovingUp = true;
   }
 
   if (event.key == "d" || event.key == 'в') {
-    moveShipRight();
+    //moveShipRight();
+    isShipMovingRight = true;
   }
+}
+
+function handleKeyUp (event) {
+
+  if (event.key == "a" || event.key == 'ф') {
+    //moveShipLeft();
+    isShipMovingLeft = false;
+  }
+
+  if (event.key == "s" || event.key == 'ы' || event.key == 'і') {
+    //moveShipDown();
+    isShipMovingDown = false;
+  }
+
+  if (event.key == "w" || event.key == 'ц') {
+    //moveShipUp();
+    isShipMovingUp = false;
+  }
+
+  if (event.key == "d" || event.key == 'в') {
+    //moveShipRight();
+    isShipMovingRight = false;
+  }
+
 }
 
 function moveShipLeft() {
