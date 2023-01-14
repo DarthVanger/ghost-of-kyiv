@@ -1,8 +1,8 @@
 const enemyWidth = 360;
 const enemyHeight = 200;
 let enemy1 = {
-  x: 600,
-  y: 90,
+  x: 800,
+  y: 300,
   width: 360,
   height: 200,
   element: document.querySelector("#enemy1"),
@@ -10,15 +10,15 @@ let enemy1 = {
 
 let enemy2 = {
   x: 1600,
-  y: 90,
+  y: 100,
   width: 360,
   height: 200,
   element: document.querySelector("#enemy2"),
 };
 
 let enemy3 = {
-  x: 2600,
-  y: 290,
+  x: 2100,
+  y: 500,
   width: 360,
   height: 200,
   element: document.querySelector("#enemy3"),
@@ -43,12 +43,28 @@ let bullet = {
   rotation: 0,
 };
 
-let enemyHealth = {
-  x: 600,
-  y: 90,
+let enemyHealth1 = {
+  x: 800,
+  y: 300,
   width: 360,
   height: 10,
-  element: document.querySelector('#healthBar'),
+  element: document.querySelector('#healthBar1'),
+};
+
+let enemyHealth2 = {
+  x: 1600,
+  y: 100,
+  width: 360,
+  height: 10,
+  element: document.querySelector('#healthBar2'),
+};
+
+let enemyHealth3 = {
+  x: 2100,
+  y: 500,
+  width: 360,
+  height: 10,
+  element: document.querySelector('#healthBar3'),
 };
 
 let rocketX = 5;
@@ -57,7 +73,9 @@ let rocketVelocity = 0;
 let enemy1Velocity = -2;
 let enemy2Velocity = -2;
 let enemy3Velocity = -2;
-let enemyHealthVelocity = -2;
+let enemyHealth1Velocity = -2;
+let enemyHealth2Velocity = -2;
+let enemyHealth3Velocity = -2;
 let rocket = document.querySelector("#rocket");
 const fps = 60;
 
@@ -70,12 +88,16 @@ function Step() {
   renderEnemy(enemy1);
   renderEnemy(enemy2);
   renderEnemy(enemy3);
-  renderEnemy(enemyHealth);
+  renderEnemy(enemyHealth1);
+  renderEnemy(enemyHealth2);
+  renderEnemy(enemyHealth3);
   renderBullet (bullet);
   enemy1.x = moveEnemy(enemy1.x, enemy1Velocity);
   enemy2.x = moveEnemy(enemy2.x, enemy2Velocity);
   enemy3.x = moveEnemy(enemy3.x, enemy3Velocity);
-  enemyHealth.x = moveEnemy(enemyHealth.x, enemyHealthVelocity);
+  enemyHealth1.x = moveEnemy(enemyHealth1.x, enemyHealth1Velocity);
+  enemyHealth2.x = moveEnemy(enemyHealth2.x, enemyHealth2Velocity);
+  enemyHealth3.x = moveEnemy(enemyHealth3.x, enemyHealth3Velocity);
   bullet.x += bullet.velocityX;
   bullet.y += bullet.velocityY;
   moveRocket();
@@ -83,17 +105,25 @@ function Step() {
   checkEnemyShipCollision(enemy2);
   checkEnemyShipCollision(enemy3);
   if (checkEnemyRocketCollision(enemy1.x, enemy1.y)) {
-    healthBar.value -= 4;
-    if (healthBar.value === 0) {
+    healthBar1.value -= 4;
+    if (healthBar1.value === 0) {
       enemy1.y += 9999;
-      enemyHealth.y +=9999;
+      enemyHealth1.y +=9999;
     }
   }
   if (checkEnemyRocketCollision(enemy2.x, enemy2.y)) {
-    enemy2.y += 800;
+    healthBar2.value -= 4;
+    if (healthBar2.value === 0) {
+      enemy2.y += 9999;
+      enemyHealth2.y +=9999;
+    }
   }
   if (checkEnemyRocketCollision(enemy3.x, enemy3.y)) {
-    enemy3.y += 800;
+    healthBar3.value -= 4;
+    if (healthBar3.value === 0) {
+      enemy3.y += 9999;
+      enemyHealth3.y +=9999;
+    }
   }
   renderRocket();
   renderShip();
@@ -102,8 +132,6 @@ function Step() {
 function renderEnemy (shitEnemy) {
   shitEnemy.element.style.left = shitEnemy.x;
   shitEnemy.element.style.top = shitEnemy.y;
-  enemyHealth.element.style.left = shitEnemy.x;
-  enemyHealth.element.style.top = shitEnemy.y;
 }
 
 function renderBullet (shitBullet) {

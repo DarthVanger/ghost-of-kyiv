@@ -35,11 +35,11 @@ p {
 }
 #enemy2 {
     position: absolute;
-    height: 250px;
+    height: 200px;
 }
 #enemy3 {
     position: absolute;
-    height: 150px;
+    height: 200px;
 }
 
 #airfighter {
@@ -70,9 +70,23 @@ p {
     transform: rotate(0deg);
 }
 
-#healthBar {
+#healthBar1 {
     position: absolute;
     width: 361;
     height: 10;
-    background: rgb(0, 160, 3);
+    background: rgb(0, 160, 0);
+}
+
+#healthBar2 {
+    position: absolute;
+    width: 361;
+    height: 10;
+    background: rgb(0, 160, 0);
+}
+
+#healthBar3 {
+    position: absolute;
+    width: 361;
+    height: 10;
+    background: rgb(0, 160, 0);
 }
