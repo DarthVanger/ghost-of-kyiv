@@ -16,9 +16,12 @@
     <img id = "airfighter" src= "Airfighter_ua_main_b.gif">
     <img id = "rocket" src = "Rocket.gif">
     <img id = "bullet" src = "Bullet_h100px.gif" alt="#">
-    <progress id="healthBar1" value="50" max="50"></progress>
-    <progress id="healthBar2" value="200" max="200"></progress>
-    <progress id="healthBar3" value="100" max="100"></progress>
+    <meter id='healthBar50' min="0" low="15" high="25" optimum="500" max="50" value="50"></meter>
+    <meter id='healthBar100' min="0" low="25" high="50" optimum="100" max="100" value="100"></meter>
+    <meter id='healthBar200' min="0" low="70" high="140" optimum="200" max="200" value="200"></meter>
+    <div id='healthBar50text'> </div>
+    <div id='healthBar100text'> </div>
+    <div id='healthBar200text'> </div>
     <div id='start-screen' style="padding: 320px; color:rgb(231, 228, 34)">
         <button type="button" onclick="handleStartGameBtnClick()">Let's Play!</button>
        <div> <br><br><br> Сontrol keys:<br>

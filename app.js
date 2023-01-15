@@ -2,23 +2,23 @@ const enemyWidth = 360;
 const enemyHeight = 200;
 let enemy1 = {
   x: 800,
-  y: 300,
+  y: 100,
   width: 360,
   height: 200,
   element: document.querySelector("#enemy1"),
 };
 
 let enemy2 = {
-  x: 1600,
-  y: 100,
+  x: 1400,
+  y: 350,
   width: 360,
   height: 200,
   element: document.querySelector("#enemy2"),
 };
 
 let enemy3 = {
-  x: 2100,
-  y: 500,
+  x: 1900,
+  y: 250,
   width: 360,
   height: 200,
   element: document.querySelector("#enemy3"),
@@ -43,39 +43,30 @@ let bullet = {
   rotation: 0,
 };
 
-let enemyHealth1 = {
-  x: 800,
-  y: 300,
-  width: 360,
-  height: 10,
-  element: document.querySelector('#healthBar1'),
-};
-
-let enemyHealth2 = {
-  x: 1600,
-  y: 100,
-  width: 360,
-  height: 10,
-  element: document.querySelector('#healthBar2'),
-};
-
-let enemyHealth3 = {
-  x: 2100,
-  y: 500,
-  width: 360,
-  height: 10,
-  element: document.querySelector('#healthBar3'),
-};
-
+let enemyHealth50 = {
+  element: document.querySelector('#healthBar50')};
+let enemyHealth100 = {
+  element: document.querySelector('#healthBar100')};
+let enemyHealth200 = {
+  element: document.querySelector('#healthBar200')};
+let enemyHealth50text = {
+  element: document.querySelector('#healthBar50text')};
+let enemyHealth100text = {
+  element: document.querySelector('#healthBar100text')};
+let enemyHealth200text = {
+  element: document.querySelector('#healthBar200text')};
 let rocketX = 5;
 let rocketY = 67;
 let rocketVelocity = 0;
 let enemy1Velocity = -2;
 let enemy2Velocity = -2;
 let enemy3Velocity = -2;
-let enemyHealth1Velocity = -2;
-let enemyHealth2Velocity = -2;
-let enemyHealth3Velocity = -2;
+let enemyHealth50Velocity = -2;
+let enemyHealth100Velocity = -2;
+let enemyHealth200Velocity = -2;
+let enemyHealth50textVelocity = -2;
+let enemyHealth100textVelocity = -2;
+let enemyHealth200textVelocity = -2;
 let rocket = document.querySelector("#rocket");
 const fps = 60;
 
@@ -85,19 +76,19 @@ function startGame() {
 }
 
 function Step() {
-  renderEnemy(enemy1);
-  renderEnemy(enemy2);
-  renderEnemy(enemy3);
-  renderEnemy(enemyHealth1);
-  renderEnemy(enemyHealth2);
-  renderEnemy(enemyHealth3);
+  renderEnemy(enemyHealth50text, healthBar50text, enemyHealth50, healthBar50, enemy1);
+  renderEnemy(enemyHealth100text, healthBar100text, enemyHealth100, healthBar100, enemy2);
+  renderEnemy(enemyHealth200text, healthBar200text, enemyHealth200, healthBar200, enemy3);
   renderBullet (bullet);
   enemy1.x = moveEnemy(enemy1.x, enemy1Velocity);
   enemy2.x = moveEnemy(enemy2.x, enemy2Velocity);
   enemy3.x = moveEnemy(enemy3.x, enemy3Velocity);
-  enemyHealth1.x = moveEnemy(enemyHealth1.x, enemyHealth1Velocity);
-  enemyHealth2.x = moveEnemy(enemyHealth2.x, enemyHealth2Velocity);
-  enemyHealth3.x = moveEnemy(enemyHealth3.x, enemyHealth3Velocity);
+  enemyHealth50.x = moveEnemy(enemyHealth50.x, enemyHealth50Velocity);
+  enemyHealth100.x = moveEnemy(enemyHealth100.x, enemyHealth100Velocity);
+  enemyHealth200.x = moveEnemy(enemyHealth200.x, enemyHealth200Velocity);
+  enemyHealth50text.x = moveEnemy(enemyHealth50text.x, enemyHealth50textVelocity);
+  enemyHealth100text.x = moveEnemy(enemyHealth100text.x, enemyHealth100textVelocity);
+  enemyHealth200text.x = moveEnemy(enemyHealth200text.x, enemyHealth200textVelocity);
   bullet.x += bullet.velocityX;
   bullet.y += bullet.velocityY;
   moveRocket();
@@ -105,33 +96,40 @@ function Step() {
   checkEnemyShipCollision(enemy2);
   checkEnemyShipCollision(enemy3);
   if (checkEnemyRocketCollision(enemy1.x, enemy1.y)) {
-    healthBar1.value -= 4;
-    if (healthBar1.value === 0) {
-      enemy1.y += 9999;
-      enemyHealth1.y +=9999;
+    healthBar50.value -= 4;
+    if (healthBar50.value === 0) {
+      enemy1.x -= 9999;
+      enemyHealth50.x -= 9999;
     }
   }
   if (checkEnemyRocketCollision(enemy2.x, enemy2.y)) {
-    healthBar2.value -= 4;
-    if (healthBar2.value === 0) {
-      enemy2.y += 9999;
-      enemyHealth2.y +=9999;
+    healthBar100.value -= 4;
+    if (healthBar100.value === 0) {
+      enemy2.x -= 9999;
     }
   }
   if (checkEnemyRocketCollision(enemy3.x, enemy3.y)) {
-    healthBar3.value -= 4;
-    if (healthBar3.value === 0) {
-      enemy3.y += 9999;
-      enemyHealth3.y +=9999;
+    healthBar200.value -= 4;
+    if (healthBar200.value === 0) {
+      enemy3.x -= 9999;
     }
   }
   renderRocket();
   renderShip();
 }
 
-function renderEnemy (shitEnemy) {
-  shitEnemy.element.style.left = shitEnemy.x;
-  shitEnemy.element.style.top = shitEnemy.y;
+function renderEnemy (text, textValue, health, healthValue, enemy) {
+  health.element.style.left = enemy.x;
+  health.element.style.top = enemy.y - 20;
+  health.element.style.width = enemy.width;
+  health.element.style.height = enemy.height*0.1;
+  textValue.value = healthValue.value / healthValue.max;
+  textValue.innerHTML = `${healthValue.value} / ${healthValue.max} HP`;
+  text.element.style.left = enemy.x;
+  text.element.style.top = enemy.y - 40;
+  text.element.style.width = enemy.width;
+  enemy.element.style.left = enemy.x;
+  enemy.element.style.top = enemy.y;
 }
 
 function renderBullet (shitBullet) {
