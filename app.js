@@ -1,5 +1,3 @@
-const enemyWidth = 361;
-const enemyHeight = 200;
 let enemy1 = {
   x: 600,
   y: 81,
@@ -79,13 +77,13 @@ function Step() {
   checkEnemyShipCollision(enemy1);
   checkEnemyShipCollision(enemy2);
   checkEnemyShipCollision(enemy3);
-  if (checkEnemyRocketCollision(enemy1.x, enemy1.y)) {
+  if (checkEnemyRocketCollision(enemy1)) {
     enemy1.x = -2000;
   }
-  if (checkEnemyRocketCollision(enemy2.x, enemy2.y)) {
+  if (checkEnemyRocketCollision(enemy2)) {
     enemy2.x = -2000;
   }
-  if (checkEnemyRocketCollision(enemy3.x, enemy3.y)) {
+  if (checkEnemyRocketCollision(enemy3)) {
     enemy3.x = -2000;
   }
   renderRocket();
@@ -145,12 +143,12 @@ function checkEnemyShipCollision(enemy) {
   }
 }
 
-function checkEnemyRocketCollision(enemyX, enemyY) {
+function checkEnemyRocketCollision(enemy) {
   if (
-    rocketX > enemyX &&
-    rocketY > enemyY &&
-    rocketX < enemyX + enemyWidth &&
-    rocketY < enemyY + enemyHeight
+    rocketX > enemy.x &&
+    rocketY > enemy.y &&
+    rocketX < enemy.x + enemy.width &&
+    rocketY < enemy.y + enemy.height
   ) {
     return true;
   }
