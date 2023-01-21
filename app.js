@@ -59,6 +59,10 @@ let bullet = {
   rotation: 0,
 };
 
+let isShipMovingUp = false;
+let isShipMovingLeft = false;
+let isShipMovingRight = false;
+let isShipMovingDown = false;
 let enemyHealth50 = {
   element: document.querySelector('#healthBar50')};
 let enemyHealth100 = {
@@ -110,7 +114,7 @@ function Step() {
   checkEnemyShipCollision(enemy1);
   checkEnemyShipCollision(enemy2);
   checkEnemyShipCollision(enemy3);
-
+  ammo.innerHTML = `Gutling Ammo: ${gutling.ammo} <br> Rocket Ammo: ${rocket.ammo}`;
   if (checkEnemyRocketCollision(enemy1.x, enemy1.y)) {
     healthBar50.value -= 10;
     rocket.dmg -= 10;
@@ -125,7 +129,6 @@ function Step() {
       rocket.element.src = "Rocket.gif";
     }
   }
-
   if (checkEnemyRocketCollision(enemy2.x, enemy2.y)) {
     healthBar100.value -= 10;
     rocket.dmg -= 10;
@@ -140,7 +143,6 @@ function Step() {
       rocket.element.src = "Rocket.gif";
     }
   }
-
   if (checkEnemyRocketCollision(enemy3.x, enemy3.y)) {
     healthBar200.value -= 10;
     rocket.dmg -= 10;
@@ -155,7 +157,6 @@ function Step() {
       rocket.element.src = "Rocket.gif";
     }
   }
-
   if (rocket.x > airfighter.x + 1500) {
     rocket.x = airfighter.x +5;
     rocket.y = airfighter.y +67;
@@ -163,7 +164,6 @@ function Step() {
     rocket.dmg = 50;
     rocket.element.src = "Rocket.gif";
   }
-
   if (checkEnemyGutlingCollision(enemy1.x, enemy1.y)) {
     healthBar50.value -= 10;
     gutling.x = enemy1.x + enemyWidth - gutlingVelocity + 2;
@@ -171,7 +171,6 @@ function Step() {
       enemy1.x -= 9999;
     }
   }
-
   if (checkEnemyGutlingCollision(enemy2.x, enemy2.y)) {
     healthBar100.value -= 10;
     gutling.x = enemy2.x + enemyWidth - gutlingVelocity + 2;
@@ -179,7 +178,6 @@ function Step() {
       enemy2.x -= 9999;
     }
   }
-
   if (checkEnemyGutlingCollision(enemy3.x, enemy3.y)) {
     healthBar200.value -= 10;
     gutling.x = enemy3.x + enemyWidth - gutlingVelocity + 2;
@@ -189,6 +187,18 @@ function Step() {
   }
   renderRocket();
   renderShip();
+  if (isShipMovingUp) {
+    moveShipUp();
+  }
+  if (isShipMovingDown) {
+    moveShipDown();
+  }
+  if (isShipMovingLeft) {
+    moveShipLeft();
+  }
+  if (isShipMovingRight) {
+    moveShipRight();
+  }
 }
 
 function renderEnemy (text, textValue, health, healthValue, enemy) {
@@ -226,7 +236,8 @@ function renderShip() {
 
 function initKeybordMovement() {
   document.addEventListener("keydown", handleKeyDown);
-	document.addEventListener('click' , handleClick);
+	document.addEventListener('mousedown' , handleClick);
+  document.addEventListener("keyup", handleKeyUp);
 }
 
 function checkEnemyShipCollision(enemy) {
@@ -236,7 +247,8 @@ function checkEnemyShipCollision(enemy) {
     airfighter.y + airfighter.height > enemy.y &&
     airfighter.y < enemy.y + enemy.height
   ) {
-    alert("Game Over!");
+    //alert("Game Over!");
+    document.body.innerHTML = "gameover";
   }
 }
 
@@ -270,7 +282,7 @@ function handleClick (event) {
 	gutling.y = event.pageY;
   gutling.ammo -= 10;
   console.log('Gutling Ammo: ' + gutling.ammo);
-  console.log('Rocker Ammo: ' + rocket.ammo);
+  console.log('Rocket Ammo: ' + rocket.ammo);
 }
 
 function handleKeyDown(event) {
@@ -281,19 +293,37 @@ function handleKeyDown(event) {
   }
 
   if (event.key == "a" || event.key == 'ф') {
-    moveShipLeft();
+    isShipMovingLeft = true;
   }
 
   if (event.key == "s" || event.key == 'ы' || event.key == 'і') {
-    moveShipDown();
+    isShipMovingDown = true;
   }
 
   if (event.key == "w" || event.key == 'ц') {
-    moveShipUp();
+    isShipMovingUp = true;
   }
 
   if (event.key == "d" || event.key == 'в') {
-    moveShipRight();
+    isShipMovingRight = true;
+  }
+}
+
+function handleKeyUp (event) {
+  if (event.key == "a" || event.key == 'ф') {
+    isShipMovingLeft = false;
+  }
+
+  if (event.key == "s" || event.key == 'ы' || event.key == 'і') {
+    isShipMovingDown = false;
+  }
+
+  if (event.key == "w" || event.key == 'ц') {
+    isShipMovingUp = false;
+  }
+
+  if (event.key == "d" || event.key == 'в') {
+    isShipMovingRight = false;
   }
 }
 
@@ -326,6 +356,10 @@ function moveShipDown() {
   if (rocketVelocity < 7) {
     rocket.y += 10;
   }
+    
+  //if (airfighter.element.src != "Airfighter_ua_movedown.gif") {
+  //  airfighter.element.src = "Airfighter_ua_movedown.gif";
+  //}
   console.log("moveShipDown");
 }
 
