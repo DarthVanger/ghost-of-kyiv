@@ -96,6 +96,9 @@ function Step() {
   if (isShipMovingRight) {
     moveShipRight();
   }
+  if (rocketVelocity > 0) {
+    fireBullet();
+  }
 }
 
 function renderEnemy (shitEnemy) {
@@ -157,7 +160,6 @@ function handleKeyDown(event) {
   console.log (event.key);
   if (event.key == "r" || event.key == 'к' || event.key == ' ') {
     fireRocket();
-    fireBullet();
   }
 
   if (event.key == "a" || event.key == 'ф') {
@@ -251,12 +253,12 @@ function fireBullet() {
     x: airfighter.x + (airfighter.width/2), 
     y: airfighter.y + (airfighter.height/2),
   };
-  const distanceToAirfighter = Math.hypot(airfighterCenter.x, airfighterCenter.y);
   const bulletSpeed = 10;
+  const distanceToAirfighter = Math.hypot(airfighterCenter.x, airfighterCenter.y);
   const bulletAngle = Math.atan(airfighter.x / airfighter.y);
-  bullet.velocityX += airfighterCenter.x / distanceToAirfighter * bulletSpeed;
-  bullet.velocityY += airfighterCenter.y / distanceToAirfighter * bulletSpeed;
-  bullet.rotation += Math.PI / 2 - bulletAngle;
+  bullet.velocityX = airfighterCenter.x / distanceToAirfighter * bulletSpeed;
+  bullet.velocityY = airfighterCenter.y / distanceToAirfighter * bulletSpeed;
+  bullet.rotation = Math.PI / 2 - bulletAngle;
   console.log((Math.PI / 2 - bulletAngle )*180 / Math.PI);
   console.log(bulletAngle);
 }
