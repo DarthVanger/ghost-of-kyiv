@@ -80,13 +80,13 @@ function Step() {
   checkEnemyShipCollision(enemy2);
   checkEnemyShipCollision(enemy3);
   if (checkEnemyRocketCollision(enemy1.x, enemy1.y)) {
-    enemy1.y += 800;
+    enemy1.x = -2000;
   }
   if (checkEnemyRocketCollision(enemy2.x, enemy2.y)) {
-    enemy2.y += 800;
+    enemy2.x = -2000;
   }
   if (checkEnemyRocketCollision(enemy3.x, enemy3.y)) {
-    enemy3.y += 800;
+    enemy3.x = -2000;
   }
   renderRocket();
   renderShip();
