@@ -1,10 +1,17 @@
+const fps = 60;
 const enemyWidth = 360;
 const enemyHeight = 200;
+const rocketDefaultX = 5;
+const rocketDefaultY = 67;
+const rocketMaxDistance = 1500;
+const enemyDies = 9999;
+
 let enemy1 = {
   x: 800,
   y: 100,
   width: 360,
   height: 200,
+  velocity: -2,
   element: document.querySelector("#enemy1"),
 };
 
@@ -13,6 +20,7 @@ let enemy2 = {
   y: 350,
   width: 360,
   height: 200,
+  velocity: -2,
   element: document.querySelector("#enemy2"),
 };
 
@@ -21,6 +29,7 @@ let enemy3 = {
   y: 250,
   width: 360,
   height: 200,
+  velocity: -2,
   element: document.querySelector("#enemy3"),
 };
 
@@ -32,11 +41,13 @@ let airfighter = {
   element: document.querySelector('#airfighter'),
 };
 
-let gutling = {
+let gatling = {
   x: 0,
   y: 0,
+  velocity: -2,
   ammo: 1500,
-  element: document.querySelector("#gutling"),
+  dmg: 10,
+  element: document.querySelector("#gatling"),
 };
 
 let rocket = {
@@ -45,6 +56,7 @@ let rocket = {
   width: 120,
   ammo: 5,
   dmg: 50,
+  velocity: 0,
   element: document.querySelector("#rocket"),
 }
 
@@ -59,34 +71,34 @@ let bullet = {
   rotation: 0,
 };
 
+let enemyHealth50 = {
+  velocity: -2,
+  element: document.querySelector('#healthBar50')
+};
+let enemyHealth100 = {
+  velocity: -2,
+  element: document.querySelector('#healthBar100')
+};
+let enemyHealth200 = {
+  velocity: -2,
+  element: document.querySelector('#healthBar200')
+};
+let enemyHealth50text = {
+  velocity: -2,
+  element: document.querySelector('#healthBar50text')
+};
+let enemyHealth100text = {
+  velocity: -2,
+  element: document.querySelector('#healthBar100text')
+};
+let enemyHealth200text = {
+  velocity: -2,
+  element: document.querySelector('#healthBar200text')
+};
 let isShipMovingUp = false;
 let isShipMovingLeft = false;
 let isShipMovingRight = false;
 let isShipMovingDown = false;
-let enemyHealth50 = {
-  element: document.querySelector('#healthBar50')};
-let enemyHealth100 = {
-  element: document.querySelector('#healthBar100')};
-let enemyHealth200 = {
-  element: document.querySelector('#healthBar200')};
-let enemyHealth50text = {
-  element: document.querySelector('#healthBar50text')};
-let enemyHealth100text = {
-  element: document.querySelector('#healthBar100text')};
-let enemyHealth200text = {
-  element: document.querySelector('#healthBar200text')};
-let rocketVelocity = 0;
-let gutlingVelocity = -2;
-let enemy1Velocity = -2;
-let enemy2Velocity = -2;
-let enemy3Velocity = -2;
-let enemyHealth50Velocity = -2;
-let enemyHealth100Velocity = -2;
-let enemyHealth200Velocity = -2;
-let enemyHealth50textVelocity = -2;
-let enemyHealth100textVelocity = -2;
-let enemyHealth200textVelocity = -2;
-const fps = 60;
 
 function startGame() {
   setInterval(Step, 1000 / fps);
@@ -98,95 +110,104 @@ function Step() {
   renderEnemy(enemyHealth100text, healthBar100text, enemyHealth100, healthBar100, enemy2);
   renderEnemy(enemyHealth200text, healthBar200text, enemyHealth200, healthBar200, enemy3);
   renderBullet (bullet);
-  enemy1.x = moveEnemy(enemy1.x, enemy1Velocity);
-  enemy2.x = moveEnemy(enemy2.x, enemy2Velocity);
-  enemy3.x = moveEnemy(enemy3.x, enemy3Velocity);
-  enemyHealth50.x = moveEnemy(enemyHealth50.x, enemyHealth50Velocity);
-  enemyHealth100.x = moveEnemy(enemyHealth100.x, enemyHealth100Velocity);
-  enemyHealth200.x = moveEnemy(enemyHealth200.x, enemyHealth200Velocity);
-  enemyHealth50text.x = moveEnemy(enemyHealth50text.x, enemyHealth50textVelocity);
-  enemyHealth100text.x = moveEnemy(enemyHealth100text.x, enemyHealth100textVelocity);
-  enemyHealth200text.x = moveEnemy(enemyHealth200text.x, enemyHealth200textVelocity);
-  gutling.x = moveEnemy(gutling.x, gutlingVelocity);
+  enemy1.x = moveEnemy(enemy1.x, enemy1.velocity);
+  enemy2.x = moveEnemy(enemy2.x, enemy2.velocity);
+  enemy3.x = moveEnemy(enemy3.x, enemy3.velocity);
+  enemyHealth50.x = moveEnemy(enemyHealth50.x, enemyHealth50.velocity);
+  enemyHealth100.x = moveEnemy(enemyHealth100.x, enemyHealth100.velocity);
+  enemyHealth200.x = moveEnemy(enemyHealth200.x, enemyHealth200.velocity);
+  enemyHealth50text.x = moveEnemy(enemyHealth50text.x, enemyHealth50text.velocity);
+  enemyHealth100text.x = moveEnemy(enemyHealth100text.x, enemyHealth100text.velocity);
+  enemyHealth200text.x = moveEnemy(enemyHealth200text.x, enemyHealth200text.velocity);
+  gatling.x = moveEnemy(gatling.x, gatling.velocity);
   bullet.x += bullet.velocityX;
   bullet.y += bullet.velocityY;
   moveRocket();
   checkEnemyShipCollision(enemy1);
   checkEnemyShipCollision(enemy2);
   checkEnemyShipCollision(enemy3);
-  ammo.innerHTML = `Gutling Ammo: ${gutling.ammo} <br> Rocket Ammo: ${rocket.ammo}`;
+  ammoElement.innerHTML = `Gatling Ammo: ${gatling.ammo} <br> Rocket Ammo: ${rocket.ammo}`;
+
   if (checkEnemyRocketCollision(enemy1.x, enemy1.y)) {
-    healthBar50.value -= 10;
-    rocket.dmg -= 10;
+    healthBar50.value -= rocket.dmg;
+    rocket.dmg -= rocket.dmg;
     if (healthBar50.value <= 0) {
-      enemy1.x -= 9999;
+      enemy1.x -= enemyDies;
     }
     if (rocket.dmg <= 0) {
-      rocket.x = airfighter.x +5;
-      rocket.y = airfighter.y +67;
-      rocketVelocity -= 8;
-      rocket.dmg = 50;
+      rocket.x = airfighter.x + rocketDefaultX;
+      rocket.y = airfighter.y + rocketDefaultY;
+      rocket.velocity -= 8;
+      rocket.dmg = rocket.dmg;
       rocket.element.src = "Rocket.gif";
     }
   }
+
   if (checkEnemyRocketCollision(enemy2.x, enemy2.y)) {
-    healthBar100.value -= 10;
-    rocket.dmg -= 10;
+    healthBar100.value -= rocket.dmg;
+    rocket.dmg -= rocket.dmg;
     if (healthBar100.value <= 0) {
-      enemy2.x -= 9999;
+      enemy2.x -= enemyDies;
     }
     if (rocket.dmg <= 0) {
-      rocket.x = airfighter.x +5;
-      rocket.y = airfighter.y +67;
-      rocketVelocity -= 8;
+      rocket.x = airfighter.x + rocketDefaultX;
+      rocket.y = airfighter.y + rocketDefaultY;
+      rocket.velocity -= 8;
       rocket.dmg = 50;
       rocket.element.src = "Rocket.gif";
     }
   }
+
   if (checkEnemyRocketCollision(enemy3.x, enemy3.y)) {
-    healthBar200.value -= 10;
-    rocket.dmg -= 10;
+    healthBar200.value -= rocket.dmg;
+    rocket.dmg -= rocket.dmg;
     if (healthBar200.value <= 0) {
-      enemy3.x -= 9999;
+      enemy3.x -= enemyDies;
     }
     if (rocket.dmg <= 0) {
-      rocket.x = airfighter.x +5;
-      rocket.y = airfighter.y +67;
-      rocketVelocity -= 8;
+      rocket.x = airfighter.x + rocketDefaultX;
+      rocket.y = airfighter.y + rocketDefaultY;
+      rocket.velocity -= 8;
       rocket.dmg = 50;
       rocket.element.src = "Rocket.gif";
     }
   }
-  if (rocket.x > airfighter.x + 1500) {
-    rocket.x = airfighter.x +5;
-    rocket.y = airfighter.y +67;
-    rocketVelocity -= 8;
+
+  if (rocket.x > airfighter.x + rocketMaxDistance) {
+    rocket.x = airfighter.x + rocketDefaultX;
+    rocket.y = airfighter.y + rocketDefaultY;
+    rocket.velocity -= 8;
     rocket.dmg = 50;
     rocket.element.src = "Rocket.gif";
   }
-  if (checkEnemyGutlingCollision(enemy1.x, enemy1.y)) {
-    healthBar50.value -= 10;
-    gutling.x = enemy1.x + enemyWidth - gutlingVelocity + 2;
+
+  if (checkEnemyGatlingCollision(enemy1.x, enemy1.y)) {
+    healthBar50.value -= gatling.dmg;
+    gatling.x = enemy1.x + enemyWidth - gatling.velocity;
     if (healthBar50.value === 0) {
-      enemy1.x -= 9999;
+      enemy1.x -= enemyDies;
     }
   }
-  if (checkEnemyGutlingCollision(enemy2.x, enemy2.y)) {
-    healthBar100.value -= 10;
-    gutling.x = enemy2.x + enemyWidth - gutlingVelocity + 2;
+
+  if (checkEnemyGatlingCollision(enemy2.x, enemy2.y)) {
+    healthBar100.value -= gatling.dmg;
+    gatling.x = enemy2.x + enemyWidth - gatling.velocity;
     if (healthBar100.value === 0) {
-      enemy2.x -= 9999;
+      enemy2.x -= enemyDies;
     }
   }
-  if (checkEnemyGutlingCollision(enemy3.x, enemy3.y)) {
-    healthBar200.value -= 10;
-    gutling.x = enemy3.x + enemyWidth - gutlingVelocity + 2;
+
+  if (checkEnemyGatlingCollision(enemy3.x, enemy3.y)) {
+    healthBar200.value -= gatling.dmg;
+    gatling.x = enemy3.x + enemyWidth - gatling.velocity;
     if (healthBar200.value === 0) {
-      enemy3.x -= 9999;
+      enemy3.x -= enemyDies;
     }
   }
+  
   renderRocket();
   renderShip();
+
   if (isShipMovingUp) {
     moveShipUp();
   }
@@ -263,12 +284,12 @@ function checkEnemyRocketCollision(enemyX, enemyY) {
   }
 }
 
-function checkEnemyGutlingCollision(enemyX, enemyY) {
+function checkEnemyGatlingCollision(enemyX, enemyY) {
   if (
-    gutling.x > enemyX &&
-    gutling.y > enemyY &&
-    gutling.x < enemyX + enemyWidth &&
-    gutling.y < enemyY + enemyHeight
+    gatling.x > enemyX &&
+    gatling.y > enemyY &&
+    gatling.x < enemyX + enemyWidth &&
+    gatling.y < enemyY + enemyHeight
   ) {
     return true;
   }
@@ -277,12 +298,8 @@ function checkEnemyGutlingCollision(enemyX, enemyY) {
 /**
  * Bind all game keyboard controls
  */
-function handleClick (event) {
-	gutling.x = event.pageX;
-	gutling.y = event.pageY;
-  gutling.ammo -= 10;
-  console.log('Gutling Ammo: ' + gutling.ammo);
-  console.log('Rocket Ammo: ' + rocket.ammo);
+function handleClick(event) {
+  fireGatling(event);
 }
 
 function handleKeyDown(event) {
@@ -329,7 +346,7 @@ function handleKeyUp (event) {
 
 function moveShipLeft() {
   airfighter.x -= 10;
-  if (rocketVelocity < 7) {
+  if (rocket.velocity < 7) {
     rocket.x -= 10;
   }
   console.log("moveShipLeft");
@@ -337,7 +354,7 @@ function moveShipLeft() {
 
 function moveShipRight() {
   airfighter.x += 10;
-  if (rocketVelocity < 7) {
+  if (rocket.velocity < 7) {
     rocket.x += 10;
   }
   console.log("moveShipRight");
@@ -345,7 +362,7 @@ function moveShipRight() {
 
 function moveShipUp() {
   airfighter.y -= 10;
-  if (rocketVelocity < 7) {
+  if (rocket.velocity < 7) {
     rocket.y -= 10;
   }
   console.log("moveShipUp");
@@ -353,7 +370,7 @@ function moveShipUp() {
 
 function moveShipDown() {
   airfighter.y += 10;
-  if (rocketVelocity < 7) {
+  if (rocket.velocity < 7) {
     rocket.y += 10;
   }
     
@@ -367,12 +384,18 @@ function moveShipDown() {
  * Launch rocket
  */
 function fireRocket() {
-  if (rocketVelocity < 8) {
-    rocketVelocity += 8;
+  if (rocket.velocity < 8) {
+    rocket.velocity += 8;
     rocket.ammo -= 1;
     rocket.element.src = "Rocket.gif";
     setTimeout(preRocket, 8);
   }
+}
+
+function fireGatling (event) {
+	gatling.x = event.pageX;
+	gatling.y = event.pageY;
+  gatling.ammo -= 10;
 }
 
 function fireBullet() {
@@ -390,7 +413,7 @@ function preRocket() {
  * Change coordinates of rocket according to rocket velocity
  */
 function moveRocket() {
-  rocket.x += rocketVelocity;
+  rocket.x += rocket.velocity;
 }
 
 /**

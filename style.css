@@ -53,7 +53,7 @@ p {
     width: 250px;   
 }
 
-#ammo {
+#ammoElement {
     position: absolute;
     x: 0;
     y: 0;
@@ -79,9 +79,6 @@ p {
     top: 0;
     height: 3px;
     transform: rotate(0deg);
-}
-#minigun {
-    position: absolute;
 }
 
 #healthBar50 {
