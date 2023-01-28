@@ -51,6 +51,7 @@ p {
 #airfighter {
     position: absolute;
     width: 250px;   
+    border: 1px solid red;
 }
 
 #ammoElement {
