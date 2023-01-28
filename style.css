@@ -18,11 +18,11 @@ button {
     font-size:1.5em;
     cursor:pointer;
     text-decoration:none;
-    padding:12px 48px 12px 48px;
+    padding:13px 48px 13px 48px;
     border-radius:4px;
     color:#ffffff;
     background-color:#1bafdb;
-    border: 2px solid #ffffff;
+    border: 3px solid #ffffff;
 }
 
 p {
@@ -31,29 +31,40 @@ p {
 
 #enemy1 {
     position: absolute;
-    height: 200px;
+    width: 360;
+    height: 200;
+    box-shadow: 0px 0px 4px #64B5F6, 0px 0px 6px #64B5F6;
 }
 #enemy2 {
     position: absolute;
-    height: 250px;
+    width: 360;
+    height: 200;
+    box-shadow: 0px 0px 4px #64B5F6, 0px 0px 6px #64B5F6;
 }
 #enemy3 {
     position: absolute;
-    height: 150px;
+    width: 360;
+    height: 200;
+    box-shadow: 0px 0px 4px #64B5F6, 0px 0px 6px #64B5F6;
 }
 
 #airfighter {
     position: absolute;
-    top: 0;
     width: 250px;   
     border: 1px solid red;
 }
 
+#ammoElement {
+    position: absolute;
+    x: 0;
+    y: 0;
+    color:#ffffff;
+    text-align-last: left;
+}
+
 #rocket {
     position: absolute;
-    top: 70px;
-    left: 20px;
-    width: 100px;
+    width: 120px;
 }
 
 #game-background {
@@ -64,9 +75,39 @@ p {
     min-height: 100%;
 }
 
-#bullet{
+#bullet {
     position: absolute;
     top: 0;
-    width: 15px;
+    height: 3px;
     transform: rotate(0deg);
+}
+
+#healthBar50 {
+    position: absolute;
+}
+  
+#healthBar100 {
+    position: absolute;
+}
+  
+#healthBar200 {
+    position: absolute;
+}
+
+#healthBar50text {
+    position: absolute;
+    color:#ffffff;
+    text-align-last: center;
+}
+
+#healthBar100text {
+    position: absolute;
+    color:#ffffff;
+    text-align-last: center;
+}
+
+#healthBar200text {
+    position: absolute;
+    color:#ffffff;
+    text-align-last: center;
 }
