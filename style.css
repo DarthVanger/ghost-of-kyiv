@@ -118,6 +118,7 @@ p {
     border-right: 50px solid transparent;
     border-top: 100px solid #fff;
     z-index: 1;
+    opacity: 20%;
 }
 
 ._touch .left{
@@ -133,6 +134,7 @@ p {
     border-right: 100px solid #fff;
     border-top: 50px solid transparent;
     z-index: 1;
+    opacity: 20%;
 }
 
 ._touch .right{
@@ -148,6 +150,7 @@ p {
     border-left: 100px solid #fff;
     border-top: 50px solid transparent;
     z-index: 1;
+    opacity: 20%;
 }
 
 ._touch .top{
@@ -163,6 +166,7 @@ p {
     border-right: 50px solid transparent;
     border-bottom: 100px solid #fff;
     z-index: 1;
+    opacity: 20%;
 }
 
 ._touch .fire{
@@ -175,4 +179,10 @@ p {
     border-radius: 50%;
     background-color: #fff;
     z-index: 1;
+    opacity: 20%;
+}
+
+body ._touch{
+    min-width: 100%;
+    min-height: 100%;
 }
