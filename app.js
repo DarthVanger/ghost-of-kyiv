@@ -340,30 +340,6 @@ function handleKeyUp (event) {
   }
 }
 
-function handleKeyUp (event) {
-
-  if (event.key == "a" || event.key == 'ф') {
-    //moveShipLeft();
-    isShipMovingLeft = false;
-  }
-
-  if (event.key == "s" || event.key == 'ы' || event.key == 'і') {
-    //moveShipDown();
-    isShipMovingDown = false;
-  }
-
-  if (event.key == "w" || event.key == 'ц') {
-    //moveShipUp();
-    isShipMovingUp = false;
-  }
-
-  if (event.key == "d" || event.key == 'в') {
-    //moveShipRight();
-    isShipMovingRight = false;
-  }
-
-}
-
 function moveShipLeft() {
   airfighter.x -= 10;
   if (rocket.velocity < 7) {
