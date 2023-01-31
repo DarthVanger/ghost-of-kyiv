@@ -409,9 +409,11 @@ function fireRocket() {
 }
 
 function fireGatling (event) {
-	gatling.x = event.pageX;
-	gatling.y = event.pageY;
-  gatling.ammo -= 10;
+  if (airfighter.x + airfighter.width < event.pageX ) {
+    gatling.x = event.pageX;
+    gatling.y = event.pageY;
+    gatling.ammo -= 10;
+  }
 }
 
 function preRocket() {
