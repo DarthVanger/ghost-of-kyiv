@@ -20,7 +20,12 @@ jobs:
       - name: Install and Build
         run: |
           mkdir build
-          mv * build/ || exit 0
+          mv *.html build/
+          mv *.css build/
+          mv *.js build/
+          mv *.gif build/
+          mv *.mp4 build/
+          mv *.png build/
 
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
