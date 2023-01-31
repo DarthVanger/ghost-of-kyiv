@@ -109,11 +109,6 @@ p {
     position: absolute;
     bottom: 10px;
     left: 120px;
-    display: block;
-    width: 0;
-    height: 0;
-    margin: 0 0 0 5px;
-    transition: transform 0.3s ease 0s;
     border-left: 50px solid transparent;
     border-right: 50px solid transparent;
     border-top: 100px solid #fff;
@@ -125,11 +120,6 @@ p {
     position: absolute;
     bottom: 10px;
     left: 10px;
-    display: block;
-    width: 0;
-    height: 0;
-    margin: 0 0 0 5px;
-    transition: transform 0.3s ease 0s;
     border-bottom: 50px solid transparent;
     border-right: 100px solid #fff;
     border-top: 50px solid transparent;
@@ -141,11 +131,6 @@ p {
     position: absolute;
     bottom: 10px;
     left: 230px;
-    display: block;
-    width: 0;
-    height: 0;
-    margin: 0 0 0 5px;
-    transition: transform 0.3s ease 0s;
     border-bottom: 50px solid transparent;
     border-left: 100px solid #fff;
     border-top: 50px solid transparent;
@@ -157,11 +142,6 @@ p {
     position: absolute;
     bottom: 120px;
     left: 120px;
-    display: block;
-    width: 0;
-    height: 0;
-    margin: 0 0 0 5px;
-    transition: transform 0.3s ease 0s;
     border-left: 50px solid transparent;
     border-right: 50px solid transparent;
     border-bottom: 100px solid #fff;
@@ -182,7 +162,7 @@ p {
     opacity: 20%;
 }
 
-body ._touch{
+body{
     min-width: 100%;
     min-height: 100%;
 }

@@ -6,12 +6,12 @@ const rocketDefaultY = 67;
 const rocketMaxDistance = 1500;
 const enemyDies = 9999;
 
-let mobile = {
-  left: document.querySelector('.left'),
-  top: document.querySelector('.top'),
-  bottom: document.querySelector('.bottom'),
-  right: document.querySelector('.right'),
-  fire: document.querySelector('.fire'),
+let mobileControls = {
+  leftButton: document.querySelector('.left'),
+  topButton: document.querySelector('.top'),
+  bottomButton: document.querySelector('.bottom'),
+  rightButton: document.querySelector('.right'),
+  fireButton: document.querySelector('.fire'),
 }
 
 
@@ -249,11 +249,11 @@ function initKeybordMovement() {
   document.addEventListener("keydown", handleKeyDown);
 	document.addEventListener('mousedown' , handleClick);
   document.addEventListener("keyup", handleKeyUp);
-  mobile.left.addEventListener('click' , moveShipLeft);
-  mobile.right.addEventListener('mousedown' , moveShipRight);
-  mobile.top.addEventListener('mousedown' , moveShipUp);
-  mobile.bottom.addEventListener('mousedown' , moveShipDown);
-  mobile.fire.addEventListener('click' , fireRocket)
+  mobileControls.leftButton.addEventListener('click' , moveShipLeft);
+  mobileControls.rightButton.addEventListener('mousedown' , moveShipRight);
+  mobileControls.topButton.addEventListener('mousedown' , moveShipUp);
+  mobileControls.bottomButton.addEventListener('mousedown' , moveShipDown);
+  mobileControls.fireButton.addEventListener('click' , fireRocket)
 }
 
 function checkEnemyShipCollision(enemy) {
