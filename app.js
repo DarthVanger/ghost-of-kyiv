@@ -60,17 +60,6 @@ let rocket = {
   element: document.querySelector("#rocket"),
 }
 
-let bullet = {
-  x: 0,
-  y: 0,
-  width: 100,
-  height: 100,
-  element: document.querySelector('#bullet'),
-  velocityX: 0,
-  velocityY: 0,
-  rotation: 0,
-};
-
 let enemyHealth50 = {
   velocity: -2,
   element: document.querySelector('#healthBar50')
@@ -114,7 +103,6 @@ function Step() {
   renderEnemy(enemyHealth50text, healthBar50text, enemyHealth50, healthBar50, enemy1);
   renderEnemy(enemyHealth100text, healthBar100text, enemyHealth100, healthBar100, enemy2);
   renderEnemy(enemyHealth200text, healthBar200text, enemyHealth200, healthBar200, enemy3);
-  renderBullet (bullet);
   enemy1.x = moveEnemy(enemy1.x, enemy1.velocity);
   enemy2.x = moveEnemy(enemy2.x, enemy2.velocity);
   enemy3.x = moveEnemy(enemy3.x, enemy3.velocity);
@@ -125,8 +113,6 @@ function Step() {
   enemyHealth100text.x = moveEnemy(enemyHealth100text.x, enemyHealth100text.velocity);
   enemyHealth200text.x = moveEnemy(enemyHealth200text.x, enemyHealth200text.velocity);
   gatling.x = moveEnemy(gatling.x, gatling.velocity);
-  bullet.x += bullet.velocityX;
-  bullet.y += bullet.velocityY;
   moveRocket();
   checkEnemyShipCollision(enemy1);
   checkEnemyShipCollision(enemy2);
@@ -231,10 +217,6 @@ function Step() {
     document.querySelector('#levelComplete').style.display = '';
     fadeIn(levelComplete, 400);
   }
-  
-  if (rocket.velocity > 0) {
-    fireBullet();
-  }
 }
 
 function renderEnemy (text, textValue, health, healthValue, enemy) {
@@ -249,12 +231,6 @@ function renderEnemy (text, textValue, health, healthValue, enemy) {
   text.element.style.width = enemy.width;
   enemy.element.style.left = enemy.x;
   enemy.element.style.top = enemy.y;
-}
-
-function renderBullet (shitBullet) {
-  shitBullet.element.style.left = shitBullet.x;
-  shitBullet.element.style.top = shitBullet.y;
-  shitBullet.element.style.transform = `rotate(${shitBullet.rotation}rad)`;
 }
 
 /**
@@ -374,30 +350,6 @@ function handleKeyUp (event) {
   }
 }
 
-function handleKeyUp (event) {
-
-  if (event.key == "a" || event.key == 'ф') {
-    //moveShipLeft();
-    isShipMovingLeft = false;
-  }
-
-  if (event.key == "s" || event.key == 'ы' || event.key == 'і') {
-    //moveShipDown();
-    isShipMovingDown = false;
-  }
-
-  if (event.key == "w" || event.key == 'ц') {
-    //moveShipUp();
-    isShipMovingUp = false;
-  }
-
-  if (event.key == "d" || event.key == 'в') {
-    //moveShipRight();
-    isShipMovingRight = false;
-  }
-
-}
-
 function moveShipLeft() {
   airfighter.x -= 10;
   if (rocket.velocity < 7) {
@@ -443,24 +395,11 @@ function fireRocket() {
 }
 
 function fireGatling (event) {
-	gatling.x = event.pageX;
-	gatling.y = event.pageY;
-  gatling.ammo -= 10;
-}
-
-function fireBullet() {
-  const airfighterCenter = { 
-    x: airfighter.x + (airfighter.width/2), 
-    y: airfighter.y + (airfighter.height/2),
-  };
-  const bulletSpeed = 10;
-  const distanceToAirfighter = Math.hypot(airfighterCenter.x, airfighterCenter.y);
-  const bulletAngle = Math.atan(airfighter.x / airfighter.y);
-  bullet.velocityX = airfighterCenter.x / distanceToAirfighter * bulletSpeed;
-  bullet.velocityY = airfighterCenter.y / distanceToAirfighter * bulletSpeed;
-  bullet.rotation = Math.PI / 2 - bulletAngle;
-  console.log((Math.PI / 2 - bulletAngle )*180 / Math.PI);
-  console.log(bulletAngle);
+  if (airfighter.x + airfighter.width < event.pageX ) {
+    gatling.x = event.pageX;
+    gatling.y = event.pageY;
+    gatling.ammo -= 10;
+  }
 }
 
 function preRocket() {
