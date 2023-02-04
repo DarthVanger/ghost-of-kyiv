@@ -5,6 +5,11 @@ const rocketDefaultX = 5;
 const rocketDefaultY = 67;
 const rocketMaxDistance = 1500;
 const enemyDies = 9999;
+const gameFps = setInterval(Step, 1000 / fps);
+let isShipMovingUp = false;
+let isShipMovingLeft = false;
+let isShipMovingRight = false;
+let isShipMovingDown = false;
 
 let mobileControls = {
   leftButton: document.querySelector('.left'),
@@ -94,14 +99,13 @@ let enemyHealth200text = {
   element: document.querySelector('#healthBar200text')
 };
 
-let isShipMovingUp = false;
-let isShipMovingLeft = false;
-let isShipMovingRight = false;
-let isShipMovingDown = false;
+let lvlComplete = {
+  element: document.querySelector('#levelComplete')
+}
 
 function startGame() {
-  setInterval(Step, 1000 / fps);
   initKeybordMovement();
+  gameFps;
 }
 
 function Step() {
@@ -215,6 +219,11 @@ function Step() {
   }
   if (isShipMovingRight) {
     moveShipRight();
+  }
+  if (enemy3.x < 0 - enemy3.width) {
+    clearInterval(gameFps);
+    document.querySelector('#levelComplete').style.display = '';
+    fadeIn(levelComplete, 400);
   }
 }
 
@@ -330,6 +339,10 @@ function handleKeyDown(event) {
       airfighter.element.src = "Airfighter_ua_moveforvard.gif";
     }
   }
+
+  if (event.key == "p" || event.key == 'з') {
+    clearInterval(gameFps);
+  }
 }
 
 function handleKeyUp (event) {
@@ -400,9 +413,9 @@ function fireRocket() {
 
 function fireGatling (event) {
   if (airfighter.x + airfighter.width < event.pageX ) {
-    gatling.x = event.pageX;
-    gatling.y = event.pageY;
-    gatling.ammo -= 10;
+	gatling.x = event.pageX;
+	gatling.y = event.pageY;
+  gatling.ammo -= 10;
   }
 }
 
@@ -439,4 +452,18 @@ function handleStartGameBtnClick() {
 function hideStartScreen() {
   let startScreen = document.querySelector("#start-screen");
   startScreen.remove();
+}
+
+function fadeIn(element, duration) {
+  element.style.display = '';
+  element.style.opacity = 0;
+  var last = +new Date();
+  var tick = function() {
+    element.style.opacity = +element.style.opacity + (new Date() - last) / duration;
+    last = +new Date();
+    if (+element.style.opacity < 1) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    }
+  };
+  tick();
 }
