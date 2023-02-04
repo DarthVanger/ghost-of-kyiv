@@ -399,9 +399,9 @@ function fireRocket() {
 
 function fireGatling (event) {
   if (airfighter.x + airfighter.width < event.pageX ) {
-    gatling.x = event.pageX;
-    gatling.y = event.pageY;
-    gatling.ammo -= 10;
+	gatling.x = event.pageX;
+	gatling.y = event.pageY;
+  gatling.ammo -= 10;
   }
 }
 
