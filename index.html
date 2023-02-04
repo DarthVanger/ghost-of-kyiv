@@ -1,4 +1,5 @@
 <head>
+    <meta name="viewport" content="width=device, user-scalable=no">
     <link href="style.css" rel="stylesheet" />
     <link rel="shortcut icon" href="Rocket.gif">
 </head>
@@ -10,11 +11,16 @@
     <video autoplay muted loop id="game-background">
         <source src="space-1050p.mp4" type="video/mp4">
     </video>
-    <img id = "enemy1" src= "walls.gif">
-    <img id = "enemy2" src= "walls.gif">
-    <img id = "enemy3" src= "walls.gif">
+    <img id = "enemy1" src= "shahed.png">
+    <img id = "enemy2" src= "drone.png">
+    <img id = "enemy3" src= "uav.png">
     <img id = "rocket" src = "Rocket.gif">
     <img id = "airfighter" src= "Airfighter_ua_main.gif">
+    <div class="left"></div>
+    <div class="bottom"></div>
+    <div class="right"></div>
+    <div class="top"></div>
+    <div class="fire"></div>
     <meter id='healthBar50' min="0" low="15" high="25" optimum="50" max="50" value="50"></meter>
     <meter id='healthBar100' min="0" low="25" high="50" optimum="100" max="100" value="100"></meter>
     <meter id='healthBar200' min="0" low="70" high="140" optimum="200" max="200" value="200"></meter>
@@ -30,7 +36,7 @@
     </div>
     <div id='start-screen' style="padding: 320px; color:rgb(231, 228, 34)">
         <button type="button" onclick="handleStartGameBtnClick()">Let's Play!</button>
-       <div> <br><br><br> Сontrol keys:<br>
+       <div id="keyboard-controls-help"> <br><br><br> Сontrol keys:<br>
           "W" - move airfighter up;<br>
           "S" - move airfighter down;<br>
           "A" - move airfighter left;<br>
@@ -41,4 +47,5 @@
 </body>
 
 <script src="app.js"></script> 
+<script defer src="touch.js"></script>
  
