@@ -5,7 +5,7 @@ const rocketDefaultX = 5;
 const rocketDefaultY = 67;
 const rocketMaxDistance = 1500;
 const enemyDies = 9999;
-const gameFps = setInterval(Step, 1000 / fps);
+let gameFps;
 let isShipMovingUp = false;
 let isShipMovingLeft = false;
 let isShipMovingRight = false;
@@ -105,9 +105,41 @@ let lvlComplete = {
 
 function startGame() {
   initKeybordMovement();
-  gameFps;
+  enemy1.element.addEventListener('click', fireGatlingEnemyOne);
+  enemy2.element.addEventListener('click', fireGatlingEnemyTwo);
+  enemy3.element.addEventListener('click', fireGatlingEnemyThree);
+  gameFps = setInterval(Step, 1000 / fps);
 }
 
+function fireGatlingEnemyOne (event) {  
+  if (airfighter.x + airfighter.width < event.pageX ) { 
+    healthBar50.value -= gatling.dmg;
+    gatling.ammo -= 10;
+    if (healthBar50.value === 0) {
+      enemy1.x -= enemyDies;
+    }
+  }
+}
+
+function fireGatlingEnemyTwo (event) { 
+  if (airfighter.x + airfighter.width < event.pageX ) {
+    healthBar100.value -= gatling.dmg;
+    gatling.ammo -= 10;
+    if (healthBar100.value === 0) {
+      enemy2.x -= enemyDies;
+    }
+  }
+ }
+
+function fireGatlingEnemyThree (event) {
+  if (airfighter.x + airfighter.width < event.pageX ) {
+    healthBar200.value -= gatling.dmg;
+    gatling.ammo -= 10;
+    if (healthBar200.value === 0) {
+      enemy3.x -= enemyDies;
+    }
+  }
+}
 function Step() {
   renderEnemy(enemyHealth50text, healthBar50text, enemyHealth50, healthBar50, enemy1);
   renderEnemy(enemyHealth100text, healthBar100text, enemyHealth100, healthBar100, enemy2);
@@ -180,30 +212,6 @@ function Step() {
     rocket.dmg = 50;
     rocket.element.src = "Rocket.gif";
   }
-
-  if (checkEnemyGatlingCollision(enemy1)) {
-    healthBar50.value -= gatling.dmg;
-    gatling.x = enemy1.x + enemyWidth - gatling.velocity;
-    if (healthBar50.value === 0) {
-      enemy1.x -= enemyDies;
-    }
-  }
-
-  if (checkEnemyGatlingCollision(enemy2)) {
-    healthBar100.value -= gatling.dmg;
-    gatling.x = enemy2.x + enemyWidth - gatling.velocity;
-    if (healthBar100.value === 0) {
-      enemy2.x -= enemyDies;
-    }
-  }
-
-  if (checkEnemyGatlingCollision(enemy3)) {
-    healthBar200.value -= gatling.dmg;
-    gatling.x = enemy3.x + enemyWidth - gatling.velocity;
-    if (healthBar200.value === 0) {
-      enemy3.x -= enemyDies;
-    }
-  }
   
   renderRocket();
   renderShip();
@@ -256,7 +264,6 @@ function renderShip() {
 
 function initKeybordMovement() {
   document.addEventListener("keydown", handleKeyDown);
-	document.addEventListener('mousedown' , handleClick);
   document.addEventListener("keyup", handleKeyUp);
   mobileControls.leftButton.addEventListener('click' , moveShipLeft);
   mobileControls.rightButton.addEventListener('mousedown' , moveShipRight);
@@ -286,24 +293,6 @@ function checkEnemyRocketCollision(enemy) {
   ) {
     return true;
   }
-}
-
-function checkEnemyGatlingCollision(enemy) {
-  if (
-    gatling.x > enemy.x &&
-    gatling.y > enemy.y &&
-    gatling.x < enemy.x + enemy.width &&
-    gatling.y < enemy.y + enemy.height
-  ) {
-    return true;
-  }
-}
-
-/**
- * Bind all game keyboard controls
- */
-function handleClick(event) {
-  fireGatling(event);
 }
 
 function handleKeyDown(event) {
@@ -411,13 +400,6 @@ function fireRocket() {
   }
 }
 
-function fireGatling (event) {
-  if (airfighter.x + airfighter.width < event.pageX ) {
-	gatling.x = event.pageX;
-	gatling.y = event.pageY;
-  gatling.ammo -= 10;
-  }
-}
 
 function preRocket() {
   rocket.element.src = "preRocket.gif";
