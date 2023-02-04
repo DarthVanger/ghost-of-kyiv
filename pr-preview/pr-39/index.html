@@ -1,0 +1,51 @@
+<head>
+    <meta name="viewport" content="width=device, user-scalable=no">
+    <link href="style.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="Rocket.gif">
+</head>
+<body>
+    <p>
+        x:0 <br> 
+        y:0  
+    </p>
+    <video autoplay muted loop id="game-background">
+        <source src="space-1050p.mp4" type="video/mp4">
+    </video>
+    <img id = "enemy1" src= "shahed.png">
+    <img id = "enemy21" src= "drone.png">
+    <img id = "enemy3" src= "uav.png">
+    <img id = "rocket" src = "Rocket.gif">
+    <img id = "airfighter" src= "Airfighter_ua_main.gif">
+    <div class="left"></div>
+    <div class="bottom"></div>
+    <div class="right"></div>
+    <div class="top"></div>
+    <div class="fire"></div>
+    <meter id='healthBar50' min="0" low="15" high="25" optimum="50" max="50" value="50"></meter>
+    <meter id='healthBar100' min="0" low="25" high="50" optimum="100" max="100" value="100"></meter>
+    <meter id='healthBar200' min="0" low="70" high="140" optimum="200" max="200" value="200"></meter>
+    <div id='healthBar50text'> </div>
+    <div id='healthBar100text'> </div>
+    <div id='healthBar200text'> </div>
+    <div id='ammoElement'> </div>
+    <div id="levelComplete" style="display: none">
+        <br><br><br><br><br>
+        <h2>Level Complete!</h2>
+        <br><br><br>
+        <img src="level_complete_animation.gif">
+    </div>
+    <div id='start-screen' style="padding: 320px; color:rgb(231, 228, 34)">
+        <button type="button" id="startGameButton">Let's Play!</button>
+       <div id="keyboard-controls-help"> <br><br><br> Сontrol keys:<br>
+          "W" - move airfighter up;<br>
+          "S" - move airfighter down;<br>
+          "A" - move airfighter left;<br>
+          "D" - move airfighter right;<br><br>
+          "R" - rocket shot;
+       </div>
+      </div>
+</body>
+
+<script type="module" src="app.js"></script> 
+<script defer src="touch.js"></script>
+ 
