@@ -36,7 +36,7 @@ let enemy2 = {
 let enemy3 = {
   x: 1900,
   y: 250,
-  width: 360,
+  width: 687,
   height: 200,
   velocity: -2,
   element: document.querySelector("#enemy3"),
