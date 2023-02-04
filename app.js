@@ -95,13 +95,18 @@ let enemyHealth200text = {
   velocity: -2,
   element: document.querySelector('#healthBar200text')
 };
+
+let lvlComplete = {
+  element: document.querySelector('#levelComplete')
+}
+
 let isShipMovingUp = false;
 let isShipMovingLeft = false;
 let isShipMovingRight = false;
 let isShipMovingDown = false;
 
 function startGame() {
-  setInterval(Step, 1000 / fps);
+    gameFps = setInterval(Step, 1000 / fps);;
   initKeybordMovement();
 }
 
@@ -219,6 +224,12 @@ function Step() {
   }
   if (isShipMovingRight) {
     moveShipRight();
+  }
+
+  if (enemy3.x < 0 - enemy3.width) {
+    clearInterval(gameFps);
+    document.querySelector('#levelComplete').style.display = '';
+    fadeIn(levelComplete, 400);
   }
 }
 
@@ -450,4 +461,18 @@ function handleStartGameBtnClick() {
 function hideStartScreen() {
   let startScreen = document.querySelector("#start-screen");
   startScreen.remove();
+}
+
+function fadeIn(element, duration) {
+  element.style.display = '';
+  element.style.opacity = 0;
+  var last = +new Date();
+  var tick = function() {
+    element.style.opacity = +element.style.opacity + (new Date() - last) / duration;
+    last = +new Date();
+    if (+element.style.opacity < 1) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    }
+  };
+  tick();
 }
