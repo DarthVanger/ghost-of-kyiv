@@ -6,6 +6,15 @@ const rocketDefaultY = 67;
 const rocketMaxDistance = 1500;
 const enemyDies = 9999;
 
+let mobileControls = {
+  leftButton: document.querySelector('.left'),
+  topButton: document.querySelector('.top'),
+  bottomButton: document.querySelector('.bottom'),
+  rightButton: document.querySelector('.right'),
+  fireButton: document.querySelector('.fire'),
+}
+
+
 let enemy1 = {
   x: 800,
   y: 100,
@@ -240,6 +249,11 @@ function initKeybordMovement() {
   document.addEventListener("keydown", handleKeyDown);
 	document.addEventListener('mousedown' , handleClick);
   document.addEventListener("keyup", handleKeyUp);
+  mobileControls.leftButton.addEventListener('click' , moveShipLeft);
+  mobileControls.rightButton.addEventListener('mousedown' , moveShipRight);
+  mobileControls.topButton.addEventListener('mousedown' , moveShipUp);
+  mobileControls.bottomButton.addEventListener('mousedown' , moveShipDown);
+  mobileControls.fireButton.addEventListener('click' , fireRocket)
 }
 
 function checkEnemyShipCollision(enemy) {
