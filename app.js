@@ -1,10 +1,14 @@
+import {fireGatlingEnemyOne, fireGatlingEnemyTwo, fireGatlingEnemyThree, gatling, enemyDies} from "./gatling.js";
+import {enemyHealth50, enemyHealth100, enemyHealth200, enemyHealth50text, enemyHealth100text, enemyHealth200text} from "./health.js";
+import {airfighter} from "./airfighter.js";
+import {enemy1, enemy2, enemy3} from './enemy.js';
+
 const fps = 60;
 const enemyWidth = 360;
 const enemyHeight = 200;
 const rocketDefaultX = 5;
 const rocketDefaultY = 67;
 const rocketMaxDistance = 1500;
-const enemyDies = 9999;
 let gameFps;
 let isShipMovingUp = false;
 let isShipMovingLeft = false;
@@ -19,51 +23,6 @@ let mobileControls = {
   fireButton: document.querySelector('.fire'),
 }
 
-
-let enemy1 = {
-  x: 800,
-  y: 100,
-  width: 360,
-  height: 200,
-  velocity: -2,
-  element: document.querySelector("#enemy1"),
-};
-
-let enemy2 = {
-  x: 1400,
-  y: 350,
-  width: 360,
-  height: 200,
-  velocity: -2,
-  element: document.querySelector("#enemy2"),
-};
-
-let enemy3 = {
-  x: 1900,
-  y: 250,
-  width: 687,
-  height: 200,
-  velocity: -2,
-  element: document.querySelector("#enemy3"),
-};
-
-let airfighter = {
-  x: 0,
-  y: 0,
-  width: 250,
-  height: 80,
-  element: document.querySelector('#airfighter'),
-};
-
-let gatling = {
-  x: 0,
-  y: 0,
-  velocity: -2,
-  ammo: 1500,
-  dmg: 10,
-  element: document.querySelector("#gatling"),
-};
-
 let rocket = {
   x: 5,
   y: 67,
@@ -74,30 +33,6 @@ let rocket = {
   element: document.querySelector("#rocket"),
 }
 
-let enemyHealth50 = {
-  velocity: -2,
-  element: document.querySelector('#healthBar50')
-};
-let enemyHealth100 = {
-  velocity: -2,
-  element: document.querySelector('#healthBar100')
-};
-let enemyHealth200 = {
-  velocity: -2,
-  element: document.querySelector('#healthBar200')
-};
-let enemyHealth50text = {
-  velocity: -2,
-  element: document.querySelector('#healthBar50text')
-};
-let enemyHealth100text = {
-  velocity: -2,
-  element: document.querySelector('#healthBar100text')
-};
-let enemyHealth200text = {
-  velocity: -2,
-  element: document.querySelector('#healthBar200text')
-};
 
 let lvlComplete = {
   element: document.querySelector('#levelComplete')
@@ -111,38 +46,9 @@ function startGame() {
   gameFps = setInterval(Step, 1000 / fps);
 }
 
-function fireGatlingEnemyOne (event) {  
-  if (airfighter.x + airfighter.width < event.pageX ) { 
-    healthBar50.value -= gatling.dmg;
-    gatling.ammo -= 10;
-    if (healthBar50.value === 0) {
-      enemy1.x -= enemyDies;
-    }
-  }
-}
-
-function fireGatlingEnemyTwo (event) { 
-  if (airfighter.x + airfighter.width < event.pageX ) {
-    healthBar100.value -= gatling.dmg;
-    gatling.ammo -= 10;
-    if (healthBar100.value === 0) {
-      enemy2.x -= enemyDies;
-    }
-  }
- }
-
-function fireGatlingEnemyThree (event) {
-  if (airfighter.x + airfighter.width < event.pageX ) {
-    healthBar200.value -= gatling.dmg;
-    gatling.ammo -= 10;
-    if (healthBar200.value === 0) {
-      enemy3.x -= enemyDies;
-    }
-  }
-}
 function Step() {
   renderEnemy(enemyHealth50text, healthBar50text, enemyHealth50, healthBar50, enemy1);
-  renderEnemy(enemyHealth100text, healthBar100text, enemyHealth100, healthBar100, enemy2);
+  renderEnemy(enemyHealth100text, healthBar100text, enemyHealth100, enemyHealth100.element, enemy2);
   renderEnemy(enemyHealth200text, healthBar200text, enemyHealth200, healthBar200, enemy3);
   enemy1.x = moveEnemy(enemy1.x, enemy1.velocity);
   enemy2.x = moveEnemy(enemy2.x, enemy2.velocity);
@@ -176,9 +82,9 @@ function Step() {
   }
 
   if (checkEnemyRocketCollision(enemy2)) {
-    healthBar100.value -= rocket.dmg;
+    enemyHealth100.element.value -= rocket.dmg;
     rocket.dmg -= rocket.dmg;
-    if (healthBar100.value <= 0) {
+    if (enemyHealth100.element.value <= 0) {
       enemy2.x -= enemyDies;
     }
     if (rocket.dmg <= 0) {
@@ -449,3 +355,5 @@ function fadeIn(element, duration) {
   };
   tick();
 }
+const startGameButton = document.querySelector("#startGameButton");
+startGameButton.addEventListener("click", handleStartGameBtnClick);
