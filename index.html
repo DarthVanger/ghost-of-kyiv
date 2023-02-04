@@ -12,7 +12,7 @@
         <source src="space-1050p.mp4" type="video/mp4">
     </video>
     <img id = "enemy1" src= "shahed.png">
-    <img id = "enemy2" src= "drone.png">
+    <img id = "enemy21" src= "drone.png">
     <img id = "enemy3" src= "uav.png">
     <img id = "rocket" src = "Rocket.gif">
     <img id = "airfighter" src= "Airfighter_ua_main.gif">
@@ -35,7 +35,7 @@
         <img src="level_complete_animation.gif">
     </div>
     <div id='start-screen' style="padding: 320px; color:rgb(231, 228, 34)">
-        <button type="button" onclick="handleStartGameBtnClick()">Let's Play!</button>
+        <button type="button" id="startGameButton">Let's Play!</button>
        <div id="keyboard-controls-help"> <br><br><br> Сontrol keys:<br>
           "W" - move airfighter up;<br>
           "S" - move airfighter down;<br>
@@ -46,6 +46,6 @@
       </div>
 </body>
 
-<script src="app.js"></script> 
+<script type="module" src="app.js"></script> 
 <script defer src="touch.js"></script>
  
