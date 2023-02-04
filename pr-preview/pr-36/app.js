@@ -5,6 +5,11 @@ const rocketDefaultX = 5;
 const rocketDefaultY = 67;
 const rocketMaxDistance = 1500;
 const enemyDies = 9999;
+const gameFps = setInterval(Step, 1000 / fps);
+let isShipMovingUp = false;
+let isShipMovingLeft = false;
+let isShipMovingRight = false;
+let isShipMovingDown = false;
 
 let enemy1 = {
   x: 800,
@@ -89,14 +94,9 @@ let lvlComplete = {
   element: document.querySelector('#levelComplete')
 }
 
-let isShipMovingUp = false;
-let isShipMovingLeft = false;
-let isShipMovingRight = false;
-let isShipMovingDown = false;
-
 function startGame() {
-    gameFps = setInterval(Step, 1000 / fps);;
   initKeybordMovement();
+  gameFps;
 }
 
 function Step() {
@@ -211,7 +211,6 @@ function Step() {
   if (isShipMovingRight) {
     moveShipRight();
   }
-
   if (enemy3.x < 0 - enemy3.width) {
     clearInterval(gameFps);
     document.querySelector('#levelComplete').style.display = '';
@@ -325,6 +324,10 @@ function handleKeyDown(event) {
     if (airfighter.element.src != "Airfighter_ua_moveforvard.gif") {
       airfighter.element.src = "Airfighter_ua_moveforvard.gif";
     }
+  }
+
+  if (event.key == "p" || event.key == 'з') {
+    clearInterval(gameFps);
   }
 }
 
