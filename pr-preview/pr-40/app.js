@@ -171,11 +171,31 @@ function renderShip() {
 function initKeybordMovement() {
   document.addEventListener("keydown", handleKeyDown);
   document.addEventListener("keyup", handleKeyUp);
-  mobileControls.leftButton.addEventListener('click' , moveShipLeft);
-  mobileControls.rightButton.addEventListener('mousedown' , moveShipRight);
-  mobileControls.topButton.addEventListener('mousedown' , moveShipUp);
-  mobileControls.bottomButton.addEventListener('mousedown' , moveShipDown);
-  mobileControls.fireButton.addEventListener('click' , fireRocket)
+  mobileControls.leftButton.addEventListener('mousedown' , function () {
+    isShipMovingLeft = true;
+});
+  mobileControls.rightButton.addEventListener('mousedown' ,  function () {
+    isShipMovingRight = true;
+});
+  mobileControls.topButton.addEventListener('mousedown' , function () {
+    isShipMovingUp = true;
+});
+  mobileControls.bottomButton.addEventListener('mousedown' ,  function () {
+    isShipMovingDown = true;
+});
+mobileControls.leftButton.addEventListener('mouseup' , function () {
+  isShipMovingLeft = false;
+});
+mobileControls.rightButton.addEventListener('mouseup' ,  function () {
+  isShipMovingRight = false;
+});
+mobileControls.topButton.addEventListener('mouseup' , function () {
+  isShipMovingUp = false;
+});
+mobileControls.bottomButton.addEventListener('mouseup' ,  function () {
+  isShipMovingDown = false;
+});
+  mobileControls.fireButton.addEventListener('click' , fireRocket);
 }
 
 function checkEnemyShipCollision(enemy) {
