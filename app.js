@@ -185,8 +185,8 @@ function checkEnemyShipCollision(enemy) {
     airfighter.y < enemy.y + enemy.height
   ) {
     //alert("Game Over!");
-    document.querySelector('#gameOver').style.display = '';
-  }
+    document.querySelector('#gameover-screen').style.display = '';
+    }
 }
 
 function checkEnemyRocketCollision(enemy) {
@@ -354,5 +354,12 @@ function fadeIn(element, duration) {
   };
   tick();
 }
+
+function endGameAction () {
+  document.location.reload();
+}
+
 const startGameButton = document.querySelector("#startGameButton");
+const endGameButton = document.querySelector('#endGameButton');
+endGameButton.addEventListener('click', endGameAction)
 startGameButton.addEventListener("click", handleStartGameBtnClick);
