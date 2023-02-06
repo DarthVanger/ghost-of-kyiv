@@ -171,28 +171,28 @@ function renderShip() {
 function initKeybordMovement() {
   document.addEventListener("keydown", handleKeyDown);
   document.addEventListener("keyup", handleKeyUp);
-  mobileControls.leftButton.addEventListener('mousedown' , function () {
+  mobileControls.leftButton.addEventListener('touchstart' , function () {
     isShipMovingLeft = true;
 });
-  mobileControls.rightButton.addEventListener('mousedown' ,  function () {
+  mobileControls.rightButton.addEventListener('touchstart' ,  function () {
     isShipMovingRight = true;
 });
-  mobileControls.topButton.addEventListener('mousedown' , function () {
+  mobileControls.topButton.addEventListener('touchstart' , function () {
     isShipMovingUp = true;
 });
-  mobileControls.bottomButton.addEventListener('mousedown' ,  function () {
+  mobileControls.bottomButton.addEventListener('touchstart' ,  function () {
     isShipMovingDown = true;
 });
-mobileControls.leftButton.addEventListener('mouseup' , function () {
+mobileControls.leftButton.addEventListener('touchend' , function () {
   isShipMovingLeft = false;
 });
-mobileControls.rightButton.addEventListener('mouseup' ,  function () {
+mobileControls.rightButton.addEventListener('touchend' ,  function () {
   isShipMovingRight = false;
 });
-mobileControls.topButton.addEventListener('mouseup' , function () {
+mobileControls.topButton.addEventListener('touchend' , function () {
   isShipMovingUp = false;
 });
-mobileControls.bottomButton.addEventListener('mouseup' ,  function () {
+mobileControls.bottomButton.addEventListener('touchend' ,  function () {
   isShipMovingDown = false;
 });
   mobileControls.fireButton.addEventListener('click' , fireRocket);
