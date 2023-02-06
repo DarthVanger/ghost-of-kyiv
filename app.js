@@ -32,11 +32,9 @@ let rocket = {
   velocity: 0,
   element: document.querySelector("#rocket"),
 }
-
-
-let lvlComplete = {
-  element: document.querySelector('#levelComplete')
-}
+  let lvlComplete = {
+    element: document.querySelector('#levelComplete')
+  }
 
 function startGame() {
   initKeybordMovement();
@@ -60,11 +58,12 @@ function Step() {
   enemyHealth100text.x = moveEnemy(enemyHealth100text.x, enemyHealth100text.velocity);
   enemyHealth200text.x = moveEnemy(enemyHealth200text.x, enemyHealth200text.velocity);
   gatling.x = moveEnemy(gatling.x, gatling.velocity);
+  ammoElement.innerHTML = `Gatling Ammo: ${gatling.ammo} <br> Rocket Ammo: ${rocket.ammo}`;
   moveRocket();
   checkEnemyShipCollision(enemy1);
   checkEnemyShipCollision(enemy2);
   checkEnemyShipCollision(enemy3);
-  ammoElement.innerHTML = `Gatling Ammo: ${gatling.ammo} <br> Rocket Ammo: ${rocket.ammo}`;
+  
 
   if (checkEnemyRocketCollision(enemy1)) {
     healthBar50.value -= rocket.dmg;
@@ -186,7 +185,7 @@ function checkEnemyShipCollision(enemy) {
     airfighter.y < enemy.y + enemy.height
   ) {
     //alert("Game Over!");
-    document.body.innerHTML = "gameover";
+    document.querySelector('#gameOver').style.display = '';
   }
 }
 
