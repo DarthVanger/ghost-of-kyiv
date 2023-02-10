@@ -104,7 +104,17 @@ p {
     color:#ffffff;
     text-align-last: center;
 }
-
+#gameover-screen {
+    padding: auto;
+    position: fixed;     
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    background: black;
+    z-index: 2;
+}
 #levelComplete {
     width: 100%;
     height: 100%;
