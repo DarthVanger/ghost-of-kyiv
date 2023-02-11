@@ -75,7 +75,7 @@ function Step() {
       rocket.x = airfighter.x + rocketDefaultX;
       rocket.y = airfighter.y + rocketDefaultY;
       rocket.velocity -= 8;
-      rocket.dmg = rocket.dmg;
+      rocket.dmg = 50;
       rocket.element.src = "Rocket.gif";
     }
   }
