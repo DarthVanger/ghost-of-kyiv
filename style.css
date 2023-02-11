@@ -40,13 +40,13 @@ p {
 }
 #enemy21 {
     position: absolute;
-    width: 360;
-    height: 200;
+    width: 350;
+    height: 240;
 }
 #enemy3 {
     position: absolute;
-    width: 687;
-    height: 200;
+    width: 350;
+    height: 350;
 }
 
 #airfighter {
