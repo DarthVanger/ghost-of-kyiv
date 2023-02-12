@@ -10,7 +10,7 @@ name: Deploy Master Branch
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   deploy-preview:
     runs-on: ubuntu-latest
@@ -19,5 +19,5 @@ jobs:
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: .
-          branch: gh-pages
+          branch: master
           clean-exclude: pr-preview
