@@ -7,6 +7,9 @@
 ###
 name: Deploy PR previews
 
+# Deploy website to Github Pages when pull request is:
+# opened, reopened, and pushed ("synchronize")
+# Also delete the pull request privew, when it is closed.
 on:
   pull_request:
     types:
@@ -17,6 +20,8 @@ on:
 
 concurrency: preview-${{ github.ref }}
 
+# Use https://github.com/marketplace/actions/deploy-pr-previe
+# To deploy website preview to Github Pages for each Pull Request
 jobs:
   deploy-preview:
     runs-on: ubuntu-20.04
@@ -27,3 +32,6 @@ jobs:
         uses: rossjrw/pr-preview-action@v1
         with:
           source-dir: .
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: auto

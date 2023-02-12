@@ -1,0 +1,23 @@
+###
+# Deploy master branch to Github Pages
+# Add clean-exclude option to avoid deleting pull request previews,
+# when deploying master branch.
+#
+# Code is taken from the following Example for pr-preview Github Action:
+# https://github.com/marketplace/actions/deploy-pr-preview#full-example
+###
+name: Deploy Master Branch
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: .
+          branch: gh-pages
+          clean-exclude: pr-preview
