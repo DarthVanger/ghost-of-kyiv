@@ -18,10 +18,11 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
-      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
+      - name: Install and Build 🔧
         run: |
           mkdir -p build
-          # https://unix.stackexchange.com/questions/41693/how-to-copy-some-but-not-all-files
+          # Copy all files into build/ directory, but except the build dir itself
+          # See https://unix.stackexchange.com/a/239365/286952
           cp -R $(ls | grep -v '^build$') build/
       - name: deploy
         uses: JamesIves/github-pages-deploy-action@v4
