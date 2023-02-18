@@ -35,18 +35,18 @@ p {
 
 #enemy1 {
     position: absolute;
-    width: 360;
-    height: 200;
+    width: 250;
+    height: 80;
 }
 #enemy21 {
     position: absolute;
-    width: 350;
-    height: 240;
+    width: 270;
+    height: 100;
 }
 #enemy3 {
     position: absolute;
-    width: 350;
-    height: 350;
+    width: 330;
+    height: 200;
 }
 
 #airfighter {
