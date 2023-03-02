@@ -4,16 +4,7 @@ import {airfighter} from "./airfighter.js";
 import {enemy1, enemy2, enemy3} from './enemy.js';
 
 const fps = 60;
-const enemyWidth = 360;
-const enemyHeight = 200;
-const rocketDefaultX = 5;
-const rocketDefaultY = 67;
-const rocketMaxDistance = 1500;
 let gameFps;
-let isShipMovingUp = false;
-let isShipMovingLeft = false;
-let isShipMovingRight = false;
-let isShipMovingDown = false;
 
 let mobileControls = {
   leftButton: document.querySelector('.left'),
@@ -72,8 +63,8 @@ function Step() {
       enemy1.x -= enemyDies;
     }
     if (rocket.dmg <= 0) {
-      rocket.x = airfighter.x + rocketDefaultX;
-      rocket.y = airfighter.y + rocketDefaultY;
+      rocket.x = airfighter.x + airfighter.rocketDefaultX;
+      rocket.y = airfighter.y + airfighter.rocketDefaultY;
       rocket.velocity -= 8;
       rocket.dmg = rocket.dmg;
       rocket.element.src = "Rocket.gif";
@@ -87,8 +78,8 @@ function Step() {
       enemy2.x -= enemyDies;
     }
     if (rocket.dmg <= 0) {
-      rocket.x = airfighter.x + rocketDefaultX;
-      rocket.y = airfighter.y + rocketDefaultY;
+      rocket.x = airfighter.x + airfighter.rocketDefaultX;
+      rocket.y = airfighter.y + airfighter.rocketDefaultY;
       rocket.velocity -= 8;
       rocket.dmg = 50;
       rocket.element.src = "Rocket.gif";
@@ -102,17 +93,17 @@ function Step() {
       enemy3.x -= enemyDies;
     }
     if (rocket.dmg <= 0) {
-      rocket.x = airfighter.x + rocketDefaultX;
-      rocket.y = airfighter.y + rocketDefaultY;
+      rocket.x = airfighter.x + airfighter.rocketDefaultX;
+      rocket.y = airfighter.y + airfighter.rocketDefaultY;
       rocket.velocity -= 8;
       rocket.dmg = 50;
       rocket.element.src = "Rocket.gif";
     }
   }
 
-  if (rocket.x > airfighter.x + rocketMaxDistance) {
-    rocket.x = airfighter.x + rocketDefaultX;
-    rocket.y = airfighter.y + rocketDefaultY;
+  if (rocket.x > airfighter.x + airfighter.rocketMaxDistance) {
+    rocket.x = airfighter.x + airfighter.rocketDefaultX;
+    rocket.y = airfighter.y + airfighter.rocketDefaultY;
     rocket.velocity -= 8;
     rocket.dmg = 50;
     rocket.element.src = "Rocket.gif";
@@ -121,16 +112,16 @@ function Step() {
   renderRocket();
   renderShip();
 
-  if (isShipMovingUp) {
+  if (airfighter.isShipMovingUp) {
     moveShipUp();
   }
-  if (isShipMovingDown) {
+  if (airfighter.isShipMovingDown) {
     moveShipDown();
   }
-  if (isShipMovingLeft) {
+  if (airfighter.isShipMovingLeft) {
     moveShipLeft();
   }
-  if (isShipMovingRight) {
+  if (airfighter.isShipMovingRight) {
     moveShipRight();
   }
   if (enemy3.x < 0 - enemy3.width) {
@@ -171,28 +162,28 @@ function initKeybordMovement() {
   document.addEventListener("keydown", handleKeyDown);
   document.addEventListener("keyup", handleKeyUp);
   mobileControls.leftButton.addEventListener('touchstart' , function () {
-    isShipMovingLeft = true;
+    airfighter.isShipMovingLeft = true;
 });
   mobileControls.rightButton.addEventListener('touchstart' ,  function () {
-    isShipMovingRight = true;
+    airfighter.isShipMovingRight = true;
 });
   mobileControls.topButton.addEventListener('touchstart' , function () {
-    isShipMovingUp = true;
+    airfighter.isShipMovingUp = true;
 });
   mobileControls.bottomButton.addEventListener('touchstart' ,  function () {
-    isShipMovingDown = true;
+    airfighter.isShipMovingDown = true;
 });
 mobileControls.leftButton.addEventListener('touchend' , function () {
-  isShipMovingLeft = false;
+  airfighter.isShipMovingLeft = false;
 });
 mobileControls.rightButton.addEventListener('touchend' ,  function () {
-  isShipMovingRight = false;
+  airfighter.isShipMovingRight = false;
 });
 mobileControls.topButton.addEventListener('touchend' , function () {
-  isShipMovingUp = false;
+  airfighter.isShipMovingUp = false;
 });
 mobileControls.bottomButton.addEventListener('touchend' ,  function () {
-  isShipMovingDown = false;
+  airfighter.isShipMovingDown = false;
 });
   mobileControls.fireButton.addEventListener('click' , fireRocket);
 }
@@ -227,28 +218,28 @@ function handleKeyDown(event) {
   }
 
   if (event.key == "a" || event.key == 'ф') {
-    isShipMovingLeft = true;
+    airfighter.isShipMovingLeft = true;
     if (airfighter.element.src != "Airfighter_ua_main_to_back.gif") {
       airfighter.element.src = "Airfighter_ua_main_to_back.gif";
     } 
   }
 
   if (event.key == "s" || event.key == 'ы' || event.key == 'і') {
-    isShipMovingDown = true;
+    airfighter.isShipMovingDown = true;
     if (airfighter.element.src != "Airfighter_ua_main_to_down.gif") {
       airfighter.element.src = "Airfighter_ua_main_to_down.gif";
     }
   }
 
   if (event.key == "w" || event.key == 'ц') {
-    isShipMovingUp = true;
+    airfighter.isShipMovingUp = true;
     if (airfighter.element.src != "Airfighter_ua_main_to_up.gif") {
       airfighter.element.src = "Airfighter_ua_main_to_up.gif";
     }
   }
 
   if (event.key == "d" || event.key == 'в') {
-    isShipMovingRight = true;
+    airfighter.isShipMovingRight = true;
     if (airfighter.element.src != "Airfighter_ua_moveforvard.gif") {
       airfighter.element.src = "Airfighter_ua_moveforvard.gif";
     }
@@ -261,22 +252,22 @@ function handleKeyDown(event) {
 
 function handleKeyUp (event) {
   if (event.key == "a" || event.key == 'ф') {
-    isShipMovingLeft = false;
+    airfighter.isShipMovingLeft = false;
     airfighter.element.src = "Airfighter_ua_back_to_main.gif";
   }
 
   if (event.key == "s" || event.key == 'ы' || event.key == 'і') {
-    isShipMovingDown = false;
+    airfighter.isShipMovingDown = false;
     airfighter.element.src = "Airfighter_ua_down_to_main.gif";
   }
 
   if (event.key == "w" || event.key == 'ц') {
-    isShipMovingUp = false;
+    airfighter.isShipMovingUp = false;
     airfighter.element.src = "Airfighter_ua_up_to_main.gif";
   }
 
   if (event.key == "d" || event.key == 'в') {
-    isShipMovingRight = false;
+    airfighter.isShipMovingRight = false;
     airfighter.element.src = "Airfighter_ua_main.gif";
   }
 }
