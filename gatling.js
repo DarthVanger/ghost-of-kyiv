@@ -5,8 +5,6 @@ import {enemy1, enemy2, enemy3} from './enemy.js';
 export const enemyDies = 9999;
 
 export let gatling = {
-  x: 0,
-  y: 0,
   velocity: -2,
   ammo: 1500,
   dmg: 10,
