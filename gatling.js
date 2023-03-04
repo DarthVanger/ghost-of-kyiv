@@ -1,6 +1,7 @@
 import {enemyHealth50, enemyHealth100, enemyHealth200, enemyHealth50text, enemyHealth100text, enemyHealth200text} from "./health.js";
 import {airfighter} from "./airfighter.js";
 import {enemy1, enemy2, enemy3} from './enemy.js';
+import { soundExplosion, soundGatling} from "./music.js";
 
 export const enemyDies = 9999;
 
@@ -17,8 +18,10 @@ export function fireGatlingEnemyOne (event) {
     if (airfighter.x + airfighter.width < event.pageX ) { 
       healthBar50.value -= gatling.dmg;
       gatling.ammo -= 10;
+      soundGatling.play();
       if (healthBar50.value === 0) {
         enemy1.x -= enemyDies;
+        soundExplosion.play();
       }
     }
   }
@@ -27,10 +30,12 @@ export function fireGatlingEnemyOne (event) {
     if (airfighter.x + airfighter.width < event.pageX ) {
       enemyHealth100.element.value -= gatling.dmg;
       gatling.ammo -= 10;
+      soundGatling.play();
       if (enemyHealth100.element.value === 0) {
         console.log('enemy2');
         console.log(enemy2);
         enemy2.x -= enemyDies;
+        soundExplosion.play();
       }
     }
    }
@@ -39,8 +44,10 @@ export function fireGatlingEnemyOne (event) {
     if (airfighter.x + airfighter.width < event.pageX ) {
       healthBar200.value -= gatling.dmg;
       gatling.ammo -= 10;
+      soundGatling.play();
       if (healthBar200.value === 0) {
         enemy3.x -= enemyDies;
+        soundExplosion.play();
       }
     }
   }

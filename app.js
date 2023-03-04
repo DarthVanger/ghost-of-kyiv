@@ -2,6 +2,7 @@ import {fireGatlingEnemyOne, fireGatlingEnemyTwo, fireGatlingEnemyThree, gatling
 import {enemyHealth50, enemyHealth100, enemyHealth200, enemyHealth50text, enemyHealth100text, enemyHealth200text} from "./health.js";
 import {airfighter} from "./airfighter.js";
 import {enemy1, enemy2, enemy3} from './enemy.js';
+import { soundShot, soundHit, soundExplosion, soundLaught} from "./music.js";
 
 const fps = 60;
 const enemyWidth = 360;
@@ -70,6 +71,7 @@ function Step() {
     rocket.dmg -= rocket.dmg;
     if (healthBar50.value <= 0) {
       enemy1.x -= enemyDies;
+      soundExplosion.play();
     }
     if (rocket.dmg <= 0) {
       rocket.x = airfighter.x + rocketDefaultX;
@@ -83,8 +85,10 @@ function Step() {
   if (checkEnemyRocketCollision(enemy2)) {
     enemyHealth100.element.value -= rocket.dmg;
     rocket.dmg -= rocket.dmg;
+    soundHit.play();
     if (enemyHealth100.element.value <= 0) {
       enemy2.x -= enemyDies;
+      soundExplosion.play();
     }
     if (rocket.dmg <= 0) {
       rocket.x = airfighter.x + rocketDefaultX;
@@ -98,8 +102,10 @@ function Step() {
   if (checkEnemyRocketCollision(enemy3)) {
     healthBar200.value -= rocket.dmg;
     rocket.dmg -= rocket.dmg;
+    soundHit.play();
     if (healthBar200.value <= 0) {
       enemy3.x -= enemyDies;
+      soundExplosion.play();
     }
     if (rocket.dmg <= 0) {
       rocket.x = airfighter.x + rocketDefaultX;
@@ -206,6 +212,14 @@ function checkEnemyShipCollision(enemy) {
   ) {
     //alert("Game Over!");
     document.querySelector('#gameover-screen').style.display = '';
+    airfighter.x = 0;
+    airfighter.y = 0;
+    soundHit.pause();
+    soundExplosion.play();
+    setTimeout(function() {
+      soundLaught.play();
+    }, 900);
+    
     }
 }
 
@@ -216,6 +230,8 @@ function checkEnemyRocketCollision(enemy) {
     rocket.x < enemy.x + enemy.width &&
     rocket.y < enemy.y + enemy.height
   ) {
+    soundShot.pause();
+    soundShot.currentTime = 0;
     return true;
   }
 }
@@ -322,6 +338,7 @@ function fireRocket() {
     rocket.ammo -= 1;
     rocket.element.src = "img/Rocket.gif";
     setTimeout(preRocket, 8);
+    soundShot.play();
   }
 }
 
