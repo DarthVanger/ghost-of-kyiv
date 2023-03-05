@@ -11,5 +11,5 @@ soundShot.src = 'music/vyistrel.mp3';
 soundHit.src = 'music/smallBoom.mp3';
 soundExplosion.src = 'music/vzryiv-sredney.mp3';
 soundLaught.src = 'music/zvuk-so-smehom-nelsona-iz-simpsonov-ha-ha-6710-1__=3.mp3';
-soundStart.src = 'music/ES_Phoenix Rising - Edgar Hopp.mp3';
-soundEnd.src = 'music/ES_Step by Step - Experia.mp3';
+soundEnd.src = 'music/ES_Phoenix Rising - Edgar Hopp.mp3';
+soundStart.src = 'music/ES_Step by Step - Experia.mp3';
