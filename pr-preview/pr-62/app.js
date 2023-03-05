@@ -2,7 +2,7 @@ import {fireGatlingEnemyOne, fireGatlingEnemyTwo, fireGatlingEnemyThree, gatling
 import {enemyHealth50, enemyHealth100, enemyHealth200, enemyHealth50text, enemyHealth100text, enemyHealth200text} from "./health.js";
 import {airfighter} from "./airfighter.js";
 import {enemy1, enemy2, enemy3} from './enemy.js';
-import { soundShot, soundHit, soundExplosion, soundLaught} from "./music.js";
+import { soundShot, soundHit, soundExplosion, soundLaught, soundStart, soundEnd} from "./music.js";
 
 const fps = 60;
 const enemyWidth = 360;
@@ -142,6 +142,9 @@ function Step() {
     clearInterval(gameFps);
     document.querySelector('#levelComplete').style.display = '';
     fadeIn(levelComplete, 400);
+    soundStart.pause();
+    soundEnd.play();
+    soundEnd.volume = 1;
   }
 }
 
@@ -216,6 +219,7 @@ function checkEnemyShipCollision(enemy) {
     soundHit.pause();
     soundExplosion.play();
     setTimeout(function() {
+      soundStart.pause();
       soundLaught.play();
     }, 900);
     
@@ -367,6 +371,8 @@ function moveEnemy(enemyx, enemyVelocity) {
 function handleStartGameBtnClick() {
   startGame();
   hideStartScreen();
+  soundStart.play();
+  soundStart.volume = 0.3;
 }
 
 /**
@@ -375,6 +381,7 @@ function handleStartGameBtnClick() {
 function hideStartScreen() {
   let startScreen = document.querySelector("#start-screen");
   startScreen.remove();
+
 }
 
 function fadeIn(element, duration) {
