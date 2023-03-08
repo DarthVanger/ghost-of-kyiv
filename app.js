@@ -2,19 +2,10 @@ import {fireGatlingEnemyOne, fireGatlingEnemyTwo, fireGatlingEnemyThree, gatling
 import {enemyHealth50, enemyHealth100, enemyHealth200, enemyHealth50text, enemyHealth100text, enemyHealth200text} from "./health.js";
 import {airfighter} from "./airfighter.js";
 import {enemy1, enemy2, enemy3} from './enemy.js';
-import { soundShot, soundHit, soundExplosion, soundLaught} from "./music.js";
+import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete} from "./music.js";
 
 const fps = 60;
-const enemyWidth = 360;
-const enemyHeight = 200;
-const rocketDefaultX = 5;
-const rocketDefaultY = 67;
-const rocketMaxDistance = 1500;
 let gameFps;
-let isShipMovingUp = false;
-let isShipMovingLeft = false;
-let isShipMovingRight = false;
-let isShipMovingDown = false;
 
 let mobileControls = {
   leftButton: document.querySelector('.left'),
@@ -70,11 +61,11 @@ function Step() {
     rocket.dmg -= rocket.dmg;
     if (healthBar50.value <= 0) {
       enemy1.x -= enemyDies;
-      soundExplosion.play();
+      soundEnemyDieExplosion.play();
     }
     if (rocket.dmg <= 0) {
-      rocket.x = airfighter.x + rocketDefaultX;
-      rocket.y = airfighter.y + rocketDefaultY;
+      rocket.x = airfighter.x + airfighter.rocketDefaultX;
+      rocket.y = airfighter.y + airfighter.rocketDefaultY;
       rocket.velocity -= 8;
       rocket.dmg = 50;
       rocket.element.src = "img/Rocket.gif";
@@ -84,14 +75,14 @@ function Step() {
   if (checkEnemyRocketCollision(enemy2)) {
     enemyHealth100.element.value -= rocket.dmg;
     rocket.dmg -= rocket.dmg;
-    soundHit.play();
+    soundRocketHit.play();
     if (enemyHealth100.element.value <= 0) {
       enemy2.x -= enemyDies;
-      soundExplosion.play();
+      soundEnemyDieExplosion.play();
     }
     if (rocket.dmg <= 0) {
-      rocket.x = airfighter.x + rocketDefaultX;
-      rocket.y = airfighter.y + rocketDefaultY;
+      rocket.x = airfighter.x + airfighter.rocketDefaultX;
+      rocket.y = airfighter.y + airfighter.rocketDefaultY;
       rocket.velocity -= 8;
       rocket.dmg = 50;
       rocket.element.src = "img/Rocket.gif";
@@ -101,23 +92,23 @@ function Step() {
   if (checkEnemyRocketCollision(enemy3)) {
     healthBar200.value -= rocket.dmg;
     rocket.dmg -= rocket.dmg;
-    soundHit.play();
+    soundRocketHit.play();
     if (healthBar200.value <= 0) {
       enemy3.x -= enemyDies;
-      soundExplosion.play();
+      soundEnemyDieExplosion.play();
     }
     if (rocket.dmg <= 0) {
-      rocket.x = airfighter.x + rocketDefaultX;
-      rocket.y = airfighter.y + rocketDefaultY;
+      rocket.x = airfighter.x + airfighter.rocketDefaultX;
+      rocket.y = airfighter.y + airfighter.rocketDefaultY;
       rocket.velocity -= 8;
       rocket.dmg = 50;
       rocket.element.src = "img/Rocket.gif";
     }
   }
 
-  if (rocket.x > airfighter.x + rocketMaxDistance) {
-    rocket.x = airfighter.x + rocketDefaultX;
-    rocket.y = airfighter.y + rocketDefaultY;
+  if (rocket.x > airfighter.x + airfighter.rocketMaxDistance) {
+    rocket.x = airfighter.x + airfighter.rocketDefaultX;
+    rocket.y = airfighter.y + airfighter.rocketDefaultY;
     rocket.velocity -= 8;
     rocket.dmg = 50;
     rocket.element.src = "img/Rocket.gif";
@@ -126,22 +117,26 @@ function Step() {
   renderRocket();
   renderShip();
 
-  if (isShipMovingUp) {
+  if (airfighter.isShipMovingUp) {
     moveShipUp();
   }
-  if (isShipMovingDown) {
+  if (airfighter.isShipMovingDown) {
     moveShipDown();
   }
-  if (isShipMovingLeft) {
+  if (airfighter.isShipMovingLeft) {
     moveShipLeft();
   }
-  if (isShipMovingRight) {
+  if (airfighter.isShipMovingRight) {
     moveShipRight();
   }
   if (enemy3.x < 0 - enemy3.width) {
     clearInterval(gameFps);
     document.querySelector('#levelComplete').style.display = '';
     fadeIn(levelComplete, 400);
+    soundMainTheme.pause();
+    soundMainTheme.currentTime = 0;
+    soundLevelComplete.play();
+    soundLevelComplete.volume = 0.4;
   }
 }
 
@@ -176,28 +171,28 @@ function initKeybordMovement() {
   document.addEventListener("keydown", handleKeyDown);
   document.addEventListener("keyup", handleKeyUp);
   mobileControls.leftButton.addEventListener('touchstart' , function () {
-    isShipMovingLeft = true;
+    airfighter.isShipMovingLeft = true;
 });
   mobileControls.rightButton.addEventListener('touchstart' ,  function () {
-    isShipMovingRight = true;
+    airfighter.isShipMovingRight = true;
 });
   mobileControls.topButton.addEventListener('touchstart' , function () {
-    isShipMovingUp = true;
+    airfighter.isShipMovingUp = true;
 });
   mobileControls.bottomButton.addEventListener('touchstart' ,  function () {
-    isShipMovingDown = true;
+    airfighter.isShipMovingDown = true;
 });
 mobileControls.leftButton.addEventListener('touchend' , function () {
-  isShipMovingLeft = false;
+  airfighter.isShipMovingLeft = false;
 });
 mobileControls.rightButton.addEventListener('touchend' ,  function () {
-  isShipMovingRight = false;
+  airfighter.isShipMovingRight = false;
 });
 mobileControls.topButton.addEventListener('touchend' , function () {
-  isShipMovingUp = false;
+  airfighter.isShipMovingUp = false;
 });
 mobileControls.bottomButton.addEventListener('touchend' ,  function () {
-  isShipMovingDown = false;
+  airfighter.isShipMovingDown = false;
 });
   mobileControls.fireButton.addEventListener('click' , fireRocket);
 }
@@ -213,10 +208,11 @@ function checkEnemyShipCollision(enemy) {
     document.querySelector('#gameover-screen').style.display = '';
     airfighter.x = 0;
     airfighter.y = 0;
-    soundHit.pause();
-    soundExplosion.play();
+    soundRocketHit.pause();
+    soundEnemyDieExplosion.play();
     setTimeout(function() {
-      soundLaught.play();
+      soundMainTheme.pause();
+      soundGameOver.play();
     }, 900);
     
     }
@@ -229,8 +225,8 @@ function checkEnemyRocketCollision(enemy) {
     rocket.x < enemy.x + enemy.width &&
     rocket.y < enemy.y + enemy.height
   ) {
-    soundShot.pause();
-    soundShot.currentTime = 0;
+    soundRocketShot.pause();
+    soundRocketShot.currentTime = 0;
     return true;
   }
 }
@@ -242,28 +238,28 @@ function handleKeyDown(event) {
   }
 
   if (event.key == "a" || event.key == 'ф') {
-    isShipMovingLeft = true;
+    airfighter.isShipMovingLeft = true;
     if (airfighter.element.src != "img/Airfighter_ua_main_to_back.gif") {
       airfighter.element.src = "img/Airfighter_ua_main_to_back.gif";
     } 
   }
 
   if (event.key == "s" || event.key == 'ы' || event.key == 'і') {
-    isShipMovingDown = true;
+    airfighter.isShipMovingDown = true;
     if (airfighter.element.src != "img/Airfighter_ua_main_to_down.gif") {
       airfighter.element.src = "img/Airfighter_ua_main_to_down.gif";
     }
   }
 
   if (event.key == "w" || event.key == 'ц') {
-    isShipMovingUp = true;
+    airfighter.isShipMovingUp = true;
     if (airfighter.element.src != "img/Airfighter_ua_main_to_up.gif") {
       airfighter.element.src = "img/Airfighter_ua_main_to_up.gif";
     }
   }
 
   if (event.key == "d" || event.key == 'в') {
-    isShipMovingRight = true;
+    airfighter.isShipMovingRight = true;
     if (airfighter.element.src != "img/Airfighter_ua_moveforvard.gif") {
       airfighter.element.src = "img/Airfighter_ua_moveforvard.gif";
     }
@@ -276,22 +272,22 @@ function handleKeyDown(event) {
 
 function handleKeyUp (event) {
   if (event.key == "a" || event.key == 'ф') {
-    isShipMovingLeft = false;
+    airfighter.isShipMovingLeft = false;
     airfighter.element.src = "img/Airfighter_ua_back_to_main.gif";
   }
 
   if (event.key == "s" || event.key == 'ы' || event.key == 'і') {
-    isShipMovingDown = false;
+    airfighter.isShipMovingDown = false;
     airfighter.element.src = "img/Airfighter_ua_down_to_main.gif";
   }
 
   if (event.key == "w" || event.key == 'ц') {
-    isShipMovingUp = false;
+    airfighter.isShipMovingUp = false;
     airfighter.element.src = "img/Airfighter_ua_up_to_main.gif";
   }
 
   if (event.key == "d" || event.key == 'в') {
-    isShipMovingRight = false;
+    airfighter.isShipMovingRight = false;
     airfighter.element.src = "img/Airfighter_ua_main.gif";
   }
 }
@@ -337,7 +333,7 @@ function fireRocket() {
     rocket.ammo -= 1;
     rocket.element.src = "img/Rocket.gif";
     setTimeout(preRocket, 8);
-    soundShot.play();
+    soundRocketShot.play();
   }
 }
 
@@ -367,6 +363,8 @@ function moveEnemy(enemyx, enemyVelocity) {
 function handleStartGameBtnClick() {
   startGame();
   hideStartScreen();
+  soundMainTheme.play();
+  soundMainTheme.volume = 0.3;
 }
 
 /**
@@ -375,6 +373,7 @@ function handleStartGameBtnClick() {
 function hideStartScreen() {
   let startScreen = document.querySelector("#start-screen");
   startScreen.remove();
+
 }
 
 function fadeIn(element, duration) {
