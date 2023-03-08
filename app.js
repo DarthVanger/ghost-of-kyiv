@@ -5,7 +5,16 @@ import {enemy1, enemy2, enemy3} from './enemy.js';
 import { soundShot, soundHit, soundExplosion, soundLaught} from "./music.js";
 
 const fps = 60;
+const enemyWidth = 360;
+const enemyHeight = 200;
+const rocketDefaultX = 5;
+const rocketDefaultY = 67;
+const rocketMaxDistance = 1500;
 let gameFps;
+let isShipMovingUp = false;
+let isShipMovingLeft = false;
+let isShipMovingRight = false;
+let isShipMovingDown = false;
 
 let mobileControls = {
   leftButton: document.querySelector('.left'),
@@ -64,8 +73,8 @@ function Step() {
       soundExplosion.play();
     }
     if (rocket.dmg <= 0) {
-      rocket.x = airfighter.x + airfighter.rocketDefaultX;
-      rocket.y = airfighter.y + airfighter.rocketDefaultY;
+      rocket.x = airfighter.x + rocketDefaultX;
+      rocket.y = airfighter.y + rocketDefaultY;
       rocket.velocity -= 8;
       rocket.dmg = 50;
       rocket.element.src = "img/Rocket.gif";
@@ -81,8 +90,8 @@ function Step() {
       soundExplosion.play();
     }
     if (rocket.dmg <= 0) {
-      rocket.x = airfighter.x + airfighter.rocketDefaultX;
-      rocket.y = airfighter.y + airfighter.rocketDefaultY;
+      rocket.x = airfighter.x + rocketDefaultX;
+      rocket.y = airfighter.y + rocketDefaultY;
       rocket.velocity -= 8;
       rocket.dmg = 50;
       rocket.element.src = "img/Rocket.gif";
@@ -98,17 +107,17 @@ function Step() {
       soundExplosion.play();
     }
     if (rocket.dmg <= 0) {
-      rocket.x = airfighter.x + airfighter.rocketDefaultX;
-      rocket.y = airfighter.y + airfighter.rocketDefaultY;
+      rocket.x = airfighter.x + rocketDefaultX;
+      rocket.y = airfighter.y + rocketDefaultY;
       rocket.velocity -= 8;
       rocket.dmg = 50;
       rocket.element.src = "img/Rocket.gif";
     }
   }
 
-  if (rocket.x > airfighter.x + airfighter.rocketMaxDistance) {
-    rocket.x = airfighter.x + airfighter.rocketDefaultX;
-    rocket.y = airfighter.y + airfighter.rocketDefaultY;
+  if (rocket.x > airfighter.x + rocketMaxDistance) {
+    rocket.x = airfighter.x + rocketDefaultX;
+    rocket.y = airfighter.y + rocketDefaultY;
     rocket.velocity -= 8;
     rocket.dmg = 50;
     rocket.element.src = "img/Rocket.gif";
@@ -117,16 +126,16 @@ function Step() {
   renderRocket();
   renderShip();
 
-  if (airfighter.isShipMovingUp) {
+  if (isShipMovingUp) {
     moveShipUp();
   }
-  if (airfighter.isShipMovingDown) {
+  if (isShipMovingDown) {
     moveShipDown();
   }
-  if (airfighter.isShipMovingLeft) {
+  if (isShipMovingLeft) {
     moveShipLeft();
   }
-  if (airfighter.isShipMovingRight) {
+  if (isShipMovingRight) {
     moveShipRight();
   }
   if (enemy3.x < 0 - enemy3.width) {
@@ -167,28 +176,28 @@ function initKeybordMovement() {
   document.addEventListener("keydown", handleKeyDown);
   document.addEventListener("keyup", handleKeyUp);
   mobileControls.leftButton.addEventListener('touchstart' , function () {
-    airfighter.isShipMovingLeft = true;
+    isShipMovingLeft = true;
 });
   mobileControls.rightButton.addEventListener('touchstart' ,  function () {
-    airfighter.isShipMovingRight = true;
+    isShipMovingRight = true;
 });
   mobileControls.topButton.addEventListener('touchstart' , function () {
-    airfighter.isShipMovingUp = true;
+    isShipMovingUp = true;
 });
   mobileControls.bottomButton.addEventListener('touchstart' ,  function () {
-    airfighter.isShipMovingDown = true;
+    isShipMovingDown = true;
 });
 mobileControls.leftButton.addEventListener('touchend' , function () {
-  airfighter.isShipMovingLeft = false;
+  isShipMovingLeft = false;
 });
 mobileControls.rightButton.addEventListener('touchend' ,  function () {
-  airfighter.isShipMovingRight = false;
+  isShipMovingRight = false;
 });
 mobileControls.topButton.addEventListener('touchend' , function () {
-  airfighter.isShipMovingUp = false;
+  isShipMovingUp = false;
 });
 mobileControls.bottomButton.addEventListener('touchend' ,  function () {
-  airfighter.isShipMovingDown = false;
+  isShipMovingDown = false;
 });
   mobileControls.fireButton.addEventListener('click' , fireRocket);
 }
@@ -233,28 +242,28 @@ function handleKeyDown(event) {
   }
 
   if (event.key == "a" || event.key == 'ф') {
-    airfighter.isShipMovingLeft = true;
+    isShipMovingLeft = true;
     if (airfighter.element.src != "img/Airfighter_ua_main_to_back.gif") {
       airfighter.element.src = "img/Airfighter_ua_main_to_back.gif";
     } 
   }
 
   if (event.key == "s" || event.key == 'ы' || event.key == 'і') {
-    airfighter.isShipMovingDown = true;
+    isShipMovingDown = true;
     if (airfighter.element.src != "img/Airfighter_ua_main_to_down.gif") {
       airfighter.element.src = "img/Airfighter_ua_main_to_down.gif";
     }
   }
 
   if (event.key == "w" || event.key == 'ц') {
-    airfighter.isShipMovingUp = true;
+    isShipMovingUp = true;
     if (airfighter.element.src != "img/Airfighter_ua_main_to_up.gif") {
       airfighter.element.src = "img/Airfighter_ua_main_to_up.gif";
     }
   }
 
   if (event.key == "d" || event.key == 'в') {
-    airfighter.isShipMovingRight = true;
+    isShipMovingRight = true;
     if (airfighter.element.src != "img/Airfighter_ua_moveforvard.gif") {
       airfighter.element.src = "img/Airfighter_ua_moveforvard.gif";
     }
@@ -267,22 +276,22 @@ function handleKeyDown(event) {
 
 function handleKeyUp (event) {
   if (event.key == "a" || event.key == 'ф') {
-    airfighter.isShipMovingLeft = false;
+    isShipMovingLeft = false;
     airfighter.element.src = "img/Airfighter_ua_back_to_main.gif";
   }
 
   if (event.key == "s" || event.key == 'ы' || event.key == 'і') {
-    airfighter.isShipMovingDown = false;
+    isShipMovingDown = false;
     airfighter.element.src = "img/Airfighter_ua_down_to_main.gif";
   }
 
   if (event.key == "w" || event.key == 'ц') {
-    airfighter.isShipMovingUp = false;
+    isShipMovingUp = false;
     airfighter.element.src = "img/Airfighter_ua_up_to_main.gif";
   }
 
   if (event.key == "d" || event.key == 'в') {
-    airfighter.isShipMovingRight = false;
+    isShipMovingRight = false;
     airfighter.element.src = "img/Airfighter_ua_main.gif";
   }
 }
