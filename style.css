@@ -253,6 +253,7 @@ h1 sub
 	overflow: hidden;
 	transform-origin: 50% 100%;
 	transform: perspective(300px) rotateX(25deg);
+    
 }
 
 #titles:after
@@ -267,15 +268,10 @@ h1 sub
 	pointer-events: none;
 }
 
-#titles p
+#titles div
 {
 	text-align: center;
 	margin: 0.8em 0;
-}
-
-#titles p.center
-{
-	text-align: center;
 }
 
 #titlecontent
