@@ -1,6 +1,7 @@
+@import url(https://fonts.googleapis.com/css?family=Droid+Sans:400,700);
 #start-screen {
     padding: auto;
-    position: fixed;     
+    position: absolute;     
     right: 0;
     top: 0;
     left: 0;
@@ -193,3 +194,98 @@ p {
 *::selection { 
     background: transparent; 
   } 
+/*introduction*/
+#introduction {
+    z-index: 4;
+    position: absolute;     
+    height: 100%;
+    width: 100%;
+    font-family: "Droid Sans", arial, verdana, sans-serif;
+	font-weight: 700;
+	color: #ff6;
+	background-image: url('img/star_wars_background.jpg');
+	overflow: hidden;
+}
+h1
+{
+	position: absolute;
+	width: 5.6em;
+	left: 30%;
+    transform:translate(-50%,-50%);
+	top: 25%;
+	font-size: 10em;
+	text-align: center;
+	margin-left: -1.3em;
+	line-height: 0.8em;
+	letter-spacing: -0.05em;
+	color: #000;
+	text-shadow: -2px -2px 0 #ff6, 2px -2px 0 #ff6, -2px 2px 0 #ff6, 2px 2px 0 #ff6;
+	opacity: 0;
+	z-index: 5;
+	animation: logo 5s ease-out 2.5s;
+}
+
+h1 sub
+{
+	display: block;
+	font-size: 0.3em;
+	letter-spacing: 0;
+	line-height: 0.8em;
+}
+
+
+@keyframes logo {
+	0% { transform: scale(1); opacity: 1; }
+	50% { opacity: 1; }
+	100% { transform: scale(0.1); opacity: 0; }
+}
+
+/* the interesting 3D scrolling stuff */
+#titles {
+	position: absolute;
+	width: 18em;
+	height: 50em;
+	bottom: 0;
+	left: 50%;
+	margin-left: -9em;
+	font-size: 350%;
+	text-align: justify;
+	overflow: hidden;
+	transform-origin: 50% 100%;
+	transform: perspective(300px) rotateX(25deg);
+}
+
+#titles:after
+{
+	position: absolute;
+	content: ' ';
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 60%;
+	background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
+	pointer-events: none;
+}
+
+#titles p
+{
+	text-align: center;
+	margin: 0.8em 0;
+}
+
+#titles p.center
+{
+	text-align: center;
+}
+
+#titlecontent
+{
+	position: absolute;
+	top: 100%;
+	animation: scroll 150s linear 4s infinite;
+}
+
+@keyframes scroll {
+	0% { top: 100%; }
+	100% { top: -170%; }
+} 
