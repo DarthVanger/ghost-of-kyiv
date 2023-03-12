@@ -211,8 +211,7 @@ h1
 	position: absolute;
 	width: 5.6em;
 	left: 30%;
-    transform:translate(-50%,-50%);
-	top: 25%;
+    transform:translate(-50%, 0%);
 	font-size: 10em;
 	text-align: center;
 	margin-left: -1.3em;
@@ -270,10 +269,12 @@ h1 sub
 
 #titles div
 {
-	text-align: center;
+    text-align: justify;
 	margin: 0.8em 0;
 }
-
+#titles div.centr{
+    text-align: center;
+}
 #titlecontent
 {
 	position: absolute;
