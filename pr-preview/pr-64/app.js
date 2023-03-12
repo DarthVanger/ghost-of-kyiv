@@ -2,7 +2,7 @@ import {fireGatlingEnemyOne, fireGatlingEnemyTwo, fireGatlingEnemyThree, gatling
 import {enemyHealth50, enemyHealth100, enemyHealth200, enemyHealth50text, enemyHealth100text, enemyHealth200text} from "./health.js";
 import {airfighter} from "./airfighter.js";
 import {enemy1, enemy2, enemy3} from './enemy.js';
-import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete} from "./music.js";
+import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
 
 const fps = 60;
 let gameFps;
@@ -393,8 +393,15 @@ function fadeIn(element, duration) {
 function endGameAction () {
   document.location.reload();
 }
-
+let introduction = document.querySelector('#introduction');
 const startGameButton = document.querySelector("#startGameButton");
 const endGameButton = document.querySelector('#endGameButton');
 endGameButton.addEventListener('click', endGameAction)
 startGameButton.addEventListener("click", handleStartGameBtnClick);
+window.addEventListener('load', function (){setTimeout(introductionSkip, 44000)});
+function introductionSkip(){
+  introduction.style.width = 10 + 'px';
+  introduction.style.zIndex = 1;
+  soundIntro.play();
+}
+introduction.addEventListener('click', introductionSkip);
