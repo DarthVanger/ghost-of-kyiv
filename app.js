@@ -3,6 +3,7 @@ import {enemyHealth50, enemyHealth100, enemyHealth200, enemyHealth50text, enemyH
 import {airfighter} from "./airfighter.js";
 import {enemy1, enemy2, enemy3} from './enemy.js';
 import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete} from "./music.js";
+import {predictVxVy} from "./predictiveShot.js";
 
 const fps = 60;
 let gameFps;
@@ -21,12 +22,31 @@ let rocket = {
   width: 120,
   ammo: 5,
   dmg: 50,
-  velocity: 0,
+  vx: 0,
+  vy: 0,
   element: document.querySelector("#rocket"),
 }
+
+let bullet = {
+  x: 0,
+  y: 0,
+  width: 120,
+  ammo: 5,
+  dmg: 50,
+  vx: 0,
+  vy: 0,
+  element: document.querySelector("#bullet"),
+}
+
   let lvlComplete = {
     element: document.querySelector('#levelComplete')
   }
+
+function predictiveShot () {
+  const predictiveV = predictVxVy();
+  bullet.vx = predictiveV.vx;
+  bullet.vy = predictiveV.vy;
+}  
 
 function startGame() {
   initKeybordMovement();
@@ -34,6 +54,7 @@ function startGame() {
   enemy2.element.addEventListener('click', fireGatlingEnemyTwo);
   enemy3.element.addEventListener('click', fireGatlingEnemyThree);
   gameFps = setInterval(Step, 1000 / fps);
+  predictiveShot();
 }
 
 function Step() {
@@ -51,6 +72,7 @@ function Step() {
   enemyHealth200text.x = moveEnemy(enemyHealth200text.x, enemyHealth200text.velocity);
   ammoElement.innerHTML = `Gatling Ammo: ${gatling.ammo} <br> Rocket Ammo: ${rocket.ammo}`;
   moveRocket();
+  moveBullet();
   checkEnemyShipCollision(enemy1);
   checkEnemyShipCollision(enemy2);
   checkEnemyShipCollision(enemy3);
@@ -66,7 +88,7 @@ function Step() {
     if (rocket.dmg <= 0) {
       rocket.x = airfighter.x + airfighter.rocketDefaultX;
       rocket.y = airfighter.y + airfighter.rocketDefaultY;
-      rocket.velocity -= 8;
+      rocket.vx -= 8;
       rocket.dmg = 50;
       rocket.element.src = "img/Rocket.gif";
     }
@@ -83,7 +105,7 @@ function Step() {
     if (rocket.dmg <= 0) {
       rocket.x = airfighter.x + airfighter.rocketDefaultX;
       rocket.y = airfighter.y + airfighter.rocketDefaultY;
-      rocket.velocity -= 8;
+      rocket.vx -= 8;
       rocket.dmg = 50;
       rocket.element.src = "img/Rocket.gif";
     }
@@ -100,7 +122,7 @@ function Step() {
     if (rocket.dmg <= 0) {
       rocket.x = airfighter.x + airfighter.rocketDefaultX;
       rocket.y = airfighter.y + airfighter.rocketDefaultY;
-      rocket.velocity -= 8;
+      rocket.vx -= 8;
       rocket.dmg = 50;
       rocket.element.src = "img/Rocket.gif";
     }
@@ -109,12 +131,13 @@ function Step() {
   if (rocket.x > airfighter.x + airfighter.rocketMaxDistance) {
     rocket.x = airfighter.x + airfighter.rocketDefaultX;
     rocket.y = airfighter.y + airfighter.rocketDefaultY;
-    rocket.velocity -= 8;
+    rocket.vx -= 8;
     rocket.dmg = 50;
     rocket.element.src = "img/Rocket.gif";
   }
   
   renderRocket();
+  renderBullet();
   renderShip();
 
   if (airfighter.isShipMovingUp) {
@@ -160,6 +183,10 @@ function renderEnemy (text, textValue, health, healthValue, enemy) {
 function renderRocket() {
   rocket.element.style.left = rocket.x;
   rocket.element.style.top = rocket.y;
+}
+function renderBullet() {
+  bullet.element.style.left = bullet.x;
+  bullet.element.style.top = bullet.y;
 }
 
 function renderShip() {
@@ -294,7 +321,7 @@ function handleKeyUp (event) {
 
 function moveShipLeft() {
   airfighter.x -= 10;
-  if (rocket.velocity < 7) {
+  if (rocket.vx < 7) {
     rocket.x -= 10;
   }
   console.log("moveShipLeft");
@@ -302,7 +329,7 @@ function moveShipLeft() {
 
 function moveShipRight() {
   airfighter.x += 10;
-  if (rocket.velocity < 7) {
+  if (rocket.vx < 7) {
     rocket.x += 10;
   }
   console.log("moveShipRight");
@@ -310,7 +337,7 @@ function moveShipRight() {
 
 function moveShipUp() {
   airfighter.y -= 10;
-  if (rocket.velocity < 7) {
+  if (rocket.vx < 7) {
     rocket.y -= 10;
   }
   console.log("moveShipUp");
@@ -318,7 +345,7 @@ function moveShipUp() {
 
 function moveShipDown() {
   airfighter.y += 10;
-  if (rocket.velocity < 7) {
+  if (rocket.vx < 7) {
     rocket.y += 10;
   }
   console.log("moveShipDown");
@@ -328,8 +355,8 @@ function moveShipDown() {
  * Launch rocket
  */
 function fireRocket() {
-  if (rocket.velocity < 8) {
-    rocket.velocity += 8;
+  if (rocket.vx < 8) {
+    rocket.vx += 8;
     rocket.ammo -= 1;
     rocket.element.src = "img/Rocket.gif";
     setTimeout(preRocket, 8);
@@ -346,7 +373,13 @@ function preRocket() {
  * Change coordinates of rocket according to rocket velocity
  */
 function moveRocket() {
-  rocket.x += rocket.velocity;
+  rocket.x += rocket.vx;
+  rocket.y += rocket.vy;
+}
+
+function moveBullet() {
+  bullet.x += bullet.vx;
+  bullet.y += bullet.vy;
 }
 
 /**

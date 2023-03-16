@@ -72,6 +72,11 @@ p {
     width: 120px;
 }
 
+#bullet {
+    position: absolute;
+    width: 120px;
+}
+
 #game-background {
     position: fixed;
     right: 0;
