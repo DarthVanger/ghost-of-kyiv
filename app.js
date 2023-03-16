@@ -31,6 +31,7 @@ let bullet = {
   x: 0,
   y: 0,
   width: 120,
+  height: 5,
   ammo: 5,
   dmg: 50,
   vx: 0,
@@ -42,8 +43,9 @@ let bullet = {
     element: document.querySelector('#levelComplete')
   }
 
-function predictiveShot () {
-  const predictiveV = predictVxVy();
+function fireBullet () {
+  const maxBulletSpeed = 2;
+  const predictiveV = predictVxVy(maxBulletSpeed,bullet,enemy1);
   bullet.vx = predictiveV.vx;
   bullet.vy = predictiveV.vy;
 }  
@@ -54,16 +56,16 @@ function startGame() {
   enemy2.element.addEventListener('click', fireGatlingEnemyTwo);
   enemy3.element.addEventListener('click', fireGatlingEnemyThree);
   gameFps = setInterval(Step, 1000 / fps);
-  predictiveShot();
+  fireBullet();
 }
 
 function Step() {
   renderEnemy(enemyHealth50text, healthBar50text, enemyHealth50, healthBar50, enemy1);
   renderEnemy(enemyHealth100text, healthBar100text, enemyHealth100, enemyHealth100.element, enemy2);
   renderEnemy(enemyHealth200text, healthBar200text, enemyHealth200, healthBar200, enemy3);
-  enemy1.x = moveEnemy(enemy1.x, enemy1.velocity);
-  enemy2.x = moveEnemy(enemy2.x, enemy2.velocity);
-  enemy3.x = moveEnemy(enemy3.x, enemy3.velocity);
+  enemy1.x = moveEnemy(enemy1.x, enemy1.vx);
+  enemy2.x = moveEnemy(enemy2.x, enemy2.vx);
+  enemy3.x = moveEnemy(enemy3.x, enemy3.vx);
   enemyHealth50.x = moveEnemy(enemyHealth50.x, enemyHealth50.velocity);
   enemyHealth100.x = moveEnemy(enemyHealth100.x, enemyHealth100.velocity);
   enemyHealth200.x = moveEnemy(enemyHealth200.x, enemyHealth200.velocity);

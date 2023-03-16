@@ -3,7 +3,8 @@ export let enemy1 = {
     y: 100,
     width: 250,
     height: 80,
-    velocity: -2,
+    vx: -2,
+    vy: 0,
     element: document.querySelector("#enemy1"),
   };
   
@@ -12,7 +13,8 @@ export let enemy2 = {
     y: 350,
     width: 270,
     height: 100,
-    velocity: -2,
+    vx: -2,
+    vy: 0,
     element: document.querySelector("#enemy21"),
   };
   
@@ -21,6 +23,7 @@ export let enemy3 = {
     y: 250,
     width: 330,
     height: 200,
-    velocity: -2,
+    vx: -2,
+    vy: 0,
     element: document.querySelector("#enemy3"),
   };
