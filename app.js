@@ -361,10 +361,8 @@ function moveEnemy(enemyx, enemyVelocity) {
  * On start screen button click actions
  */
 function handleStartGameBtnClick() {
-  startGame();
+  soundIntro.play();
   hideStartScreen();
-  soundMainTheme.play();
-  soundMainTheme.volume = 0.3;
 }
 
 /**
@@ -400,8 +398,11 @@ endGameButton.addEventListener('click', endGameAction)
 startGameButton.addEventListener("click", handleStartGameBtnClick);
 window.addEventListener('load', function (){setTimeout(introductionSkip, 44000)});
 function introductionSkip(){
-  introduction.style.width = 10 + 'px';
-  introduction.style.zIndex = 1;
-  soundIntro.play();
-}
+    startGame();
+    soundMainTheme.play();
+    soundMainTheme.volume = 0.3;
+    introduction.remove();
+    introduction.style.zIndex = 1;
+  soundIntro.pause();
+  }
 introduction.addEventListener('click', introductionSkip);
