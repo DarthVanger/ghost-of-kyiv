@@ -294,6 +294,7 @@ function handleKeyUp (event) {
 
 function moveShipLeft() {
   airfighter.x -= 10;
+  document.body.scrollLeft -= 9;
   if (rocket.velocity < 7) {
     rocket.x -= 10;
   }
@@ -302,6 +303,8 @@ function moveShipLeft() {
 
 function moveShipRight() {
   airfighter.x += 10;
+  if (airfighter.x > airfighter.width) {
+  document.body.scrollLeft += 9;}
   if (rocket.velocity < 7) {
     rocket.x += 10;
   }
