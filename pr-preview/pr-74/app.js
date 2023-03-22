@@ -294,9 +294,9 @@ function handleKeyUp (event) {
 
 function moveShipLeft() {
   if (airfighter.x > 0) {
-    airfighter.x -= 10;
+    airfighter.x -= 2;
     if (rocket.velocity < 7) {
-      rocket.x -= 10;
+      rocket.x -= 2;
     }
   console.log("moveShipLeft");
   }
