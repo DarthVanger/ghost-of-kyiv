@@ -1,8 +1,8 @@
-import {fireGatlingEnemyOne, fireGatlingEnemyTwo, fireGatlingEnemyThree, gatling, enemyDies} from "./gatling.js";
+import {fireGatlingEnemy, gatling, enemyDies} from "./gatling.js";
 import {enemyHealth50, enemyHealth100, enemyHealth200, enemyHealth50text, enemyHealth100text, enemyHealth200text} from "./health.js";
 import {airfighter} from "./airfighter.js";
-import {enemy1, enemy2, enemy3} from './enemy.js';
-import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
+import {enemies} from './enemy.js';
+import {soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
 
 const fps = 60;
 let gameFps;
@@ -24,16 +24,18 @@ let rocket = {
   velocity: 0,
   element: document.querySelector("#rocket"),
 }
-  let lvlComplete = {
-    element: document.querySelector('#levelComplete')
-  }
 
 function startGame() {
   initKeybordMovement();
-  enemy1.element.addEventListener('click', fireGatlingEnemyOne);
-  enemy2.element.addEventListener('click', fireGatlingEnemyTwo);
-  enemy3.element.addEventListener('click', fireGatlingEnemyThree);
+  enemies.forEach(addGatling);
   gameFps = setInterval(Step, 1000 / fps);
+}
+
+function addGatling (enemy) {
+  function handleEnemyClick (event) {
+    fireGatlingEnemy(event, enemy);
+  }    
+  enemy.element.addEventListener('click', handleEnemyClick);
 }
 
 function Step() {
