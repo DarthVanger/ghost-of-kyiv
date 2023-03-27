@@ -13,10 +13,11 @@ export let gatling = {
 
 export function fireGatlingEnemy (event, enemy) {  
     if (airfighter.x + airfighter.width < event.pageX ) { 
-      enemy.enemyHealth.value -= gatling.dmg;
+      enemy.enemyHealth.element.value -= gatling.dmg;
       gatling.ammo -= 10;
       soundGatling.play();
-      if (enemy.enemyHealth.value === 0) {
+      console.log(enemy.enemyHealth.element.value)
+      if (enemy.enemyHealth.element.value === 0) {
         enemy.x -= enemyDies;
         soundEnemyDieExplosion.play();
       }

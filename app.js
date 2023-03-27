@@ -39,25 +39,34 @@ function addGatling (enemy) {
 }
 
 function Step() {
-  renderEnemy(enemyHealth50text, healthBar50text, enemyHealth50, healthBar50, enemy1);
-  renderEnemy(enemyHealth100text, healthBar100text, enemyHealth100, enemyHealth100.element, enemy2);
-  renderEnemy(enemyHealth200text, healthBar200text, enemyHealth200, healthBar200, enemy3);
-  enemy1.x = moveEnemy(enemy1.x, enemy1.velocity);
-  enemy2.x = moveEnemy(enemy2.x, enemy2.velocity);
-  enemy3.x = moveEnemy(enemy3.x, enemy3.velocity);
-  enemyHealth50.x = moveEnemy(enemyHealth50.x, enemyHealth50.velocity);
-  enemyHealth100.x = moveEnemy(enemyHealth100.x, enemyHealth100.velocity);
-  enemyHealth200.x = moveEnemy(enemyHealth200.x, enemyHealth200.velocity);
-  enemyHealth50text.x = moveEnemy(enemyHealth50text.x, enemyHealth50text.velocity);
-  enemyHealth100text.x = moveEnemy(enemyHealth100text.x, enemyHealth100text.velocity);
-  enemyHealth200text.x = moveEnemy(enemyHealth200text.x, enemyHealth200text.velocity);
+  //renderEnemy(enemyHealth50text, healthBar50text, enemyHealth50, healthBar50, enemy1);
+  //renderEnemy(enemyHealth100text, healthBar100text, enemyHealth100, enemyHealth100.element, enemy2);
+  //renderEnemy(enemyHealth200text, healthBar200text, enemyHealth200, healthBar200, enemy3);
+  // changed to
+  enemies.forEach(el => {renderEnemy(el)})
+  //enemy1.x = moveEnemy(enemy1.x, enemy1.velocity);
+  //enemy2.x = moveEnemy(enemy2.x, enemy2.velocity);
+  //enemy3.x = moveEnemy(enemy3.x, enemy3.velocity);
+  //changed to
+  enemies.forEach(el => {moveEnemy({el})})
+  //enemyHealth50.x = moveEnemy(enemyHealth50.x, enemyHealth50.velocity);
+  //enemyHealth100.x = moveEnemy(enemyHealth100.x, enemyHealth100.velocity);
+  //enemyHealth200.x = moveEnemy(enemyHealth200.x, enemyHealth200.velocity);
+  //changed to 
+  enemies.forEach(el => {el})
+  //enemyHealth50text.x = moveEnemy(enemyHealth50text.x, enemyHealth50text.velocity);
+  //enemyHealth100text.x = moveEnemy(enemyHealth100text.x, enemyHealth100text.velocity);
+  //enemyHealth200text.x = moveEnemy(enemyHealth200text.x, enemyHealth200text.velocity);
   ammoElement.innerHTML = `Gatling Ammo: ${gatling.ammo} <br> Rocket Ammo: ${rocket.ammo}`;
-  moveRocket();
-  checkEnemyShipCollision(enemy1);
-  checkEnemyShipCollision(enemy2);
-  checkEnemyShipCollision(enemy3);
-  
 
+  moveRocket();
+  //checkEnemyShipCollision(enemy1);
+  //checkEnemyShipCollision(enemy2);
+  //checkEnemyShipCollision(enemy3);
+  //changed to
+  enemies.forEach(el => {checkEnemyShipCollision(el)})
+  
+  /*
   if (checkEnemyRocketCollision(enemy1)) {
     healthBar50.value -= rocket.dmg;
     rocket.dmg -= rocket.dmg;
@@ -73,7 +82,7 @@ function Step() {
       rocket.element.src = "img/Rocket.gif";
     }
   }
-
+  
   if (checkEnemyRocketCollision(enemy2)) {
     enemyHealth100.element.value -= rocket.dmg;
     rocket.dmg -= rocket.dmg;
@@ -106,7 +115,29 @@ function Step() {
       rocket.dmg = 50;
       rocket.element.src = "img/Rocket.gif";
     }
-  }
+  }*/
+  //changed to
+  enemies.forEach((el) => {
+    if(checkEnemyRocketCollision(el)){
+      el.enemyHealth.element.value -= rocket.dmg;
+      rocket.dmg -= rocket.dmg;
+      soundRocketHit.play();
+      }
+      if (el.enemyHealth.element.value <= 0 && el.isOn) {
+        el.x -= enemyDies;
+        soundEnemyDieExplosion.play();
+        el.isOn = false;
+      }
+      if (rocket.dmg <= 0) {
+        rocket.x = airfighter.x + airfighter.rocketDefaultX;
+        rocket.y = airfighter.y + airfighter.rocketDefaultY;
+        rocket.velocity -= 8;
+        rocket.dmg = 50;
+        rocket.element.src = "img/Rocket.gif";
+      }
+    }
+  )
+  
 
   if (rocket.x > airfighter.x + airfighter.rocketMaxDistance) {
     rocket.x = airfighter.x + airfighter.rocketDefaultX;
@@ -142,16 +173,25 @@ function Step() {
   }
 }
 
-function renderEnemy (text, textValue, health, healthValue, enemy) {
-  health.element.style.left = enemy.x;
-  health.element.style.top = enemy.y - 20;
-  health.element.style.width = enemy.width;
-  health.element.style.height = enemy.height*0.1;
-  textValue.value = healthValue.value / healthValue.max;
-  textValue.innerHTML = `${healthValue.value} / ${healthValue.max} HP`;
-  text.element.style.left = enemy.x;
-  text.element.style.top = enemy.y - 35;
-  text.element.style.width = enemy.width;
+function renderEnemy (enemy) {
+  //health.element.style.left = enemy.x;
+  //health.element.style.top = enemy.y - 20;
+  //health.element.style.width = enemy.width;
+  //health.element.style.height = enemy.height*0.1;
+  // textValue.value = healthValue.value / healthValue.max;
+  //textValue.innerHTML = `${healthValue.value} / ${healthValue.max} HP`;
+  //text.element.style.left = enemy.x;
+  //text.element.style.top = enemy.y - 35;
+  //text.element.style.width = enemy.width;
+  enemy.enemyHealth.element.style.left = enemy.x;
+  enemy.enemyHealth.element.style.top = enemy.y - 20;
+  enemy.enemyHealth.element.style.width = enemy.width;
+  enemy.enemyHealth.element.style.height = enemy.height*0.1;
+  enemy.enemyHealthText.element.value = enemy.enemyHealth.element.value / enemy.enemyHealth.element.max
+  enemy.enemyHealthText.element.innerHTML = `${enemy.enemyHealth.element.value} / ${enemy.enemyHealth.element.max} HP`;
+  enemy.enemyHealthText.element.style.left = enemy.x;
+  enemy.enemyHealthText.element.style.top = enemy.y - 35;
+  enemy.enemyHealthText.element.style.width = enemy.width;
   enemy.element.style.left = enemy.x;
   enemy.element.style.top = enemy.y;
 }
@@ -372,8 +412,8 @@ function moveRocket() {
  * Change coordinates of enemy1 according to enemy1 velocity
  */
 
-function moveEnemy(enemyx, enemyVelocity) {
-  return (enemyx += enemyVelocity);
+function moveEnemy({el}) {
+  return (el.x += el.velocity);
 }
 
 /**
