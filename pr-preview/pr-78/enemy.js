@@ -1,7 +1,7 @@
 import {enemyHealth50, enemyHealth100, enemyHealth200, enemyHealth50text, enemyHealth100text, enemyHealth200text} from "./health.js";
 
-let enemy1 = {
-    isOn : true,
+  let enemy1 = {
+    isAlive : true,
     x: 800,
     y: 100,
     width: 250,
@@ -12,7 +12,7 @@ let enemy1 = {
     element: document.querySelector("#enemy1"),
   };
   
-let enemy2 = {
+  let enemy2 = {
     isOn : true,
     x: 1400,
     y: 350,
@@ -24,7 +24,7 @@ let enemy2 = {
     element: document.querySelector("#enemy21"),
   };
   
- let enemy3 = {
+  let enemy3 = {
     isOn : true,
     x: 1900,
     y: 250,
