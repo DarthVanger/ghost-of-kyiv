@@ -13,7 +13,7 @@ import {enemyHealth50, enemyHealth100, enemyHealth200, enemyHealth50text, enemyH
   };
   
   let enemy2 = {
-    isOn : true,
+    isAlive : true,
     x: 1400,
     y: 350,
     width: 270,
@@ -25,7 +25,7 @@ import {enemyHealth50, enemyHealth100, enemyHealth200, enemyHealth50text, enemyH
   };
   
   let enemy3 = {
-    isOn : true,
+    isAlive : true,
     x: 1900,
     y: 250,
     width: 330,

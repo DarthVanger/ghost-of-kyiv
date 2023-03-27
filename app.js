@@ -50,10 +50,10 @@ function Step() {
       rocket.dmg -= rocket.dmg;
       soundRocketHit.play();
       }
-      if (enemy.enemyHealth.element.value <= 0 && enemy.isAlive) {
+      if (enemy.enemyHealth.element.value <= 0  && enemy.isAlive) {
+        enemy.isAlive = false;
         enemy.x -= enemyDies;
         soundEnemyDieExplosion.play();
-        enemy.isAlive = false;
       }
       if (rocket.dmg <= 0) {
         rocket.x = airfighter.x + airfighter.rocketDefaultX;
