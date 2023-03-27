@@ -1,8 +1,7 @@
-import {fireGatlingEnemyOne, fireGatlingEnemyTwo, fireGatlingEnemyThree, gatling, enemyDies} from "./gatling.js";
-import {enemyHealth50, enemyHealth100, enemyHealth200, enemyHealth50text, enemyHealth100text, enemyHealth200text} from "./health.js";
+import {fireGatlingEnemy, gatling, enemyDies} from "./gatling.js";
 import {airfighter} from "./airfighter.js";
-import {enemy1, enemy2, enemy3} from './enemy.js';
-import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
+import {enemies} from './enemy.js';
+import {soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
 
 const fps = 60;
 let gameFps;
@@ -24,87 +23,47 @@ let rocket = {
   velocity: 0,
   element: document.querySelector("#rocket"),
 }
-  let lvlComplete = {
-    element: document.querySelector('#levelComplete')
-  }
 
 function startGame() {
   initKeybordMovement();
-  enemy1.element.addEventListener('click', fireGatlingEnemyOne);
-  enemy2.element.addEventListener('click', fireGatlingEnemyTwo);
-  enemy3.element.addEventListener('click', fireGatlingEnemyThree);
+  enemies.forEach(addGatling);
   gameFps = setInterval(Step, 1000 / fps);
 }
 
+function addGatling (enemy) {
+  function handleEnemyClick (event) {
+    fireGatlingEnemy(event, enemy);
+  }    
+  enemy.element.addEventListener('click', handleEnemyClick);
+}
+
 function Step() {
-  renderEnemy(enemyHealth50text, healthBar50text, enemyHealth50, healthBar50, enemy1);
-  renderEnemy(enemyHealth100text, healthBar100text, enemyHealth100, enemyHealth100.element, enemy2);
-  renderEnemy(enemyHealth200text, healthBar200text, enemyHealth200, healthBar200, enemy3);
-  enemy1.x = moveEnemy(enemy1.x, enemy1.velocity);
-  enemy2.x = moveEnemy(enemy2.x, enemy2.velocity);
-  enemy3.x = moveEnemy(enemy3.x, enemy3.velocity);
-  enemyHealth50.x = moveEnemy(enemyHealth50.x, enemyHealth50.velocity);
-  enemyHealth100.x = moveEnemy(enemyHealth100.x, enemyHealth100.velocity);
-  enemyHealth200.x = moveEnemy(enemyHealth200.x, enemyHealth200.velocity);
-  enemyHealth50text.x = moveEnemy(enemyHealth50text.x, enemyHealth50text.velocity);
-  enemyHealth100text.x = moveEnemy(enemyHealth100text.x, enemyHealth100text.velocity);
-  enemyHealth200text.x = moveEnemy(enemyHealth200text.x, enemyHealth200text.velocity);
+  enemies.forEach(renderEnemy);
+  enemies.forEach(moveEnemy);
   ammoElement.innerHTML = `Gatling Ammo: ${gatling.ammo} <br> Rocket Ammo: ${rocket.ammo}`;
   moveRocket();
-  checkEnemyShipCollision(enemy1);
-  checkEnemyShipCollision(enemy2);
-  checkEnemyShipCollision(enemy3);
+  enemies.forEach(checkEnemyShipCollision);
+  enemies.forEach(collisionSHmolision);
+  function collisionSHmolision(enemy){
+    if(checkEnemyRocketCollision(enemy)) {
+      enemy.enemyHealth.element.value -= rocket.dmg;
+      rocket.dmg -= rocket.dmg;
+      soundRocketHit.play();
+      }
+      if (enemy.enemyHealth.element.value <= 0  && enemy.isAlive) {
+        enemy.isAlive = false;
+        enemy.x -= enemyDies;
+        soundEnemyDieExplosion.play();
+      }
+      if (rocket.dmg <= 0) {
+        rocket.x = airfighter.x + airfighter.rocketDefaultX;
+        rocket.y = airfighter.y + airfighter.rocketDefaultY;
+        rocket.velocity -= 8;
+        rocket.dmg = 50;
+        rocket.element.src = "img/Rocket.gif";
+      }
+    }
   
-
-  if (checkEnemyRocketCollision(enemy1)) {
-    healthBar50.value -= rocket.dmg;
-    rocket.dmg -= rocket.dmg;
-    if (healthBar50.value <= 0) {
-      enemy1.x -= enemyDies;
-      soundEnemyDieExplosion.play();
-    }
-    if (rocket.dmg <= 0) {
-      rocket.x = airfighter.x + airfighter.rocketDefaultX;
-      rocket.y = airfighter.y + airfighter.rocketDefaultY;
-      rocket.velocity -= 8;
-      rocket.dmg = 50;
-      rocket.element.src = "img/Rocket.gif";
-    }
-  }
-
-  if (checkEnemyRocketCollision(enemy2)) {
-    enemyHealth100.element.value -= rocket.dmg;
-    rocket.dmg -= rocket.dmg;
-    soundRocketHit.play();
-    if (enemyHealth100.element.value <= 0) {
-      enemy2.x -= enemyDies;
-      soundEnemyDieExplosion.play();
-    }
-    if (rocket.dmg <= 0) {
-      rocket.x = airfighter.x + airfighter.rocketDefaultX;
-      rocket.y = airfighter.y + airfighter.rocketDefaultY;
-      rocket.velocity -= 8;
-      rocket.dmg = 50;
-      rocket.element.src = "img/Rocket.gif";
-    }
-  }
-
-  if (checkEnemyRocketCollision(enemy3)) {
-    healthBar200.value -= rocket.dmg;
-    rocket.dmg -= rocket.dmg;
-    soundRocketHit.play();
-    if (healthBar200.value <= 0) {
-      enemy3.x -= enemyDies;
-      soundEnemyDieExplosion.play();
-    }
-    if (rocket.dmg <= 0) {
-      rocket.x = airfighter.x + airfighter.rocketDefaultX;
-      rocket.y = airfighter.y + airfighter.rocketDefaultY;
-      rocket.velocity -= 8;
-      rocket.dmg = 50;
-      rocket.element.src = "img/Rocket.gif";
-    }
-  }
 
   if (rocket.x > airfighter.x + airfighter.rocketMaxDistance) {
     rocket.x = airfighter.x + airfighter.rocketDefaultX;
@@ -140,23 +99,20 @@ function Step() {
   }
 }
 
-function renderEnemy (text, textValue, health, healthValue, enemy) {
-  health.element.style.left = enemy.x;
-  health.element.style.top = enemy.y - 20;
-  health.element.style.width = enemy.width;
-  health.element.style.height = enemy.height*0.1;
-  textValue.value = healthValue.value / healthValue.max;
-  textValue.innerHTML = `${healthValue.value} / ${healthValue.max} HP`;
-  text.element.style.left = enemy.x;
-  text.element.style.top = enemy.y - 35;
-  text.element.style.width = enemy.width;
+function renderEnemy (enemy) {
+  enemy.enemyHealth.element.style.left = enemy.x;
+  enemy.enemyHealth.element.style.top = enemy.y - 20;
+  enemy.enemyHealth.element.style.width = enemy.width;
+  enemy.enemyHealth.element.style.height = enemy.height*0.1;
+  enemy.enemyHealthText.element.value = enemy.enemyHealth.element.value / enemy.enemyHealth.element.max
+  enemy.enemyHealthText.element.innerHTML = `${enemy.enemyHealth.element.value} / ${enemy.enemyHealth.element.max} HP`;
+  enemy.enemyHealthText.element.style.left = enemy.x;
+  enemy.enemyHealthText.element.style.top = enemy.y - 35;
+  enemy.enemyHealthText.element.style.width = enemy.width;
   enemy.element.style.left = enemy.x;
   enemy.element.style.top = enemy.y;
 }
 
-/**
- * Update rocket img coordinates according to variables
- */
 function renderRocket() {
   rocket.element.style.left = rocket.x;
   rocket.element.style.top = rocket.y;
@@ -204,7 +160,6 @@ function checkEnemyShipCollision(enemy) {
     airfighter.y + airfighter.height > enemy.y &&
     airfighter.y < enemy.y + enemy.height
   ) {
-    //alert("Game Over!");
     document.querySelector('#gameover-screen').style.display = '';
     airfighter.x = 0;
     airfighter.y = 0;
@@ -293,30 +248,47 @@ function handleKeyUp (event) {
 }
 
 function moveShipLeft() {
-  airfighter.x -= 10;
-  if (rocket.velocity < 7) {
-    rocket.x -= 10;
-  }
+  if (airfighter.x > 0) {
+    airfighter.x -= 2;
+    if (rocket.velocity < 7) {
+      rocket.x -= 2;
+    }
   console.log("moveShipLeft");
+  }
 }
 
 function moveShipRight() {
-  airfighter.x += 10;
-  if (rocket.velocity < 7) {
-    rocket.x += 10;
-  }
+  if (airfighter.x + airfighter.width < screen.width) {
+    airfighter.x += 10;
+    if (rocket.velocity < 7) {
+      rocket.x += 10;
+    }
   console.log("moveShipRight");
+  }
 }
 
 function moveShipUp() {
-  airfighter.y -= 10;
-  if (rocket.velocity < 7) {
-    rocket.y -= 10;
-  }
+  if (airfighter.y > 0) {
+    airfighter.y -= 10;
+    if (rocket.velocity < 7) {
+      rocket.y -= 10;
+    }
   console.log("moveShipUp");
+  }
 }
 
 function moveShipDown() {
+  if (airfighter.y + airfighter.height > screen.height - 200) {
+    document.querySelector('#gameover-screen').style.display = '';
+    airfighter.x = 0;
+    airfighter.y = 0;
+    soundRocketHit.pause();
+    soundEnemyDieExplosion.play();
+    setTimeout (function() {
+    soundMainTheme.pause();
+    soundGameOver.play();
+    }, 900);
+  }
   airfighter.y += 10;
   if (rocket.velocity < 7) {
     rocket.y += 10;
@@ -324,9 +296,6 @@ function moveShipDown() {
   console.log("moveShipDown");
 }
 
-/**
- * Launch rocket
- */
 function fireRocket() {
   if (rocket.velocity < 8) {
     rocket.velocity += 8;
@@ -337,41 +306,26 @@ function fireRocket() {
   }
 }
 
-
 function preRocket() {
   rocket.element.src = "img/preRocket.gif";
 }
 
-/**
- * Change coordinates of rocket according to rocket velocity
- */
 function moveRocket() {
   rocket.x += rocket.velocity;
 }
 
-/**
- * Change coordinates of enemy1 according to enemy1 velocity
- */
-
-function moveEnemy(enemyx, enemyVelocity) {
-  return (enemyx += enemyVelocity);
+function moveEnemy(enemy) {
+  return (enemy.x += enemy.velocity);
 }
 
-/**
- * On start screen button click actions
- */
 function handleStartGameBtnClick() {
   soundIntro.play();
   hideStartScreen();
 }
 
-/**
- * Remove div of start button screen
- */
 function hideStartScreen() {
   let startScreen = document.querySelector("#start-screen");
   startScreen.remove();
-
 }
 
 function fadeIn(element, duration) {
