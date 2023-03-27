@@ -293,33 +293,47 @@ function handleKeyUp (event) {
 }
 
 function moveShipLeft() {
-  airfighter.x -= 10;
-  document.body.scrollLeft -= 9;
-  if (rocket.velocity < 7) {
-    rocket.x -= 10;
-  }
+  if (airfighter.x > 0) {
+    airfighter.x -= 2;
+    if (rocket.velocity < 7) {
+      rocket.x -= 2;
+    }
   console.log("moveShipLeft");
+  }
 }
 
 function moveShipRight() {
-  airfighter.x += 10;
-  if (airfighter.x > airfighter.width) {
-  document.body.scrollLeft += 9;}
-  if (rocket.velocity < 7) {
-    rocket.x += 10;
-  }
+  if (airfighter.x + airfighter.width < screen.width) {
+    airfighter.x += 10;
+    if (rocket.velocity < 7) {
+      rocket.x += 10;
+    }
   console.log("moveShipRight");
+  }
 }
 
 function moveShipUp() {
-  airfighter.y -= 10;
-  if (rocket.velocity < 7) {
-    rocket.y -= 10;
-  }
+  if (airfighter.y > 0) {
+    airfighter.y -= 10;
+    if (rocket.velocity < 7) {
+      rocket.y -= 10;
+    }
   console.log("moveShipUp");
+  }
 }
 
 function moveShipDown() {
+  if (airfighter.y + airfighter.height > screen.height - 200) {
+    document.querySelector('#gameover-screen').style.display = '';
+    airfighter.x = 0;
+    airfighter.y = 0;
+    soundRocketHit.pause();
+    soundEnemyDieExplosion.play();
+    setTimeout (function() {
+    soundMainTheme.pause();
+    soundGameOver.play();
+    }, 900);
+  }
   airfighter.y += 10;
   if (rocket.velocity < 7) {
     rocket.y += 10;
