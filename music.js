@@ -1,3 +1,4 @@
+export let soundIntro = new Audio();
 export let soundGatling = new Audio();
 export let soundRocketShot = new Audio();
 export let soundRocketHit = new Audio();
@@ -6,6 +7,7 @@ export let soundGameOver = new Audio();
 export let soundMainTheme = new Audio();
 export let soundLevelComplete = new Audio();
 
+soundIntro.src = 'music/John_Williams-Star_Wars.mp3'
 soundGatling.src = 'music/avtomat.mp3';
 soundRocketShot.src = 'music/vyistrel.mp3';
 soundRocketHit.src = 'music/smallBoom.mp3';
