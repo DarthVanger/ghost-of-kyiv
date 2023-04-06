@@ -2,8 +2,8 @@ import {enemyHealth50, enemyHealth100, enemyHealth200, enemyHealth50text, enemyH
 
   let enemy1 = {
     isAlive : true,
-    x: 800,
-    y: 100,
+    x: 600 + Math.floor(Math.random()*400) ,
+    y: Math.floor(Math.random()*(innerHeight-80))/2,
     width: 250,
     height: 80,
     velocity: -2,
@@ -12,10 +12,11 @@ import {enemyHealth50, enemyHealth100, enemyHealth200, enemyHealth50text, enemyH
     element: document.querySelector("#enemy1"),
   };
   
+
   let enemy2 = {
     isAlive : true,
-    x: 1400,
-    y: 350,
+    x: 1200 + Math.floor(Math.random()*800),
+    y:  Math.floor(Math.random()*(innerHeight-100)),
     width: 270,
     height: 100,
     velocity: -2,
@@ -26,8 +27,8 @@ import {enemyHealth50, enemyHealth100, enemyHealth200, enemyHealth50text, enemyH
   
   let enemy3 = {
     isAlive : true,
-    x: 1900,
-    y: 250,
+    x: 2300 + Math.floor(Math.random()*400),
+    y:  Math.floor(Math.random()*(innerHeight-200)),
     width: 330,
     height: 200,
     velocity: -2,
