@@ -1,4 +1,3 @@
-import {enemyHealth50, enemyHealth100, enemyHealth200, enemyHealth50text, enemyHealth100text, enemyHealth200text} from "./health.js";
 import {airfighter} from "./airfighter.js";
 import {soundEnemyDieExplosion, soundGatling} from "./music.js";
 

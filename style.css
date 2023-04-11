@@ -115,6 +115,7 @@ position: absolute;
     align-items: center;
     color:#ffffff;
     text-align-last: center;
+    z-index: 2;
   }
 
 /* touch menu*/

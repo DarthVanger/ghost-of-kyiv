@@ -112,10 +112,11 @@ for(let i = 0; i < 11; i++) {
       obj.x = Math.floor(Math.random()*400)+300+(enemies[i-1].x);
     }
 
-    obj.y = Math.floor(Math.random()*(innerHeight-200));
+    obj.y = Math.floor(Math.random()*(innerHeight-200)+50);
     obj.velocity = -2;
     obj.element = document.querySelector('#enemy' + i);
     enemies.push(obj)
+    console.log(obj.y)
   }
 }
 

@@ -276,7 +276,7 @@ function moveShipUp() {
 }
 
 function moveShipDown() {
-  if (airfighter.y + airfighter.height > screen.height ) {
+  if (airfighter.y + airfighter.height > window.innerHeight-50 ) {
     document.querySelector('#gameover-screen').style.display = '';
     airfighter.x = 0;
     airfighter.y = 0;
