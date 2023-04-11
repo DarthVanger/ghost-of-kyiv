@@ -251,9 +251,9 @@ function handleKeyUp (event) {
 
 function moveShipLeft() {
   if (airfighter.x > 0) {
-    airfighter.x -= 2;
+    airfighter.x -= 3;
     if (rocket.velocity < 7) {
-      rocket.x -= 2;
+      rocket.x -= 3;
     }
   }
 }
@@ -327,8 +327,7 @@ function hideStartScreen() {
 }
 
 function fadeIn(element, duration) {
-  //element.style.display = '';
-  //element.style.opacity = 0;
+  element.style.opacity = 0;
   var last = +new Date();
   var tick = function() {
     element.style.opacity = +element.style.opacity + (new Date() - last) / duration;

@@ -67,7 +67,7 @@ position: absolute;
     text-align-last: left;
 }
 
-ammoImg {
+.ammoImg {
     position: relative;
     top: 5;
     left: 5;
