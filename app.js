@@ -338,6 +338,7 @@ function fadeIn(element, duration) {
   };
   tick();
 }
+let isGameStarted = false
 
 function endGameAction () {
   document.location.reload();
@@ -347,13 +348,18 @@ const startGameButton = document.querySelector("#startGameButton");
 const endGameButton = document.querySelector('#endGameButton');
 endGameButton.addEventListener('click', endGameAction)
 startGameButton.addEventListener("click", handleStartGameBtnClick);
-window.addEventListener('load', function (){setTimeout(introductionSkip, 44000)});
+window.addEventListener('load', function (){ setTimeout(introductionSkip, 44000)});
 function introductionSkip(){
+  if (!isGameStarted) {
     startGame();
     soundMainTheme.play();
     soundMainTheme.volume = 0.3;
     introduction.remove();
     introduction.style.zIndex = 1;
-  soundIntro.pause();
+    soundIntro.pause();
+    isGameStarted = true;
+  } else{
+    return
+  }
   }
 introduction.addEventListener('click', introductionSkip);
