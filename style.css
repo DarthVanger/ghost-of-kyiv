@@ -69,10 +69,9 @@ position: absolute;
 
 .ammoImg {
     position: relative;
-    top: 5;
-    left: 5;
     height: 50;
     width: 50;
+    margin: 5px;
     box-shadow: 0px 0px 4px #64B5F6, 0px 0px 2px #64B5F6, 0px 0px 6px #64B5F6;
 }
 

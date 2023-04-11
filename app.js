@@ -41,7 +41,7 @@ function addGatling (enemy) {
 function Step() {
   enemies.forEach(renderEnemy);
   enemies.forEach(moveEnemy);
-  ammoElement.innerHTML = `<img class="ammoImg" src="img/ammo-gatling-img.gif"> ${gatling.ammo} <br><br> <img class="ammoImg" src="img/ammo-rocket-img.gif"> ${rocket.ammo}`;
+  ammoElement.innerHTML = `<img class="ammoImg" src="img/ammo-gatling-img.gif"> ${gatling.ammo} <br> <img class="ammoImg" src="img/ammo-rocket-img.gif"> ${rocket.ammo}`;
   moveRocket();
   enemies.forEach(checkEnemyShipCollision);
   enemies.forEach(collisionSHmolision);
