@@ -67,6 +67,14 @@ position: absolute;
     text-align-last: left;
 }
 
+.ammoImg {
+    position: relative;
+    height: 50;
+    width: 50;
+    margin: 5px;
+    box-shadow: 0px 0px 4px #64B5F6, 0px 0px 2px #64B5F6, 0px 0px 6px #64B5F6;
+}
+
 #rocket {
     position: absolute;
     width: 120px;
