@@ -326,8 +326,8 @@ function hideStartScreen() {
 }
 
 function fadeIn(element, duration) {
-  element.style.display = '';
-  element.style.opacity = 0;
+  //element.style.display = '';
+  //element.style.opacity = 0;
   var last = +new Date();
   var tick = function() {
     element.style.opacity = +element.style.opacity + (new Date() - last) / duration;
