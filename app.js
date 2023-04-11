@@ -358,7 +358,6 @@ function introductionSkip() {
     introduction.style.zIndex = 1;
     soundIntro.pause();
     isGameStarted = true;
-  } else{
-  }
+  } 
   }
 introduction.addEventListener('click', introductionSkip);
