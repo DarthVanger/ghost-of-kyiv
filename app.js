@@ -18,7 +18,7 @@ let rocket = {
   x: 5,
   y: 67,
   width: 120,
-  ammo: 10,
+  ammo: 5,
   dmg: 50,
   velocity: 0,
   element: document.querySelector("#rocket"),
@@ -40,7 +40,7 @@ function addGatling (enemy) {
 function Step() {
   enemies.forEach(renderEnemy);
   enemies.forEach(moveEnemy);
-  ammoElement.innerHTML = `Gatling Ammo: ${gatling.ammo} <br> Rocket Ammo: ${rocket.ammo}`;
+  ammoElement.innerHTML = `<img class="ammoImg" src="img/ammo-gatling-img.gif"> ${gatling.ammo} <br><br> <img class="ammoImg" src="img/ammo-rocket-img.gif"> ${rocket.ammo}`;
   moveRocket();
   enemies.forEach(checkEnemyShipCollision);
   enemies.forEach(collisionSHmolision);
@@ -88,7 +88,7 @@ function Step() {
   if (airfighter.isShipMovingRight) {
     moveShipRight();
   }
-  if (enemies[enemies.length-1].x < 0 - enemies[enemies.length-1].width) {
+  if (enemy3.x < 0 - enemy3.width) {
     clearInterval(gameFps);
     document.querySelector('#levelComplete').style.display = '';
     fadeIn(levelComplete, 400);
@@ -111,8 +111,6 @@ function renderEnemy (enemy) {
   enemy.enemyHealthText.element.style.width = enemy.width;
   enemy.element.style.left = enemy.x;
   enemy.element.style.top = enemy.y;
-  enemy.element.style.width = enemy.width;
-  enemy.element.style.height = enemy.height;
 }
 
 function renderRocket() {
@@ -189,6 +187,7 @@ function checkEnemyRocketCollision(enemy) {
 }
 
 function handleKeyDown(event) {
+  console.log (event.key);
   if ((event.key == "r" || event.key == 'к' || event.key == ' ') && rocket.ammo != 0) {
     fireRocket();
   }
@@ -254,6 +253,7 @@ function moveShipLeft() {
     if (rocket.velocity < 7) {
       rocket.x -= 2;
     }
+  console.log("moveShipLeft");
   }
 }
 
@@ -263,6 +263,7 @@ function moveShipRight() {
     if (rocket.velocity < 7) {
       rocket.x += 10;
     }
+  console.log("moveShipRight");
   }
 }
 
@@ -272,11 +273,12 @@ function moveShipUp() {
     if (rocket.velocity < 7) {
       rocket.y -= 10;
     }
+  console.log("moveShipUp");
   }
 }
 
 function moveShipDown() {
-  if (airfighter.y + airfighter.height > window.innerHeight-50 ) {
+  if (airfighter.y + airfighter.height > screen.height - 200) {
     document.querySelector('#gameover-screen').style.display = '';
     airfighter.x = 0;
     airfighter.y = 0;
@@ -291,6 +293,7 @@ function moveShipDown() {
   if (rocket.velocity < 7) {
     rocket.y += 10;
   }
+  console.log("moveShipDown");
 }
 
 function fireRocket() {
@@ -326,8 +329,8 @@ function hideStartScreen() {
 }
 
 function fadeIn(element, duration) {
-  //element.style.display = '';
-  //element.style.opacity = 0;
+  element.style.display = '';
+  element.style.opacity = 0;
   var last = +new Date();
   var tick = function() {
     element.style.opacity = +element.style.opacity + (new Date() - last) / duration;
