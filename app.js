@@ -5,6 +5,7 @@ import {soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, 
 
 const fps = 60;
 let gameFps;
+let isGameStarted = false;
 
 let mobileControls = {
   leftButton: document.querySelector('.left'),
@@ -347,13 +348,16 @@ const startGameButton = document.querySelector("#startGameButton");
 const endGameButton = document.querySelector('#endGameButton');
 endGameButton.addEventListener('click', endGameAction)
 startGameButton.addEventListener("click", handleStartGameBtnClick);
-window.addEventListener('load', function (){setTimeout(introductionSkip, 44000)});
-function introductionSkip(){
+window.addEventListener('load', function (){ setTimeout(introductionSkip, 44000)});
+function introductionSkip() {
+  if (!isGameStarted) {
     startGame();
     soundMainTheme.play();
     soundMainTheme.volume = 0.3;
     introduction.remove();
     introduction.style.zIndex = 1;
-  soundIntro.pause();
+    soundIntro.pause();
+    isGameStarted = true;
+  } 
   }
 introduction.addEventListener('click', introductionSkip);
