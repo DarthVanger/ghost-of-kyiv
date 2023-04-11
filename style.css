@@ -38,22 +38,21 @@ button {
 p {
     position: absolute;
 }
+#enemy0,
+#enemy1,
+#enemy2,
+#enemy3, 
+#enemy4,
+#enemy5,
+#enemy6,
+#enemy7,
+#enemy8,
+#enemy9,
+#enemy10 {
+position: absolute;
+}
 
-#enemy1 {
-    position: absolute;
-    width: 250;
-    height: 80;
-}
-#enemy21 {
-    position: absolute;
-    width: 270;
-    height: 100;
-}
-#enemy3 {
-    position: absolute;
-    width: 330;
-    height: 200;
-}
+
 
 #airfighter {
     position: absolute;
@@ -81,35 +80,20 @@ p {
     min-height: 100%;
 }
 
-#healthBar50 {
-    position: absolute;
-}
-  
-#healthBar100 {
-    position: absolute;
-}
-  
-#healthBar200 {
+.healthBar50,
+.healthBar100,
+.healthBar200 {
     position: absolute;
 }
 
-#healthBar50text {
+.healthBar50text,
+.healthBar100text,
+.healthBar200text {
     position: absolute;
     color:#ffffff;
     text-align-last: center;
 }
 
-#healthBar100text {
-    position: absolute;
-    color:#ffffff;
-    text-align-last: center;
-}
-
-#healthBar200text {
-    position: absolute;
-    color:#ffffff;
-    text-align-last: center;
-}
 #gameover-screen {
     padding: auto;
     position: fixed;     

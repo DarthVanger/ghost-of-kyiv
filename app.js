@@ -18,7 +18,7 @@ let rocket = {
   x: 5,
   y: 67,
   width: 120,
-  ammo: 5,
+  ammo: 10,
   dmg: 50,
   velocity: 0,
   element: document.querySelector("#rocket"),
@@ -88,7 +88,7 @@ function Step() {
   if (airfighter.isShipMovingRight) {
     moveShipRight();
   }
-  if (enemy3.x < 0 - enemy3.width) {
+  if (enemies[enemies.length-1].x < 0 - enemies[enemies.length-1].width) {
     clearInterval(gameFps);
     document.querySelector('#levelComplete').style.display = '';
     fadeIn(levelComplete, 400);
@@ -111,6 +111,8 @@ function renderEnemy (enemy) {
   enemy.enemyHealthText.element.style.width = enemy.width;
   enemy.element.style.left = enemy.x;
   enemy.element.style.top = enemy.y;
+  enemy.element.style.width = enemy.width;
+  enemy.element.style.height = enemy.height;
 }
 
 function renderRocket() {
@@ -187,7 +189,6 @@ function checkEnemyRocketCollision(enemy) {
 }
 
 function handleKeyDown(event) {
-  console.log (event.key);
   if ((event.key == "r" || event.key == 'к' || event.key == ' ') && rocket.ammo != 0) {
     fireRocket();
   }
@@ -253,7 +254,6 @@ function moveShipLeft() {
     if (rocket.velocity < 7) {
       rocket.x -= 2;
     }
-  console.log("moveShipLeft");
   }
 }
 
@@ -263,7 +263,6 @@ function moveShipRight() {
     if (rocket.velocity < 7) {
       rocket.x += 10;
     }
-  console.log("moveShipRight");
   }
 }
 
@@ -273,12 +272,11 @@ function moveShipUp() {
     if (rocket.velocity < 7) {
       rocket.y -= 10;
     }
-  console.log("moveShipUp");
   }
 }
 
 function moveShipDown() {
-  if (airfighter.y + airfighter.height > screen.height - 200) {
+  if (airfighter.y + airfighter.height > screen.height ) {
     document.querySelector('#gameover-screen').style.display = '';
     airfighter.x = 0;
     airfighter.y = 0;
@@ -293,7 +291,6 @@ function moveShipDown() {
   if (rocket.velocity < 7) {
     rocket.y += 10;
   }
-  console.log("moveShipDown");
 }
 
 function fireRocket() {

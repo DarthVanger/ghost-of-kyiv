@@ -16,7 +16,6 @@ export function fireGatlingEnemy (event, enemy) {
       enemy.enemyHealth.element.value -= gatling.dmg;
       gatling.ammo -= 10;
       soundGatling.play();
-      console.log(enemy.enemyHealth.element.value)
       if (enemy.enemyHealth.element.value === 0) {
         enemy.x -= enemyDies;
         soundEnemyDieExplosion.play();
