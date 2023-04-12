@@ -6,6 +6,7 @@ import {soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, 
 const fps = 60;
 let gameFps;
 let isGameStarted = false;
+let isGamePaused = false;
 
 let mobileControls = {
   leftButton: document.querySelector('.left'),
@@ -66,13 +67,13 @@ function Step() {
     }
   
 
-  if (rocket.x > airfighter.x + airfighter.rocketMaxDistance) {
-    rocket.x = airfighter.x + airfighter.rocketDefaultX;
-    rocket.y = airfighter.y + airfighter.rocketDefaultY;
-    rocket.velocity -= 8;
-    rocket.dmg = 50;
-    rocket.element.src = "img/Rocket.gif";
-  }
+    if (rocket.x > airfighter.x + airfighter.rocketMaxDistance) {
+      rocket.x = airfighter.x + airfighter.rocketDefaultX;
+      rocket.y = airfighter.y + airfighter.rocketDefaultY;
+      rocket.velocity -= 8;
+      rocket.dmg = 50;
+      rocket.element.src = "img/Rocket.gif";
+    }
   
   renderRocket();
   renderShip();
@@ -223,8 +224,10 @@ function handleKeyDown(event) {
   }
 
   if (event.key == "p" || event.key == 'з') {
-    clearInterval(gameFps);
+    gamePauseAction();
+    
   }
+
 }
 
 function handleKeyUp (event) {
@@ -237,7 +240,7 @@ function handleKeyUp (event) {
     airfighter.isShipMovingDown = false;
     airfighter.element.src = "img/Airfighter_ua_down_to_main.gif";
   }
-
+  
   if (event.key == "w" || event.key == 'ц') {
     airfighter.isShipMovingUp = false;
     airfighter.element.src = "img/Airfighter_ua_up_to_main.gif";
@@ -284,14 +287,14 @@ function moveShipDown() {
     soundRocketHit.pause();
     soundEnemyDieExplosion.play();
     setTimeout (function() {
-    soundMainTheme.pause();
-    soundGameOver.play();
+      soundMainTheme.pause();
+      soundGameOver.play();
     }, 900);
   }
   airfighter.y += 10;
   if (rocket.velocity < 7) {
     rocket.y += 10;
-  }
+  } 
 }
 
 function fireRocket() {
@@ -342,12 +345,14 @@ function fadeIn(element, duration) {
 function endGameAction () {
   document.location.reload();
 }
+
 let introduction = document.querySelector('#introduction');
 const startGameButton = document.querySelector("#startGameButton");
 const endGameButton = document.querySelector('#endGameButton');
 endGameButton.addEventListener('click', endGameAction)
 startGameButton.addEventListener("click", handleStartGameBtnClick);
 window.addEventListener('load', function (){ setTimeout(introductionSkip, 44000)});
+
 function introductionSkip() {
   if (!isGameStarted) {
     startGame();
@@ -358,5 +363,16 @@ function introductionSkip() {
     soundIntro.pause();
     isGameStarted = true;
   } 
-  }
+}
+
 introduction.addEventListener('click', introductionSkip);
+
+function gamePauseAction () {
+  if (isGamePaused === true) {
+    startGame();
+    isGamePaused = false;
+  } else {
+    clearInterval(gameFps);
+    isGamePaused = true;
+  }
+}
