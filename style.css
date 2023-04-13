@@ -279,3 +279,17 @@ h1 sub
 	0% { top: 100%; }
 	100% { top: -170%; }
 } 
+
+#pause-screen {
+    padding: 320px;
+    display: none;
+    position: absolute;   
+    color: #ff6;  
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    background: black;
+    z-index: 2;
+}

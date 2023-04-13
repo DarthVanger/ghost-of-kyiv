@@ -368,11 +368,22 @@ function introductionSkip() {
 introduction.addEventListener('click', introductionSkip);
 
 function gamePauseAction () {
-  if (isGamePaused === true) {
-    startGame();
-    isGamePaused = false;
+  if (isGamePaused) {
+    unPauseGame();
   } else {
-    clearInterval(gameFps);
-    isGamePaused = true;
+    pauseGame();
   }
+}
+const pauseScreen = document.querySelector("#pause-screen");
+
+function unPauseGame () {
+  gameFps = setInterval(Step, 1000/fps);
+  pauseScreen.style.display = 'none';
+  isGamePaused = false;
+}
+ 
+function pauseGame () {
+  clearInterval(gameFps);
+  pauseScreen.style.display = 'block';
+  isGamePaused = true;
 }
