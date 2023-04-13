@@ -8,12 +8,12 @@ function createFirstEnemyHealth(obj, i) {
   obj.enemyHealth = {};
   obj.enemyHealth.velocity = -2;
   obj.enemyHealth.elem = document.createElement('meter')
-  obj.enemyHealth.elem.setAttribute('min',"0")
-  obj.enemyHealth.elem.setAttribute('low',"15")
-  obj.enemyHealth.elem.setAttribute('high',"20")
-  obj.enemyHealth.elem.setAttribute('optimum',"50")
-  obj.enemyHealth.elem.setAttribute('max',"50")
-  obj.enemyHealth.elem.setAttribute('value',"50")
+  obj.enemyHealth.elem.setAttribute('min', 0)
+  obj.enemyHealth.elem.setAttribute('low', 20)
+  obj.enemyHealth.elem.setAttribute('high', 35)
+  obj.enemyHealth.elem.setAttribute('optimum', 50)
+  obj.enemyHealth.elem.setAttribute('max', 50)
+  obj.enemyHealth.elem.setAttribute('value', 50)
   obj.enemyHealth.elem.id = 'healthBar50-' + i;
   obj.enemyHealth.elem.className = 'healthBar50';
   document.body.append(obj.enemyHealth.elem);
@@ -38,8 +38,8 @@ function createSecondEnemyHealth(obj, i){
   obj.enemyHealth.velocity = -2;
   obj.enemyHealth.elem = document.createElement('meter');
   obj.enemyHealth.elem.setAttribute('min', 0);
-  obj.enemyHealth.elem.setAttribute('low', 25);
-  obj.enemyHealth.elem.setAttribute('high', 50);
+  obj.enemyHealth.elem.setAttribute('low', 30);
+  obj.enemyHealth.elem.setAttribute('high', 65);
   obj.enemyHealth.elem.setAttribute('optimum', 100);
   obj.enemyHealth.elem.setAttribute('max', 100);
   obj.enemyHealth.elem.setAttribute('value', 100);
