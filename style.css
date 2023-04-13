@@ -236,7 +236,7 @@ h1 sub
 #titles {
 	position: absolute;
 	width: 18em;
-	height: 50em;
+	height: 40em;
 	bottom: 0;
 	left: 50%;
 	margin-left: -9em;
@@ -272,12 +272,12 @@ h1 sub
 {
 	position: absolute;
 	top: 100%;
-	animation: scroll 150s linear 4s infinite;
+	animation: scroll 60s linear 4s infinite;
 }
 
 @keyframes scroll {
 	0% { top: 100%; }
-	100% { top: -170%; }
+	100% { top: -70%; }
 } 
 
 #pause-screen {

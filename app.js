@@ -351,7 +351,6 @@ const startGameButton = document.querySelector("#startGameButton");
 const endGameButton = document.querySelector('#endGameButton');
 endGameButton.addEventListener('click', endGameAction)
 startGameButton.addEventListener("click", handleStartGameBtnClick);
-window.addEventListener('load', function (){ setTimeout(introductionSkip, 44000)});
 
 function introductionSkip() {
   if (!isGameStarted) {
