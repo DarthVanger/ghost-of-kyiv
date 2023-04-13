@@ -39,41 +39,42 @@ function addGatling (enemy) {
   enemy.element.addEventListener('click', handleEnemyClick);
 }
 
-function Step() {
+function Step () {
   enemies.forEach(renderEnemy);
   enemies.forEach(moveEnemy);
   ammoElement.innerHTML = `<img class="ammoImg" src="img/ammo-gatling-img.gif"> ${gatling.ammo} <br> <img class="ammoImg" src="img/ammo-rocket-img.gif"> ${rocket.ammo}`;
   moveRocket();
   enemies.forEach(checkEnemyShipCollision);
   enemies.forEach(collisionSHmolision);
-  function collisionSHmolision(enemy){
-    if(checkEnemyRocketCollision(enemy)) {
+  function collisionSHmolision (enemy) {
+    if (checkEnemyRocketCollision(enemy)) {
       enemy.enemyHealth.element.value -= rocket.dmg;
       rocket.dmg -= rocket.dmg;
       soundRocketHit.play();
-      }
-      if (enemy.enemyHealth.element.value <= 0  && enemy.isAlive) {
-        enemy.isAlive = false;
-        enemy.x -= enemyDies;
-        soundEnemyDieExplosion.play();
-      }
-      if (rocket.dmg <= 0) {
-        rocket.x = airfighter.x + airfighter.rocketDefaultX;
-        rocket.y = airfighter.y + airfighter.rocketDefaultY;
-        rocket.velocity -= 8;
-        rocket.dmg = 50;
-        rocket.element.src = "img/Rocket.gif";
-      }
     }
-  
 
-    if (rocket.x > airfighter.x + airfighter.rocketMaxDistance) {
+    if (enemy.enemyHealth.element.value <= 0  && enemy.isAlive) {
+      enemy.isAlive = false;
+      enemy.x -= enemyDies;
+      soundEnemyDieExplosion.play();
+    }
+
+    if (rocket.dmg <= 0) {
       rocket.x = airfighter.x + airfighter.rocketDefaultX;
       rocket.y = airfighter.y + airfighter.rocketDefaultY;
       rocket.velocity -= 8;
       rocket.dmg = 50;
       rocket.element.src = "img/Rocket.gif";
     }
+  }
+  
+  if (rocket.x > airfighter.x + airfighter.rocketMaxDistance) {
+    rocket.x = airfighter.x + airfighter.rocketDefaultX;
+    rocket.y = airfighter.y + airfighter.rocketDefaultY;
+    rocket.velocity -= 8;
+    rocket.dmg = 50;
+    rocket.element.src = "img/Rocket.gif";
+  }
   
   renderRocket();
   renderShip();
@@ -225,9 +226,7 @@ function handleKeyDown(event) {
 
   if (event.key == "p" || event.key == 'з') {
     gamePauseAction();
-    
   }
-
 }
 
 function handleKeyUp (event) {
@@ -373,6 +372,7 @@ function gamePauseAction () {
     pauseGame();
   }
 }
+
 const pauseScreen = document.querySelector("#pause-screen");
 
 function unPauseGame () {
