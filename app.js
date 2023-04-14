@@ -1,9 +1,4 @@
-import {
-  fireGatlingEnemy,
-  gatling,
-  enemyDies,
-  addGatling,
-} from "./gatling.js";
+import { addGatling } from "./gatling.js";
 import { airfighter } from "./airfighter.js";
 import { enemies } from './enemy.js';
 import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";

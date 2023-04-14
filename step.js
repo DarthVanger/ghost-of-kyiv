@@ -1,12 +1,6 @@
 import { enemies } from './enemy.js';
 import { rocket } from './rocket.js';
-import {
-    enemyDies,
-    fireGatlingEnemy,
-    gatling,
-   // enemyDies,
-    addGatling,
-  } from "./gatling.js";
+import { enemyDies, gatling } from "./gatling.js";
 import { airfighter } from "./airfighter.js";
 import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
 import { gameFps } from './app.js'
