@@ -21,3 +21,10 @@ export function fireGatlingEnemy (event, enemy) {
       }
     }
   }
+
+export function addGatling (enemy) {
+  function handleEnemyClick (event) {
+    fireGatlingEnemy(event, enemy);
+  }
+  enemy.element.addEventListener('click', handleEnemyClick);
+}
