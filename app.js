@@ -3,21 +3,12 @@ import {airfighter} from "./airfighter.js";
 import {enemies} from './enemy.js';
 import {soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
 import { mobileControls } from './touch.js';
+import { rocket } from './rocket.js';
 
 const fps = 60;
 let gameFps;
 let isGameStarted = false;
 let isGamePaused = false;
-
-let rocket = {
-  x: 5,
-  y: 67,
-  width: 120,
-  ammo: 10,
-  dmg: 50,
-  velocity: 0,
-  element: document.querySelector("#rocket"),
-}
 
 function startGame() {
   initKeybordMovement();
