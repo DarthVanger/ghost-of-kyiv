@@ -293,3 +293,13 @@ h1 sub
     background: black;
     z-index: 2;
 }
+
+#levelComplete,
+#gameover-screen {
+    display: none;
+}
+
+#start-screen{
+    padding: 320px; 
+    color:rgb(231, 228, 34);
+}
