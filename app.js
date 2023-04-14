@@ -1,42 +1,24 @@
-import {fireGatlingEnemy, gatling, enemyDies} from "./gatling.js";
+import {
+  fireGatlingEnemy,
+  gatling,
+  enemyDies,
+  addGatling,
+} from "./gatling.js";
 import {airfighter} from "./airfighter.js";
 import {enemies} from './enemy.js';
 import {soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
+import { mobileControls } from './touch.js';
+import { rocket } from './rocket.js';
 
 const fps = 60;
 let gameFps;
 let isGameStarted = false;
 let isGamePaused = false;
 
-let mobileControls = {
-  leftButton: document.querySelector('.left'),
-  topButton: document.querySelector('.top'),
-  bottomButton: document.querySelector('.bottom'),
-  rightButton: document.querySelector('.right'),
-  fireButton: document.querySelector('.fire'),
-}
-
-let rocket = {
-  x: 5,
-  y: 67,
-  width: 120,
-  ammo: 10,
-  dmg: 50,
-  velocity: 0,
-  element: document.querySelector("#rocket"),
-}
-
 function startGame() {
   initKeybordMovement();
   enemies.forEach(addGatling);
   gameFps = setInterval(Step, 1000 / fps);
-}
-
-function addGatling (enemy) {
-  function handleEnemyClick (event) {
-    fireGatlingEnemy(event, enemy);
-  }    
-  enemy.element.addEventListener('click', handleEnemyClick);
 }
 
 function Step () {

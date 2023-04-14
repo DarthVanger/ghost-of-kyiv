@@ -1,6 +1,16 @@
+export const mobileControls = {
+  leftButton: document.querySelector('.left'),
+  topButton: document.querySelector('.top'),
+  bottomButton: document.querySelector('.bottom'),
+  rightButton: document.querySelector('.right'),
+  fireButton: document.querySelector('.fire'),
+};
+
 let checkDevice = navigator.userAgent;
 const viewport = document.querySelector('#viewport'); 
 let touch = document.querySelector('#keyboard-controls-help');
+
+
 
 if (navigator.userAgent.match('iPhone') || navigator.userAgent.match('Android') || 
     navigator.userAgent.match('iPad') || navigator.userAgent.match('RIM')) {
@@ -12,3 +22,4 @@ if (navigator.userAgent.match('iPhone') || navigator.userAgent.match('Android') 
 } 
 
 document.querySelectorAll('*').forEach((e) =>{e.setAttribute('draggable', false)}); 
+
