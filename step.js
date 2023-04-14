@@ -1,5 +1,15 @@
 import { enemies } from './enemy.js';
-import { gatling } from './gatling.js';
+import { rocket } from './rocket.js';
+import {
+    enemyDies,
+    fireGatlingEnemy,
+    gatling,
+   // enemyDies,
+    addGatling,
+  } from "./gatling.js";
+import { airfighter } from "./airfighter.js";
+import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
+import { gameFps } from './app.js'
 
 export function Step () {
     enemies.forEach(renderEnemy);
@@ -10,7 +20,7 @@ export function Step () {
     enemies.forEach(collisionSHmolision);
     function collisionSHmolision (enemy) {
       if (checkEnemyRocketCollision(enemy)) {
-        enemy.enemyHealthgit.element.value -= rocket.dmg;
+        enemy.enemyHealth.element.value -= rocket.dmg;
         rocket.dmg -= rocket.dmg;
         soundRocketHit.play();
       }
@@ -174,4 +184,17 @@ function checkEnemyShipCollision(enemy) {
       }, 900);
       
       }
+  }
+
+  function fadeIn(element, duration) {
+    element.style.opacity = 0;
+    var last = +new Date();
+    var tick = function() {
+      element.style.opacity = +element.style.opacity + (new Date() - last) / duration;
+      last = +new Date();
+      if (+element.style.opacity < 1) {
+        (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+      }
+    };
+    tick();
   }

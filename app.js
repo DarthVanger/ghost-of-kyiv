@@ -11,10 +11,10 @@ import { mobileControls } from './touch.js';
 import { rocket } from './rocket.js';
 import { Step } from './step.js';
 
-const fps = 60;
-let gameFps;
-let isGameStarted = false;
-let isGamePaused = false;
+export const fps = 60;
+export let gameFps;
+export let isGameStarted = false;
+export let isGamePaused = false;
 
 function startGame() {
   initKeybordMovement();
@@ -136,18 +136,7 @@ function hideStartScreen() {
   startScreen.remove();
 }
 
-function fadeIn(element, duration) {
-  element.style.opacity = 0;
-  var last = +new Date();
-  var tick = function() {
-    element.style.opacity = +element.style.opacity + (new Date() - last) / duration;
-    last = +new Date();
-    if (+element.style.opacity < 1) {
-      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
-    }
-  };
-  tick();
-}
+
 
 function endGameAction () {
   document.location.reload();
