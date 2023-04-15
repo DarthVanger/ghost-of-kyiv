@@ -116,7 +116,6 @@ for(let i = 0; i < 11; i++) {
     obj.velocity = -2;
     obj.element = document.querySelector('#enemy' + i);
     enemies.push(obj)
-    console.log(obj.y)
   }
 }
 
