@@ -4,16 +4,15 @@ import { addGatling } from "./gatling.js";
 import { airfighter } from "./airfighter.js";
 import { enemies } from './enemy.js';
 import { soundRocketShot } from "./music.js";
-import { Step } from './step.js';
-
+import { Step, gameState } from './step.js';
 const fps = 60;
-let isGamePaused = false;
-let gameFps;
+
+
 
 export function startGame() {
     initKeybordMovement();
     enemies.forEach(addGatling);
-    gameFps = setInterval(Step, 1000 / fps);
+    gameState.gameIntervalId = setInterval(Step, 1000 / fps);
   }
 
   function initKeybordMovement() {
@@ -125,7 +124,7 @@ export function endGameAction () {
   }
 
   function gamePauseAction () {
-    if (isGamePaused) {
+    if (gameState.isGamePaused) {
       unPauseGame();
     } else {
       pauseGame();
@@ -134,18 +133,15 @@ export function endGameAction () {
   const pauseScreen = document.querySelector("#pause-screen");
 
   function unPauseGame () {
-    gameFps = setInterval(Step, 1000/fps);
+    gameState.gameIntervalId = setInterval(Step, 1000/fps);
     pauseScreen.style.display = 'none';
-    isGamePaused = false;
+    gameState.isGamePaused = false;
   }
    
   function pauseGame () {
-    clearInterval(gameFps);
+    clearInterval(gameState.gameIntervalId);
     pauseScreen.style.display = 'block';
-    isGamePaused = true;
+    gameState.isGamePaused = true;
   }
 
-  export function stopInterval () {
-    clearInterval(gameFps);
-    isGamePaused = true;
-  }
+  
