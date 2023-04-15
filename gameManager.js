@@ -8,6 +8,7 @@ import { Step } from './step.js';
 
 const fps = 60;
 let isGamePaused = false;
+let gameFps;
 
 export function startGame() {
     initKeybordMovement();
@@ -141,5 +142,10 @@ export function endGameAction () {
   function pauseGame () {
     clearInterval(gameFps);
     pauseScreen.style.display = 'block';
+    isGamePaused = true;
+  }
+
+  export function stopInterval () {
+    clearInterval(gameFps);
     isGamePaused = true;
   }

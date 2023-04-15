@@ -3,8 +3,8 @@ import { rocket } from './rocket.js';
 import { enemyDies, gatling } from "./gatling.js";
 import { airfighter } from "./airfighter.js";
 import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
+import { stopInterval } from './gameManager.js';
 
-let gameFps;
 
 export function Step () {
     enemies.forEach(renderEnemy);
@@ -62,7 +62,7 @@ export function Step () {
     const lastEnemy = enemies[enemies.length-1]
     const vuletivZaRamku = lastEnemy.x < 0 - lastEnemy.width
     if (vuletivZaRamku) {
-      clearInterval(gameFps);
+      stopInterval();
       document.querySelector('#levelComplete').style.display = '';
       fadeIn(levelComplete, 400);
       soundMainTheme.pause();
