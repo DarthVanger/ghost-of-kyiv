@@ -32,8 +32,3 @@ function introductionSkip() {
 }
 
 introduction.addEventListener('click', introductionSkip);
-
-
-
-
-
