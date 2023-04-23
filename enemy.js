@@ -1,4 +1,8 @@
-export let enemies = []
+export let enemies = [];
+export let explosion = document.createElement('img')
+explosion.id = 'explosion-' + new Date()
+explosion.className = 'explosion'
+explosion.src = './img/explosion.gif';
 
 function createFirstEnemyHealth(obj, i) {
   obj.e.src = 'img/su-3.png';

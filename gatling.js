@@ -1,4 +1,6 @@
 import {airfighter} from "./airfighter.js";
+import { explosion } from "./enemy.js";
+
 import {soundEnemyDieExplosion, soundGatling} from "./music.js";
 
 export const enemyDies = 9999;
@@ -16,8 +18,13 @@ export function fireGatlingEnemy (event, enemy) {
       gatling.ammo -= 10;
       soundGatling.play();
       if (enemy.enemyHealth.element.value === 0) {
-        enemy.x -= enemyDies;
+        document.querySelector('#gifContainer').append(explosion);
+        explosion.style.left = enemy.x;
+        explosion.style.top = enemy.y;
         soundEnemyDieExplosion.play();
+        setTimeout(() => {
+          explosion.remove()
+        },700)
       }
     }
   }
