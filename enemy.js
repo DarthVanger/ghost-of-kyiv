@@ -4,6 +4,8 @@ explosion.id = 'explosion-' + new Date()
 explosion.className = 'explosion'
 explosion.src = './img/explosion.gif';
 
+
+
 function createFirstEnemyHealth(obj, i) {
   obj.e.src = 'img/su-3.png';
   obj.width = 250;
@@ -118,6 +120,10 @@ for(let i = 0; i < 11; i++) {
 
     obj.y = Math.floor(Math.random()*(innerHeight-200)+50);
     obj.velocity = -2;
+    obj.rotate = 0;
+    obj.vx = 4;
+    obj.vy = 0;
+
     obj.element = document.querySelector('#enemy' + i);
     enemies.push(obj)
   }

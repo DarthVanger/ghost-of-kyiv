@@ -28,8 +28,8 @@ export function Step () {
       document.querySelector('#gifContainer').append(explosion);
       explosion.style.left = enemy.x;
       explosion.style.top = enemy.y;
+      enemyDie(enemy)
       enemy.isAlive = false;
-      enemy.x -= enemyDies;
       soundEnemyDieExplosion.play();
       setTimeout(() => {
         explosion.remove()
@@ -81,6 +81,34 @@ export function Step () {
     soundLevelComplete.volume = 0.4;
   }
 }
+const g = -0.2; 
+const forceX = 0; 
+const forceY = g; 
+function enemyDie(enemy) {
+  setInterval(() => {
+    enemy.x -= enemy.vx;
+    enemy.y -= enemy.vy;
+    enemy.velocity = 0;
+
+  if(enemy.rotate >= -90) {
+    enemy.rotate -= 1*2;
+    }
+  enemy.x += enemy.vx;
+  if(enemy.y > window.innerHeight - enemy.height) {
+    document.querySelector('#gifContainer').append(explosion);
+    explosion.style.left = enemy.x;
+    explosion.style.top = enemy.y;
+    enemy.x -= enemyDies;
+    setTimeout(() => {
+      explosion.remove()
+    },700)
+  } else {
+    enemy.vx += forceX
+    enemy.vy += forceY
+
+  }
+  },100)
+}
 
 function renderEnemy (enemy) {
   enemy.enemyHealth.element.style.left = enemy.x;
@@ -96,6 +124,7 @@ function renderEnemy (enemy) {
   enemy.element.style.top = enemy.y;
   enemy.element.style.width = enemy.width;
   enemy.element.style.height = enemy.height;
+  enemy.element.style.transform = `rotate(${enemy.rotate}deg)`;
 }
   
 function renderRocket() {
