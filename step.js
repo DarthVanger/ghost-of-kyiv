@@ -25,7 +25,7 @@ export function Step () {
     }
 
     if (enemy.enemyHealth.element.value <= 0  && enemy.isAlive) {
-      document.querySelector('#gifContainer').append(explosion);
+      document.querySelector('#gifContainerExplosion').append(explosion);
       explosion.style.left = enemy.x;
       explosion.style.top = enemy.y;
       enemy.isAlive = false;
