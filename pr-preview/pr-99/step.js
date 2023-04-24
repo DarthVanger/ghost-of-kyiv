@@ -25,9 +25,9 @@ export function Step () {
     }
 
     if (enemy.enemyHealth.element.value <= 0  && enemy.isAlive) {
-      document.querySelector('#gifContainer').append(explosion);
-      explosion.style.left = enemy.x;
-      explosion.style.top = enemy.y;
+      document.querySelector('#gifContainerExplosion').append(explosion);
+      explosion.style.left = enemy.x + enemy.width/3;
+        explosion.style.top = enemy.y;
       enemy.isAlive = false;
       enemy.x -= enemyDies;
       soundEnemyDieExplosion.play();
