@@ -100,6 +100,15 @@ function renderRocket() {
 function renderShip() {
     airfighter.element.style.left = airfighter.x;
     airfighter.element.style.top = airfighter.y;
+    airfighter.health.element.style.left = airfighter.x;
+    airfighter.health.element.style.top = airfighter.y;
+    airfighter.health.element.style.width = airfighter.width;
+    airfighter.health.element.style.height = airfighter.height*0.1;
+    airfighter.healthtext.element.value = airfighter.health.element.value / airfighter.health.element.max;
+    airfighter.healthtext.element.innerHTML = `${airfighter.health.element.value} / ${airfighter.health.element.max} HP`;
+    airfighter.healthtext.element.style.left = airfighter.x;
+    airfighter.healthtext.element.style.top = airfighter.y - 35;
+    airfighter.healthtext.element.style.width = airfighter.width;
 }
 
 function moveRocket() {
@@ -175,16 +184,20 @@ function checkEnemyShipCollision(enemy) {
     airfighter.y + airfighter.height > enemy.y &&
     airfighter.y < enemy.y + enemy.height
   ) {
-    document.querySelector('#gameover-screen').style.display = '';
-    airfighter.x = 0;
-    airfighter.y = 0;
-    soundRocketHit.pause();
+    airfighter.health.element.value -= 35;
+    enemy.x += enemyDies;
     soundEnemyDieExplosion.play();
-    setTimeout(function() {
+    if (airfighter.health.element.value <= 0) {
+      document.querySelector('#gameover-screen').style.display = '';
+      airfighter.x = 0;
+      airfighter.y = 0;
+      soundRocketHit.pause();
+      soundEnemyDieExplosion.play();
+      setTimeout(function() {
       soundMainTheme.pause();
       soundGameOver.play();
-    }, 900);
-    
+      }, 900);
+    }
   }
 }
 
