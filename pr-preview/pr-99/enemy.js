@@ -3,6 +3,8 @@ export let explosion = document.createElement('img')
 explosion.id = 'explosion-' + new Date()
 explosion.className = 'explosion'
 explosion.src = './img/explosion.gif';
+explosion.width = 120;
+explosion.height = 130;
 
 function createFirstEnemyHealth(obj, i) {
   obj.e.src = 'img/su-3.png';

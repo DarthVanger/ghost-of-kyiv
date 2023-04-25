@@ -19,8 +19,8 @@ export function fireGatlingEnemy (event, enemy) {
       soundGatling.play();
       if (enemy.enemyHealth.element.value === 0) {
         document.querySelector('#gifContainerExplosion').append(explosion);
-        explosion.style.left = enemy.x + enemy.width/3;
-        explosion.style.top = enemy.y;
+        explosion.style.left = enemy.x + enemy.width/2 - explosion.width/2;
+        explosion.style.top = enemy.y + enemy.height/2 - explosion.height/2;
         soundEnemyDieExplosion.play();
         setTimeout(() => {
           explosion.remove()
