@@ -4,6 +4,16 @@ export let airfighter = {
     width: 250,
     height: 80,
     element: document.querySelector('#airfighter'),
+    health: {
+      x: 0,
+      y: 0,
+      element: document.querySelector("#playerHealth")
+    },
+    healthtext: {
+      x: 0,
+      y: 0,
+      element: document.querySelector("#playerHealthText")
+    },
     rocketDefaultX: 5,
     rocketDefaultY: 67,
     rocketMaxDistance: 1500,
