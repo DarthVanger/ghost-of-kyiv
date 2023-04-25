@@ -7,12 +7,12 @@ export let airfighter = {
     health: {
       x: 0,
       y: 0,
-      element: document.querySelector("#health")
+      element: document.querySelector("#playerHealth")
     },
     healthtext: {
       x: 0,
       y: 0,
-      element: document.querySelector("#healthtext")
+      element: document.querySelector("#playerHealthText")
     },
     rocketDefaultX: 5,
     rocketDefaultY: 67,

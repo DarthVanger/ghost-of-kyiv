@@ -57,13 +57,13 @@ position: absolute;
     width: 250px;
 }
 
-#health {
+#playerHealth {
     position: absolute;
     left: 0;
     top: 0;
 }
 
-#healthtext {
+#playerHealthText {
     position: absolute;
     left: 0;
     top: 0;
