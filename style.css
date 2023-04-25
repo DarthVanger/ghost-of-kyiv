@@ -52,11 +52,23 @@ p {
 position: absolute;
 }
 
-
-
 #airfighter {
     position: absolute;
-    width: 250px;   
+    width: 250px;
+}
+
+#playerHealth {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#playerHealthText {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color:#ffffff;
+    text-align-last: center;
 }
 
 #ammoElement {
