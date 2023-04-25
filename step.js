@@ -191,15 +191,21 @@ function checkEnemyShipCollision(enemy) {
     airfighter.y < enemy.y + enemy.height
   ) {
     airfighter.health.element.value -= 35;
-    enemy.x += enemyDies;
+    document.querySelector('#gifContainerExplosion').append(explosion);
+    explosion.style.left = enemy.x + enemy.width/2 - explosion.width/2;
+    explosion.style.top = enemy.y + enemy.height/2 - explosion.height/2;
+    enemy.x = enemyDies;
     soundEnemyDieExplosion.play();
+    setTimeout(() => {
+      explosion.remove()
+    },700)
     if (airfighter.health.element.value <= 0) {
       document.querySelector('#gameover-screen').style.display = '';
       airfighter.x = 0;
       airfighter.y = 0;
       soundRocketHit.pause();
       soundEnemyDieExplosion.play();
-      setTimeout(function() {
+      setTimeout(() => {
       soundMainTheme.pause();
       soundGameOver.play();
       }, 900);
