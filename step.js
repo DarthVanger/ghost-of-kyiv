@@ -1,4 +1,4 @@
-import { enemies } from './enemy.js';
+import { enemies, explosion } from './enemy.js';
 import { rocket } from './rocket.js';
 import { enemyDies, gatling } from "./gatling.js";
 import { airfighter } from "./airfighter.js";
@@ -25,9 +25,15 @@ export function Step () {
     }
 
     if (enemy.enemyHealth.element.value <= 0  && enemy.isAlive) {
+      document.querySelector('#gifContainerExplosion').append(explosion);
+      explosion.style.left = enemy.x + enemy.width/2 - explosion.width/2;
+      explosion.style.top = enemy.y + enemy.height/2 - explosion.height/2;
       enemy.isAlive = false;
       enemy.x -= enemyDies;
       soundEnemyDieExplosion.play();
+      setTimeout(() => {
+        explosion.remove()
+      },700)
     }
 
     if (rocket.dmg <= 0) {

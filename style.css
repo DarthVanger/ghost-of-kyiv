@@ -213,13 +213,12 @@ position: absolute;
 }
 h1
 {
-	position: absolute;
+    padding: 10vh;
 	width: 5.6em;
-	left: 30%;
+    margin: auto;
     transform:translate(-50%, 0%);
 	font-size: 10em;
 	text-align: center;
-	margin-left: -1.3em;
 	line-height: 0.8em;
 	letter-spacing: -0.05em;
 	color: #000;
@@ -304,4 +303,10 @@ h1 sub
     text-align: center;
     background: black;
     z-index: 2;
+}
+
+.explosion{
+    position: absolute;
+    height: 130px;
+    width: 120px;
 }
