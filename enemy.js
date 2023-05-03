@@ -132,7 +132,7 @@ for(let i = 0; i < 11; i++) {
       y: obj.y,
       width: 120,
       height: 12,
-      dmg: 50,
+      dmg: 20,
       vx: 0,
       vy: 0,
       element: enemyRocketImg,

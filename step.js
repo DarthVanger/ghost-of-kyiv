@@ -210,28 +210,30 @@ function checkEnemyRocketCollision(enemy) {
     rocket.y > enemy.y &&
     rocket.x < enemy.x + enemy.width &&
     rocket.y < enemy.y + enemy.height
+  ) {
+    soundRocketShot.pause();
+    soundRocketShot.currentTime = 0;
+    return true;
+  }
+}
+
+function checkPlayerRocketCollision(enemy) {
+  if (
+    airfighter.x + airfighter.width > enemy.rocket.x &&
+    airfighter.x < enemy.rocket.x + enemy.rocket.width &&
+    airfighter.y + airfighter.height > enemy.rocket.y &&
+    airfighter.y < enemy.rocket.y + enemy.rocket.height
     ) {
       soundRocketShot.pause();
       soundRocketShot.currentTime = 0;
+      explosionEffect(airfighter);
       return true;
-    }
   }
 
-  function checkPlayerRocketCollision(enemy) {
-    if (
-      airfighter.x + airfighter.width > enemy.rocket.x &&
-      airfighter.x < enemy.rocket.x + enemy.rocket.width &&
-      airfighter.y + airfighter.height > enemy.rocket.y &&
-      airfighter.y < enemy.rocket.y + enemy.rocket.height
-      ) {
-        soundRocketShot.pause();
-        soundRocketShot.currentTime = 0;
-        return true;
-      }
-      playerDiesIfHpBelowZiro();
-    }
+  playerDiesIfHpBelowZiro();
+}
 
-    function checkEnemyShipCollision(enemy) {
+function checkEnemyShipCollision(enemy) {
   if (
     airfighter.x + airfighter.width > enemy.x &&
     airfighter.x < enemy.x + enemy.width &&
@@ -239,16 +241,20 @@ function checkEnemyRocketCollision(enemy) {
     airfighter.y < enemy.y + enemy.height
   ) {
     airfighter.health.element.value -= 35;
-    document.querySelector('#gifContainerExplosion').append(explosion);
-    explosion.style.left = enemy.x + enemy.width/2 - explosion.width/2;
-    explosion.style.top = enemy.y + enemy.height/2 - explosion.height/2;
-    enemy.x = enemyDies;
     soundEnemyDieExplosion.play();
-    setTimeout(() => {
-      explosion.remove()
-    },700)
-    playerDiesIfHpBelowZiro()
+    explosionEffect(enemy);
+    enemy.x = enemyDies;
+    playerDiesIfHpBelowZiro();
   }
+}
+
+function explosionEffect (position) {
+  document.querySelector('#gifContainerExplosion').append(explosion);
+  explosion.style.left = position.x + position.width/2 - explosion.width/2;
+  explosion.style.top = position.y + position.height/2 - explosion.height/2;
+  setTimeout(() => {
+    explosion.remove()
+  },700);
 }
 
 function playerDiesIfHpBelowZiro () {
