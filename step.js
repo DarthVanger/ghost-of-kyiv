@@ -228,6 +228,7 @@ function checkEnemyRocketCollision(enemy) {
         soundRocketShot.currentTime = 0;
         return true;
       }
+      playerDiesIfHpBelowZiro();
     }
 
     function checkEnemyShipCollision(enemy) {
@@ -246,17 +247,21 @@ function checkEnemyRocketCollision(enemy) {
     setTimeout(() => {
       explosion.remove()
     },700)
-    if (airfighter.health.element.value <= 0) {
-      document.querySelector('#gameover-screen').style.display = '';
-      airfighter.x = 0;
-      airfighter.y = 0;
-      soundRocketHit.pause();
-      soundEnemyDieExplosion.play();
-      setTimeout(() => {
-      soundMainTheme.pause();
-      soundGameOver.play();
-      }, 900);
-    }
+    playerDiesIfHpBelowZiro()
+  }
+}
+
+function playerDiesIfHpBelowZiro () {
+  if (airfighter.health.element.value <= 0) {
+    document.querySelector('#gameover-screen').style.display = '';
+    airfighter.x = 0;
+    airfighter.y = 0;
+    soundRocketHit.pause();
+    soundEnemyDieExplosion.play();
+    setTimeout(() => {
+    soundMainTheme.pause();
+    soundGameOver.play();
+    }, 900);
   }
 }
 
