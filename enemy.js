@@ -130,6 +130,9 @@ for(let i = 0; i < 11; i++) {
     obj.rocket = {
       x: obj.x,
       y: obj.y,
+      width: 120,
+      height: 12,
+      dmg: 50,
       vx: 0,
       vy: 0,
       element: enemyRocketImg,

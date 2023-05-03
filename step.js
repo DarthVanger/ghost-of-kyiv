@@ -44,6 +44,12 @@ export function Step () {
       soundRocketHit.play();
     }
 
+    if (checkPlayerRocketCollision(enemy)) {
+      airfighter.health.element.value -= enemy.rocket.dmg;
+      enemy.rocket.dmg -= enemy.rocket.dmg;
+      soundRocketHit.play();
+    }
+
     if (enemy.enemyHealth.element.value <= 0  && enemy.isAlive) {
       document.querySelector('#gifContainerExplosion').append(explosion);
       explosion.style.left = enemy.x + enemy.width/2 - explosion.width/2;
@@ -204,14 +210,27 @@ function checkEnemyRocketCollision(enemy) {
     rocket.y > enemy.y &&
     rocket.x < enemy.x + enemy.width &&
     rocket.y < enemy.y + enemy.height
-  ) {
-    soundRocketShot.pause();
-    soundRocketShot.currentTime = 0;
-    return true;
+    ) {
+      soundRocketShot.pause();
+      soundRocketShot.currentTime = 0;
+      return true;
+    }
   }
-}
 
-function checkEnemyShipCollision(enemy) {
+  function checkPlayerRocketCollision(enemy) {
+    if (
+      airfighter.x + airfighter.width > enemy.rocket.x &&
+      airfighter.x < enemy.rocket.x + enemy.rocket.width &&
+      airfighter.y + airfighter.height > enemy.rocket.y &&
+      airfighter.y < enemy.rocket.y + enemy.rocket.height
+      ) {
+        soundRocketShot.pause();
+        soundRocketShot.currentTime = 0;
+        return true;
+      }
+    }
+
+    function checkEnemyShipCollision(enemy) {
   if (
     airfighter.x + airfighter.width > enemy.x &&
     airfighter.x < enemy.x + enemy.width &&
