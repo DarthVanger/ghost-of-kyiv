@@ -147,6 +147,9 @@ function moveRocket() {
 }
 
 function moveEnemy(enemy) {
+  if (!enemy.isRocketLaunchenemy) {
+    enemy.rocket.x += enemy.velocity;
+  }
   return (enemy.x += enemy.velocity);
 }
 

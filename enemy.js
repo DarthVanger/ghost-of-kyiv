@@ -123,7 +123,7 @@ for(let i = 0; i < 11; i++) {
 
     const enemyRocketImg = document.createElement('img');
     enemyRocketImg.className = 'enemyRocket';
-    enemyRocketImg.src = 'img/Rocket.gif';
+    enemyRocketImg.src = 'img/mrRocket.gif';
     obj.isRocketLaunchenemy = false;
     document.body.append(enemyRocketImg);
     // rocket for Enemies
