@@ -9,9 +9,9 @@ import { Step, gameState } from './step.js';
 const fps = 60;
 
 export function startGame() {
-    initKeybordMovement();
-    enemies.forEach(addGatling);
-    gameState.gameIntervalId = setInterval(Step, 1000 / fps);
+  initKeybordMovement();
+  enemies.forEach(addGatling);
+  gameState.gameIntervalId = setInterval(Step, 1000 / fps);
 }
 
 function initKeybordMovement() {
@@ -19,28 +19,28 @@ function initKeybordMovement() {
   document.addEventListener("keyup", handleKeyUp);
   mobileControls.leftButton.addEventListener('touchstart' , function () {
     airfighter.isShipMovingLeft = true;
-});
+  });
   mobileControls.rightButton.addEventListener('touchstart' ,  function () {
     airfighter.isShipMovingRight = true;
-});
+  });
   mobileControls.topButton.addEventListener('touchstart' , function () {
     airfighter.isShipMovingUp = true;
-});
+  });
   mobileControls.bottomButton.addEventListener('touchstart' ,  function () {
     airfighter.isShipMovingDown = true;
-});
-mobileControls.leftButton.addEventListener('touchend' , function () {
+  });
+  mobileControls.leftButton.addEventListener('touchend' , function () {
   airfighter.isShipMovingLeft = false;
-});
-mobileControls.rightButton.addEventListener('touchend' ,  function () {
+  });
+  mobileControls.rightButton.addEventListener('touchend' ,  function () {
   airfighter.isShipMovingRight = false;
-});
-mobileControls.topButton.addEventListener('touchend' , function () {
+  });
+  mobileControls.topButton.addEventListener('touchend' , function () {
   airfighter.isShipMovingUp = false;
-});
-mobileControls.bottomButton.addEventListener('touchend' ,  function () {
+  });
+  mobileControls.bottomButton.addEventListener('touchend' ,  function () {
   airfighter.isShipMovingDown = false;
-});
+  });
   mobileControls.fireButton.addEventListener('click' , fireRocket);
 }
 
