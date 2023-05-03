@@ -11,11 +11,31 @@ export const gameState = {
 
 export function Step () {
   enemies.forEach(renderEnemy);
+  enemies.forEach(renderEnemyRocket);
   enemies.forEach(moveEnemy);
+  enemies.forEach(moveEnemyRocket);
   ammoElement.innerHTML = `<img class="ammoImg" src="img/ammo-gatling-img.gif"> ${gatling.ammo} <br> <img class="ammoImg" src="img/ammo-rocket-img.gif"> ${rocket.ammo}`;
   moveRocket();
   enemies.forEach(checkEnemyShipCollision);
   enemies.forEach(collisionSHmolision);
+  enemies.forEach(launchRocketIfOnScreen); //launchrocket 
+
+  function moveEnemyRocket(enemy) {
+    enemy.rocket.x += enemy.rocket.vx;
+  }
+
+  function launchEnemyRocket (enemy) {
+    enemy.rocket.vx -= 8;
+  }
+
+  function launchRocketIfOnScreen (enemy) {
+    if (enemy.x < window.innerWidth) {
+      if (!enemy.isRocketLaunchenemy) {
+        launchEnemyRocket(enemy);
+        enemy.isRocketLaunchenemy = true;
+      }
+    }
+  }
 
   function collisionSHmolision (enemy) {
     if (checkEnemyRocketCollision(enemy)) {
@@ -44,7 +64,7 @@ export function Step () {
       rocket.element.src = "img/Rocket.gif";
     }
   }
-    
+
   if (rocket.x > airfighter.x + airfighter.rocketMaxDistance) {
     rocket.x = airfighter.x + airfighter.rocketDefaultX;
     rocket.y = airfighter.y + airfighter.rocketDefaultY;
@@ -52,7 +72,7 @@ export function Step () {
     rocket.dmg = 50;
     rocket.element.src = "img/Rocket.gif";
   }
-  
+
   renderRocket();
   renderShip();
 
@@ -97,32 +117,37 @@ function renderEnemy (enemy) {
   enemy.element.style.width = enemy.width;
   enemy.element.style.height = enemy.height;
 }
-  
+
 function renderRocket() {
-    rocket.element.style.left = rocket.x;
-    rocket.element.style.top = rocket.y;
+  rocket.element.style.left = rocket.x;
+  rocket.element.style.top = rocket.y;
 }
-  
+
+function renderEnemyRocket(enemy) {
+  enemy.rocket.element.style.left = enemy.rocket.x;
+  enemy.rocket.element.style.top = enemy.rocket.y;
+}
+
 function renderShip() {
-    airfighter.element.style.left = airfighter.x;
-    airfighter.element.style.top = airfighter.y;
-    airfighter.health.element.style.left = airfighter.x;
-    airfighter.health.element.style.top = airfighter.y;
-    airfighter.health.element.style.width = airfighter.width;
-    airfighter.health.element.style.height = airfighter.height*0.1;
-    airfighter.healthtext.element.value = airfighter.health.element.value / airfighter.health.element.max;
-    airfighter.healthtext.element.innerHTML = `${airfighter.health.element.value} / ${airfighter.health.element.max} HP`;
-    airfighter.healthtext.element.style.left = airfighter.x;
-    airfighter.healthtext.element.style.top = airfighter.y - 35;
-    airfighter.healthtext.element.style.width = airfighter.width;
+  airfighter.element.style.left = airfighter.x;
+  airfighter.element.style.top = airfighter.y;
+  airfighter.health.element.style.left = airfighter.x;
+  airfighter.health.element.style.top = airfighter.y;
+  airfighter.health.element.style.width = airfighter.width;
+  airfighter.health.element.style.height = airfighter.height*0.1;
+  airfighter.healthtext.element.value = airfighter.health.element.value / airfighter.health.element.max;
+  airfighter.healthtext.element.innerHTML = `${airfighter.health.element.value} / ${airfighter.health.element.max} HP`;
+  airfighter.healthtext.element.style.left = airfighter.x;
+  airfighter.healthtext.element.style.top = airfighter.y - 35;
+  airfighter.healthtext.element.style.width = airfighter.width;
 }
 
 function moveRocket() {
-    rocket.x += rocket.velocity;
+  rocket.x += rocket.velocity;
 }
-  
+
 function moveEnemy(enemy) {
-    return (enemy.x += enemy.velocity);
+  return (enemy.x += enemy.velocity);
 }
 
 function moveShipDown() {
@@ -151,7 +176,7 @@ function moveShipLeft() {
     }
   }
 }
-  
+
 function moveShipRight() {
   if (airfighter.x + airfighter.width < screen.width) {
     airfighter.x += 10;
@@ -160,7 +185,7 @@ function moveShipRight() {
     }
   }
 }
-  
+
 function moveShipUp() {
   if (airfighter.y > 0) {
     airfighter.y -= 10;

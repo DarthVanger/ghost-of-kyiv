@@ -59,7 +59,7 @@ function createSecondEnemyHealth(obj, i){
   obj.enemyHealthText.elem.id = 'healthBar100text-' + i;
   obj.enemyHealthText.elem.className = 'healthBar100text';
   document.body.append(obj.enemyHealthText.elem);
-  
+
   obj.enemyHealth.element = document.querySelector('#healthBar100-' + i);
   obj.enemyHealthText.element = document.querySelector('#healthBar100text-' + i);
 }
@@ -68,7 +68,6 @@ function createThirdEnemyHealth(obj, i) {
   obj.e.src = 'img/z-10.png';
     obj.width = 330;
     obj.height = 200;
-
     obj.enemyHealth = {};
     obj.enemyHealth.velocity = -2;
     obj.enemyHealth.elem = document.createElement('meter')
@@ -81,7 +80,7 @@ function createThirdEnemyHealth(obj, i) {
     obj.enemyHealth.elem.id = 'healthBar200-' + i;
     obj.enemyHealth.elem.className = 'healthBar200';
     document.body.append(obj.enemyHealth.elem);
-    
+
     obj.enemyHealthText = {};
     obj.enemyHealthText.velocity = -2;
     obj.enemyHealthText.elem = document.createElement('div')
@@ -100,12 +99,12 @@ for(let i = 0; i < 11; i++) {
     obj.e.id = 'enemy' + i;
 
     if(i < 5){
-    createFirstEnemyHealth(obj, i)
-  } else if( i >= 5 && i <= 9) {
-    createSecondEnemyHealth(obj, i)
-  } else{
-    createThirdEnemyHealth(obj, i)
-  }
+      createFirstEnemyHealth(obj, i)
+    } else if( i >= 5 && i <= 9) {
+      createSecondEnemyHealth(obj, i)
+    } else{
+      createThirdEnemyHealth(obj, i)
+    }
 
     document.body.append(obj.e)
     obj.name = 'enemy-' + i;
@@ -121,6 +120,21 @@ for(let i = 0; i < 11; i++) {
     obj.y = Math.floor(Math.random()*(innerHeight-200)+50);
     obj.velocity = -2;
     obj.element = document.querySelector('#enemy' + i);
+
+    const enemyRocketImg = document.createElement('img');
+    enemyRocketImg.className = 'enemyRocket';
+    enemyRocketImg.src = 'img/Rocket.gif';
+    obj.isRocketLaunchenemy = false;
+    document.body.append(enemyRocketImg);
+    // rocket for Enemies
+    obj.rocket = {
+      x: obj.x,
+      y: obj.y,
+      vx: 0,
+      vy: 0,
+      element: enemyRocketImg,
+    }
+
     enemies.push(obj)
   }
 }

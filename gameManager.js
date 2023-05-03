@@ -114,6 +114,7 @@ function fireRocket() {
   }
 }
 
+
 function preRocket() {
   rocket.element.src = "img/preRocket.gif";
 }

@@ -92,6 +92,12 @@ position: absolute;
     width: 120px;
 }
 
+.enemyRocket {
+    position: absolute;
+    width: 120px;
+    transform: rotate(180deg);
+}
+
 #game-background {
     position: fixed;
     right: 0;
