@@ -3,6 +3,7 @@ import { rocket } from './rocket.js';
 import { enemyDies, gatling } from "./gatling.js";
 import { airfighter } from "./airfighter.js";
 import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
+import { acceleration } from './gameManager.js';
 
 export const gameState = {
   isGamePaused : false,
@@ -56,19 +57,19 @@ export function Step () {
   renderRocket();
   renderShip();
 
-  if (airfighter.isShipMovingUp) {
-    moveShipUp();
-  }
-  if (airfighter.isShipMovingDown) {
-    moveShipDown();
-  }
-  if (airfighter.isShipMovingLeft) {
-    moveShipLeft();
-  }
-  if (airfighter.isShipMovingRight) {
-    moveShipRight();
-  }
-
+    if (airfighter.isShipMovingUp) {
+      moveShipUp();
+    }
+    if (airfighter.isShipMovingDown) {
+      moveShipDown();
+    }
+    if (airfighter.isShipMovingLeft) {
+      moveShipLeft();
+    }
+    if (airfighter.isShipMovingRight) {
+      moveShipRight();
+    }
+  
   const lastEnemy = enemies[enemies.length-1]
   const vuletivZaRamku = lastEnemy.x < 0 - lastEnemy.width
   if (vuletivZaRamku) {
@@ -104,17 +105,33 @@ function renderRocket() {
 }
   
 function renderShip() {
-    airfighter.element.style.left = airfighter.x;
-    airfighter.element.style.top = airfighter.y;
-    airfighter.health.element.style.left = airfighter.x;
-    airfighter.health.element.style.top = airfighter.y;
-    airfighter.health.element.style.width = airfighter.width;
-    airfighter.health.element.style.height = airfighter.height*0.1;
-    airfighter.healthtext.element.value = airfighter.health.element.value / airfighter.health.element.max;
-    airfighter.healthtext.element.innerHTML = `${airfighter.health.element.value} / ${airfighter.health.element.max} HP`;
-    airfighter.healthtext.element.style.left = airfighter.x;
-    airfighter.healthtext.element.style.top = airfighter.y - 35;
-    airfighter.healthtext.element.style.width = airfighter.width;
+  airfighter.element.style.left = airfighter.x;
+  airfighter.element.style.top = airfighter.y;
+  airfighter.health.element.style.left = airfighter.x;
+  airfighter.health.element.style.top = airfighter.y;
+  airfighter.health.element.style.width = airfighter.width;
+  airfighter.health.element.style.height = airfighter.height*0.1;
+  airfighter.healthtext.element.value = airfighter.health.element.value / airfighter.health.element.max;
+  airfighter.healthtext.element.innerHTML = `${airfighter.health.element.value} / ${airfighter.health.element.max} HP`;
+  airfighter.healthtext.element.style.left = airfighter.x;
+  airfighter.healthtext.element.style.top = airfighter.y - 35;
+  airfighter.healthtext.element.style.width = airfighter.width;
+
+  if (airfighter.vx > 0 && airfighter.isShipMovingRight == false) {
+    airfighter.x += airfighter.vx;
+    airfighter.vx -= acceleration / 4;
+    if (rocket.velocity < 7) {
+      rocket.x += airfighter.vx;
+    }
+  }  
+
+  if (airfighter.vx < 0 && airfighter.isShipMovingLeft == false) {
+    airfighter.x += airfighter.vx;
+    airfighter.vx += acceleration / 8;
+    if (rocket.velocity < 7) {
+      rocket.x += airfighter.vx;
+    }
+  }
 }
 
 function moveRocket() {
@@ -145,18 +162,24 @@ function moveShipDown() {
 
 function moveShipLeft() {
   if (airfighter.x > 0) {
-    airfighter.x -= 3;
+    airfighter.x += airfighter.vx;
+    if (airfighter.vx > -5) {
+      airfighter.vx -= acceleration / 2;
+    }
     if (rocket.velocity < 7) {
-      rocket.x -= 3;
+      rocket.x += airfighter.vx;
     }
   }
 }
   
 function moveShipRight() {
   if (airfighter.x + airfighter.width < screen.width) {
-    airfighter.x += 10;
+    airfighter.x += airfighter.vx;
+    if (airfighter.vx <= 10) {
+      airfighter.vx += acceleration;
+    }
     if (rocket.velocity < 7) {
-      rocket.x += 10;
+      rocket.x += airfighter.vx;
     }
   }
 }
