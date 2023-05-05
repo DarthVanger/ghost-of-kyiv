@@ -7,7 +7,6 @@ import { soundRocketShot } from "./music.js";
 import { Step, gameState } from './step.js';
 
 const fps = 60;
-export const acceleration = 30 / fps;
 
 export function startGame() {
     initKeybordMovement();
