@@ -4,7 +4,8 @@ import { enemyDies, gatling } from "./gatling.js";
 import { airfighter } from "./airfighter.js";
 import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
 
-const acceleration = 30 / 60;
+export const fps = 60;
+const acceleration = 30 / fps;
 
 export const gameState = {
   isGamePaused : false,
@@ -58,18 +59,18 @@ export function Step () {
   renderRocket();
   renderShip();
 
-    if (airfighter.isShipMovingUp) {
-      moveShipUp();
-    }
-    if (airfighter.isShipMovingDown) {
-      moveShipDown();
-    }
-    if (airfighter.isShipMovingLeft) {
-      moveShipLeft();
-    }
-    if (airfighter.isShipMovingRight) {
-      moveShipRight();
-    }
+  if (airfighter.isShipMovingUp) {
+    moveShipUp();
+  }
+  if (airfighter.isShipMovingDown) {
+    moveShipDown();
+  }
+  if (airfighter.isShipMovingLeft) {
+    moveShipLeft();
+  }
+  if (airfighter.isShipMovingRight) {
+    moveShipRight();
+  }
   
   const lastEnemy = enemies[enemies.length-1]
   const vuletivZaRamku = lastEnemy.x < 0 - lastEnemy.width
