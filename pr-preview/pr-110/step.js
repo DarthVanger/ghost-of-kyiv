@@ -3,7 +3,8 @@ import { rocket } from './rocket.js';
 import { enemyDies, gatling } from "./gatling.js";
 import { airfighter } from "./airfighter.js";
 import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
-import { acceleration } from './gameManager.js';
+
+const acceleration = 30 / 60;
 
 export const gameState = {
   isGamePaused : false,
