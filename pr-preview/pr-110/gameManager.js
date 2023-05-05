@@ -4,9 +4,7 @@ import { addGatling } from "./gatling.js";
 import { airfighter } from "./airfighter.js";
 import { enemies } from './enemy.js';
 import { soundRocketShot } from "./music.js";
-import { Step, gameState } from './step.js';
-
-const fps = 60;
+import { Step, gameState, fps } from './step.js';
 
 export function startGame() {
     initKeybordMovement();
