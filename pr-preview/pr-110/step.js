@@ -5,7 +5,7 @@ import { airfighter } from "./airfighter.js";
 import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
 
 export const fps = 60;
-const acceleration = 30 / fps;
+const acceleration = 60 / fps;
 
 export const gameState = {
   isGamePaused : false,
@@ -32,7 +32,7 @@ export function Step () {
       explosion.style.left = enemy.x + enemy.width/2 - explosion.width/2;
       explosion.style.top = enemy.y + enemy.height/2 - explosion.height/2;
       enemy.isAlive = false;
-      enemy.x -= enemyDies;
+      enemy.x = enemyDies;
       soundEnemyDieExplosion.play();
       setTimeout(() => {
         explosion.remove()
