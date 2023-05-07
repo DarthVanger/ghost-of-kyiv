@@ -3,7 +3,7 @@ import { explosion } from "./enemy.js";
 
 import {soundEnemyDieExplosion, soundGatling} from "./music.js";
 
-export const enemyDies = 9999;
+export const enemyDies = -9999;
 
 export let gatling = {
   velocity: -2,
