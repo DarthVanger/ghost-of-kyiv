@@ -24,6 +24,7 @@ concurrency: preview-${{ github.ref }}
 # To deploy website preview to Github Pages for each Pull Request
 jobs:
   deploy-preview:
+    permissions: write-all
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
