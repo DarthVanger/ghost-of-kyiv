@@ -5,7 +5,7 @@ import { airfighter } from "./airfighter.js";
 import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
 
 export const fps = 60;
-const acceleration = 30 / fps;
+const acceleration = 60 / fps;
 
 export const gameState = {
   isGamePaused : false,
