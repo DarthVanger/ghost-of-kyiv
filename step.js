@@ -1,7 +1,7 @@
-import { enemies, explosion } from './enemy.js';
-import { rocket } from './rocket.js';
+import { enemies, explosion, renderEnemy } from './enemy.js';
+import { rocket, renderRocket, moveRocket } from './rocket.js';
 import { enemyDies, gatling } from "./gatling.js";
-import { airfighter } from "./airfighter.js";
+import { airfighter, renderShip } from "./airfighter.js";
 import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
 
 export const gameState = {
@@ -82,45 +82,9 @@ export function Step () {
   }
 }
 
-function renderEnemy (enemy) {
-  enemy.enemyHealth.element.style.left = enemy.x;
-  enemy.enemyHealth.element.style.top = enemy.y - 20;
-  enemy.enemyHealth.element.style.width = enemy.width;
-  enemy.enemyHealth.element.style.height = enemy.height*0.1;
-  enemy.enemyHealthText.element.value = enemy.enemyHealth.element.value / enemy.enemyHealth.element.max
-  enemy.enemyHealthText.element.innerHTML = `${enemy.enemyHealth.element.value} / ${enemy.enemyHealth.element.max} HP`;
-  enemy.enemyHealthText.element.style.left = enemy.x;
-  enemy.enemyHealthText.element.style.top = enemy.y - 35;
-  enemy.enemyHealthText.element.style.width = enemy.width;
-  enemy.element.style.left = enemy.x;
-  enemy.element.style.top = enemy.y;
-  enemy.element.style.width = enemy.width;
-  enemy.element.style.height = enemy.height;
-}
-  
-function renderRocket() {
-    rocket.element.style.left = rocket.x;
-    rocket.element.style.top = rocket.y;
-}
-  
-function renderShip() {
-    airfighter.element.style.left = airfighter.x;
-    airfighter.element.style.top = airfighter.y;
-    airfighter.health.element.style.left = airfighter.x;
-    airfighter.health.element.style.top = airfighter.y;
-    airfighter.health.element.style.width = airfighter.width;
-    airfighter.health.element.style.height = airfighter.height*0.1;
-    airfighter.healthtext.element.value = airfighter.health.element.value / airfighter.health.element.max;
-    airfighter.healthtext.element.innerHTML = `${airfighter.health.element.value} / ${airfighter.health.element.max} HP`;
-    airfighter.healthtext.element.style.left = airfighter.x;
-    airfighter.healthtext.element.style.top = airfighter.y - 35;
-    airfighter.healthtext.element.style.width = airfighter.width;
-}
 
-function moveRocket() {
-    rocket.x += rocket.velocity;
-}
-  
+
+
 function moveEnemy(enemy) {
     return (enemy.x += enemy.velocity);
 }
