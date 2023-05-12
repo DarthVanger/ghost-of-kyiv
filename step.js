@@ -163,18 +163,20 @@ function moveShipDown() {
 }
 
 function accelerationBack() {
+  const maxBackSpeed = airfighter.vx < -5;
   if (airfighter.x > 0) {
     airfighter.x += airfighter.vx;
-    if (airfighter.vx > -5) {
+    if (!maxBackSpeed) {
       airfighter.vx -= acceleration / 2;
     }
   }
 }
 
 function accelerationForward() {
+  const maxForwardSpeed = airfighter.vx >= 10;
   if (airfighter.x + airfighter.width < screen.width) {
     airfighter.x += airfighter.vx;
-    if (airfighter.vx <= 10) {
+    if (!maxForwardSpeed) {
       airfighter.vx += acceleration;
     }
   }
