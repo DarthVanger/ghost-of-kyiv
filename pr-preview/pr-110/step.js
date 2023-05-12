@@ -107,6 +107,8 @@ function renderRocket() {
 }
   
 function renderShip() {
+  const afterForardDesccelerationCondition = airfighter.vx > 0 && airfighter.isShipMovingRight == false;
+  const afterBackDesccelerationCondition = airfighter.vx < 0 && airfighter.isShipMovingLeft == false;
   airfighter.element.style.left = airfighter.x;
   airfighter.element.style.top = airfighter.y;
   airfighter.health.element.style.left = airfighter.x;
@@ -118,18 +120,16 @@ function renderShip() {
   airfighter.healthtext.element.style.left = airfighter.x;
   airfighter.healthtext.element.style.top = airfighter.y - 35;
   airfighter.healthtext.element.style.width = airfighter.width;
-
-  if (airfighter.vx > 0 && airfighter.isShipMovingRight == false) {
-    airfighter.x += airfighter.vx;
-    airfighter.vx -= acceleration / 4;
+  
+  if (afterForardDesccelerationCondition) {
+    afterForardDescceleration();
     if (rocket.velocity < 7) {
       rocket.x += airfighter.vx;
     }
   }  
 
-  if (airfighter.vx < 0 && airfighter.isShipMovingLeft == false) {
-    airfighter.x += airfighter.vx;
-    airfighter.vx += acceleration / 8;
+  if (afterBackDesccelerationCondition) {
+    afterBackDescceleration();
     if (rocket.velocity < 7) {
       rocket.x += airfighter.vx;
     }
@@ -162,12 +162,37 @@ function moveShipDown() {
   } 
 }
 
-function moveShipLeft() {
+function accelerationBack() {
   if (airfighter.x > 0) {
     airfighter.x += airfighter.vx;
     if (airfighter.vx > -5) {
       airfighter.vx -= acceleration / 2;
     }
+  }
+}
+
+function accelerationForward() {
+  if (airfighter.x + airfighter.width < screen.width) {
+    airfighter.x += airfighter.vx;
+    if (airfighter.vx <= 10) {
+      airfighter.vx += acceleration;
+    }
+  }
+}
+
+function afterForardDescceleration() {
+  airfighter.x += airfighter.vx;
+  airfighter.vx -= acceleration / 4;
+}
+
+function afterBackDescceleration() {
+  airfighter.x += airfighter.vx;
+  airfighter.vx += acceleration / 8;
+}
+
+function moveShipLeft() {
+  if (airfighter.x > 0) {
+    accelerationBack();
     if (rocket.velocity < 7) {
       rocket.x += airfighter.vx;
     }
@@ -175,15 +200,11 @@ function moveShipLeft() {
 }
   
 function moveShipRight() {
-  if (airfighter.x + airfighter.width < screen.width) {
-    airfighter.x += airfighter.vx;
-    if (airfighter.vx <= 10) {
-      airfighter.vx += acceleration;
-    }
-    if (rocket.velocity < 7) {
-      rocket.x += airfighter.vx;
-    }
+  accelerationForward();
+  if (rocket.velocity < 7) {
+    rocket.x += airfighter.vx;
   }
+
 }
   
 function moveShipUp() {
