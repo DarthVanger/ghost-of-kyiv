@@ -26,9 +26,6 @@ function createHealth(enemy, i, maxHealth) {
   enemy.enemyHealthText.element.id = 'healthBar200text-' + i;
   enemy.enemyHealthText.element.className = 'healthBar200text';
   document.body.append(enemy.enemyHealthText.element);
-
-  
-  
 }
 
 function createEnemy(enemy, src, width, height, i, maxHealth) {
@@ -57,16 +54,19 @@ function createEnemies() {
     enemy.isAlive = true;
     enemy.x = 0;
 
-    if(i < 1) {
-      enemy.x = Math.floor(Math.random()*400)+400;
-      } else {
-      enemy.x = Math.floor(Math.random()*400)+300+(enemies[i-1].x);
-    }
-
+    enemy.x = getRandomEnemyX(i)
     enemy.y = Math.floor(Math.random()*(innerHeight-200)+50);
     enemy.velocity = -2;
   
     enemies.push(enemy)
+  }
+}
+
+function getRandomEnemyX (enemyIndex) {
+  if(enemyIndex < 1) {
+    return Math.floor(Math.random()*400)+400;
+    } else {
+    return Math.floor(Math.random()*400)+300+(enemies[enemyIndex-1].x);
   }
 }
 
