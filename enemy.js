@@ -30,9 +30,12 @@ function createHealth(enemy, i, maxHealth) {
 
 function createEnemy(enemy, src, width, height, i, maxHealth) {
   enemy.element.src = src;
-    enemy.width = width;
-    enemy.height = height;
-    createHealth(enemy, i, maxHealth)
+  enemy.x = getRandomEnemyX(i)
+  enemy.y = Math.floor(Math.random()*(innerHeight-200)+50);
+  enemy.width = width;
+  enemy.height = height;
+  enemy.velocity = -2;
+  createHealth(enemy, i, maxHealth)
 }
 
 function createEnemies() {
@@ -50,17 +53,13 @@ function createEnemies() {
     }
     
     document.body.append(enemy.element)
-    enemy.name = 'enemy-' + i;
     enemy.isAlive = true;
-    enemy.x = 0;
 
-    enemy.x = getRandomEnemyX(i)
-    enemy.y = Math.floor(Math.random()*(innerHeight-200)+50);
-    enemy.velocity = -2;
-  
     enemies.push(enemy)
   }
 }
+
+
 
 function getRandomEnemyX (enemyIndex) {
   if(enemyIndex < 1) {
