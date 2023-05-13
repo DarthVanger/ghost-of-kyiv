@@ -6,26 +6,6 @@ explosion.src = './img/explosion.gif';
 explosion.width = 120;
 explosion.height = 130;
 
-function createFirstEnemy(enemy, i) {
-  enemy.element.src = 'img/su-3.png';
-  enemy.width = 250;
-  enemy.height = 80;
-
-}
-
-function createSecondEnemy(enemy, i){
-  enemy.element.src = 'img/su-27.png';
-  enemy.width = 270;
-  enemy.height =  100;
-
-}
-
-function createThirdEnemy(enemy, i) {
-  enemy.element.src = 'img/z-10.png';
-    enemy.width = 330;
-    enemy.height = 200;
-}
-
 function createHealth(enemy, i, maxHealth) {
   enemy.enemyHealth = {};
   enemy.enemyHealth.velocity = -2;
@@ -51,6 +31,12 @@ function createHealth(enemy, i, maxHealth) {
   enemy.enemyHealthText.element = document.querySelector('#healthBar200text-' + i)
 }
 
+function createEnemy(enemy, src, width, height) {
+  enemy.element.src = src;
+    enemy.width = width;
+    enemy.height = height;
+}
+
 function createEnemies() {
   for(let i = 0; i < 11; i++) {  
     let enemy = {};
@@ -58,13 +44,13 @@ function createEnemies() {
     enemy.element.id = 'enemy' + i;
 
     if(i < 5){
-      createFirstEnemy(enemy, i)
+      createEnemy(enemy,'img/su-3.png', 250, 80)
       createHealth(enemy, i, 50)
     } else if( i >= 5 && i <= 9) {
-      createSecondEnemy(enemy, i)
+      createEnemy(enemy, 'img/su-27.png', 270, 100)
       createHealth(enemy, i, 100)
     } else{
-      createThirdEnemy(enemy, i)
+      createEnemy(enemy,'img/z-10.png', 330, 200)
       createHealth(enemy, i, 200)
     }
     
