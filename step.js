@@ -4,6 +4,9 @@ import { enemyDies, gatling } from "./gatling.js";
 import { airfighter } from "./airfighter.js";
 import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
 
+export const fps = 60;
+const acceleration = 60 / fps;
+
 export const gameState = {
   isGamePaused : false,
   gameIntervalId : undefined,
@@ -68,7 +71,7 @@ export function Step () {
   if (airfighter.isShipMovingRight) {
     moveShipRight();
   }
-
+  
   const lastEnemy = enemies[enemies.length-1]
   const vuletivZaRamku = lastEnemy.x < 0 - lastEnemy.width
   if (vuletivZaRamku) {
@@ -104,17 +107,33 @@ function renderRocket() {
 }
   
 function renderShip() {
-    airfighter.element.style.left = airfighter.x;
-    airfighter.element.style.top = airfighter.y;
-    airfighter.health.element.style.left = airfighter.x;
-    airfighter.health.element.style.top = airfighter.y;
-    airfighter.health.element.style.width = airfighter.width;
-    airfighter.health.element.style.height = airfighter.height*0.1;
-    airfighter.healthtext.element.value = airfighter.health.element.value / airfighter.health.element.max;
-    airfighter.healthtext.element.innerHTML = `${airfighter.health.element.value} / ${airfighter.health.element.max} HP`;
-    airfighter.healthtext.element.style.left = airfighter.x;
-    airfighter.healthtext.element.style.top = airfighter.y - 35;
-    airfighter.healthtext.element.style.width = airfighter.width;
+  const afterForardDesccelerationCondition = airfighter.vx > 0 && airfighter.isShipMovingRight == false;
+  const afterBackDesccelerationCondition = airfighter.vx < 0 && airfighter.isShipMovingLeft == false;
+  airfighter.element.style.left = airfighter.x;
+  airfighter.element.style.top = airfighter.y;
+  airfighter.health.element.style.left = airfighter.x;
+  airfighter.health.element.style.top = airfighter.y;
+  airfighter.health.element.style.width = airfighter.width;
+  airfighter.health.element.style.height = airfighter.height*0.1;
+  airfighter.healthtext.element.value = airfighter.health.element.value / airfighter.health.element.max;
+  airfighter.healthtext.element.innerHTML = `${airfighter.health.element.value} / ${airfighter.health.element.max} HP`;
+  airfighter.healthtext.element.style.left = airfighter.x;
+  airfighter.healthtext.element.style.top = airfighter.y - 35;
+  airfighter.healthtext.element.style.width = airfighter.width;
+  
+  if (afterForardDesccelerationCondition) {
+    afterForardDescceleration();
+    if (rocket.velocity < 7) {
+      rocket.x += airfighter.vx;
+    }
+  }  
+
+  if (afterBackDesccelerationCondition) {
+    afterBackDescceleration();
+    if (rocket.velocity < 7) {
+      rocket.x += airfighter.vx;
+    }
+  }
 }
 
 function moveRocket() {
@@ -143,22 +162,51 @@ function moveShipDown() {
   } 
 }
 
+function accelerationBack() {
+  const maxBackSpeed = airfighter.vx < -5;
+  if (airfighter.x > 0) {
+    airfighter.x += airfighter.vx;
+    if (!maxBackSpeed) {
+      airfighter.vx -= acceleration / 2;
+    }
+  }
+}
+
+function accelerationForward() {
+  const maxForwardSpeed = airfighter.vx >= 10;
+  if (airfighter.x + airfighter.width < screen.width) {
+    airfighter.x += airfighter.vx;
+    if (!maxForwardSpeed) {
+      airfighter.vx += acceleration;
+    }
+  }
+}
+
+function afterForardDescceleration() {
+  airfighter.x += airfighter.vx;
+  airfighter.vx -= acceleration / 4;
+}
+
+function afterBackDescceleration() {
+  airfighter.x += airfighter.vx;
+  airfighter.vx += acceleration / 8;
+}
+
 function moveShipLeft() {
   if (airfighter.x > 0) {
-    airfighter.x -= 3;
+    accelerationBack();
     if (rocket.velocity < 7) {
-      rocket.x -= 3;
+      rocket.x += airfighter.vx;
     }
   }
 }
   
 function moveShipRight() {
-  if (airfighter.x + airfighter.width < screen.width) {
-    airfighter.x += 10;
-    if (rocket.velocity < 7) {
-      rocket.x += 10;
-    }
+  accelerationForward();
+  if (rocket.velocity < 7) {
+    rocket.x += airfighter.vx;
   }
+
 }
   
 function moveShipUp() {
