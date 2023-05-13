@@ -28,33 +28,33 @@ function createHealth(enemy, i, maxHealth) {
   document.body.append(enemy.enemyHealthText.element);
 }
 
-function createEnemy(enemy, src, width, height, i, maxHealth) {
+function createEnemy(src, width, height, i, maxHealth) {
+  let enemy = {};
+  enemy.element = document.createElement('img')
+  enemy.element.id = 'enemy' + i;
   enemy.element.src = src;
   enemy.x = getRandomEnemyX(i)
   enemy.y = Math.floor(Math.random()*(innerHeight-200)+50);
   enemy.width = width;
   enemy.height = height;
   enemy.velocity = -2;
+  enemy.isAlive = true;
   createHealth(enemy, i, maxHealth)
+  return enemy
 }
 
 function createEnemies() {
-  for(let i = 0; i < 11; i++) {  
-    let enemy = {};
-    enemy.element = document.createElement('img')
-    enemy.element.id = 'enemy' + i;
-
+  for(let i = 0; i < 11; i++) {
+    let enemy;  
     if(i < 5){
-      createEnemy(enemy,'img/su-3.png', 250, 80, i, 50)
+      enemy = createEnemy('img/su-3.png', 250, 80, i, 50)
     } else if( i >= 5 && i <= 9) {
-      createEnemy(enemy, 'img/su-27.png', 270, 100, i, 100)
+      enemy = createEnemy( 'img/su-27.png', 270, 100, i, 100)
     } else{
-      createEnemy(enemy,'img/z-10.png', 330, 200, i, 200)
+      enemy = createEnemy('img/z-10.png', 330, 200, i, 200)
     }
     
     document.body.append(enemy.element)
-    enemy.isAlive = true;
-
     enemies.push(enemy)
   }
 }
