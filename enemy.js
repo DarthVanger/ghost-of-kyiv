@@ -9,26 +9,26 @@ explosion.height = 130;
 function createHealth(enemy, i, maxHealth) {
   enemy.enemyHealth = {};
   enemy.enemyHealth.velocity = -2;
-  enemy.enemyHealth.elem = document.createElement('meter')
-  enemy.enemyHealth.elem.setAttribute('min', 0)
-  enemy.enemyHealth.elem.setAttribute('low', maxHealth/3)
-  enemy.enemyHealth.elem.setAttribute('high', maxHealth/3*2)
-  enemy.enemyHealth.elem.setAttribute('optimum', maxHealth)
-  enemy.enemyHealth.elem.setAttribute('max', maxHealth)
-  enemy.enemyHealth.elem.setAttribute('value', maxHealth)
-  enemy.enemyHealth.elem.id = 'healthBar200-' + i;
-  enemy.enemyHealth.elem.className = 'healthBar200';
-  document.body.append(enemy.enemyHealth.elem);
+  enemy.enemyHealth.element = document.createElement('meter')
+  enemy.enemyHealth.element.setAttribute('min', 0)
+  enemy.enemyHealth.element.setAttribute('low', maxHealth/3)
+  enemy.enemyHealth.element.setAttribute('high', maxHealth/3*2)
+  enemy.enemyHealth.element.setAttribute('optimum', maxHealth)
+  enemy.enemyHealth.element.setAttribute('max', maxHealth)
+  enemy.enemyHealth.element.setAttribute('value', maxHealth)
+  enemy.enemyHealth.element.id = 'healthBar200-' + i;
+  enemy.enemyHealth.element.className = 'healthBar200';
+  document.body.append(enemy.enemyHealth.element);
   
   enemy.enemyHealthText = {};
   enemy.enemyHealthText.velocity = -2;
-  enemy.enemyHealthText.elem = document.createElement('div')
-  enemy.enemyHealthText.elem.id = 'healthBar200text-' + i;
-  enemy.enemyHealthText.elem.className = 'healthBar200text';
-  document.body.append(enemy.enemyHealthText.elem);
+  enemy.enemyHealthText.element = document.createElement('div')
+  enemy.enemyHealthText.element.id = 'healthBar200text-' + i;
+  enemy.enemyHealthText.element.className = 'healthBar200text';
+  document.body.append(enemy.enemyHealthText.element);
 
-  enemy.enemyHealth.element = document.querySelector('#healthBar200-' + i);
-  enemy.enemyHealthText.element = document.querySelector('#healthBar200text-' + i)
+  
+  
 }
 
 function createEnemy(enemy, src, width, height, i, maxHealth) {
