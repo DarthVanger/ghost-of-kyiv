@@ -85,7 +85,7 @@ export function Step () {
 }
 
 function moveEnemy(enemy) {
-    return (enemy.x += enemy.velocity);
+  return (enemy.x += enemy.velocity);
 }
 
 
