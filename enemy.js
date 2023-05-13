@@ -60,11 +60,9 @@ function createEnemies() {
     if(i < 5){
       createFirstEnemy(enemy, i)
       createHealth(enemy, i, 50)
-
     } else if( i >= 5 && i <= 9) {
       createSecondEnemy(enemy, i)
       createHealth(enemy, i, 100)
-
     } else{
       createThirdEnemy(enemy, i)
       createHealth(enemy, i, 200)
@@ -88,13 +86,10 @@ function createEnemies() {
   }
 }
 
-export function renderEnemy (enemy) {
-  renderEnemyHealth(enemy)
-  renderEnemyHealthText(enemy)
-  enemy.element.style.left = enemy.x;
-  enemy.element.style.top = enemy.y;
-  enemy.element.style.width = enemy.width;
-  enemy.element.style.height = enemy.height;
+export function renderEnemy(enemy) {
+  renderEnemyHealth(enemy);
+  renderEnemyHealthText(enemy);
+  renderEnemyImg(enemy);
 }
 
 function renderEnemyHealth(enemy) {
@@ -111,6 +106,13 @@ function renderEnemyHealthText (enemy) {
   enemy.enemyHealthText.element.style.left = enemy.x;
   enemy.enemyHealthText.element.style.top = enemy.y - 35;
   enemy.enemyHealthText.element.style.width = enemy.width;
+}
+
+function renderEnemyImg(enemy) {
+  enemy.element.style.left = enemy.x;
+  enemy.element.style.top = enemy.y;
+  enemy.element.style.width = enemy.width;
+  enemy.element.style.height = enemy.height;
 }
 
 createEnemies()
