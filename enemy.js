@@ -59,8 +59,6 @@ function createEnemies() {
   }
 }
 
-
-
 function getRandomEnemyX (enemyIndex) {
   if(enemyIndex < 1) {
     return Math.floor(Math.random()*400)+400;

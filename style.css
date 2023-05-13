@@ -301,9 +301,7 @@ h1 sub
     left: 0;
     bottom: 0;
     text-align: center;
-    background: black;
     z-index: 2;
-    opacity: 0;
 }
 
 .explosion{
