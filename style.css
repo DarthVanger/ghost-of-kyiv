@@ -303,6 +303,7 @@ h1 sub
     text-align: center;
     background: black;
     z-index: 2;
+    opacity: 0;
 }
 
 .explosion{
