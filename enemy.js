@@ -6,135 +6,90 @@ explosion.src = './img/explosion.gif';
 explosion.width = 120;
 explosion.height = 130;
 
-function createFirstEnemyHealth(obj, i) {
-  obj.e.src = 'img/su-3.png';
-  obj.width = 250;
-  obj.height = 80;
-
-  obj.enemyHealth = {};
-  obj.enemyHealth.velocity = -2;
-  obj.enemyHealth.elem = document.createElement('meter')
-  obj.enemyHealth.elem.setAttribute('min', 0)
-  obj.enemyHealth.elem.setAttribute('low', 20)
-  obj.enemyHealth.elem.setAttribute('high', 35)
-  obj.enemyHealth.elem.setAttribute('optimum', 50)
-  obj.enemyHealth.elem.setAttribute('max', 50)
-  obj.enemyHealth.elem.setAttribute('value', 50)
-  obj.enemyHealth.elem.id = 'healthBar50-' + i;
-  obj.enemyHealth.elem.className = 'healthBar50';
-  document.body.append(obj.enemyHealth.elem);
-
-  obj.enemyHealthText =  {};
-  obj.enemyHealthText.velocity = -2;
-  obj.enemyHealthText.elem = document.createElement('div')
-  obj.enemyHealthText.elem.id = 'healthBar50text-' + i;
-  obj.enemyHealthText.elem.className = 'healthBar50text';
-  document.body.append(obj.enemyHealthText.elem);
-
-  obj.enemyHealth.element = document.querySelector('#healthBar50-' + i);
-  obj.enemyHealthText.element = document.querySelector('#healthBar50text-' + i);
-}
-
-function createSecondEnemyHealth(obj, i){
-  obj.e.src = 'img/su-27.png';
-  obj.width = 270;
-  obj.height =  100;
-
-  obj.enemyHealth = {};
-  obj.enemyHealth.velocity = -2;
-  obj.enemyHealth.elem = document.createElement('meter');
-  obj.enemyHealth.elem.setAttribute('min', 0);
-  obj.enemyHealth.elem.setAttribute('low', 30);
-  obj.enemyHealth.elem.setAttribute('high', 65);
-  obj.enemyHealth.elem.setAttribute('optimum', 100);
-  obj.enemyHealth.elem.setAttribute('max', 100);
-  obj.enemyHealth.elem.setAttribute('value', 100);
-  obj.enemyHealth.elem.id = 'healthBar100-' + i;
-  obj.enemyHealth.elem.className = 'healthBar100';
-  document.body.append(obj.enemyHealth.elem);
-
-  obj.enemyHealthText = {};
-  obj.enemyHealthText.velocity = -2;
-  obj.enemyHealthText.elem = document.createElement('div')
-  obj.enemyHealthText.elem.id = 'healthBar100text-' + i;
-  obj.enemyHealthText.elem.className = 'healthBar100text';
-  document.body.append(obj.enemyHealthText.elem);
+function createHealth(enemy, i, maxHealth) {
+  enemy.enemyHealth = {};
+  enemy.enemyHealth.velocity = -2;
+  enemy.enemyHealth.element = document.createElement('meter')
+  enemy.enemyHealth.element.setAttribute('min', 0)
+  enemy.enemyHealth.element.setAttribute('low', maxHealth/3)
+  enemy.enemyHealth.element.setAttribute('high', maxHealth/3*2)
+  enemy.enemyHealth.element.setAttribute('optimum', maxHealth)
+  enemy.enemyHealth.element.setAttribute('max', maxHealth)
+  enemy.enemyHealth.element.setAttribute('value', maxHealth)
+  enemy.enemyHealth.element.id = 'healthBar200-' + i;
+  enemy.enemyHealth.element.className = 'healthBar200';
+  document.body.append(enemy.enemyHealth.element);
   
-  obj.enemyHealth.element = document.querySelector('#healthBar100-' + i);
-  obj.enemyHealthText.element = document.querySelector('#healthBar100text-' + i);
+  enemy.enemyHealthText = {};
+  enemy.enemyHealthText.velocity = -2;
+  enemy.enemyHealthText.element = document.createElement('div')
+  enemy.enemyHealthText.element.id = 'healthBar200text-' + i;
+  enemy.enemyHealthText.element.className = 'healthBar200text';
+  document.body.append(enemy.enemyHealthText.element);
 }
 
-function createThirdEnemyHealth(obj, i) {
-  obj.e.src = 'img/z-10.png';
-    obj.width = 330;
-    obj.height = 200;
-
-    obj.enemyHealth = {};
-    obj.enemyHealth.velocity = -2;
-    obj.enemyHealth.elem = document.createElement('meter')
-    obj.enemyHealth.elem.setAttribute('min', 0)
-    obj.enemyHealth.elem.setAttribute('low', 70)
-    obj.enemyHealth.elem.setAttribute('high', 140)
-    obj.enemyHealth.elem.setAttribute('optimum', 200)
-    obj.enemyHealth.elem.setAttribute('max', 200)
-    obj.enemyHealth.elem.setAttribute('value', 200)
-    obj.enemyHealth.elem.id = 'healthBar200-' + i;
-    obj.enemyHealth.elem.className = 'healthBar200';
-    document.body.append(obj.enemyHealth.elem);
-    
-    obj.enemyHealthText = {};
-    obj.enemyHealthText.velocity = -2;
-    obj.enemyHealthText.elem = document.createElement('div')
-    obj.enemyHealthText.elem.id = 'healthBar200text-' + i;
-    obj.enemyHealthText.elem.className = 'healthBar200text';
-    document.body.append(obj.enemyHealthText.elem);
-
-    obj.enemyHealth.element = document.querySelector('#healthBar200-' + i);
-    obj.enemyHealthText.element = document.querySelector('#healthBar200text-' + i)
+function createEnemy(src, width, height, i, maxHealth) {
+  let enemy = {};
+  enemy.element = document.createElement('img')
+  enemy.element.id = 'enemy' + i;
+  enemy.element.src = src;
+  enemy.x = getRandomEnemyX(i)
+  enemy.y = Math.floor(Math.random()*(innerHeight-200)+50);
+  enemy.width = width;
+  enemy.height = height;
+  enemy.velocity = -2;
+  enemy.isAlive = true;
+  createHealth(enemy, i, maxHealth)
+  return enemy
 }
 
 function createEnemies() {
-for(let i = 0; i < 11; i++) {  
-    let obj = {};
-    obj.e = document.createElement('img')
-    obj.e.id = 'enemy' + i;
-
+  for(let i = 0; i < 11; i++) {
+    let enemy;  
     if(i < 5){
-    createFirstEnemyHealth(obj, i)
-  } else if( i >= 5 && i <= 9) {
-    createSecondEnemyHealth(obj, i)
-  } else{
-    createThirdEnemyHealth(obj, i)
-  }
-
-    document.body.append(obj.e)
-    obj.name = 'enemy-' + i;
-    obj.isAlive = true;
-    obj.x = 0;
-
-    if(i < 1) {
-      obj.x = Math.floor(Math.random()*400)+400;
-    } else {
-      obj.x = Math.floor(Math.random()*400)+300+(enemies[i-1].x);
+      enemy = createEnemy('img/su-3.png', 250, 80, i, 50)
+    } else if( i >= 5 && i <= 9) {
+      enemy = createEnemy( 'img/su-27.png', 270, 100, i, 100)
+    } else{
+      enemy = createEnemy('img/z-10.png', 330, 200, i, 200)
     }
-
-    obj.y = Math.floor(Math.random()*(innerHeight-200)+50);
-    obj.velocity = -2;
-    obj.element = document.querySelector('#enemy' + i);
-    enemies.push(obj)
+    
+    document.body.append(enemy.element)
+    enemies.push(enemy)
   }
 }
 
-export function renderEnemy (enemy) {
+function getRandomEnemyX (enemyIndex) {
+  if(enemyIndex < 1) {
+    return Math.floor(Math.random()*400)+400;
+    } else {
+    return Math.floor(Math.random()*400)+300+(enemies[enemyIndex-1].x);
+  }
+}
+
+export function renderEnemy(enemy) {
+  renderEnemyHealth(enemy);
+  renderEnemyHealthText(enemy);
+  renderEnemyImg(enemy);
+}
+
+function renderEnemyHealth(enemy) {
   enemy.enemyHealth.element.style.left = enemy.x;
   enemy.enemyHealth.element.style.top = enemy.y - 20;
   enemy.enemyHealth.element.style.width = enemy.width;
   enemy.enemyHealth.element.style.height = enemy.height*0.1;
-  enemy.enemyHealthText.element.value = enemy.enemyHealth.element.value / enemy.enemyHealth.element.max
-  enemy.enemyHealthText.element.innerHTML = `${enemy.enemyHealth.element.value} / ${enemy.enemyHealth.element.max} HP`;
+}
+
+function renderEnemyHealthText (enemy) {
+  const currentHp = enemy.enemyHealth.element.value
+  const maxHp = enemy.enemyHealth.element.max
+  enemy.enemyHealthText.element.innerHTML = `${currentHp} / ${maxHp} HP`;
   enemy.enemyHealthText.element.style.left = enemy.x;
   enemy.enemyHealthText.element.style.top = enemy.y - 35;
   enemy.enemyHealthText.element.style.width = enemy.width;
+}
+
+function renderEnemyImg(enemy) {
   enemy.element.style.left = enemy.x;
   enemy.element.style.top = enemy.y;
   enemy.element.style.width = enemy.width;
