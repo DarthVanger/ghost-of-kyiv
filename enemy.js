@@ -6,122 +6,122 @@ explosion.src = './img/explosion.gif';
 explosion.width = 120;
 explosion.height = 130;
 
-function createFirstEnemyHealth(obj, i) {
-  obj.e.src = 'img/su-3.png';
-  obj.width = 250;
-  obj.height = 80;
+function createFirstEnemyHealth(enemy, i) {
+  enemy.e.src = 'img/su-3.png';
+  enemy.width = 250;
+  enemy.height = 80;
 
-  obj.enemyHealth = {};
-  obj.enemyHealth.velocity = -2;
-  obj.enemyHealth.elem = document.createElement('meter')
-  obj.enemyHealth.elem.setAttribute('min', 0)
-  obj.enemyHealth.elem.setAttribute('low', 20)
-  obj.enemyHealth.elem.setAttribute('high', 35)
-  obj.enemyHealth.elem.setAttribute('optimum', 50)
-  obj.enemyHealth.elem.setAttribute('max', 50)
-  obj.enemyHealth.elem.setAttribute('value', 50)
-  obj.enemyHealth.elem.id = 'healthBar50-' + i;
-  obj.enemyHealth.elem.className = 'healthBar50';
-  document.body.append(obj.enemyHealth.elem);
+  enemy.enemyHealth = {};
+  enemy.enemyHealth.velocity = -2;
+  enemy.enemyHealth.elem = document.createElement('meter')
+  enemy.enemyHealth.elem.setAttribute('min', 0)
+  enemy.enemyHealth.elem.setAttribute('low', 20)
+  enemy.enemyHealth.elem.setAttribute('high', 35)
+  enemy.enemyHealth.elem.setAttribute('optimum', 50)
+  enemy.enemyHealth.elem.setAttribute('max', 50)
+  enemy.enemyHealth.elem.setAttribute('value', 50)
+  enemy.enemyHealth.elem.id = 'healthBar50-' + i;
+  enemy.enemyHealth.elem.className = 'healthBar50';
+  document.body.append(enemy.enemyHealth.elem);
 
-  obj.enemyHealthText =  {};
-  obj.enemyHealthText.velocity = -2;
-  obj.enemyHealthText.elem = document.createElement('div')
-  obj.enemyHealthText.elem.id = 'healthBar50text-' + i;
-  obj.enemyHealthText.elem.className = 'healthBar50text';
-  document.body.append(obj.enemyHealthText.elem);
+  enemy.enemyHealthText =  {};
+  enemy.enemyHealthText.velocity = -2;
+  enemy.enemyHealthText.elem = document.createElement('div')
+  enemy.enemyHealthText.elem.id = 'healthBar50text-' + i;
+  enemy.enemyHealthText.elem.className = 'healthBar50text';
+  document.body.append(enemy.enemyHealthText.elem);
 
-  obj.enemyHealth.element = document.querySelector('#healthBar50-' + i);
-  obj.enemyHealthText.element = document.querySelector('#healthBar50text-' + i);
+  enemy.enemyHealth.element = document.querySelector('#healthBar50-' + i);
+  enemy.enemyHealthText.element = document.querySelector('#healthBar50text-' + i);
 }
 
-function createSecondEnemyHealth(obj, i){
-  obj.e.src = 'img/su-27.png';
-  obj.width = 270;
-  obj.height =  100;
+function createSecondEnemyHealth(enemy, i){
+  enemy.e.src = 'img/su-27.png';
+  enemy.width = 270;
+  enemy.height =  100;
 
-  obj.enemyHealth = {};
-  obj.enemyHealth.velocity = -2;
-  obj.enemyHealth.elem = document.createElement('meter');
-  obj.enemyHealth.elem.setAttribute('min', 0);
-  obj.enemyHealth.elem.setAttribute('low', 30);
-  obj.enemyHealth.elem.setAttribute('high', 65);
-  obj.enemyHealth.elem.setAttribute('optimum', 100);
-  obj.enemyHealth.elem.setAttribute('max', 100);
-  obj.enemyHealth.elem.setAttribute('value', 100);
-  obj.enemyHealth.elem.id = 'healthBar100-' + i;
-  obj.enemyHealth.elem.className = 'healthBar100';
-  document.body.append(obj.enemyHealth.elem);
+  enemy.enemyHealth = {};
+  enemy.enemyHealth.velocity = -2;
+  enemy.enemyHealth.elem = document.createElement('meter');
+  enemy.enemyHealth.elem.setAttribute('min', 0);
+  enemy.enemyHealth.elem.setAttribute('low', 30);
+  enemy.enemyHealth.elem.setAttribute('high', 65);
+  enemy.enemyHealth.elem.setAttribute('optimum', 100);
+  enemy.enemyHealth.elem.setAttribute('max', 100);
+  enemy.enemyHealth.elem.setAttribute('value', 100);
+  enemy.enemyHealth.elem.id = 'healthBar100-' + i;
+  enemy.enemyHealth.elem.className = 'healthBar100';
+  document.body.append(enemy.enemyHealth.elem);
 
-  obj.enemyHealthText = {};
-  obj.enemyHealthText.velocity = -2;
-  obj.enemyHealthText.elem = document.createElement('div')
-  obj.enemyHealthText.elem.id = 'healthBar100text-' + i;
-  obj.enemyHealthText.elem.className = 'healthBar100text';
-  document.body.append(obj.enemyHealthText.elem);
+  enemy.enemyHealthText = {};
+  enemy.enemyHealthText.velocity = -2;
+  enemy.enemyHealthText.elem = document.createElement('div')
+  enemy.enemyHealthText.elem.id = 'healthBar100text-' + i;
+  enemy.enemyHealthText.elem.className = 'healthBar100text';
+  document.body.append(enemy.enemyHealthText.elem);
   
-  obj.enemyHealth.element = document.querySelector('#healthBar100-' + i);
-  obj.enemyHealthText.element = document.querySelector('#healthBar100text-' + i);
+  enemy.enemyHealth.element = document.querySelector('#healthBar100-' + i);
+  enemy.enemyHealthText.element = document.querySelector('#healthBar100text-' + i);
 }
 
-function createThirdEnemyHealth(obj, i) {
-  obj.e.src = 'img/z-10.png';
-    obj.width = 330;
-    obj.height = 200;
+function createThirdEnemyHealth(enemy, i) {
+  enemy.e.src = 'img/z-10.png';
+    enemy.width = 330;
+    enemy.height = 200;
 
-    obj.enemyHealth = {};
-    obj.enemyHealth.velocity = -2;
-    obj.enemyHealth.elem = document.createElement('meter')
-    obj.enemyHealth.elem.setAttribute('min', 0)
-    obj.enemyHealth.elem.setAttribute('low', 70)
-    obj.enemyHealth.elem.setAttribute('high', 140)
-    obj.enemyHealth.elem.setAttribute('optimum', 200)
-    obj.enemyHealth.elem.setAttribute('max', 200)
-    obj.enemyHealth.elem.setAttribute('value', 200)
-    obj.enemyHealth.elem.id = 'healthBar200-' + i;
-    obj.enemyHealth.elem.className = 'healthBar200';
-    document.body.append(obj.enemyHealth.elem);
+    enemy.enemyHealth = {};
+    enemy.enemyHealth.velocity = -2;
+    enemy.enemyHealth.elem = document.createElement('meter')
+    enemy.enemyHealth.elem.setAttribute('min', 0)
+    enemy.enemyHealth.elem.setAttribute('low', 70)
+    enemy.enemyHealth.elem.setAttribute('high', 140)
+    enemy.enemyHealth.elem.setAttribute('optimum', 200)
+    enemy.enemyHealth.elem.setAttribute('max', 200)
+    enemy.enemyHealth.elem.setAttribute('value', 200)
+    enemy.enemyHealth.elem.id = 'healthBar200-' + i;
+    enemy.enemyHealth.elem.className = 'healthBar200';
+    document.body.append(enemy.enemyHealth.elem);
     
-    obj.enemyHealthText = {};
-    obj.enemyHealthText.velocity = -2;
-    obj.enemyHealthText.elem = document.createElement('div')
-    obj.enemyHealthText.elem.id = 'healthBar200text-' + i;
-    obj.enemyHealthText.elem.className = 'healthBar200text';
-    document.body.append(obj.enemyHealthText.elem);
+    enemy.enemyHealthText = {};
+    enemy.enemyHealthText.velocity = -2;
+    enemy.enemyHealthText.elem = document.createElement('div')
+    enemy.enemyHealthText.elem.id = 'healthBar200text-' + i;
+    enemy.enemyHealthText.elem.className = 'healthBar200text';
+    document.body.append(enemy.enemyHealthText.elem);
 
-    obj.enemyHealth.element = document.querySelector('#healthBar200-' + i);
-    obj.enemyHealthText.element = document.querySelector('#healthBar200text-' + i)
+    enemy.enemyHealth.element = document.querySelector('#healthBar200-' + i);
+    enemy.enemyHealthText.element = document.querySelector('#healthBar200text-' + i)
 }
 
 function createEnemies() {
 for(let i = 0; i < 11; i++) {  
-    let obj = {};
-    obj.e = document.createElement('img')
-    obj.e.id = 'enemy' + i;
+    let enemy = {};
+    enemy.e = document.createElement('img')
+    enemy.e.id = 'enemy' + i;
 
     if(i < 5){
-    createFirstEnemyHealth(obj, i)
+    createFirstEnemyHealth(enemy, i)
   } else if( i >= 5 && i <= 9) {
-    createSecondEnemyHealth(obj, i)
+    createSecondEnemyHealth(enemy, i)
   } else{
-    createThirdEnemyHealth(obj, i)
+    createThirdEnemyHealth(enemy, i)
   }
 
-    document.body.append(obj.e)
-    obj.name = 'enemy-' + i;
-    obj.isAlive = true;
-    obj.x = 0;
+    document.body.append(enemy.e)
+    enemy.name = 'enemy-' + i;
+    enemy.isAlive = true;
+    enemy.x = 0;
 
     if(i < 1) {
-      obj.x = Math.floor(Math.random()*400)+400;
+      enemy.x = Math.floor(Math.random()*400)+400;
     } else {
-      obj.x = Math.floor(Math.random()*400)+300+(enemies[i-1].x);
+      enemy.x = Math.floor(Math.random()*400)+300+(enemies[i-1].x);
     }
 
-    obj.y = Math.floor(Math.random()*(innerHeight-200)+50);
-    obj.velocity = -2;
-    obj.element = document.querySelector('#enemy' + i);
-    enemies.push(obj)
+    enemy.y = Math.floor(Math.random()*(innerHeight-200)+50);
+    enemy.velocity = -2;
+    enemy.element = document.querySelector('#enemy' + i);
+    enemies.push(enemy)
   }
 }
 
