@@ -31,10 +31,11 @@ function createHealth(enemy, i, maxHealth) {
   enemy.enemyHealthText.element = document.querySelector('#healthBar200text-' + i)
 }
 
-function createEnemy(enemy, src, width, height) {
+function createEnemy(enemy, src, width, height, i, maxHealth) {
   enemy.element.src = src;
     enemy.width = width;
     enemy.height = height;
+    createHealth(enemy, i, maxHealth)
 }
 
 function createEnemies() {
@@ -44,14 +45,11 @@ function createEnemies() {
     enemy.element.id = 'enemy' + i;
 
     if(i < 5){
-      createEnemy(enemy,'img/su-3.png', 250, 80)
-      createHealth(enemy, i, 50)
+      createEnemy(enemy,'img/su-3.png', 250, 80, i, 50)
     } else if( i >= 5 && i <= 9) {
-      createEnemy(enemy, 'img/su-27.png', 270, 100)
-      createHealth(enemy, i, 100)
+      createEnemy(enemy, 'img/su-27.png', 270, 100, i, 100)
     } else{
-      createEnemy(enemy,'img/z-10.png', 330, 200)
-      createHealth(enemy, i, 200)
+      createEnemy(enemy,'img/z-10.png', 330, 200, i, 200)
     }
     
     document.body.append(enemy.element)
