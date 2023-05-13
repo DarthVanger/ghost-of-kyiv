@@ -125,4 +125,20 @@ for(let i = 0; i < 11; i++) {
   }
 }
 
+export function renderEnemy (enemy) {
+  enemy.enemyHealth.element.style.left = enemy.x;
+  enemy.enemyHealth.element.style.top = enemy.y - 20;
+  enemy.enemyHealth.element.style.width = enemy.width;
+  enemy.enemyHealth.element.style.height = enemy.height*0.1;
+  enemy.enemyHealthText.element.value = enemy.enemyHealth.element.value / enemy.enemyHealth.element.max
+  enemy.enemyHealthText.element.innerHTML = `${enemy.enemyHealth.element.value} / ${enemy.enemyHealth.element.max} HP`;
+  enemy.enemyHealthText.element.style.left = enemy.x;
+  enemy.enemyHealthText.element.style.top = enemy.y - 35;
+  enemy.enemyHealthText.element.style.width = enemy.width;
+  enemy.element.style.left = enemy.x;
+  enemy.element.style.top = enemy.y;
+  enemy.element.style.width = enemy.width;
+  enemy.element.style.height = enemy.height;
+}
+
 createEnemies()
