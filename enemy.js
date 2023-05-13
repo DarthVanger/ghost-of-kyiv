@@ -7,21 +7,21 @@ explosion.width = 120;
 explosion.height = 130;
 
 function createFirstEnemy(enemy, i) {
-  enemy.e.src = 'img/su-3.png';
+  enemy.element.src = 'img/su-3.png';
   enemy.width = 250;
   enemy.height = 80;
 
 }
 
 function createSecondEnemy(enemy, i){
-  enemy.e.src = 'img/su-27.png';
+  enemy.element.src = 'img/su-27.png';
   enemy.width = 270;
   enemy.height =  100;
 
 }
 
 function createThirdEnemy(enemy, i) {
-  enemy.e.src = 'img/z-10.png';
+  enemy.element.src = 'img/z-10.png';
     enemy.width = 330;
     enemy.height = 200;
 }
@@ -54,8 +54,8 @@ function createHealth(enemy, i, maxHealth) {
 function createEnemies() {
   for(let i = 0; i < 11; i++) {  
     let enemy = {};
-    enemy.e = document.createElement('img')
-    enemy.e.id = 'enemy' + i;
+    enemy.element = document.createElement('img')
+    enemy.element.id = 'enemy' + i;
 
     if(i < 5){
       createFirstEnemy(enemy, i)
@@ -68,7 +68,7 @@ function createEnemies() {
       createHealth(enemy, i, 200)
     }
     
-    document.body.append(enemy.e)
+    document.body.append(enemy.element)
     enemy.name = 'enemy-' + i;
     enemy.isAlive = true;
     enemy.x = 0;
@@ -81,7 +81,7 @@ function createEnemies() {
 
     enemy.y = Math.floor(Math.random()*(innerHeight-200)+50);
     enemy.velocity = -2;
-    enemy.element = document.querySelector('#enemy' + i);
+  
     enemies.push(enemy)
   }
 }
