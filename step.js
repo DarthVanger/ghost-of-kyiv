@@ -27,9 +27,9 @@ export function Step () {
   }
 
   function launchEnemyRocket (enemy) {
-    enemy.rocket.vx -= 8;
+    enemy.rocket.vx = -8;
   }
-
+  
   function launchRocketIfOnScreen (enemy) {
     if (enemy.x < window.innerWidth) {
       if (!enemy.isRocketLaunched) {
