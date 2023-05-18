@@ -52,6 +52,13 @@ p {
 position: absolute;
 }
 
+.enemyRocket {
+    position: absolute;
+    width: 120px;
+    height: 12px;
+    transform: rotate(180deg);
+}
+
 #airfighter {
     position: absolute;
     width: 250px;
