@@ -94,7 +94,7 @@ function createThirdEnemyHealth(obj, i) {
 }
 
 function createEnemies() {
-for(let i = 0; i < 11; i++) {  
+  for(let i = 0; i < 11; i++) {
     let obj = {};
     obj.e = document.createElement('img')
     obj.e.id = 'enemy' + i;
@@ -122,6 +122,24 @@ for(let i = 0; i < 11; i++) {
     obj.velocity = -2;
     obj.element = document.querySelector('#enemy' + i);
     enemies.push(obj)
+  
+    const enemyRocketImg = document.createElement('img');
+    enemyRocketImg.className = 'enemyRocket';
+    enemyRocketImg.src = 'img/mrRocket.gif';
+    obj.isRocketLaunched = false;
+
+    document.body.append(enemyRocketImg);
+    // rocket for Enemies
+    obj.rocket = {
+      x: obj.x,
+      y: obj.y,
+      width: 120,
+      height: 12,
+      dmg: 20,
+      vx: 0,
+      vy: 0,
+      element: enemyRocketImg,
+    }
   }
 }
 
