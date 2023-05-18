@@ -53,6 +53,23 @@ function createEnemies() {
     } else{
       enemy = createEnemy('img/z-10.png', 330, 200, i, 200)
     }
+
+    const enemyRocketImg = document.createElement('img');
+    enemyRocketImg.className = 'enemyRocket';
+    enemyRocketImg.src = 'img/mrRocket.gif';
+    enemy.isRocketLaunchenemy = false;
+    document.body.append(enemyRocketImg);
+
+    enemy.rocket = {
+      x: enemy.x,
+      y: enemy.y,
+      width: 120,
+      height: 12,
+      dmg: 20,
+      vx: 0,
+      vy: 0,
+      element: enemyRocketImg,
+    }
     
     document.body.append(enemy.element)
     enemies.push(enemy)

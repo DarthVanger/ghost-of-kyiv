@@ -13,16 +13,42 @@ export const gameState = {
 
 export function Step () {
   enemies.forEach(renderEnemy);
+  enemies.forEach(renderEnemyRocket);
   enemies.forEach(moveEnemy);
+  enemies.forEach(moveEnemyRocket);
   ammoElement.innerHTML = `<img class="ammoImg" src="img/ammo-gatling-img.gif"> ${gatling.ammo} <br> <img class="ammoImg" src="img/ammo-rocket-img.gif"> ${rocket.ammo}`;
   moveRocket();
   enemies.forEach(checkEnemyShipCollision);
   enemies.forEach(collisionSHmolision);
+  enemies.forEach(launchRocketIfOnScreen);
+
+  function moveEnemyRocket(enemy) {
+    enemy.rocket.x += enemy.rocket.vx;
+  }
+
+  function launchEnemyRocket (enemy) {
+    enemy.rocket.vx -= 8;
+  }
+
+  function launchRocketIfOnScreen (enemy) {
+    if (enemy.x < window.innerWidth) {
+      if (!enemy.isRocketLaunched) {
+        launchEnemyRocket(enemy);
+        enemy.isRocketLaunched = true;
+      }
+    }
+  }
 
   function collisionSHmolision (enemy) {
     if (checkEnemyRocketCollision(enemy)) {
       enemy.enemyHealth.element.value -= rocket.dmg;
-      rocket.dmg -= rocket.dmg;
+      rocket.dmg = 0;
+      soundRocketHit.play();
+    }
+
+    if (checkPlayerRocketCollision(enemy)) {
+      airfighter.health.element.value -= enemy.rocket.dmg;
+      enemy.rocket.dmg = 0;
       soundRocketHit.play();
     }
 
@@ -84,7 +110,15 @@ export function Step () {
   }
 }
 
+function renderEnemyRocket(enemy) {
+  enemy.rocket.element.style.left = enemy.rocket.x;
+  enemy.rocket.element.style.top = enemy.rocket.y;
+}
+
 function moveEnemy(enemy) {
+  if (!enemy.isRocketLaunched) {
+    enemy.rocket.x += enemy.velocity;
+  }
   return (enemy.x += enemy.velocity);
 }
 
@@ -102,6 +136,22 @@ function checkEnemyRocketCollision(enemy) {
   }
 }
 
+function checkPlayerRocketCollision(enemy) {
+  if (
+    airfighter.x + airfighter.width > enemy.rocket.x &&
+    airfighter.x < enemy.rocket.x + enemy.rocket.width &&
+    airfighter.y + airfighter.height > enemy.rocket.y &&
+    airfighter.y < enemy.rocket.y + enemy.rocket.height
+    ) {
+      soundRocketShot.pause();
+      soundRocketShot.currentTime = 0;
+      explosionEffect(airfighter);
+      return true;
+  }
+
+  playerDiesIfHpBelowZiro();
+}
+
 function checkEnemyShipCollision(enemy) {
   if (
     airfighter.x + airfighter.width > enemy.x &&
@@ -110,25 +160,33 @@ function checkEnemyShipCollision(enemy) {
     airfighter.y < enemy.y + enemy.height
   ) {
     airfighter.health.element.value -= 35;
-    document.querySelector('#gifContainerExplosion').append(explosion);
-    explosion.style.left = enemy.x + enemy.width/2 - explosion.width/2;
-    explosion.style.top = enemy.y + enemy.height/2 - explosion.height/2;
+    soundEnemyDieExplosion.play();
+    explosionEffect(enemy)
     enemy.x = enemyDies;
+    playerDiesIfHpBelowZiro();
+  }
+}
+
+function explosionEffect (airplane) {
+  document.querySelector('#gifContainerExplosion').append(explosion);
+  explosion.style.left = airplane.x + airplane.width/2 - explosion.width/2;
+  explosion.style.top = airplane.y + airplane.height/2 - explosion.height/2;
+  setTimeout(() => {
+    explosion.remove()
+  },700);
+}
+
+function playerDiesIfHpBelowZiro () {
+  if (airfighter.health.element.value <= 0) {
+    document.querySelector('#gameover-screen').style.display = '';
+    airfighter.x = 0;
+    airfighter.y = 0;
+    soundRocketHit.pause();
     soundEnemyDieExplosion.play();
     setTimeout(() => {
-      explosion.remove()
-    },700)
-    if (airfighter.health.element.value <= 0) {
-      document.querySelector('#gameover-screen').style.display = '';
-      airfighter.x = 0;
-      airfighter.y = 0;
-      soundRocketHit.pause();
-      soundEnemyDieExplosion.play();
-      setTimeout(() => {
-      soundMainTheme.pause();
-      soundGameOver.play();
-      }, 900);
-    }
+    soundMainTheme.pause();
+    soundGameOver.play();
+    }, 900);
   }
 }
 

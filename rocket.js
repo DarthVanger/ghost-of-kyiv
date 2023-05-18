@@ -13,6 +13,7 @@ export function renderRocket() {
   rocket.element.style.top = rocket.y;
 }
 
+
 export function moveRocket() {
   rocket.x += rocket.velocity;
 }
