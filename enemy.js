@@ -57,7 +57,7 @@ function createEnemies() {
     const enemyRocketImg = document.createElement('img');
     enemyRocketImg.className = 'enemyRocket';
     enemyRocketImg.src = 'img/mrRocket.gif';
-    enemy.isRocketLaunchenemy = false;
+    enemy.isRocketLaunched = false;
     document.body.append(enemyRocketImg);
 
     enemy.rocket = {
