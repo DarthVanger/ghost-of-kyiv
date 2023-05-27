@@ -1,3 +1,5 @@
+import { addGatling } from "./gatling.js";
+
 export let enemies = [];
 export let explosion = document.createElement('img')
 explosion.id = 'explosion-' + new Date()
@@ -82,7 +84,7 @@ function createEnemies() {
       vy: 0,
       element: enemyRocketImg,
     }
-    
+    addGatling(enemy)
     document.body.append(enemy.element)
     enemies.push(enemy)
   }

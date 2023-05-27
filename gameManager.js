@@ -1,8 +1,7 @@
 import { mobileControls } from './touch.js';
 import { rocket } from './rocket.js';
-import { addGatling } from "./gatling.js";
 import { airfighter } from "./airfighter.js";
-import { deleteEnemies, enemies } from './enemy.js';
+import { deleteEnemies, enemies, createEnemies } from './enemy.js';
 import { soundRocketShot } from "./music.js";
 import { Step, gameState, fps } from './step.js';
 
@@ -13,7 +12,6 @@ export const levelState = {
 
 export function startGame() {
     initKeybordMovement();
-    enemies.forEach(addGatling);
     startLevel1()
 }
 
@@ -23,6 +21,7 @@ function startLevel1() {
 
 function startLevel2() {
   deleteEnemies();
+  createEnemies()
   gameState.gameIntervalId = setInterval(Step, 1000 / fps);
   document.querySelector('#levelComplete').style.display = 'none'
 
