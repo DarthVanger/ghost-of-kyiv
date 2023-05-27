@@ -1,16 +1,64 @@
 import { mobileControls } from './touch.js';
 import { rocket } from './rocket.js';
-import { addGatling } from "./gatling.js";
 import { airfighter } from "./airfighter.js";
-import { enemies } from './enemy.js';
-import { soundRocketShot } from "./music.js";
+import { deleteEnemies, createEnemies } from './enemy.js';
+import { soundRocketShot, soundMainTheme, soundIntro } from "./music.js";
 import { Step, gameState, fps } from './step.js';
+import { moveAirfighterToInitalPosition } from './airfighter.js';
+
+let isGameStarted = false;
+let introduction = document.querySelector('#introduction');
+introduction.addEventListener('click', introductionSkip);
+
+export const levelState = {
+  isLevelFinished : false,
+  levelNumber : 1,
+}
 
 export function startGame() {
-    initKeybordMovement();
-    enemies.forEach(addGatling);
-    gameState.gameIntervalId = setInterval(Step, 1000 / fps);
+  console.log('startGame');
+  initKeybordMovement();
+  if (levelState.levelNumber == 1) {
+    startLevel1()
+  }
+  if (levelState.levelNumber == 2) {
+    startLevel2()
+  }
 }
+
+function introductionSkip() {
+  console.log('funtion introductionSkip');
+  if (!isGameStarted) {
+    console.log('funtion introductionSkip: Starting Game');
+    startGame();
+    soundMainTheme.play();
+    soundMainTheme.volume = 0.3;
+    introduction.style.display = "none";
+    introduction.style.zIndex = 1;
+    soundIntro.pause();
+    isGameStarted = true;
+  } 
+}
+
+function startLevel1() {
+  console.log('startLevel1');
+  gameState.gameIntervalId = setInterval(Step, 1000 / fps);
+}
+
+function startLevel2() {
+  moveAirfighterToInitalPosition();
+  clearInterval(gameState.gameIntervalId);
+  isGameStarted = false;
+  console.log('startLevel2');
+  levelState.levelNumber = 2;
+  deleteEnemies();
+  createEnemies()
+  gameState.gameIntervalId = setInterval(Step, 1000 / fps);
+  document.querySelector('#levelComplete').style.display = 'none'
+  introduction.style.display = "block";
+}
+
+document.querySelector('#nextlevel').addEventListener('click', startLevel2)
 
 function initKeybordMovement() {
   document.addEventListener("keydown", handleKeyDown);
