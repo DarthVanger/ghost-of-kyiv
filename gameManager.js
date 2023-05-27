@@ -116,9 +116,6 @@ function preRocket() {
   rocket.element.src = "img/preRocket.gif";
 }
   
-export function endGameAction () {
-  document.location.reload();
-}
 
 function gamePauseAction () {
   if (gameState.isGamePaused) {
