@@ -4,6 +4,7 @@ import { airfighter } from "./airfighter.js";
 import { deleteEnemies, createEnemies } from './enemy.js';
 import { soundRocketShot, soundMainTheme, soundIntro } from "./music.js";
 import { Step, gameState, fps } from './step.js';
+import { moveAirfighterToInitalPosition } from './airfighter.js';
 
 let isGameStarted = false;
 let introduction = document.querySelector('#introduction');
@@ -45,6 +46,8 @@ function startLevel1() {
 }
 
 function startLevel2() {
+  moveAirfighterToInitalPosition();
+  clearInterval(gameState.gameIntervalId);
   isGameStarted = false;
   console.log('startLevel2');
   levelState.levelNumber = 2;
