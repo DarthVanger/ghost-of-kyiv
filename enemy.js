@@ -57,7 +57,7 @@ function createEnemy(src, width, height, i, maxHealth) {
   return enemy
 }
 
-function createEnemies() {
+export function createEnemies() {
   for(let i = 0; i < 11; i++) {
     let enemy;  
     if(i < 5){
