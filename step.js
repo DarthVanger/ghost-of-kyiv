@@ -3,7 +3,7 @@ import { rocket, renderRocket, moveRocket } from './rocket.js';
 import { enemyDies, gatling } from "./gatling.js";
 import { airfighter, renderShip, moveShipLeft, moveShipRight, moveShipUp, moveShipDown } from "./airfighter.js";
 import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
-
+import { levelState } from './gameManager.js';
 export const fps = 60;
 
 export const gameState = {
@@ -107,6 +107,7 @@ export function Step () {
     soundMainTheme.currentTime = 0;
     soundLevelComplete.play();
     soundLevelComplete.volume = 0.4;
+    
   }
 }
 

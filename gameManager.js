@@ -6,6 +6,11 @@ import { enemies } from './enemy.js';
 import { soundRocketShot } from "./music.js";
 import { Step, gameState, fps } from './step.js';
 
+export const levelState = {
+  isLevelFinished : false,
+  levelNumber : 1,
+}
+
 export function startGame() {
     initKeybordMovement();
     enemies.forEach(addGatling);
@@ -15,6 +20,13 @@ export function startGame() {
 function startLevel1() {
   gameState.gameIntervalId = setInterval(Step, 1000 / fps);
 }
+
+function startLevel2() {
+  gameState.gameIntervalId = setInterval(Step, 1000 / fps);
+  document.querySelector('#levelComplete').style.display = 'none'
+}
+
+document.querySelector('#nextlevel').addEventListener('click', startLevel2)
 
 function initKeybordMovement() {
   document.addEventListener("keydown", handleKeyDown);
