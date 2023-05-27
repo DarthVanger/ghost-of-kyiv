@@ -9,7 +9,11 @@ import { Step, gameState, fps } from './step.js';
 export function startGame() {
     initKeybordMovement();
     enemies.forEach(addGatling);
-    gameState.gameIntervalId = setInterval(Step, 1000 / fps);
+    startLevel1()
+}
+
+function startLevel1() {
+  gameState.gameIntervalId = setInterval(Step, 1000 / fps);
 }
 
 function initKeybordMovement() {
