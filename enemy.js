@@ -1,3 +1,5 @@
+import { addGatling } from "./gatling.js";
+
 export let enemies = [];
 export let explosion = document.createElement('img')
 explosion.id = 'explosion-' + new Date()
@@ -5,6 +7,18 @@ explosion.className = 'explosion'
 explosion.src = './img/explosion.gif';
 explosion.width = 120;
 explosion.height = 130;
+
+export function deleteEnemies() {
+  enemies.forEach(deleteEnemyImg)
+  enemies = []
+}
+
+function deleteEnemyImg(enemy) {
+  enemy.enemyHealth.element.remove()
+  enemy.enemyHealthText.element.remove()
+  enemy.element.remove()
+  enemy.rocket.element.remove()
+}
 
 function createHealth(enemy, i, maxHealth) {
   enemy.enemyHealth = {};
@@ -43,8 +57,8 @@ function createEnemy(src, width, height, i, maxHealth) {
   return enemy
 }
 
-function createEnemies() {
-  for(let i = 0; i < 11; i++) {
+export function createEnemies() {
+  for(let i = 0; i < 1; i++) {
     let enemy;  
     if(i < 5){
       enemy = createEnemy('img/su-3.png', 250, 80, i, 50)
@@ -70,7 +84,7 @@ function createEnemies() {
       vy: 0,
       element: enemyRocketImg,
     }
-    
+    addGatling(enemy)
     document.body.append(enemy.element)
     enemies.push(enemy)
   }
