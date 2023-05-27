@@ -2,7 +2,7 @@ import { mobileControls } from './touch.js';
 import { rocket } from './rocket.js';
 import { addGatling } from "./gatling.js";
 import { airfighter } from "./airfighter.js";
-import { enemies } from './enemy.js';
+import { deleteEnemies, enemies } from './enemy.js';
 import { soundRocketShot } from "./music.js";
 import { Step, gameState, fps } from './step.js';
 
@@ -22,8 +22,10 @@ function startLevel1() {
 }
 
 function startLevel2() {
+  deleteEnemies();
   gameState.gameIntervalId = setInterval(Step, 1000 / fps);
   document.querySelector('#levelComplete').style.display = 'none'
+
 }
 
 document.querySelector('#nextlevel').addEventListener('click', startLevel2)

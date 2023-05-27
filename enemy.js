@@ -6,6 +6,18 @@ explosion.src = './img/explosion.gif';
 explosion.width = 120;
 explosion.height = 130;
 
+export function deleteEnemies() {
+  enemies.forEach(deleteEnemyImg)
+  enemies = []
+}
+
+function deleteEnemyImg(enemy) {
+  enemy.enemyHealth.element.remove()
+  enemy.enemyHealthText.element.remove()
+  enemy.element.remove()
+  enemy.rocket.element.remove()
+}
+
 function createHealth(enemy, i, maxHealth) {
   enemy.enemyHealth = {};
   enemy.enemyHealth.velocity = -2;
