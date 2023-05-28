@@ -18,9 +18,9 @@ export let bulletArray = []
 function createBullet() {
   const bullet = {}
   bullet.element = document.createElement('img')
-  bullet.element.src = 'img/bullet_h100px.png'
+  bullet.element.src = 'img/Bullet_h100px.gif'
   bullet.element.className = 'bullet'
-  bullet.element.style.width = '20px'
+  bullet.element.style.width = '120px'
   document.body.append(bullet.element)
   bullet.velocity = 12
   bullet.x = airfighter.x + airfighter.width + (Math.random()* 4)
