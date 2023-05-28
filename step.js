@@ -136,12 +136,17 @@ function enemyCollisionWithBullet(enemy) {
 }
 
 function checkBulletCollision(bullet, enemy) {
-  const isCollision = checkCollision(bullet, enemy)
+  const isCollisionWithEnemy = checkCollision(bullet, enemy)
+  const isCollisionWithRocket = checkCollision(bullet, enemy.rocket)
   const isOutOfScreen = bullet.x > window.innerWidth
-  if (isCollision) {
+  if (isCollisionWithEnemy) {
     enemy.enemyHealth.element.value -= 5
   }
-  if (isOutOfScreen || isCollision) {
+  if(isCollisionWithRocket) {
+    enemy.rocket.x = -999
+    enemy.rocket.element.remove()
+  }
+  if (isOutOfScreen || isCollisionWithEnemy || isCollisionWithRocket) {
     removeBullet(bullet)
   }
 }
