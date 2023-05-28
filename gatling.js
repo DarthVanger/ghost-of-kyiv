@@ -1,5 +1,6 @@
 import {airfighter} from "./airfighter.js";
 import { explosion } from "./enemy.js";
+import { enemies } from "./enemy.js";
 
 import {soundEnemyDieExplosion, soundGatling} from "./music.js";
 
@@ -12,26 +13,39 @@ export let gatling = {
   element: document.querySelector("#gatling"),
 };
 
-export function fireGatlingEnemy (event, enemy) {  
-    if (airfighter.x + airfighter.width < event.pageX ) { 
-      enemy.enemyHealth.element.value -= gatling.dmg;
-      gatling.ammo -= 10;
+export let bulletArray = []
+
+function createBullet() {
+  const bullet = {}
+  bullet.element = document.createElement('img')
+  bullet.element.src = 'img/Bullet_h100px.png'
+  bullet.element.className = 'bullet'
+  bullet.element.style.width = '20px'
+  document.body.append(bullet.element)
+  bullet.velocity = 12
+  bullet.x = airfighter.x + airfighter.width + (Math.random()* 4)
+  bullet.y = airfighter.y + airfighter.height/2
+  bullet.margin = Math.random()*(3)-(1.5)
+  gatling.ammo -= 10;
+  bulletArray.push(bullet)
+}
+
+export function removeBullet(bullet) {
+  bullet.element.remove()
+  bulletArray = bulletArray.filter(anotherBullet => anotherBullet !== bullet)
+}
+
+export function fireGatlingEnemy() {
+  if (gatling.ammo > 0) {
+    if (bulletArray.length < 10) {
+      createBullet()
       soundGatling.play();
-      if (enemy.enemyHealth.element.value === 0) {
-        document.querySelector('#gifContainerExplosion').append(explosion);
-        explosion.style.left = enemy.x + enemy.width/2 - explosion.width/2;
-        explosion.style.top = enemy.y + enemy.height/2 - explosion.height/2;
-        soundEnemyDieExplosion.play();
-        setTimeout(() => {
-          explosion.remove()
-        },700)
-      }
     }
   }
+}
 
-export function addGatling (enemy) {
-  function handleEnemyClick (event) {
-    fireGatlingEnemy(event, enemy);
-  }
-  enemy.element.addEventListener('click', handleEnemyClick);
+export function addGatling(enemy) {
+  document.querySelector('#game-background').addEventListener('click', fireGatlingEnemy);
+  enemy.element.addEventListener('click', fireGatlingEnemy);
+  document.querySelector('#airfighter').addEventListener('click', fireGatlingEnemy);
 }

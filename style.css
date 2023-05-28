@@ -316,3 +316,7 @@ h1 sub
     height: 130px;
     width: 120px;
 }
+
+.bullet{
+    position: absolute;
+}

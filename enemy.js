@@ -46,6 +46,7 @@ function createEnemy(src, width, height, i, maxHealth) {
   let enemy = {};
   enemy.element = document.createElement('img')
   enemy.element.id = 'enemy' + i;
+  enemy.element.className = 'enemy'
   enemy.element.src = src;
   enemy.x = getRandomEnemyX(i)
   enemy.y = Math.floor(Math.random()*(innerHeight-200)+50);
@@ -58,7 +59,7 @@ function createEnemy(src, width, height, i, maxHealth) {
 }
 
 export function createEnemies() {
-  for(let i = 0; i < 1; i++) {
+  for(let i = 0; i < 11; i++) {
     let enemy;  
     if(i < 5){
       enemy = createEnemy('img/su-3.png', 250, 80, i, 50)
