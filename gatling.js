@@ -18,9 +18,9 @@ export let bulletArray = []
 function createBullet() {
   const bullet = {}
   bullet.element = document.createElement('img')
-  bullet.element.src = 'img/Bullet_h100px.gif'
+  bullet.element.src = 'img/Bullet_h100px.png'
   bullet.element.className = 'bullet'
-  bullet.element.style.width = '120px'
+  bullet.element.style.width = '20px'
   document.body.append(bullet.element)
   bullet.velocity = 12
   bullet.x = airfighter.x + airfighter.width + (Math.random()* 4)
@@ -35,7 +35,7 @@ export function removeBullet(bullet) {
   bulletArray = bulletArray.filter(anotherBullet => anotherBullet !== bullet)
 }
 
-export function fireGatlingEnemy(event, enemy) {
+export function fireGatlingEnemy() {
   if (gatling.ammo > 0) {
     if (bulletArray.length < 10) {
       createBullet()
