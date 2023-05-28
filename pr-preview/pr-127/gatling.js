@@ -15,10 +15,8 @@ export let gatling = {
 
 export let bulletArray = []
 
-
-
 function createBullet() {
-  let bullet = {}
+  const bullet = {}
   bullet.element = document.createElement('img')
   bullet.element.src = './img/bullet_h100px.png'
   bullet.element.className = 'bullet'
@@ -34,20 +32,19 @@ function createBullet() {
 
 export function removeBullet(bullet) {
   bullet.element.remove()
-  bulletArray = bulletArray.filter(anothetBullet => anothetBullet !== bullet)
+  bulletArray = bulletArray.filter(anotherBullet => anotherBullet !== bullet)
 }
 
-
-export function fireGatlingEnemy (event, enemy) {
-  if(gatling.ammo > 0) {
-    if(bulletArray.length < 10) {
+export function fireGatlingEnemy(event, enemy) {
+  if (gatling.ammo > 0) {
+    if (bulletArray.length < 10) {
       createBullet()
       soundGatling.play();
     }
   }
 }
 
-export function addGatling (enemy) {
+export function addGatling(enemy) {
   document.querySelector('#game-background').addEventListener('click', fireGatlingEnemy);
   enemy.element.addEventListener('click', fireGatlingEnemy);
   document.querySelector('#airfighter').addEventListener('click', fireGatlingEnemy);
