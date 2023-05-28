@@ -18,7 +18,7 @@ export let bulletArray = []
 function createBullet() {
   const bullet = {}
   bullet.element = document.createElement('img')
-  bullet.element.src = './img/bullet_h100px.png'
+  bullet.element.src = 'img/bullet_h100px.png'
   bullet.element.className = 'bullet'
   bullet.element.style.width = '20px'
   document.body.append(bullet.element)
