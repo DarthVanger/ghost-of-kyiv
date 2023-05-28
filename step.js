@@ -135,28 +135,30 @@ function moveBullet(bullet) {
 
 function enemyCollisionWithBullet(enemy) {
   const filteredBullets = bulletArray.filter((bullet, index) => {
-    if (
-    bullet.x > enemy.x &&
-    bullet.y > enemy.y &&
-    bullet.x < enemy.x + enemy.width &&
-    bullet.y < enemy.y + enemy.height) 
-    {
+    const isCollision = checkCollision(bullet, enemy)
+    const isOutOfScreen = bullet.x > window.innerWidth
+    if (isCollision) {
       enemy.enemyHealth.element.value -= 5
-      bulletArray[index].element.remove()
-      return false
     }
-    if(bullet.x > window.innerWidth) {
+    if(isOutOfScreen || isCollision) {
       bulletArray[index].element.remove()
       return false
     }
     return true
-  }
-  )
+  })
   setBulletArray(filteredBullets)
 }
 
 
 
+function checkCollision(bullet, enemy) {
+  return (
+    bullet.x > enemy.x &&
+    bullet.y > enemy.y &&
+    bullet.x < enemy.x + enemy.width &&
+    bullet.y < enemy.y + enemy.height
+  )
+}
 
 function checkEnemyRocketCollision(enemy) {
   if (
@@ -183,7 +185,6 @@ function checkPlayerRocketCollision(enemy) {
       explosionEffect(airfighter);
       return true;
   }
-
   playerDiesIfHpBelowZiro();
 }
 
