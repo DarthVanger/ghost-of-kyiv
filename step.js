@@ -3,7 +3,6 @@ import { rocket, renderRocket, moveRocket } from './rocket.js';
 import { bulletArray, enemyDies, gatling, removeBullet } from "./gatling.js";
 import { airfighter, renderShip, moveShipLeft, moveShipRight, moveShipUp, moveShipDown } from "./airfighter.js";
 import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
-import { levelState } from './gameManager.js';
 export const fps = 60;
 
 export const gameState = {
@@ -125,12 +124,11 @@ function moveEnemy(enemy) {
 }
 
 
-
 function moveBullet(bullet) {
   bullet.x += bullet.velocity
   bullet.y += bullet.margin
-    bullet.element.style.left = bullet.x + 'px'
-    bullet.element.style.top = bullet.y + 'px'
+  bullet.element.style.left = bullet.x + 'px'
+  bullet.element.style.top = bullet.y + 'px'
 }
 
 function enemyCollisionWithBullet(enemy) {
@@ -147,8 +145,6 @@ function checkBulletCollision(bullet, enemy) {
       removeBullet(bullet)
   }
 }
-
-
 
 function checkCollision(bullet, enemy) {
   return (
@@ -179,10 +175,10 @@ function checkPlayerRocketCollision(enemy) {
     airfighter.y + airfighter.height > enemy.rocket.y &&
     airfighter.y < enemy.rocket.y + enemy.rocket.height
     ) {
-      soundRocketShot.pause();
-      soundRocketShot.currentTime = 0;
-      explosionEffect(airfighter);
-      return true;
+    soundRocketShot.pause();
+    soundRocketShot.currentTime = 0;
+    explosionEffect(airfighter);
+    return true;
   }
   playerDiesIfHpBelowZiro();
 }
