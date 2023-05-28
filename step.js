@@ -1,6 +1,6 @@
 import { enemies, explosion, renderEnemy } from './enemy.js';
 import { rocket, renderRocket, moveRocket } from './rocket.js';
-import { bulletArray, enemyDies, gatling, setBulletArray } from "./gatling.js";
+import { bulletArray, enemyDies, gatling, removeBullet } from "./gatling.js";
 import { airfighter, renderShip, moveShipLeft, moveShipRight, moveShipUp, moveShipDown } from "./airfighter.js";
 import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
 import { levelState } from './gameManager.js';
@@ -134,19 +134,18 @@ function moveBullet(bullet) {
 }
 
 function enemyCollisionWithBullet(enemy) {
-  const filteredBullets = bulletArray.filter((bullet, index) => {
+  bulletArray.forEach((bullet) => checkBulletCollision(bullet, enemy))
+}
+
+function checkBulletCollision(bullet, enemy) {
     const isCollision = checkCollision(bullet, enemy)
     const isOutOfScreen = bullet.x > window.innerWidth
     if (isCollision) {
       enemy.enemyHealth.element.value -= 5
     }
     if(isOutOfScreen || isCollision) {
-      bulletArray[index].element.remove()
-      return false
-    }
-    return true
-  })
-  setBulletArray(filteredBullets)
+      removeBullet(bullet)
+  }
 }
 
 

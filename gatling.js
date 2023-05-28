@@ -15,9 +15,7 @@ export let gatling = {
 
 export let bulletArray = []
 
-export function setBulletArray(arrayOfBullets) {
-  bulletArray = arrayOfBullets
-}
+
 
 function createBullet() {
   let bullet = {}
@@ -32,7 +30,12 @@ function createBullet() {
   bullet.margin = Math.random()*(3)-(1.5)
   gatling.ammo -= 10;
   bulletArray.push(bullet)
-  }
+}
+
+export function removeBullet(bullet) {
+  bullet.element.remove()
+  bulletArray = bulletArray.filter(anothetBullet => anothetBullet !== bullet)
+}
 
 
 export function fireGatlingEnemy (event, enemy) {
