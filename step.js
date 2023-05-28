@@ -1,6 +1,6 @@
 import { enemies, explosion, renderEnemy } from './enemy.js';
 import { rocket, renderRocket, moveRocket } from './rocket.js';
-import { enemyDies, gatling } from "./gatling.js";
+import { bulletArray, enemyDies, gatling, setBulletArray } from "./gatling.js";
 import { airfighter, renderShip, moveShipLeft, moveShipRight, moveShipUp, moveShipDown } from "./airfighter.js";
 import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
 import { levelState } from './gameManager.js';
@@ -16,11 +16,13 @@ export function Step () {
   enemies.forEach(renderEnemyRocket);
   enemies.forEach(moveEnemy);
   enemies.forEach(moveEnemyRocket);
+  bulletArray.forEach(moveBullet)
   ammoElement.innerHTML = `<img class="ammoImg" src="img/ammo-gatling-img.gif"> ${gatling.ammo} <br> <img class="ammoImg" src="img/ammo-rocket-img.gif"> ${rocket.ammo}`;
   moveRocket();
   enemies.forEach(checkEnemyShipCollision);
   enemies.forEach(collisionSHmolision);
   enemies.forEach(launchRocketIfOnScreen);
+  enemies.forEach(enemyCollisionWithBullet)
 
   function moveEnemyRocket(enemy) {
     enemy.rocket.x += enemy.rocket.vx;
@@ -107,7 +109,6 @@ export function Step () {
     soundMainTheme.currentTime = 0;
     soundLevelComplete.play();
     soundLevelComplete.volume = 0.4;
-    
   }
 }
 
@@ -122,6 +123,39 @@ function moveEnemy(enemy) {
   }
   return (enemy.x += enemy.velocity);
 }
+
+
+
+function moveBullet(bullet) {
+  bullet.x += bullet.velocity
+  bullet.y += bullet.margin
+    bullet.element.style.left = bullet.x + 'px'
+    bullet.element.style.top = bullet.y + 'px'
+}
+
+function enemyCollisionWithBullet(enemy) {
+  const filteredBullets = bulletArray.filter((bullet, index) => {
+    if (
+    bullet.x > enemy.x &&
+    bullet.y > enemy.y &&
+    bullet.x < enemy.x + enemy.width &&
+    bullet.y < enemy.y + enemy.height) 
+    {
+      enemy.enemyHealth.element.value -= 5
+      bulletArray[index].element.remove()
+      return false
+    }
+    if(bullet.x > window.innerWidth) {
+      bulletArray[index].element.remove()
+      return false
+    }
+    return true
+  }
+  )
+  setBulletArray(filteredBullets)
+}
+
+
 
 
 function checkEnemyRocketCollision(enemy) {
