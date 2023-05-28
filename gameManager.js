@@ -5,6 +5,7 @@ import { deleteEnemies, createEnemies } from './enemy.js';
 import { soundRocketShot, soundMainTheme, soundIntro } from "./music.js";
 import { Step, gameState, fps } from './step.js';
 import { moveAirfighterToInitalPosition } from './airfighter.js';
+import { fireGatlingEnemy } from './gatling.js';
 
 let isGameStarted = false;
 let introduction = document.querySelector('#introduction');
@@ -91,7 +92,7 @@ mobileControls.bottomButton.addEventListener('touchend' ,  function () {
 }
 
 function handleKeyDown(event) {
-  if ((event.key == "r" || event.key == 'к' || event.key == ' ') && rocket.ammo != 0) {
+  if ((event.key == "r" || event.key == 'к' ) && rocket.ammo != 0) {
     fireRocket();
   }
 
@@ -125,6 +126,9 @@ function handleKeyDown(event) {
 
   if (event.key == "p" || event.key == 'з') {
     gamePauseAction();
+  }
+  if (event.key == " ") {
+    fireGatlingEnemy();
   }
 }
   

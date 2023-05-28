@@ -1,9 +1,8 @@
 import { enemies, explosion, renderEnemy } from './enemy.js';
 import { rocket, renderRocket, moveRocket } from './rocket.js';
-import { enemyDies, gatling } from "./gatling.js";
+import { bulletArray, enemyDies, gatling, removeBullet } from "./gatling.js";
 import { airfighter, renderShip, moveShipLeft, moveShipRight, moveShipUp, moveShipDown } from "./airfighter.js";
 import { soundRocketShot, soundRocketHit, soundEnemyDieExplosion, soundGameOver, soundMainTheme, soundLevelComplete, soundIntro} from "./music.js";
-import { levelState } from './gameManager.js';
 export const fps = 60;
 
 export const gameState = {
@@ -16,11 +15,13 @@ export function Step () {
   enemies.forEach(renderEnemyRocket);
   enemies.forEach(moveEnemy);
   enemies.forEach(moveEnemyRocket);
+  bulletArray.forEach(moveBullet)
   ammoElement.innerHTML = `<img class="ammoImg" src="img/ammo-gatling-img.gif"> ${gatling.ammo} <br> <img class="ammoImg" src="img/ammo-rocket-img.gif"> ${rocket.ammo}`;
   moveRocket();
   enemies.forEach(checkEnemyShipCollision);
   enemies.forEach(collisionSHmolision);
   enemies.forEach(launchRocketIfOnScreen);
+  enemies.forEach(enemyCollisionWithBullet)
 
   function moveEnemyRocket(enemy) {
     enemy.rocket.x += enemy.rocket.vx;
@@ -107,7 +108,6 @@ export function Step () {
     soundMainTheme.currentTime = 0;
     soundLevelComplete.play();
     soundLevelComplete.volume = 0.4;
-    
   }
 }
 
@@ -123,6 +123,42 @@ function moveEnemy(enemy) {
   return (enemy.x += enemy.velocity);
 }
 
+
+function moveBullet(bullet) {
+  bullet.x += bullet.velocity
+  bullet.y += bullet.margin
+  bullet.element.style.left = bullet.x + 'px'
+  bullet.element.style.top = bullet.y + 'px'
+}
+
+function enemyCollisionWithBullet(enemy) {
+  bulletArray.forEach(bullet => checkBulletCollision(bullet, enemy))
+}
+
+function checkBulletCollision(bullet, enemy) {
+  const isCollisionWithEnemy = checkCollision(bullet, enemy)
+  const isCollisionWithRocket = checkCollision(bullet, enemy.rocket)
+  const isOutOfScreen = bullet.x > window.innerWidth
+  if (isCollisionWithEnemy) {
+    enemy.enemyHealth.element.value -= 5
+  }
+  if(isCollisionWithRocket) {
+    enemy.rocket.x = -999
+    enemy.rocket.element.remove()
+  }
+  if (isOutOfScreen || isCollisionWithEnemy || isCollisionWithRocket) {
+    removeBullet(bullet)
+  }
+}
+
+function checkCollision(bullet, enemy) {
+  return (
+    bullet.x > enemy.x &&
+    bullet.y > enemy.y &&
+    bullet.x < enemy.x + enemy.width &&
+    bullet.y < enemy.y + enemy.height
+  )
+}
 
 function checkEnemyRocketCollision(enemy) {
   if (
@@ -144,12 +180,11 @@ function checkPlayerRocketCollision(enemy) {
     airfighter.y + airfighter.height > enemy.rocket.y &&
     airfighter.y < enemy.rocket.y + enemy.rocket.height
     ) {
-      soundRocketShot.pause();
-      soundRocketShot.currentTime = 0;
-      explosionEffect(airfighter);
-      return true;
+    soundRocketShot.pause();
+    soundRocketShot.currentTime = 0;
+    explosionEffect(airfighter);
+    return true;
   }
-
   playerDiesIfHpBelowZiro();
 }
 
