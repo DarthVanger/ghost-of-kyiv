@@ -132,7 +132,7 @@ function moveBullet(bullet) {
 }
 
 function enemyCollisionWithBullet(enemy) {
-  bulletArray.forEach((bullet) => checkBulletCollision(bullet, enemy))
+  bulletArray.forEach(bullet => checkBulletCollision(bullet, enemy))
 }
 
 function checkBulletCollision(bullet, enemy) {
@@ -141,7 +141,7 @@ function checkBulletCollision(bullet, enemy) {
     if (isCollision) {
       enemy.enemyHealth.element.value -= 5
     }
-    if(isOutOfScreen || isCollision) {
+    if (isOutOfScreen || isCollision) {
       removeBullet(bullet)
   }
 }
