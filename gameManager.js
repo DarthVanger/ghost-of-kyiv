@@ -98,29 +98,29 @@ function handleKeyDown(event) {
 
   if (event.key == "a" || event.key == 'ф') {
     airfighter.isShipMovingLeft = true;
-    if (airfighter.element.src != "img/Airfighter_ua_main_to_back.gif") {
-      airfighter.element.src = "img/Airfighter_ua_main_to_back.gif";
+    if (airfighter.element.src != "img/aifighter-Back.gif") {
+      airfighter.element.src = "img/aifighter-Back.gif";
     } 
   }
 
   if (event.key == "s" || event.key == 'ы' || event.key == 'і') {
     airfighter.isShipMovingDown = true;
-    if (airfighter.element.src != "img/Airfighter_ua_main_to_down.gif") {
-      airfighter.element.src = "img/Airfighter_ua_main_to_down.gif";
+    if (airfighter.element.src != "img/aifighter-Down.gif") {
+      airfighter.element.src = "img/aifighter-Down.gif";
     }
   }
 
   if (event.key == "w" || event.key == 'ц') {
     airfighter.isShipMovingUp = true;
-    if (airfighter.element.src != "img/Airfighter_ua_main_to_up.gif") {
-      airfighter.element.src = "img/Airfighter_ua_main_to_up.gif";
+    if (airfighter.element.src != "img/aifighter-Up.gif") {
+      airfighter.element.src = "img/aifighter-Up.gif";
     }
   }
 
   if (event.key == "d" || event.key == 'в') {
     airfighter.isShipMovingRight = true;
-    if (airfighter.element.src != "img/Airfighter_ua_moveforvard.gif") {
-      airfighter.element.src = "img/Airfighter_ua_moveforvard.gif";
+    if (airfighter.element.src != "img/aifighter-Front-Accelerate.gif") {
+      airfighter.element.src = "img/aifighter-Front-Accelerate.gif";
     }
   }
 
@@ -135,22 +135,22 @@ function handleKeyDown(event) {
 function handleKeyUp (event) {
   if (event.key == "a" || event.key == 'ф') {
     airfighter.isShipMovingLeft = false;
-    airfighter.element.src = "img/Airfighter_ua_back_to_main.gif";
+    airfighter.element.src = "img/aifighter-Front.gif";
   }
 
   if (event.key == "s" || event.key == 'ы' || event.key == 'і') {
     airfighter.isShipMovingDown = false;
-    airfighter.element.src = "img/Airfighter_ua_down_to_main.gif";
+    airfighter.element.src = "img/aifighter-Front.gif";
   }
   
   if (event.key == "w" || event.key == 'ц') {
     airfighter.isShipMovingUp = false;
-    airfighter.element.src = "img/Airfighter_ua_up_to_main.gif";
+    airfighter.element.src = "img/aifighter-Front.gif";
   }
 
   if (event.key == "d" || event.key == 'в') {
     airfighter.isShipMovingRight = false;
-    airfighter.element.src = "img/Airfighter_ua_main.gif";
+    airfighter.element.src = "img/aifighter-Front.gif";
   }
 }
   
@@ -165,7 +165,7 @@ function fireRocket() {
 }
 
 function preRocket() {
-  rocket.element.src = "img/preRocket.gif";
+  rocket.element.src = "img/mrRocket.gif";
 }
   
 export function endGameAction () {
