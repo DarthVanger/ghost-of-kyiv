@@ -7,8 +7,8 @@ export let airfighter = {
   y: 0,
   vx: 0,
   vy: 0,
-  width: 250,
-  height: 80,
+  width: 300,
+  height: 130,
   element: document.querySelector('#airfighter'),
   health: {
     x: 0,
@@ -20,8 +20,8 @@ export let airfighter = {
     y: 0,
     element: document.querySelector("#playerHealthText")
   },
-  rocketDefaultX: 5,
-  rocketDefaultY: 67,
+  rocketDefaultX: 80,
+  rocketDefaultY: 70,
   rocketMaxDistance: 1500,
   isShipMovingUp: false,
   isShipMovingLeft: false,
