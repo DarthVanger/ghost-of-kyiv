@@ -179,7 +179,9 @@ function checkPlayerRocketCollision(enemy) {
     airfighter.x < enemy.rocket.x + enemy.rocket.width &&
     airfighter.y + airfighter.height > enemy.rocket.y &&
     airfighter.y < enemy.rocket.y + enemy.rocket.height
-    ) {
+  ) {
+    enemy.rocket.element.remove()
+    enemy.rocket.x = enemyDies
     soundRocketShot.pause();
     soundRocketShot.currentTime = 0;
     explosionEffect(airfighter);
