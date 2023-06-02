@@ -1,6 +1,6 @@
 export let rocket = {
-  x: 5,
-  y: 67,
+  x: 80,
+  y: 70,
   width: 120,
   ammo: 10,
   dmg: 50,
