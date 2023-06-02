@@ -22,7 +22,7 @@ export function Step () {
   enemies.forEach(collisionSHmolision);
   enemies.forEach(launchRocketIfOnScreen);
   enemies.forEach(enemyCollisionWithBullet)
-
+  moveBackground()
   function moveEnemyRocket(enemy) {
     enemy.rocket.x += enemy.rocket.vx;
   }
@@ -244,4 +244,41 @@ function fadeIn(element, duration) {
 export function stopInterval () {
   clearInterval(gameState.gameIntervalId);
   gameState.isGamePaused = true;
+}
+let backBgX = 0;
+let middleBgX = 0;
+let frontBgX = 0;
+let backBgVx = -0.3;
+let middleBgVx = -0.5;
+let frontBgVx = -0.75;
+
+function moveBackground() {
+  let backBg = document.querySelector('#bg-back')
+  let middleBg = document.querySelector('#bg-middle')
+  let frontBg = document.querySelector('#bg-front')
+  console.log(backBg.width)
+  if (backBgX < window.innerWidth - backBg.width) {
+    backBgVx *= -1
+  }
+  if (middleBgX < window.innerWidth - middleBg.width) {
+    middleBgVx *= -1
+  }
+  if (frontBgX < window.innerWidth - frontBg.width) {
+    frontBgVx *= -1
+  }
+  if (backBgX > 0) {
+    backBgVx *= -1
+  }
+  if (middleBgX > 0) {
+    middleBgVx *= -1
+  }
+  if (frontBgX > 0) {
+    frontBgVx *= -1
+  }
+  backBgX += backBgVx
+  middleBgX += middleBgVx
+  frontBgX += frontBgVx
+  backBg.style.left = backBgX + 'px'
+  middleBg.style.left = middleBgX + 'px'
+  frontBg.style.left = frontBgX + 'px'
 }
