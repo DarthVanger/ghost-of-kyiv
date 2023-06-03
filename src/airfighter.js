@@ -1,33 +1,36 @@
 import { rocket } from "./rocket.js";
+import { soundRocketHit, soundEnemyDieExplosion } from "./music.js";
 
 const acceleration = 1;
 
-export let airfighter = {
-  x: 0,
-  y: 0,
-  vx: 0,
-  vy: 0,
-  width: 300,
-  height: 130,
-  element: document.querySelector('#airfighter'),
-  health: {
+class Player {
+  x = 0
+  y = 0
+  vx = 0
+  vy = 0
+  width = 300
+  height = 130
+  element = document.querySelector('#airfighter')
+  health = {
     x: 0,
     y: 0,
-    element: document.querySelector("#playerHealth")
-  },
-  healthtext: {
+    element: document.querySelector('#playerHealth'),
+  }
+  healthtext = {
     x: 0,
     y: 0,
-    element: document.querySelector("#playerHealthText")
-  },
-  rocketDefaultX: 80,
-  rocketDefaultY: 70,
-  rocketMaxDistance: 1500,
-  isShipMovingUp: false,
-  isShipMovingLeft: false,
-  isShipMovingRight: false,
-  isShipMovingDown: false,
-};
+    element: document.querySelector('#playerHealthText'),
+  }
+  rocketDefaultX = 80
+  rocketDefaultY = 70
+  rocketMaxDistance = 1500
+  isShipMovingUp = false
+  isShipMovingLeft = false
+  isShipMovingRight = false
+  isShipMovingDown = false
+}
+
+export let airfighter = new Player();
 
 export function moveAirfighterToInitalPosition() {
   airfighter.x = 0;
