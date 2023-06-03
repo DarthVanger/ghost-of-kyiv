@@ -15,8 +15,7 @@ export function Step () {
   enemies.forEach(renderEnemyRocket);
   enemies.forEach(moveEnemy);
   enemies.forEach(moveEnemyRocket);
-  bulletArray.forEach(moveBullet)
-  ammoElement.innerHTML = `<img class="ammoImg" src="img/ammo-gatling-img.gif"> ${gatling.ammo} <br> <img class="ammoImg" src="img/ammo-rocket-img.gif"> ${rocket.ammo}`;
+  bulletArray.forEach(moveBullet);
   moveRocket();
   enemies.forEach(checkEnemyShipCollision);
   enemies.forEach(collisionSHmolision);
