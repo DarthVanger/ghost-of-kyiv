@@ -7,11 +7,11 @@ export let soundGameOver = new Audio();
 export let soundMainTheme = new Audio();
 export let soundLevelComplete = new Audio();
 
-soundIntro.src = 'music/John_Williams-Star_Wars.mp3'
-soundGatling.src = 'music/avtomat.mp3';
-soundRocketShot.src = 'music/vyistrel.mp3';
-soundRocketHit.src = 'music/smallBoom.mp3';
-soundEnemyDieExplosion.src = 'music/vzryiv-sredney.mp3';
-soundGameOver.src = 'music/zvuk-so-smehom-nelsona-iz-simpsonov-ha-ha-6710-1__=3.mp3';
-soundMainTheme.src = 'music/ES_Step by Step - Experia.mp3';
-soundLevelComplete.src = 'music/ES_Phoenix Rising - Edgar Hopp.mp3';
+soundIntro.src = './music/soundIntro.mp3'
+soundGatling.src = 'music/soundGatling.mp3';
+soundRocketShot.src = 'music/soundRocketShot.mp3';
+soundRocketHit.src = 'music/soundRocketHit.mp3';
+soundEnemyDieExplosion.src = 'music/soundEnemyDieExplosion.mp3';
+soundGameOver.src = 'music/soundGameOver.mp3';
+soundMainTheme.src = 'music/soundMainTheme.mp3';
+soundLevelComplete.src = 'music/soundLevelComplete.mp3';
