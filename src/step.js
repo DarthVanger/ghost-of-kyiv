@@ -1,7 +1,7 @@
 import { enemies, renderEnemy } from './enemy.js';
 import { rocket, renderRocket, moveRocket } from './rocket.js';
 import { bulletArray } from "./gatling.js";
-import { airfighter, renderShip, moveShipLeft, moveShipRight, moveShipUp, moveShipDown } from "./airfighter.js";
+import { airfighter, moveShipLeft, moveShipRight, moveShipUp, moveShipDown } from "./airfighter.js";
 import { soundMainTheme, soundLevelComplete } from "./music.js";
 import performCollisionChecksForEnemy, { checkEnemyShipCollision, enemyCollisionWithBullet } from './rendering/EnemyCollisionsChecks.js';
 export const fps = 60;
@@ -49,7 +49,7 @@ export function Step () {
   }
   
   renderRocket();
-  renderShip();
+  airfighter.render();
 
   if (airfighter.isShipMovingUp) {
     moveShipUp();
