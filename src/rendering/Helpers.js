@@ -1,1 +1,1 @@
-export const enemyDies = -9999
+export const deadEnemyXPosition = -9999

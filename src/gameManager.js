@@ -41,6 +41,7 @@ function introductionSkip() {
 
 function startLevel1() {
   gameState.gameIntervalId = setInterval(Step, 1000 / fps);
+	createEnemies()
 }
 
 function startLevel2() {
@@ -49,7 +50,7 @@ function startLevel2() {
   isGameStarted = false;
   levelState.levelNumber = 2;
   deleteEnemies();
-  createEnemies()
+  createEnemies();
   gameState.gameIntervalId = setInterval(Step, 1000 / fps);
   document.querySelector('#levelComplete').style.display = 'none'
   introduction.style.display = "block";
