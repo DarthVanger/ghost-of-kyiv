@@ -2,8 +2,6 @@ import {airfighter} from "./airfighter.js";
 
 import { soundGatling} from "./music.js";
 
-export const enemyDies = -9999;
-
 export let gatling = {
   velocity: -2,
   ammo: 1500,
