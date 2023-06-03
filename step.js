@@ -256,7 +256,6 @@ function moveBackground() {
   let backBg = document.querySelector('#bg-back')
   let middleBg = document.querySelector('#bg-middle')
   let frontBg = document.querySelector('#bg-front')
-  console.log(backBg.width)
   if (backBgX < window.innerWidth - backBg.width) {
     backBgVx *= -1
   }

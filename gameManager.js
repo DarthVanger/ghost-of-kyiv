@@ -28,9 +28,7 @@ export function startGame() {
 }
 
 function introductionSkip() {
-  console.log('funtion introductionSkip');
   if (!isGameStarted) {
-    console.log('funtion introductionSkip: Starting Game');
     startGame();
     soundMainTheme.play();
     soundMainTheme.volume = 0.3;
@@ -42,7 +40,6 @@ function introductionSkip() {
 }
 
 function startLevel1() {
-  console.log('startLevel1');
   gameState.gameIntervalId = setInterval(Step, 1000 / fps);
 }
 
@@ -50,7 +47,6 @@ function startLevel2() {
   moveAirfighterToInitalPosition();
   clearInterval(gameState.gameIntervalId);
   isGameStarted = false;
-  console.log('startLevel2');
   levelState.levelNumber = 2;
   deleteEnemies();
   createEnemies()

@@ -32,11 +32,9 @@ export let airfighter = {
 export function moveAirfighterToInitalPosition() {
   airfighter.x = 0;
   airfighter.y = 0;
-  console.log('move airfighter to initial position: x=' +  airfighter.x +' y=' + airfighter.y);
 
   rocket.x = airfighter.rocketDefaultX;
   rocket.y = airfighter.rocketDefaultY;
-  console.log('move rocket to initial position: x=' +  rocket.x +' y=' + rocket.y);
 }
 
 export function renderShip() {
