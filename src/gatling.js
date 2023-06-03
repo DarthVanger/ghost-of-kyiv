@@ -1,8 +1,6 @@
 import {airfighter} from "./airfighter.js";
-import { explosion } from "./enemy.js";
-import { enemies } from "./enemy.js";
 
-import {soundEnemyDieExplosion, soundGatling} from "./music.js";
+import { soundGatling} from "./music.js";
 
 export const enemyDies = -9999;
 
