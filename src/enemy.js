@@ -78,9 +78,8 @@ export function createRocket(enemy, damage) {
   const enemyRocketImg = document.createElement('img');
     enemyRocketImg.className = 'enemyRocket';
     enemyRocketImg.src = 'img/mrRocket.gif';
-    enemy.rocket.element = enemyRocketImg
-    enemy.isRocketLaunched = false;
     document.body.append(enemyRocketImg);
+    enemy.isRocketLaunched = false;
     
     enemy.rocket = {
       x: enemy.x,

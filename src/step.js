@@ -14,7 +14,9 @@ export const gameState = {
 } 
 
 export function Step () {
-  level2boss.behavior()
+  if(enemies[0]?.behavior) {
+    level2boss.behavior()
+  }
   enemies.forEach(renderEnemy);
   enemies.forEach(renderEnemyRocket);
   enemies.forEach(moveEnemy);

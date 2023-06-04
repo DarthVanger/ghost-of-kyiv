@@ -15,11 +15,11 @@ introduction.addEventListener('click', introductionSkip);
 
 const levelState = {
   isLevelFinished : false,
-  levelNumber : 2,
+  levelNumber : 0,
 }
 
 export function startGame() {
-  console.log('startGame');
+  console.log(`startGame, level :${levelState.levelNumber}`);
   initKeybordMovement();
   if (levelState.levelNumber == 1) {
     startLevel1()
@@ -27,10 +27,14 @@ export function startGame() {
   if (levelState.levelNumber == 2) {
     startLevel2()
   }
+  if (levelState.levelNumber == 3) {
+    startLevel3()
+  }
 }
 
 function introductionSkip() {
   if (!isGameStarted) {
+    levelState.levelNumber += 1
     startGame();
     soundMainTheme.play();
     soundMainTheme.volume = 0.3;
@@ -44,6 +48,7 @@ function introductionSkip() {
 function startLevel1() {
   gameState.gameIntervalId = setInterval(Step, 1000 / fps);
 	createEnemies()
+  isGameStarted = false;
 }
 
 function startLevel2() {
@@ -53,6 +58,21 @@ function startLevel2() {
   clearInterval(gameState.gameIntervalId);
   isGameStarted = false;
   levelState.levelNumber = 2;
+  deleteEnemies();
+  createEnemies()
+  resetAmmo()
+  gameState.gameIntervalId = setInterval(Step, 1000 / fps);
+  document.querySelector('#levelComplete').style.display = 'none'
+  introduction.style.display = "block";
+}
+
+function startLevel3() {
+  airfighter.moveToInitalPosition();
+  airfighter.resetLife()
+	rocket.moveToInitialPosition();
+  clearInterval(gameState.gameIntervalId);
+  isGameStarted = false;
+  levelState.levelNumber = 3;
   deleteEnemies();
   createBoss()
   enemies.push(level2boss)
