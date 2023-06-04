@@ -1,10 +1,6 @@
 import {airfighter} from "./airfighter.js";
-import { explosion } from "./enemy.js";
-import { enemies } from "./enemy.js";
 
-import {soundEnemyDieExplosion, soundGatling} from "./music.js";
-
-export const enemyDies = -9999;
+import { soundGatling} from "./music.js";
 
 export let gatling = {
   velocity: -2,
@@ -48,4 +44,11 @@ export function addGatling(enemy) {
   document.querySelector('#game-background').addEventListener('click', fireGatlingEnemy);
   enemy.element.addEventListener('click', fireGatlingEnemy);
   document.querySelector('#airfighter').addEventListener('click', fireGatlingEnemy);
+}
+
+export function moveBullet(bullet) {
+  bullet.x += bullet.velocity
+  bullet.y += bullet.margin
+  bullet.element.style.left = bullet.x + 'px'
+  bullet.element.style.top = bullet.y + 'px'
 }

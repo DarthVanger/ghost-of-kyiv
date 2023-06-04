@@ -1,12 +1,6 @@
 import { addGatling } from "./gatling.js";
 
 export let enemies = [];
-export let explosion = document.createElement('img')
-explosion.id = 'explosion-' + new Date()
-explosion.className = 'explosion'
-explosion.src = './img/explosion.gif';
-explosion.width = 120;
-explosion.height = 130;
 
 export function deleteEnemies() {
   enemies.forEach(deleteEnemyImg)
@@ -43,19 +37,23 @@ function createHealth(enemy, i, maxHealth) {
 }
 
 function createEnemy(src, width, height, i, maxHealth) {
-  let enemy = {};
-  enemy.element = document.createElement('img')
-  enemy.element.id = 'enemy' + i;
-  enemy.element.className = 'enemy'
-  enemy.element.src = src;
-  enemy.x = getRandomEnemyX(i)
-  enemy.y = Math.floor(Math.random()*(innerHeight-200)+50);
-  enemy.width = width;
-  enemy.height = height;
-  enemy.velocity = -2;
-  enemy.isAlive = true;
-  createHealth(enemy, i, maxHealth)
-  return enemy
+  return new Enemy(src, width, height, i, maxHealth)
+}
+
+class Enemy {
+	constructor(src, width, height, i, maxHealth) {
+		this.element = document.createElement('img')
+		this.element.id = 'enemy' + i;
+		this.element.className = 'enemy'
+		this.element.src = src;
+		this.x = getRandomEnemyX(i)
+		this.y = Math.floor(Math.random()*(innerHeight-200)+50);
+		this.width = width;
+		this.height = height;
+		this.velocity = -2;
+		this.isAlive = true;
+		createHealth(this, i, maxHealth);
+	}
 }
 
 export function createEnemies() {
@@ -127,5 +125,3 @@ function renderEnemyImg(enemy) {
   enemy.element.style.width = enemy.width;
   enemy.element.style.height = enemy.height;
 }
-
-createEnemies()

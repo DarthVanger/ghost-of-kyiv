@@ -1,5 +1,5 @@
-import { soundIntro} from "./music.js";
-import { endGameAction } from './gameManager.js';
+import { soundIntro} from "./src/music.js";
+import { endGameAction } from './src/gameManager.js';
 
 function handleStartGameBtnClick() {
   soundIntro.play();
