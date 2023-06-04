@@ -5,6 +5,7 @@ import { airfighter, moveShipLeft, moveShipRight, moveShipUp, moveShipDown } fro
 import { soundMainTheme, soundLevelComplete } from "./music.js";
 import { rocketDefaultX, rocketDefaultY } from './rendering/Helpers.js';
 import performCollisionChecksForEnemy, { checkEnemyShipCollision, enemyCollisionWithBullet } from './rendering/EnemyCollisionsChecks.js';
+import { level2boss } from './Boss.js';
 export const fps = 60;
 
 export const gameState = {
@@ -13,6 +14,7 @@ export const gameState = {
 } 
 
 export function Step () {
+  level2boss.behavior()
   enemies.forEach(renderEnemy);
   enemies.forEach(renderEnemyRocket);
   enemies.forEach(moveEnemy);

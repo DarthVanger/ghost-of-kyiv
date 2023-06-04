@@ -1,11 +1,13 @@
 import { mobileControls } from './touch.js';
 import { rocket } from './rocket.js';
 import { airfighter } from "./airfighter.js";
-import { deleteEnemies, createEnemies } from './enemy.js';
+import { deleteEnemies, createEnemies, enemies } from './enemy.js';
 import { soundRocketShot, soundMainTheme, soundIntro } from "./music.js";
 import { Step, gameState, fps } from './step.js';
 import { fireGatlingEnemy } from './gatling.js';
 import { resetAmmo } from './ammo.js';
+import { level2boss, createBoss } from './Boss.js';
+
 
 let isGameStarted = false;
 let introduction = document.querySelector('#introduction');
@@ -13,7 +15,7 @@ introduction.addEventListener('click', introductionSkip);
 
 const levelState = {
   isLevelFinished : false,
-  levelNumber : 1,
+  levelNumber : 2,
 }
 
 export function startGame() {
@@ -52,7 +54,8 @@ function startLevel2() {
   isGameStarted = false;
   levelState.levelNumber = 2;
   deleteEnemies();
-  createEnemies();
+  createBoss()
+  enemies.push(level2boss)
   resetAmmo()
   gameState.gameIntervalId = setInterval(Step, 1000 / fps);
   document.querySelector('#levelComplete').style.display = 'none'
