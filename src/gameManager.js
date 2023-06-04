@@ -4,14 +4,14 @@ import { airfighter } from "./airfighter.js";
 import { deleteEnemies, createEnemies } from './enemy.js';
 import { soundRocketShot, soundMainTheme, soundIntro } from "./music.js";
 import { Step, gameState, fps } from './step.js';
-import { moveAirfighterToInitalPosition } from './airfighter.js';
 import { fireGatlingEnemy } from './gatling.js';
+import { resetAmmo } from './ammo.js';
 
 let isGameStarted = false;
 let introduction = document.querySelector('#introduction');
 introduction.addEventListener('click', introductionSkip);
 
-export const levelState = {
+const levelState = {
   isLevelFinished : false,
   levelNumber : 1,
 }
@@ -28,9 +28,7 @@ export function startGame() {
 }
 
 function introductionSkip() {
-  console.log('funtion introductionSkip');
   if (!isGameStarted) {
-    console.log('funtion introductionSkip: Starting Game');
     startGame();
     soundMainTheme.play();
     soundMainTheme.volume = 0.3;
@@ -42,18 +40,20 @@ function introductionSkip() {
 }
 
 function startLevel1() {
-  console.log('startLevel1');
   gameState.gameIntervalId = setInterval(Step, 1000 / fps);
+	createEnemies()
 }
 
 function startLevel2() {
-  moveAirfighterToInitalPosition();
+  airfighter.moveToInitalPosition();
+  airfighter.resetLife()
+	rocket.moveToInitialPosition();
   clearInterval(gameState.gameIntervalId);
   isGameStarted = false;
-  console.log('startLevel2');
   levelState.levelNumber = 2;
   deleteEnemies();
-  createEnemies()
+  createEnemies();
+  resetAmmo()
   gameState.gameIntervalId = setInterval(Step, 1000 / fps);
   document.querySelector('#levelComplete').style.display = 'none'
   introduction.style.display = "block";
