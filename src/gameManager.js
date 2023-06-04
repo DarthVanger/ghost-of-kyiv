@@ -71,7 +71,7 @@ function introductionSkip() {
 
 function startLevel1() {
   soundMainTheme.play()
-	createEnemies(1)
+	createEnemies(11)
   gameState.gameIntervalId = setInterval(Step, 1000 / fps);
   isGameStarted = false;
 }
@@ -84,7 +84,7 @@ function startLevel2() {
   isGameStarted = false;
 
   deleteEnemies();
-  createEnemies(2)
+  createEnemies(11)
   resetAmmo()
   gameState.gameIntervalId = setInterval(Step, 1000 / fps);
   document.querySelector('#levelComplete').style.display = 'none'
