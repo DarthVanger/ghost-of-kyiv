@@ -1,5 +1,5 @@
 import { airfighter } from '../airfighter.js'
-import { deadEnemyXPosition } from './Helpers.js'
+import { deadEnemyXPosition, rocketDefaultX, rocketDefaultY } from './Helpers.js'
 import { bulletArray, removeBullet } from '../gatling.js'
 import { explosion } from '../rendering/Explosion.js'
 import { rocket } from '../rocket.js'
@@ -35,10 +35,9 @@ export default function performCollisionChecksForEnemy(enemy) {
       explosion.remove()
     }, 700)
   }
-
   if (rocket.dmg <= 0) {
-    rocket.x = airfighter.x + airfighter.rocketDefaultX
-    rocket.y = airfighter.y + airfighter.rocketDefaultY
+    rocket.x = airfighter.x + rocketDefaultX
+    rocket.y = airfighter.y + rocketDefaultY
     rocket.velocity -= 8
     rocket.dmg = 50
     rocket.element.src = 'img/Rocket.gif'
