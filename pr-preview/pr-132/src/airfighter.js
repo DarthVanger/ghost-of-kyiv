@@ -66,6 +66,10 @@ class Player {
     }
   }
 
+  resetLife() {
+    this.health.element.value = 100
+  }
+
   moveToInitalPosition() {
     this.x = 0
     this.y = 0

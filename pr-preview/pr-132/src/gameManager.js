@@ -46,6 +46,7 @@ function startLevel1() {
 
 function startLevel2() {
   airfighter.moveToInitalPosition();
+  airfighter.resetLife()
 	rocket.moveToInitialPosition();
   clearInterval(gameState.gameIntervalId);
   isGameStarted = false;
