@@ -26,7 +26,7 @@ export function startGame() {
   }
   if (levelState.levelNumber == 2) {
     startLevel2()
-  }
+  } 
   if (levelState.levelNumber == 3) {
     startLevel3()
   }
@@ -38,6 +38,16 @@ function changeLevel() {
     introduction.style.display = 'block'
     introduction.style.position = 'absolute'
     introduction.style.zIndex = levelState.levelNumber * 2
+    if(levelState.levelNumber == 1) {
+      document.querySelector('#episode').innerHTML = 'EPISODE II'
+      document.querySelector('#preHistoryEpisode').innerHTML = 'The battle for the borders of Gostomel'
+
+    }
+    if(levelState.levelNumber == 2) {
+      document.querySelector('#episode').innerHTML = 'EPISODE III'
+      document.querySelector('#preHistoryEpisode').innerHTML = 'Helicopter Boss'
+    }
+    
   })
 }
 
@@ -56,7 +66,7 @@ function introductionSkip() {
 
 function startLevel1() {
   gameState.gameIntervalId = setInterval(Step, 1000 / fps);
-	createEnemies(11)
+	createEnemies(1)
   isGameStarted = false;
 }
 
@@ -68,7 +78,7 @@ function startLevel2() {
   isGameStarted = false;
 
   deleteEnemies();
-  createEnemies(11)
+  createEnemies(2)
   resetAmmo()
   gameState.gameIntervalId = setInterval(Step, 1000 / fps);
   document.querySelector('#levelComplete').style.display = 'none'
@@ -85,9 +95,9 @@ function startLevel3() {
   createBoss()
   enemies.push(level2boss)
   resetAmmo()
-  gameState.gameIntervalId = setInterval(Step, 1000 / fps);
   document.querySelector('#levelComplete').style.display = 'none'
   introduction.style.display = "block";
+  gameState.gameIntervalId = setInterval(Step, 1000 / fps);
 }
 
 document.querySelector('#nextlevel').addEventListener('click', changeLevel)
