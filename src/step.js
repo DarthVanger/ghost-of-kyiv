@@ -3,6 +3,7 @@ import { rocket, renderRocket, moveRocket } from './rocket.js';
 import { bulletArray, gatling, moveBullet } from "./gatling.js";
 import { airfighter, moveShipLeft, moveShipRight, moveShipUp, moveShipDown } from "./airfighter.js";
 import { soundMainTheme, soundLevelComplete } from "./music.js";
+import { rocketDefaultX, rocketDefaultY } from './rendering/Helpers.js';
 import performCollisionChecksForEnemy, { checkEnemyShipCollision, enemyCollisionWithBullet } from './rendering/EnemyCollisionsChecks.js';
 export const fps = 60;
 
@@ -42,8 +43,8 @@ export function Step () {
   }
     
   if (rocket.x > airfighter.x + airfighter.rocketMaxDistance) {
-    rocket.x = airfighter.x + airfighter.rocketDefaultX;
-    rocket.y = airfighter.y + airfighter.rocketDefaultY;
+    rocket.x = airfighter.x + rocketDefaultX;
+    rocket.y = airfighter.y + rocketDefaultY;
     rocket.velocity -= 8;
     rocket.dmg = 50;
     rocket.element.src = "img/Rocket.gif";
