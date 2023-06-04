@@ -38,7 +38,6 @@ function changeLevel() {
   soundLevelComplete.pause()
   document.querySelector('#levelComplete').addEventListener('click', (event) => {
     introduction.style.display = 'block'
-    introduction.style.position = 'absolute'
     introduction.style.zIndex = levelState.levelNumber * 2
     soundMainTheme.play()
     if(levelState.levelNumber == 1) {
@@ -82,7 +81,6 @@ function startLevel2() {
 	rocket.moveToInitialPosition();
   clearInterval(gameState.gameIntervalId);
   isGameStarted = false;
-
   deleteEnemies();
   createEnemies(11)
   resetAmmo()
