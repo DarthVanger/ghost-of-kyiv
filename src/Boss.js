@@ -68,25 +68,24 @@ export function createBoss() {
 }
 
 function bossbehavior() {
-  if (this.x < window.innerWidth - (this.width * 1.1)) {
+  if (this.x < window.innerWidth - this.width * 1.1) {
     this.velocity = 0
 
-    if (this.y < 0 + this.height/2) {
-        this.velocityY  *= -1
+    if (this.y < 0 + this.height / 2) {
+      this.velocityY *= -1
     }
-    if (this.y > window.innerHeight - (this.height*2)) {
-        this.velocityY *= -1
+    if (this.y > window.innerHeight - this.height * 2) {
+      this.velocityY *= -1
     }
     this.y -= this.velocityY
 
-    if(this.rocket.x < 0 - this.rocket.width*2 ) {
-        this.rocket.x = this.x
-        this.rocket.y = this.y
+    if (this.rocket.x < 0 - this.rocket.width * 2) {
+      this.rocket.x = this.x
+      this.rocket.y = this.y
     }
-    if(this.rocket.vx == 0) {
-        const ammoDamage = Math.floor(this.enemyHealth.element.value/5)
-        createRocket(this, ammoDamage)
+    if (this.rocket.vx == 0) {
+      const ammoDamage = Math.floor(this.enemyHealth.element.value / 5)
+      createRocket(this, ammoDamage)
     }
   }
-
 }
