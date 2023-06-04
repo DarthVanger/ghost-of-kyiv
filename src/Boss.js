@@ -62,7 +62,6 @@ export function createBoss() {
     element: bossRocketImg,
   }
   boss.behavior = bossbehavior
-  console.log(boss)
   addGatling(boss)
   document.body.append(boss.element)
   level2boss = boss
@@ -81,7 +80,6 @@ function bossbehavior() {
     this.y -= this.velocityY
 
     if(this.rocket.x < 0 - this.rocket.width*2 ) {
-        console.log(this.rocket)
         this.rocket.x = this.x
         this.rocket.y = this.y
     }

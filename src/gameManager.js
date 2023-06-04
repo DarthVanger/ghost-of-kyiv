@@ -2,11 +2,12 @@ import { mobileControls } from './touch.js';
 import { rocket } from './rocket.js';
 import { airfighter } from "./airfighter.js";
 import { deleteEnemies, createEnemies, enemies } from './enemy.js';
-import { soundRocketShot, soundMainTheme, soundIntro } from "./music.js";
+import { soundRocketShot, soundMainTheme, soundIntro, soundLevelComplete, soundboss } from "./music.js";
 import { Step, gameState, fps } from './step.js';
 import { fireGatlingEnemy } from './gatling.js';
 import { resetAmmo } from './ammo.js';
 import { level2boss, createBoss } from './Boss.js';
+import { bossPopup } from './rendering/Helpers.js';
 
 
 let isGameStarted = false;
@@ -15,7 +16,7 @@ introduction.addEventListener('click', introductionSkip);
 
 const levelState = {
   isLevelFinished : false,
-  levelNumber : 0,
+  levelNumber : 1,
 }
 
 export function startGame() {
@@ -34,16 +35,20 @@ export function startGame() {
 
 function changeLevel() { 
   isGameStarted = false
+  soundLevelComplete.pause()
   document.querySelector('#levelComplete').addEventListener('click', (event) => {
     introduction.style.display = 'block'
     introduction.style.position = 'absolute'
     introduction.style.zIndex = levelState.levelNumber * 2
+    soundMainTheme.play()
     if(levelState.levelNumber == 1) {
       document.querySelector('#episode').innerHTML = 'EPISODE II'
       document.querySelector('#preHistoryEpisode').innerHTML = 'The battle for the borders of Gostomel'
 
     }
     if(levelState.levelNumber == 2) {
+      soundboss.play()
+      soundboss.volume = 0.7;
       document.querySelector('#episode').innerHTML = 'EPISODE III'
       document.querySelector('#preHistoryEpisode').innerHTML = 'Helicopter Boss'
     }
@@ -65,8 +70,9 @@ function introductionSkip() {
 }
 
 function startLevel1() {
-  gameState.gameIntervalId = setInterval(Step, 1000 / fps);
+  soundMainTheme.play()
 	createEnemies(1)
+  gameState.gameIntervalId = setInterval(Step, 1000 / fps);
   isGameStarted = false;
 }
 
@@ -92,6 +98,7 @@ function startLevel3() {
   clearInterval(gameState.gameIntervalId);
   isGameStarted = false;
   deleteEnemies();
+  bossPopup()
   createBoss()
   enemies.push(level2boss)
   resetAmmo()

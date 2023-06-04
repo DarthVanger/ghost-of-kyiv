@@ -334,3 +334,24 @@ h1 sub {
   position: absolute;
   height: 100vh;
 }
+
+#bossPopup{
+  display: block;
+  position:  absolute;
+  color: red;
+  z-index: 4;
+  left: 50%;
+  bottom: 5%;
+  font-size: 1.5em;
+  transform: translate(-50%, 100%);
+  animation: changeSize 1.5s linear 1s infinite;
+}
+
+@keyframes changeSize {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(3);
+  }
+}
