@@ -5,6 +5,7 @@ import { deleteEnemies, createEnemies } from './enemy.js';
 import { soundRocketShot, soundMainTheme, soundIntro } from "./music.js";
 import { Step, gameState, fps } from './step.js';
 import { fireGatlingEnemy } from './gatling.js';
+import { resetAmmo } from './ammo.js';
 
 let isGameStarted = false;
 let introduction = document.querySelector('#introduction');
@@ -51,6 +52,7 @@ function startLevel2() {
   levelState.levelNumber = 2;
   deleteEnemies();
   createEnemies();
+  resetAmmo()
   gameState.gameIntervalId = setInterval(Step, 1000 / fps);
   document.querySelector('#levelComplete').style.display = 'none'
   introduction.style.display = "block";
