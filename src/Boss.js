@@ -1,5 +1,5 @@
 import { addGatling } from './gatling.js'
-import { enemies } from './enemy.js'
+import { createRocket } from './enemy.js'
 export let level2boss
 
 function createBossHp(boss, i, maxHealth) {
@@ -31,7 +31,7 @@ function createBossElement(src, width, height, i, maxHealth) {
   boss.element.className = 'boss'
   boss.element.src = src
   boss.x = Math.floor(Math.random() * 400) + window.innerWidth
-  boss.y = Math.floor(Math.random() * (innerHeight - 200) + 50)
+  boss.y = Math.floor(Math.random() * (innerHeight - 300) + 50)
   boss.width = width
   boss.height = height
   boss.velocity = -2
@@ -56,7 +56,7 @@ export function createBoss() {
     y: boss.y,
     width: 120,
     height: 12,
-    dmg: 20,
+    dmg: 200,
     vx: 0,
     vy: 0,
     element: bossRocketImg,
@@ -69,22 +69,26 @@ export function createBoss() {
 }
 
 function bossbehavior() {
-  if (this.x < window.innerWidth - (this.width*1.5)) {
-    this.velocity = (Math.random() * -2)
-    this.isRocketLaunched = true
+  if (this.x < window.innerWidth - (this.width * 1.1)) {
+    this.velocity = 0
 
     if (this.y < 0 + this.height/2) {
         this.velocityY  *= -1
     }
-    if (this.y > window.innerHeight - (this.height* 3)) {
+    if (this.y > window.innerHeight - (this.height*2)) {
         this.velocityY *= -1
     }
     this.y -= this.velocityY
 
-    if(this.x <  this.width){
-      this.velocity *= -1
+    if(this.rocket.x < 0 - this.rocket.width*2 ) {
+        console.log(this.rocket)
+        this.rocket.x = this.x
+        this.rocket.y = this.y
+    }
+    if(this.rocket.vx == 0) {
+        const ammoDamage = Math.floor(this.enemyHealth.element.value/5)
+        createRocket(this, ammoDamage)
     }
   }
 
-  console.log(this.x)
 }

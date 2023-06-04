@@ -66,27 +66,33 @@ export function createEnemies() {
     } else{
       enemy = createEnemy('img/z-10.png', 330, 200, i, 200)
     }
+    createRocket(enemy, 20)
+    
+    addGatling(enemy)
+    document.body.append(enemy.element)
+    enemies.push(enemy)
+  }
+}
 
-    const enemyRocketImg = document.createElement('img');
+export function createRocket(enemy, damage) {
+  const enemyRocketImg = document.createElement('img');
     enemyRocketImg.className = 'enemyRocket';
     enemyRocketImg.src = 'img/mrRocket.gif';
+    enemy.rocket.element = enemyRocketImg
     enemy.isRocketLaunched = false;
     document.body.append(enemyRocketImg);
-
+    
     enemy.rocket = {
       x: enemy.x,
       y: enemy.y,
       width: 120,
       height: 12,
-      dmg: 20,
+      dmg: damage,
       vx: 0,
       vy: 0,
       element: enemyRocketImg,
     }
-    addGatling(enemy)
-    document.body.append(enemy.element)
-    enemies.push(enemy)
-  }
+    
 }
 
 function getRandomEnemyX (enemyIndex) {

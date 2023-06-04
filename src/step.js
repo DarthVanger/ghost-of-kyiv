@@ -28,8 +28,9 @@ export function Step () {
   enemies.forEach(enemyCollisionWithBullet)
   moveBackground()
   function moveEnemyRocket(enemy) {
+    
     enemy.rocket.x += enemy.rocket.vx;
-  }
+    }
 
   function launchEnemyRocket (enemy) {
     enemy.rocket.vx = -8;

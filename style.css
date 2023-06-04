@@ -323,7 +323,8 @@ h1 sub {
   width: 120px;
 }
 
-.bullet {
+.bullet,
+.boss {
   position: absolute;
 }
 

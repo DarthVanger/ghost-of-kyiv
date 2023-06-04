@@ -108,7 +108,8 @@ function checkBulletCollision(bullet, enemy) {
     enemy.enemyHealth.element.value -= 5
   }
   if (isCollisionWithRocket) {
-    enemy.rocket.x = -999
+    enemy.rocket.x = deadEnemyXPosition
+    enemy.rocket.vx = 0
     enemy.rocket.element.remove()
   }
   if (isOutOfScreen || isCollisionWithEnemy || isCollisionWithRocket) {
