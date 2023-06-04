@@ -132,7 +132,7 @@ export function checkEnemyShipCollision(enemy) {
     airfighter.y + airfighter.height > enemy.y &&
     airfighter.y < enemy.y + enemy.height
   ) {
-    airfighter.health.element.value -= 35
+    airfighter.health.element.value -= (Math.floor(enemy.enemyHealth.element.value /2))
     soundEnemyDieExplosion.play()
     explosionEffect(enemy)
     enemy.x = deadEnemyXPosition
