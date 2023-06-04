@@ -45,3 +45,10 @@ export function addGatling(enemy) {
   enemy.element.addEventListener('click', fireGatlingEnemy);
   document.querySelector('#airfighter').addEventListener('click', fireGatlingEnemy);
 }
+
+export function moveBullet(bullet) {
+  bullet.x += bullet.velocity
+  bullet.y += bullet.margin
+  bullet.element.style.left = bullet.x + 'px'
+  bullet.element.style.top = bullet.y + 'px'
+}

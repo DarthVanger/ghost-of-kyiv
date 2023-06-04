@@ -1,6 +1,6 @@
 import { enemies, renderEnemy } from './enemy.js';
 import { rocket, renderRocket, moveRocket } from './rocket.js';
-import { bulletArray } from "./gatling.js";
+import { bulletArray, gatling, moveBullet } from "./gatling.js";
 import { airfighter, moveShipLeft, moveShipRight, moveShipUp, moveShipDown } from "./airfighter.js";
 import { soundMainTheme, soundLevelComplete } from "./music.js";
 import performCollisionChecksForEnemy, { checkEnemyShipCollision, enemyCollisionWithBullet } from './rendering/EnemyCollisionsChecks.js';
@@ -18,6 +18,7 @@ export function Step () {
   enemies.forEach(moveEnemyRocket);
   bulletArray.forEach(moveBullet);
   moveRocket();
+  changeAmmo()
   enemies.forEach(checkEnemyShipCollision);
   enemies.forEach(performCollisionChecksForEnemy);
   enemies.forEach(launchRocketIfOnScreen);
@@ -89,13 +90,11 @@ function moveEnemy(enemy) {
   return (enemy.x += enemy.velocity);
 }
 
-
-function moveBullet(bullet) {
-  bullet.x += bullet.velocity
-  bullet.y += bullet.margin
-  bullet.element.style.left = bullet.x + 'px'
-  bullet.element.style.top = bullet.y + 'px'
+function changeAmmo() {
+  ammoElement.innerHTML = `<img class="ammoImg" src="img/ammo-gatling-img.gif"> ${gatling.ammo} <br> <img class="ammoImg" src="img/ammo-rocket-img.gif"> ${rocket.ammo}`;
 }
+
+
 
 function fadeIn(element, duration) {
   element.style.opacity = 0;
