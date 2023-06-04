@@ -16,7 +16,7 @@ introduction.addEventListener('click', introductionSkip);
 
 const levelState = {
   isLevelFinished : false,
-  levelNumber : 1,
+  levelNumber : 0,
 }
 
 export function startGame() {
