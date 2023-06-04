@@ -32,22 +32,31 @@ export function startGame() {
   }
 }
 
+function changeLevel() { 
+  isGameStarted = false
+  document.querySelector('#levelComplete').addEventListener('click', (event) => {
+    introduction.style.display = 'block'
+    introduction.style.position = 'absolute'
+    introduction.style.zIndex = levelState.levelNumber * 2
+  })
+}
+
 function introductionSkip() {
   if (!isGameStarted) {
-    levelState.levelNumber += 1
-    startGame();
     soundMainTheme.play();
     soundMainTheme.volume = 0.3;
     introduction.style.display = "none";
-    introduction.style.zIndex = 1;
+    introduction.style.zIndex = -1;
     soundIntro.pause();
+    levelState.levelNumber += 1
+    startGame();
     isGameStarted = true;
   } 
 }
 
 function startLevel1() {
   gameState.gameIntervalId = setInterval(Step, 1000 / fps);
-	createEnemies()
+	createEnemies(11)
   isGameStarted = false;
 }
 
@@ -57,9 +66,9 @@ function startLevel2() {
 	rocket.moveToInitialPosition();
   clearInterval(gameState.gameIntervalId);
   isGameStarted = false;
-  levelState.levelNumber = 2;
+
   deleteEnemies();
-  createEnemies()
+  createEnemies(11)
   resetAmmo()
   gameState.gameIntervalId = setInterval(Step, 1000 / fps);
   document.querySelector('#levelComplete').style.display = 'none'
@@ -72,7 +81,6 @@ function startLevel3() {
 	rocket.moveToInitialPosition();
   clearInterval(gameState.gameIntervalId);
   isGameStarted = false;
-  levelState.levelNumber = 3;
   deleteEnemies();
   createBoss()
   enemies.push(level2boss)
@@ -82,7 +90,7 @@ function startLevel3() {
   introduction.style.display = "block";
 }
 
-document.querySelector('#nextlevel').addEventListener('click', startLevel2)
+document.querySelector('#nextlevel').addEventListener('click', changeLevel)
 
 function initKeybordMovement() {
   document.addEventListener("keydown", handleKeyDown);

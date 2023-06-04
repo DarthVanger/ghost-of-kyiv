@@ -56,8 +56,8 @@ class Enemy {
 	}
 }
 
-export function createEnemies() {
-  for(let i = 0; i < 11; i++) {
+export function createEnemies(maxEnemies) {
+  for(let i = 0; i < maxEnemies; i++) {
     let enemy;  
     if(i < 5){
       enemy = createEnemy('img/su-3.png', 250, 80, i, 50)
