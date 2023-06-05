@@ -14,7 +14,7 @@ import performCollisionChecksForEnemy, {
   checkEnemyShipCollision,
   enemyCollisionWithBullet,
 } from './rendering/EnemyCollisionsChecks.js'
-import { level2boss } from './Boss.js'
+import { level3Boss } from './Boss.js'
 export const fps = 60
 
 export const gameState = {
@@ -23,9 +23,12 @@ export const gameState = {
 }
 
 export function Step() {
-  if (enemies[0]?.behavior) {
-    level2boss.behavior()
-  }
+  enemies.forEach((enemy) => {
+    if (enemy.behavior) {
+      enemy.behavior();
+    }
+  })
+  
   enemies.forEach(renderEnemy)
   enemies.forEach(renderEnemyRocket)
   enemies.forEach(moveEnemy)
@@ -88,7 +91,6 @@ export function Step() {
     soundMainTheme.pause()
     soundMainTheme.currentTime = 0
     soundLevelComplete.play()
-    soundLevelComplete.volume = 0.4
   }
 }
 

@@ -66,7 +66,8 @@ export function createEnemies(maxEnemies) {
     } else {
       enemy = createEnemy('img/z-10.png', 330, 200, i, 200)
     }
-    createRocket(enemy, 20)
+    const defaultDamageBullet = 20
+    createRocket(enemy, defaultDamageBullet)
 
     addGatling(enemy)
     document.body.append(enemy.element)
@@ -95,9 +96,9 @@ export function createRocket(enemy, damage) {
 
 function getRandomEnemyX(enemyIndex) {
   if (enemyIndex < 1) {
-    return Math.floor(Math.random() * 400) + 400
+    return Math.floor(Math.random() * 400) + 500
   } else {
-    return Math.floor(Math.random() * 400) + 300 + enemies[enemyIndex - 1].x
+    return Math.floor(Math.random() * 400) + 400 + enemies[enemyIndex - 1].x
   }
 }
 

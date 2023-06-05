@@ -4,6 +4,7 @@ import {
   soundEnemyDieExplosion,
   soundMainTheme,
   soundGameOver,
+  soundboss,
 } from './music.js'
 
 const acceleration = 1
@@ -117,6 +118,7 @@ export function moveShipDown() {
     soundEnemyDieExplosion.play()
     setTimeout(function () {
       soundMainTheme.pause()
+      soundboss.pause()
       soundGameOver.play()
     }, 900)
   }

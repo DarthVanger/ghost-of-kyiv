@@ -12,13 +12,13 @@ import {
 import { Step, gameState, fps } from './step.js'
 import { fireGatlingEnemy } from './gatling.js'
 import { resetAmmo } from './ammo.js'
-import { level2boss, createBoss } from './Boss.js'
+import { level3Boss, createBoss } from './Boss.js'
 import { bossPopup } from './rendering/Helpers.js'
 
 let isGameStarted = false
 let introduction = document.querySelector('#introduction')
 introduction.addEventListener('click', introductionSkip)
-
+const levelEnemies = 11
 const levelState = {
   isLevelFinished: false,
   levelNumber: 0,
@@ -36,6 +36,10 @@ export function startGame() {
   if (levelState.levelNumber == 3) {
     startLevel3()
   }
+  if (levelState.levelNumber == 4) {
+    levelState.levelNumber = 1
+    startLevel1()
+  }
 }
 
 function changeLevel() {
@@ -43,29 +47,29 @@ function changeLevel() {
   soundLevelComplete.pause()
   document
     .querySelector('#levelComplete')
-    .addEventListener('click', (event) => {
-      introduction.style.display = 'block'
-      introduction.style.zIndex = levelState.levelNumber * 2
-      soundMainTheme.play()
-      if (levelState.levelNumber == 1) {
-        document.querySelector('#episode').innerHTML = 'EPISODE II'
-        document.querySelector('#preHistoryEpisode').innerHTML =
-          'The battle for the borders of Gostomel'
-      }
-      if (levelState.levelNumber == 2) {
-        soundboss.play()
-        soundboss.volume = 0.7
-        document.querySelector('#episode').innerHTML = 'EPISODE III'
-        document.querySelector('#preHistoryEpisode').innerHTML =
-          'Helicopter Boss'
-      }
-    })
+    .addEventListener('click', showIntroductionAndSetNewText)
+}
+
+function showIntroductionAndSetNewText() {
+  introduction.style.display = 'block'
+  introduction.style.zIndex = 3
+  soundMainTheme.play()
+  if (levelState.levelNumber == 1) {
+    document.querySelector('#episode').innerHTML = 'EPISODE II'
+    document.querySelector('#backstoryEpisode').innerHTML =
+      'The battle for the borders of Gostomel'
+  }
+  if (levelState.levelNumber == 2) {
+    soundMainTheme.pause()
+    soundboss.play()
+    document.querySelector('#episode').innerHTML = 'EPISODE III'
+    document.querySelector('#backstoryEpisode').innerHTML = 'Helicopter Boss'
+  }
 }
 
 function introductionSkip() {
   if (!isGameStarted) {
     soundMainTheme.play()
-    soundMainTheme.volume = 0.3
     introduction.style.display = 'none'
     introduction.style.zIndex = -1
     soundIntro.pause()
@@ -77,7 +81,7 @@ function introductionSkip() {
 
 function startLevel1() {
   soundMainTheme.play()
-  createEnemies(11)
+  createEnemies(levelEnemies)
   gameState.gameIntervalId = setInterval(Step, 1000 / fps)
   isGameStarted = false
 }
@@ -89,8 +93,8 @@ function startLevel2() {
   clearInterval(gameState.gameIntervalId)
   isGameStarted = false
   deleteEnemies()
-  createEnemies(11)
-  resetAmmo()
+  createEnemies(levelEnemies)
+  resetAmmo(1500, 10)
   gameState.gameIntervalId = setInterval(Step, 1000 / fps)
   document.querySelector('#levelComplete').style.display = 'none'
   introduction.style.display = 'block'
@@ -105,8 +109,9 @@ function startLevel3() {
   deleteEnemies()
   bossPopup()
   createBoss()
-  enemies.push(level2boss)
-  resetAmmo()
+  soundMainTheme.pause()
+  enemies.push(level3Boss)
+  resetAmmo(2000, 12)
   document.querySelector('#levelComplete').style.display = 'none'
   introduction.style.display = 'block'
   gameState.gameIntervalId = setInterval(Step, 1000 / fps)
