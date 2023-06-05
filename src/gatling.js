@@ -21,7 +21,7 @@ function createBullet() {
   bullet.velocity = 12
   bullet.x = airfighter.x + airfighter.width + (Math.random()* 4)
   bullet.y = airfighter.y + airfighter.height/2
-  bullet.margin = Math.random()*(3)-(1.5)
+  bullet.margin = Math.random()*(2)-(1)
   gatling.ammo -= 10;
   bulletArray.push(bullet)
 }
