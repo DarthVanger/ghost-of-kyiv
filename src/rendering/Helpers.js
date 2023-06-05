@@ -7,4 +7,8 @@ export function bossPopup() {
   popup.id = 'bossPopup'
   popup.innerHTML = 'THE BOSS IS COMING!!!'
   document.querySelector('#game-background').append(popup)
+  setTimeout(() => {deletePopup(popup)}, 3000)
 }
+function deletePopup(popup) {
+    popup.remove()
+}   

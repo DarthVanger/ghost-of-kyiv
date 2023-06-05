@@ -8,7 +8,8 @@ import {
   soundRocketHit,
   soundEnemyDieExplosion,
   soundMainTheme,
-  soundGameOver
+  soundGameOver,
+  soundboss
 } from '../music.js'
 
 export default function performCollisionChecksForEnemy(enemy) {
@@ -92,6 +93,7 @@ function playerDiesIfHpBelowZiro() {
     soundEnemyDieExplosion.play()
     setTimeout(() => {
       soundMainTheme.pause()
+      soundboss.pause()
       soundGameOver.play()
     }, 900)
   }
