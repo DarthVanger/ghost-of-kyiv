@@ -25,5 +25,5 @@ soundRocketHit.volume = 0.5
 soundEnemyDieExplosion.volume = 0.5
 soundGameOver.volume = 0.3
 soundMainTheme.volume = 0.5
-soundLevelComplete.volume = 0.01
+soundLevelComplete.volume = 0.1
 soundboss.volume = 1

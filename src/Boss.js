@@ -1,6 +1,6 @@
 import { addGatling } from './gatling.js'
 import { createRocket } from './enemy.js'
-export let level2boss
+export let level3Boss
 
 function createBossHp(boss, i, maxHealth) {
   boss.enemyHealth = {}
@@ -64,27 +64,31 @@ export function createBoss() {
   boss.behavior = bossbehavior
   addGatling(boss)
   document.body.append(boss.element)
-  level2boss = boss
+  level3Boss = boss
 }
 
 function bossbehavior() {
-  if (this.x < window.innerWidth - this.width * 1.1) {
+  const bossAppearance = this.x < window.innerWidth - this.width * 1.1
+  if (bossAppearance) {
     this.velocity = 0
-
-    if (this.y < 0 + this.height / 2) {
+    
+    const topMotionFrame = this.y < 0 + this.height / 2
+    if (topMotionFrame) {
       this.velocityY *= -1
     }
-    if (this.y > window.innerHeight - this.height * 2) {
+    const bottobMotionFrame = this.y > window.innerHeight - this.height * 2
+    if (bottobMotionFrame) {
       this.velocityY *= -1
     }
     this.y -= this.velocityY
-
-    if (this.rocket.x < 0 - this.rocket.width * 2) {
+    
+    const restartRocket = this.rocket.x < 0 - this.rocket.width * 2
+    if (restartRocket) {
       this.rocket.x = this.x
       this.rocket.y = this.y
     }
     if (this.rocket.vx == 0) {
-      const ammoDamage = Math.floor(this.enemyHealth.element.value / 5)
+      const ammoDamage = Math.floor(this.enemyHealth.element.value / 10)
       createRocket(this, ammoDamage)
     }
   }
