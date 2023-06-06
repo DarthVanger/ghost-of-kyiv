@@ -1,125 +1,140 @@
-import { enemies, renderEnemy } from './enemy.js';
-import { rocket, renderRocket, moveRocket } from './rocket.js';
-import { bulletArray, gatling, moveBullet } from "./gatling.js";
-import { airfighter, moveShipLeft, moveShipRight, moveShipUp, moveShipDown } from "./airfighter.js";
-import { soundMainTheme, soundLevelComplete } from "./music.js";
-import { rocketDefaultX, rocketDefaultY } from './rendering/Helpers.js';
-import performCollisionChecksForEnemy, { checkEnemyShipCollision, enemyCollisionWithBullet } from './rendering/EnemyCollisionsChecks.js';
-export const fps = 60;
+import { enemies, renderEnemy } from './enemy.js'
+import { rocket, renderRocket, moveRocket } from './rocket.js'
+import { bulletArray, gatling, moveBullet } from './gatling.js'
+import {
+  airfighter,
+  moveShipLeft,
+  moveShipRight,
+  moveShipUp,
+  moveShipDown,
+} from './airfighter.js'
+import { soundMainTheme, soundLevelComplete } from './music.js'
+import { rocketDefaultX, rocketDefaultY } from './rendering/Helpers.js'
+import performCollisionChecksForEnemy, {
+  checkEnemyShipCollision,
+  enemyCollisionWithBullet,
+} from './rendering/EnemyCollisionsChecks.js'
+import { level3Boss } from './Boss.js'
+export const fps = 60
 
 export const gameState = {
-  isGamePaused : false,
-  gameIntervalId : undefined,
-} 
+  isGamePaused: false,
+  gameIntervalId: undefined,
+}
 
-export function Step () {
-  enemies.forEach(renderEnemy);
-  enemies.forEach(renderEnemyRocket);
-  enemies.forEach(moveEnemy);
-  enemies.forEach(moveEnemyRocket);
-  bulletArray.forEach(moveBullet);
-  moveRocket();
+export function Step() {
+  enemies.forEach((enemy) => {
+    if (enemy.behavior) {
+      enemy.behavior();
+    }
+  })
+  
+  enemies.forEach(renderEnemy)
+  enemies.forEach(renderEnemyRocket)
+  enemies.forEach(moveEnemy)
+  enemies.forEach(moveEnemyRocket)
+  bulletArray.forEach(moveBullet)
+  moveRocket()
   changeAmmo()
-  enemies.forEach(checkEnemyShipCollision);
-  enemies.forEach(performCollisionChecksForEnemy);
-  enemies.forEach(launchRocketIfOnScreen);
+  enemies.forEach(checkEnemyShipCollision)
+  enemies.forEach(performCollisionChecksForEnemy)
+  enemies.forEach(launchRocketIfOnScreen)
   enemies.forEach(enemyCollisionWithBullet)
   moveBackground()
   function moveEnemyRocket(enemy) {
-    enemy.rocket.x += enemy.rocket.vx;
+    enemy.rocket.x += enemy.rocket.vx
   }
 
-  function launchEnemyRocket (enemy) {
-    enemy.rocket.vx = -8;
+  function launchEnemyRocket(enemy) {
+    enemy.rocket.vx = -8
   }
-  
-  function launchRocketIfOnScreen (enemy) {
+
+  function launchRocketIfOnScreen(enemy) {
     if (enemy.x < window.innerWidth) {
       if (!enemy.isRocketLaunched) {
-        launchEnemyRocket(enemy);
-        enemy.isRocketLaunched = true;
+        launchEnemyRocket(enemy)
+        enemy.isRocketLaunched = true
       }
     }
   }
-    
+
   if (rocket.x > airfighter.x + airfighter.rocketMaxDistance) {
-    rocket.x = airfighter.x + rocketDefaultX;
-    rocket.y = airfighter.y + rocketDefaultY;
-    rocket.velocity -= 8;
-    rocket.dmg = 50;
-    rocket.element.src = "img/Rocket.gif";
+    rocket.x = airfighter.x + rocketDefaultX
+    rocket.y = airfighter.y + rocketDefaultY
+    rocket.velocity -= 8
+    rocket.dmg = 50
+    rocket.element.src = 'img/Rocket.gif'
   }
-  
-  renderRocket();
-  airfighter.render();
+
+  renderRocket()
+  airfighter.render()
 
   if (airfighter.isShipMovingUp) {
-    moveShipUp();
+    moveShipUp()
   }
   if (airfighter.isShipMovingDown) {
-    moveShipDown();
+    moveShipDown()
   }
   if (airfighter.isShipMovingLeft) {
-    moveShipLeft();
+    moveShipLeft()
   }
   if (airfighter.isShipMovingRight) {
-    moveShipRight();
+    moveShipRight()
   }
-  
-  const lastEnemy = enemies[enemies.length-1]
+
+  const lastEnemy = enemies[enemies.length - 1]
   const vuletivZaRamku = lastEnemy.x < 0 - lastEnemy.width
   if (vuletivZaRamku) {
-    stopInterval();
-    document.querySelector('#levelComplete').style.display = '';
-    fadeIn(levelComplete, 400);
-    soundMainTheme.pause();
-    soundMainTheme.currentTime = 0;
-    soundLevelComplete.play();
-    soundLevelComplete.volume = 0.4;
+    stopInterval()
+    document.querySelector('#levelComplete').style.display = ''
+    fadeIn(levelComplete, 400)
+    soundMainTheme.pause()
+    soundMainTheme.currentTime = 0
+    soundLevelComplete.play()
   }
 }
 
 function renderEnemyRocket(enemy) {
-  enemy.rocket.element.style.left = enemy.rocket.x;
-  enemy.rocket.element.style.top = enemy.rocket.y;
+  enemy.rocket.element.style.left = enemy.rocket.x
+  enemy.rocket.element.style.top = enemy.rocket.y
 }
 
 function moveEnemy(enemy) {
   if (!enemy.isRocketLaunched) {
-    enemy.rocket.x += enemy.velocity;
+    enemy.rocket.x += enemy.velocity
   }
-  return (enemy.x += enemy.velocity);
+  return (enemy.x += enemy.velocity)
 }
 
 function changeAmmo() {
-  ammoElement.innerHTML = `<img class="ammoImg" src="img/ammo-gatling-img.gif"> ${gatling.ammo} <br> <img class="ammoImg" src="img/ammo-rocket-img.gif"> ${rocket.ammo}`;
+  ammoElement.innerHTML = `<img class="ammoImg" src="img/ammo-gatling-img.gif"> ${gatling.ammo} <br> <img class="ammoImg" src="img/ammo-rocket-img.gif"> ${rocket.ammo}`
 }
-
-
 
 function fadeIn(element, duration) {
-  element.style.opacity = 0;
-  var last = +new Date();
-  var tick = function() {
-    element.style.opacity = +element.style.opacity + (new Date() - last) / duration;
-    last = +new Date();
+  element.style.opacity = 0
+  var last = +new Date()
+  var tick = function () {
+    element.style.opacity =
+      +element.style.opacity + (new Date() - last) / duration
+    last = +new Date()
     if (+element.style.opacity < 1) {
-      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+      ;(window.requestAnimationFrame && requestAnimationFrame(tick)) ||
+        setTimeout(tick, 16)
     }
-  };
-  tick();
+  }
+  tick()
 }
 
-export function stopInterval () {
-  clearInterval(gameState.gameIntervalId);
-  gameState.isGamePaused = true;
+export function stopInterval() {
+  clearInterval(gameState.gameIntervalId)
+  gameState.isGamePaused = true
 }
-let backBgX = 0;
-let middleBgX = 0;
-let frontBgX = 0;
-let backBgVx = -0.3;
-let middleBgVx = -0.5;
-let frontBgVx = -0.75;
+let backBgX = 0
+let middleBgX = 0
+let frontBgX = 0
+let backBgVx = -0.3
+let middleBgVx = -0.5
+let frontBgVx = -0.75
 
 function moveBackground() {
   let backBg = document.querySelector('#bg-back')

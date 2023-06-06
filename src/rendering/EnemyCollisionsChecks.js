@@ -8,7 +8,8 @@ import {
   soundRocketHit,
   soundEnemyDieExplosion,
   soundMainTheme,
-  soundGameOver
+  soundGameOver,
+  soundboss
 } from '../music.js'
 
 export default function performCollisionChecksForEnemy(enemy) {
@@ -92,6 +93,7 @@ function playerDiesIfHpBelowZiro() {
     soundEnemyDieExplosion.play()
     setTimeout(() => {
       soundMainTheme.pause()
+      soundboss.pause()
       soundGameOver.play()
     }, 900)
   }
@@ -108,7 +110,8 @@ function checkBulletCollision(bullet, enemy) {
     enemy.enemyHealth.element.value -= 5
   }
   if (isCollisionWithRocket) {
-    enemy.rocket.x = -999
+    enemy.rocket.x = deadEnemyXPosition
+    enemy.rocket.vx = 0
     enemy.rocket.element.remove()
   }
   if (isOutOfScreen || isCollisionWithEnemy || isCollisionWithRocket) {
