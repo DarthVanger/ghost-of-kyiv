@@ -40,7 +40,7 @@ export function Step() {
   enemies.forEach(performCollisionChecksForEnemy)
   enemies.forEach(launchRocketIfOnScreen)
   enemies.forEach(enemyCollisionWithBullet)
-  moveBackground()
+  moveBackground(airfighter)
   function moveEnemyRocket(enemy) {
     enemy.rocket.x += enemy.rocket.vx
   }
