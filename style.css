@@ -334,6 +334,12 @@ h1 sub {
   position: absolute;
   height: 100vh;
 }
+#bg-front {
+  background: url('img/parallax-bg-front.png');
+  background-size: contain;
+  height: 100vh;
+  width: 25000px;
+}
 
 #bossPopup{
   display: block;
