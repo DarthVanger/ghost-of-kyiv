@@ -98,7 +98,7 @@ function getRandomEnemyX(enemyIndex) {
   if (enemyIndex < 1) {
     return Math.floor(Math.random() * 400) + 500
   } else {
-    return Math.floor(Math.random() * 400) + 400 + enemies[enemyIndex - 1].x
+    return Math.floor(Math.random() * 400) + 500 + enemies[enemyIndex - 1].x
   }
 }
 
