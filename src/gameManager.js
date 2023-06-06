@@ -14,6 +14,7 @@ import { fireGatlingEnemy } from './gatling.js'
 import { resetAmmo } from './ammo.js'
 import { level3Boss, createBoss } from './Boss.js'
 import { bossPopup } from './rendering/Helpers.js'
+import { resetBackground } from './background.js'
 
 let isGameStarted = false
 let introduction = document.querySelector('#introduction')
@@ -95,6 +96,7 @@ function startLevel2() {
   deleteEnemies()
   createEnemies(levelEnemies)
   resetAmmo(1500, 10)
+  resetBackground()
   gameState.gameIntervalId = setInterval(Step, 1000 / fps)
   document.querySelector('#levelComplete').style.display = 'none'
   introduction.style.display = 'block'
@@ -112,6 +114,7 @@ function startLevel3() {
   soundMainTheme.pause()
   enemies.push(level3Boss)
   resetAmmo(2000, 12)
+  resetBackground()
   document.querySelector('#levelComplete').style.display = 'none'
   introduction.style.display = 'block'
   gameState.gameIntervalId = setInterval(Step, 1000 / fps)
