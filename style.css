@@ -342,9 +342,9 @@ h1 sub {
   width: 25000px;
 }
 
-#bossPopup{
+#bossPopup {
   display: block;
-  position:  absolute;
+  position: absolute;
   color: red;
   z-index: 4;
   left: 50%;

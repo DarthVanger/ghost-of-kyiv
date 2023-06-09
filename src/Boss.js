@@ -71,7 +71,7 @@ function bossbehavior() {
   const bossAppearance = this.x < window.innerWidth - this.width * 1.1
   if (bossAppearance) {
     this.velocity = 0
-    
+
     const topMotionFrame = this.y < 0 + this.height / 2
     if (topMotionFrame) {
       this.velocityY *= -1
@@ -81,7 +81,7 @@ function bossbehavior() {
       this.velocityY *= -1
     }
     this.y -= this.velocityY
-    
+
     const restartRocket = this.rocket.x < 0 - this.rocket.width * 2
     if (restartRocket) {
       this.rocket.x = this.x
