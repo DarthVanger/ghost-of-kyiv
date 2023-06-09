@@ -16,7 +16,7 @@ class Player {
   width = 300
   height = 130
   element = document.querySelector('#airfighter')
-  pm = new PlayerMovement()
+  pm = new PlayerMovement(airfighter)
   health = {
     x: 0,
     y: 0,
@@ -53,14 +53,14 @@ class Player {
     this.healthtext.element.style.width = this.width
 
     if (afterForardDesccelerationCondition) {
-      this.pm.afterForardDescceleration(airfighter)
+      this.pm.afterForardDescceleration()
       if (rocket.velocity < 7) {
         rocket.x += this.vx
       }
     }
 
     if (afterBackDesccelerationCondition) {
-      this.pm.afterBackDescceleration(airfighter)
+      this.pm.afterBackDescceleration()
       if (rocket.velocity < 7) {
         rocket.x += this.vx
       }
