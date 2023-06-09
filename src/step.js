@@ -2,12 +2,6 @@ import { enemies, renderEnemy } from './enemy.js'
 import { rocket, renderRocket, moveRocket } from './rocket.js'
 import { bulletArray, gatling, moveBullet } from './gatling.js'
 import { airfighter } from './player/airfighter.js'
-import {
-  moveShipLeft,
-  moveShipRight,
-  moveShipUp,
-  moveShipDown,
-} from './player/playerMovement.js'
 import { soundMainTheme, soundLevelComplete } from './music.js'
 import { rocketDefaultX, rocketDefaultY } from './rendering/Helpers.js'
 import performCollisionChecksForEnemy, {
@@ -71,16 +65,16 @@ export function Step() {
   airfighter.render()
 
   if (airfighter.isShipMovingUp) {
-    moveShipUp(airfighter)
+    airfighter.pm.moveShipUp(airfighter)
   }
   if (airfighter.isShipMovingDown) {
-    moveShipDown(airfighter)
+    airfighter.pm.moveShipDown(airfighter)
   }
   if (airfighter.isShipMovingLeft) {
-    moveShipLeft(airfighter)
+    airfighter.pm.moveShipLeft(airfighter)
   }
   if (airfighter.isShipMovingRight) {
-    moveShipRight(airfighter)
+    airfighter.pm.moveShipRight(airfighter)
   }
 
   const lastEnemy = enemies[enemies.length - 1]
@@ -112,7 +106,7 @@ function changeAmmo() {
 }
 
 function fadeIn(element) {
-  element.className = "fadeIn"
+  element.className = 'fadeIn'
 }
 
 export function stopInterval() {
