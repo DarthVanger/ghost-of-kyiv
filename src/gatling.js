@@ -1,4 +1,4 @@
-import { airfighter } from './player/airfighter.js'
+import { airfighter } from './player/Player.js'
 
 import { soundGatling } from './music.js'
 

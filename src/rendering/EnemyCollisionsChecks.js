@@ -1,4 +1,4 @@
-import { airfighter } from '../player/airfighter.js'
+import { airfighter } from '../player/Player.js'
 import {
   deadEnemyXPosition,
   rocketDefaultX,
@@ -7,7 +7,7 @@ import {
 import { bulletArray, removeBullet } from '../gatling.js'
 import { explosion } from '../rendering/Explosion.js'
 import { rocket } from '../rocket.js'
-import { playerDiesIfHpBelowZiro } from '../player/airfighter.js'
+import { playerDiesIfHpBelowZiro } from '../player/Player.js'
 import {
   soundRocketShot,
   soundRocketHit,
