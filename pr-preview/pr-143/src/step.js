@@ -65,16 +65,16 @@ export function Step() {
   airfighter.render()
 
   if (airfighter.isShipMovingUp) {
-    airfighter.pm.moveShipUp(airfighter)
+    airfighter.pm.moveShipUp()
   }
   if (airfighter.isShipMovingDown) {
-    airfighter.pm.moveShipDown(airfighter)
+    airfighter.pm.moveShipDown()
   }
   if (airfighter.isShipMovingLeft) {
-    airfighter.pm.moveShipLeft(airfighter)
+    airfighter.pm.moveShipLeft()
   }
   if (airfighter.isShipMovingRight) {
-    airfighter.pm.moveShipRight(airfighter)
+    airfighter.pm.moveShipRight()
   }
 
   const lastEnemy = enemies[enemies.length - 1]

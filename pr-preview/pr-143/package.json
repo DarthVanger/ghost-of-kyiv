@@ -4,7 +4,6 @@
   "description": "Ghost of Kyiv Browser Game.",
   "main": "app.js",
   "scripts": {
-    "prettier": "prettier --check .",
     "prepare": "husky install"
   },
   "repository": {
