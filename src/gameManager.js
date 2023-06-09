@@ -118,7 +118,9 @@ function startLevel3() {
   gameState.gameIntervalId = setInterval(Step, 1000 / fps)
 }
 
-levelCompleteScreen.querySelector('#nextlevel').addEventListener('click', changeLevel)
+levelCompleteScreen
+  .querySelector('#nextlevel')
+  .addEventListener('click', changeLevel)
 
 export function endGameAction() {
   document.location.reload()
