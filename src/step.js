@@ -15,8 +15,9 @@ import performCollisionChecksForEnemy, {
   enemyCollisionWithBullet,
 } from './rendering/EnemyCollisionsChecks.js'
 import { moveBackground } from './background.js'
-export const fps = 60
+import { levelCompleteScreen } from './levelCompleteScreen.js'
 
+export const fps = 60
 export const gameState = {
   isGamePaused: false,
   gameIntervalId: undefined,
@@ -86,8 +87,8 @@ export function Step() {
   const vuletivZaRamku = lastEnemy.x < 0 - lastEnemy.width
   if (vuletivZaRamku) {
     stopInterval()
-    document.querySelector('#levelComplete').style.display = ''
-    fadeIn(levelComplete, 400)
+    document.body.append(levelCompleteScreen)
+    fadeIn(levelCompleteScreen)
     soundMainTheme.pause()
     soundMainTheme.currentTime = 0
     soundLevelComplete.play()
@@ -110,19 +111,8 @@ function changeAmmo() {
   ammoElement.innerHTML = `<img class="ammoImg" src="img/ammo-gatling-img.gif"> ${gatling.ammo} <br> <img class="ammoImg" src="img/ammo-rocket-img.gif"> ${rocket.ammo}`
 }
 
-function fadeIn(element, duration) {
-  element.style.opacity = 0
-  var last = +new Date()
-  var tick = function () {
-    element.style.opacity =
-      +element.style.opacity + (new Date() - last) / duration
-    last = +new Date()
-    if (+element.style.opacity < 1) {
-      ;(window.requestAnimationFrame && requestAnimationFrame(tick)) ||
-        setTimeout(tick, 16)
-    }
-  }
-  tick()
+function fadeIn(element) {
+  element.className = "fadeIn"
 }
 
 export function stopInterval() {

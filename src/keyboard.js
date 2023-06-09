@@ -42,30 +42,22 @@ function handleKeyDown(event) {
 
   if (event.key == 'a' || event.key == 'ф') {
     airfighter.isShipMovingLeft = true
-    if (airfighter.element.src != 'img/aifighter-Back.gif') {
-      airfighter.element.src = 'img/aifighter-Back.gif'
-    }
+    airfighter.element.src = 'img/aifighter-Back.gif'
   }
 
   if (event.key == 's' || event.key == 'ы' || event.key == 'і') {
     airfighter.isShipMovingDown = true
-    if (airfighter.element.src != 'img/aifighter-Down.gif') {
-      airfighter.element.src = 'img/aifighter-Down.gif'
-    }
+    airfighter.element.src = 'img/aifighter-Down.gif'
   }
 
   if (event.key == 'w' || event.key == 'ц') {
     airfighter.isShipMovingUp = true
-    if (airfighter.element.src != 'img/aifighter-Up.gif') {
-      airfighter.element.src = 'img/aifighter-Up.gif'
-    }
+    airfighter.element.src = 'img/aifighter-Up.gif'
   }
 
   if (event.key == 'd' || event.key == 'в') {
     airfighter.isShipMovingRight = true
-    if (airfighter.element.src != 'img/aifighter-Front-Accelerate.gif') {
-      airfighter.element.src = 'img/aifighter-Front-Accelerate.gif'
-    }
+    airfighter.element.src = 'img/aifighter-Front-Accelerate.gif'
   }
 
   if (event.key == 'p' || event.key == 'з') {
