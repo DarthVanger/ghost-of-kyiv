@@ -1,7 +1,7 @@
 import { enemies, renderEnemy } from './enemy.js'
 import { rocket, renderRocket, moveRocket } from './rocket.js'
 import { bulletArray, gatling, moveBullet } from './gatling.js'
-import { airfighter } from './player/airfighter.js'
+import { airfighter } from './player/Player.js'
 import { soundMainTheme, soundLevelComplete } from './music.js'
 import { rocketDefaultX, rocketDefaultY } from './rendering/Helpers.js'
 import performCollisionChecksForEnemy, {

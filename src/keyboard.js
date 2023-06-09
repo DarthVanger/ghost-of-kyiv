@@ -1,6 +1,6 @@
 import { rocket } from './rocket.js'
 import { fireGatlingEnemy } from './gatling.js'
-import { airfighter } from './player/airfighter.js'
+import { airfighter } from './player/Player.js'
 import { mobileControls } from './touch.js'
 import { gamePauseAction } from './gameMenuActions.js'
 import { soundRocketShot } from './music.js'
