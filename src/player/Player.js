@@ -6,7 +6,7 @@ import {
   soundGameOver,
   soundboss,
 } from '../music.js'
-import { afterForardDescceleration, afterBackDescceleration} from './playerMovement.js'
+import PlayerMovement from './PlayerMovement.js'
 
 class Player {
   x = 0
@@ -16,6 +16,7 @@ class Player {
   width = 300
   height = 130
   element = document.querySelector('#airfighter')
+  pm = new PlayerMovement()
   health = {
     x: 0,
     y: 0,
@@ -52,14 +53,14 @@ class Player {
     this.healthtext.element.style.width = this.width
 
     if (afterForardDesccelerationCondition) {
-      afterForardDescceleration(airfighter)
+      this.pm.afterForardDescceleration(airfighter)
       if (rocket.velocity < 7) {
         rocket.x += this.vx
       }
     }
 
     if (afterBackDesccelerationCondition) {
-      afterBackDescceleration(airfighter)
+      this.pm.afterBackDescceleration(airfighter)
       if (rocket.velocity < 7) {
         rocket.x += this.vx
       }
