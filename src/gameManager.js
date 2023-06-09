@@ -1,5 +1,5 @@
 import { rocket } from './rocket.js'
-import { airfighter } from './player/airfighter.js'
+import { airfighter } from './player/Player.js'
 import { deleteEnemies, createEnemies, enemies } from './enemy.js'
 import {
   soundMainTheme,
