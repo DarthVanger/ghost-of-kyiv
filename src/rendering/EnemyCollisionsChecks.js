@@ -3,6 +3,7 @@ import { deadEnemyXPosition, rocketDefaultX, rocketDefaultY } from './Helpers.js
 import { bulletArray, removeBullet } from '../gatling.js'
 import { explosion } from '../rendering/Explosion.js'
 import { rocket } from '../rocket.js'
+import { playerDiesIfHpBelowZiro } from '../airfighter.js'
 import {
   soundRocketShot,
   soundRocketHit,
@@ -84,20 +85,6 @@ function explosionEffect(airplane) {
   }, 700)
 }
 
-function playerDiesIfHpBelowZiro() {
-  if (airfighter.health.element.value <= 0) {
-    document.querySelector('#gameover-screen').style.display = ''
-    airfighter.x = 0
-    airfighter.y = 0
-    soundRocketHit.pause()
-    soundEnemyDieExplosion.play()
-    setTimeout(() => {
-      soundMainTheme.pause()
-      soundboss.pause()
-      soundGameOver.play()
-    }, 900)
-  }
-}
 export function enemyCollisionWithBullet(enemy) {
   bulletArray.forEach((bullet) => checkBulletCollision(bullet, enemy))
 }
