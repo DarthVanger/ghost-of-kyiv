@@ -88,7 +88,7 @@ export function Step() {
   if (vuletivZaRamku) {
     stopInterval()
     document.body.append(levelCompleteScreen)
-    fadeIn(levelCompleteScreen, 400)
+    fadeIn(levelCompleteScreen)
     soundMainTheme.pause()
     soundMainTheme.currentTime = 0
     soundLevelComplete.play()
@@ -111,20 +111,8 @@ function changeAmmo() {
   ammoElement.innerHTML = `<img class="ammoImg" src="img/ammo-gatling-img.gif"> ${gatling.ammo} <br> <img class="ammoImg" src="img/ammo-rocket-img.gif"> ${rocket.ammo}`
 }
 
-function fadeIn(element, duration) {
-  // element.style.opacity = 0
+function fadeIn(element) {
   element.className = "fadeIn"
-    // var last = +new Date()
-  // var tick = function () {
-  //   element.style.opacity =
-  //     +element.style.opacity + (new Date() - last) / duration
-  //   last = +new Date()
-  //   if (+element.style.opacity < 1) {
-  //     ;(window.requestAnimationFrame && requestAnimationFrame(tick)) ||
-  //       setTimeout(tick, 16)
-  //   }
-  // }
-  // tick()
 }
 
 export function stopInterval() {
