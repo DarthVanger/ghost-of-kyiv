@@ -1,13 +1,13 @@
 import { enemies, renderEnemy } from './enemy.js'
 import { rocket, renderRocket, moveRocket } from './rocket.js'
 import { bulletArray, gatling, moveBullet } from './gatling.js'
+import { airfighter } from './player/airfighter.js'
 import {
-  airfighter,
   moveShipLeft,
   moveShipRight,
   moveShipUp,
   moveShipDown,
-} from './airfighter.js'
+} from './player/playerMovement.js'
 import { soundMainTheme, soundLevelComplete } from './music.js'
 import { rocketDefaultX, rocketDefaultY } from './rendering/Helpers.js'
 import performCollisionChecksForEnemy, {
@@ -25,10 +25,10 @@ export const gameState = {
 export function Step() {
   enemies.forEach((enemy) => {
     if (enemy.behavior) {
-      enemy.behavior();
+      enemy.behavior()
     }
   })
-  
+
   enemies.forEach(renderEnemy)
   enemies.forEach(renderEnemyRocket)
   enemies.forEach(moveEnemy)
@@ -70,16 +70,16 @@ export function Step() {
   airfighter.render()
 
   if (airfighter.isShipMovingUp) {
-    moveShipUp()
+    moveShipUp(airfighter)
   }
   if (airfighter.isShipMovingDown) {
-    moveShipDown()
+    moveShipDown(airfighter)
   }
   if (airfighter.isShipMovingLeft) {
-    moveShipLeft()
+    moveShipLeft(airfighter)
   }
   if (airfighter.isShipMovingRight) {
-    moveShipRight()
+    moveShipRight(airfighter)
   }
 
   const lastEnemy = enemies[enemies.length - 1]

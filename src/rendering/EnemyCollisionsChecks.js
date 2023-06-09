@@ -1,16 +1,20 @@
-import { airfighter } from '../airfighter.js'
-import { deadEnemyXPosition, rocketDefaultX, rocketDefaultY } from './Helpers.js'
+import { airfighter } from '../player/airfighter.js'
+import {
+  deadEnemyXPosition,
+  rocketDefaultX,
+  rocketDefaultY,
+} from './Helpers.js'
 import { bulletArray, removeBullet } from '../gatling.js'
 import { explosion } from '../rendering/Explosion.js'
 import { rocket } from '../rocket.js'
-import { playerDiesIfHpBelowZiro } from '../airfighter.js'
+import { playerDiesIfHpBelowZiro } from '../player/airfighter.js'
 import {
   soundRocketShot,
   soundRocketHit,
   soundEnemyDieExplosion,
   soundMainTheme,
   soundGameOver,
-  soundboss
+  soundboss,
 } from '../music.js'
 
 export default function performCollisionChecksForEnemy(enemy) {
@@ -122,7 +126,9 @@ export function checkEnemyShipCollision(enemy) {
     airfighter.y + airfighter.height > enemy.y &&
     airfighter.y < enemy.y + enemy.height
   ) {
-    airfighter.health.element.value -= (Math.floor(enemy.enemyHealth.element.value /2))
+    airfighter.health.element.value -= Math.floor(
+      enemy.enemyHealth.element.value / 2
+    )
     soundEnemyDieExplosion.play()
     explosionEffect(enemy)
     enemy.x = deadEnemyXPosition

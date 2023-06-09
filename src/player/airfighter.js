@@ -1,13 +1,12 @@
-import { rocket } from './rocket.js'
+import { rocket } from '../rocket.js'
 import {
   soundRocketHit,
   soundEnemyDieExplosion,
   soundMainTheme,
   soundGameOver,
   soundboss,
-} from './music.js'
-
-const acceleration = 1
+} from '../music.js'
+import { afterForardDescceleration, afterBackDescceleration} from './playerMovement.js'
 
 class Player {
   x = 0
@@ -53,14 +52,14 @@ class Player {
     this.healthtext.element.style.width = this.width
 
     if (afterForardDesccelerationCondition) {
-      afterForardDescceleration()
+      afterForardDescceleration(airfighter)
       if (rocket.velocity < 7) {
         rocket.x += this.vx
       }
     }
 
     if (afterBackDesccelerationCondition) {
-      afterBackDescceleration()
+      afterBackDescceleration(airfighter)
       if (rocket.velocity < 7) {
         rocket.x += this.vx
       }
@@ -78,80 +77,6 @@ class Player {
 }
 
 export let airfighter = new Player()
-
-function accelerationBack() {
-  const maxBackSpeed = airfighter.vx < -5
-  if (airfighter.x > 0) {
-    airfighter.x += airfighter.vx
-    if (!maxBackSpeed) {
-      airfighter.vx -= acceleration / 2
-    }
-  }
-}
-
-function accelerationForward() {
-  const maxForwardSpeed = airfighter.vx >= 10
-  if (airfighter.x + airfighter.width < screen.width) {
-    airfighter.x += airfighter.vx
-    if (!maxForwardSpeed) {
-      airfighter.vx += acceleration
-    }
-  }
-}
-
-function afterForardDescceleration() {
-  airfighter.x += airfighter.vx
-  airfighter.vx -= acceleration / 4
-}
-
-function afterBackDescceleration() {
-  airfighter.x += airfighter.vx
-  airfighter.vx += acceleration / 8
-}
-
-export function moveShipDown() {
-  if (airfighter.y + airfighter.height > window.innerHeight - 50) {
-    document.querySelector('#gameover-screen').style.display = ''
-    airfighter.x = 0
-    airfighter.y = 0
-    soundRocketHit.pause()
-    soundEnemyDieExplosion.play()
-    setTimeout(function () {
-      soundMainTheme.pause()
-      soundboss.pause()
-      soundGameOver.play()
-    }, 900)
-  }
-  airfighter.y += 10
-  if (rocket.velocity < 7) {
-    rocket.y += 10
-  }
-}
-
-export function moveShipLeft() {
-  if (airfighter.x > 0) {
-    accelerationBack()
-    if (rocket.velocity < 7) {
-      rocket.x += airfighter.vx
-    }
-  }
-}
-
-export function moveShipRight() {
-  accelerationForward()
-  if (rocket.velocity < 7) {
-    rocket.x += airfighter.vx
-  }
-}
-
-export function moveShipUp() {
-  if (airfighter.y > 0) {
-    airfighter.y -= 10
-    if (rocket.velocity < 7) {
-      rocket.y -= 10
-    }
-  }
-}
 
 export function playerDiesIfHpBelowZiro() {
   if (airfighter.health.element.value <= 0) {
