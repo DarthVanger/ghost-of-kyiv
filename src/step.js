@@ -15,8 +15,9 @@ import performCollisionChecksForEnemy, {
   enemyCollisionWithBullet,
 } from './rendering/EnemyCollisionsChecks.js'
 import { moveBackground } from './background.js'
-export const fps = 60
+import { levelCompleteScreen } from './levelCompleteScreen.js'
 
+export const fps = 60
 export const gameState = {
   isGamePaused: false,
   gameIntervalId: undefined,
@@ -86,8 +87,8 @@ export function Step() {
   const vuletivZaRamku = lastEnemy.x < 0 - lastEnemy.width
   if (vuletivZaRamku) {
     stopInterval()
-    document.querySelector('#levelComplete').style.display = ''
-    fadeIn(levelComplete, 400)
+    document.body.append(levelCompleteScreen)
+    fadeIn(levelCompleteScreen, 400)
     soundMainTheme.pause()
     soundMainTheme.currentTime = 0
     soundLevelComplete.play()
@@ -111,18 +112,19 @@ function changeAmmo() {
 }
 
 function fadeIn(element, duration) {
-  element.style.opacity = 0
-  var last = +new Date()
-  var tick = function () {
-    element.style.opacity =
-      +element.style.opacity + (new Date() - last) / duration
-    last = +new Date()
-    if (+element.style.opacity < 1) {
-      ;(window.requestAnimationFrame && requestAnimationFrame(tick)) ||
-        setTimeout(tick, 16)
-    }
-  }
-  tick()
+  // element.style.opacity = 0
+  element.className = "fadeIn"
+    // var last = +new Date()
+  // var tick = function () {
+  //   element.style.opacity =
+  //     +element.style.opacity + (new Date() - last) / duration
+  //   last = +new Date()
+  //   if (+element.style.opacity < 1) {
+  //     ;(window.requestAnimationFrame && requestAnimationFrame(tick)) ||
+  //       setTimeout(tick, 16)
+  //   }
+  // }
+  // tick()
 }
 
 export function stopInterval() {
