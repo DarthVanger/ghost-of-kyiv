@@ -2,7 +2,6 @@ import { rocket } from './rocket.js'
 import { airfighter } from './player/airfighter.js'
 import { deleteEnemies, createEnemies, enemies } from './enemy.js'
 import {
-  soundRocketShot,
   soundMainTheme,
   soundIntro,
   soundLevelComplete,
@@ -14,6 +13,7 @@ import { level3Boss, createBoss } from './Boss.js'
 import { bossPopup } from './rendering/Helpers.js'
 import { resetBackground } from './background.js'
 import { initKeybordMovement } from './keyboard.js'
+import { levelCompleteScreen } from './levelCompleteScreen.js'
 
 let isGameStarted = false
 let introduction = document.querySelector('#introduction')
@@ -46,8 +46,7 @@ function changeLevel() {
   isGameStarted = false
   soundLevelComplete.pause()
   document
-    .querySelector('#levelComplete')
-    .addEventListener('click', showIntroductionAndSetNewText)
+  levelCompleteScreen.addEventListener('click', showIntroductionAndSetNewText)
 }
 
 function showIntroductionAndSetNewText() {
@@ -97,7 +96,7 @@ function startLevel2() {
   resetAmmo(1500, 10)
   resetBackground()
   gameState.gameIntervalId = setInterval(Step, 1000 / fps)
-  document.querySelector('#levelComplete').style.display = 'none'
+  levelCompleteScreen.remove()
   introduction.style.display = 'block'
 }
 
@@ -114,12 +113,12 @@ function startLevel3() {
   enemies.push(level3Boss)
   resetAmmo(2000, 12)
   resetBackground()
-  document.querySelector('#levelComplete').style.display = 'none'
+  levelCompleteScreen.remove()
   introduction.style.display = 'block'
   gameState.gameIntervalId = setInterval(Step, 1000 / fps)
 }
 
-document.querySelector('#nextlevel').addEventListener('click', changeLevel)
+levelCompleteScreen.querySelector('#nextlevel').addEventListener('click', changeLevel)
 
 export function endGameAction() {
   document.location.reload()
