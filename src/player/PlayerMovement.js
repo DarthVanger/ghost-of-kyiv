@@ -10,41 +10,45 @@ import { rocket } from '../rocket.js'
 class PlayerMovement {
   acceleration = 1
 
-  accelerationBack(airfighter) {
-    const maxBackSpeed = airfighter.vx < -5
-    if (airfighter.x > 0) {
-      airfighter.x += airfighter.vx
+  constructor(player) {
+    this.player = player
+  }
+
+  accelerationBack() {
+    const maxBackSpeed = this.player.vx < -5
+    if (this.player.x > 0) {
+      this.player.x += this.player.vx
       if (!maxBackSpeed) {
-        airfighter.vx -= acceleration / 2
+        this.player.vx -= acceleration / 2
       }
     }
   }
 
-  accelerationForward(airfighter) {
-    const maxForwardSpeed = airfighter.vx >= 10
-    if (airfighter.x + airfighter.width < screen.width) {
-      airfighter.x += airfighter.vx
+  accelerationForward() {
+    const maxForwardSpeed = this.player.vx >= 10
+    if (this.player.x + this.player.width < screen.width) {
+      this.player.x += this.player.vx
       if (!maxForwardSpeed) {
-        airfighter.vx += acceleration
+        this.player.vx += acceleration
       }
     }
   }
 
-  afterForardDescceleration(airfighter) {
-    airfighter.x += airfighter.vx
-    airfighter.vx -= acceleration / 4
+  afterForardDescceleration() {
+    this.player.x += this.player.vx
+    this.player.vx -= acceleration / 4
   }
 
-  afterBackDescceleration(airfighter) {
-    airfighter.x += airfighter.vx
-    airfighter.vx += acceleration / 8
+  afterBackDescceleration() {
+    this.player.x += this.player.vx
+    this.player.vx += acceleration / 8
   }
 
-  moveShipDown(airfighter) {
-    if (airfighter.y + airfighter.height > window.innerHeight - 50) {
+  moveShipDown() {
+    if (this.player.y + this.player.height > window.innerHeight - 50) {
       document.querySelector('#gameover-screen').style.display = ''
-      airfighter.x = 0
-      airfighter.y = 0
+      this.player.x = 0
+      this.player.y = 0
       soundRocketHit.pause()
       soundEnemyDieExplosion.play()
       setTimeout(function () {
@@ -53,31 +57,31 @@ class PlayerMovement {
         soundGameOver.play()
       }, 900)
     }
-    airfighter.y += 10
+    this.player.y += 10
     if (rocket.velocity < 7) {
       rocket.y += 10
     }
   }
 
-  moveShipLeft(airfighter) {
-    if (airfighter.x > 0) {
-      accelerationBack(airfighter)
+  moveShipLeft() {
+    if (this.player.x > 0) {
+      accelerationBack(this.player)
       if (rocket.velocity < 7) {
-        rocket.x += airfighter.vx
+        rocket.x += this.player.vx
       }
     }
   }
 
-  moveShipRight(airfighter) {
-    accelerationForward(airfighter)
+  moveShipRight() {
+    accelerationForward(this.player)
     if (rocket.velocity < 7) {
-      rocket.x += airfighter.vx
+      rocket.x += this.player.vx
     }
   }
 
-  moveShipUp(airfighter) {
-    if (airfighter.y > 0) {
-      airfighter.y -= 10
+  moveShipUp() {
+    if (this.player.y > 0) {
+      this.player.y -= 10
       if (rocket.velocity < 7) {
         rocket.y -= 10
       }
