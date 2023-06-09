@@ -31,6 +31,6 @@ export function moveBackground(airfighter) {
 }
 
 export function resetBackground() {
-  frontBgX = 0;
+  frontBgX = 0
   frontBg.style.left = frontBgX + 'px'
 }
