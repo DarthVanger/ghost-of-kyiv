@@ -3,9 +3,7 @@ import { fireGatlingEnemy } from './gatling.js'
 import { airfighter } from './airfighter.js'
 import { mobileControls } from './touch.js'
 import { gamePauseAction } from './gameMenuActions.js'
-import {
-  soundRocketShot,
-} from './music.js'
+import { soundRocketShot } from './music.js'
 
 export function initKeybordMovement() {
   document.addEventListener('keydown', handleKeyDown)
