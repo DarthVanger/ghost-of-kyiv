@@ -8,6 +8,7 @@ import {
 } from '../music.js'
 import { moveShipDown, moveShipUp } from './PlayerMovement.js'
 import { updateSpeedometer } from '../speedometer.js'
+import { rocketDefaultX } from '../rendering/Helpers.js'
 const acceleration = 1
 
 class Player {
@@ -52,13 +53,19 @@ class Player {
     this.vx += this.ax
     this.x += this.vx
     if (rocket.velocity < 7) {
-      rocket.x += this.vx
+      rocket.x = this.x + rocketDefaultX
     }
 
     if (this.x <= 0) {
+      this.x = 0
       this.vx = 0
       this.ax = 0
-      this.x = 0
+    }
+
+    if (this.x + this.width >= screen.width) {
+      this.x = screen.width - this.width
+      this.vx = 0
+      this.ax = 0
     }
 
     this.slowDown()
