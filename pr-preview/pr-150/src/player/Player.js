@@ -41,9 +41,6 @@ class Player {
     this.y += this.vy
     if (rocket.velocity < 7) {
       rocket.x = this.x + rocketDefaultX
-    }
-
-    if (rocket.velocity < 7) {
       rocket.y = this.y + rocketDefaultY
     }
 
@@ -63,18 +60,12 @@ class Player {
       this.ax = 0
     }
 
-    if (this.y + this.height >= screen.height) {
-      this.y = screen.height - this.height
-      this.vy = 0
-    }
-
     this.slowDown()
 
     if (this.isKeyUpPressed) {
       this.vy = -10
     }
     if (this.isKeyDownPressed) {
-      playerDiesWhenCrashed(this)
       this.vy = +10
     }
 
@@ -103,6 +94,7 @@ class Player {
     this.healthtext.element.style.left = this.x
     this.healthtext.element.style.top = this.y - 35
     this.healthtext.element.style.width = this.width
+    playerDiesWhenCrashed(this)
   }
 
   resetLife() {
