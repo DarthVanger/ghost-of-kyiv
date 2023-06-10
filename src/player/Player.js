@@ -1,14 +1,7 @@
 import { rocket } from '../rocket.js'
-import {
-  soundRocketHit,
-  soundEnemyDieExplosion,
-  soundMainTheme,
-  soundGameOver,
-  soundboss,
-} from '../music.js'
-import { gameOver, moveShipDown, moveShipUp } from './PlayerMovement.js'
+import { gameOver } from './PlayerMovement.js'
 import { updateSpeedometer } from '../speedometer.js'
-import { rocketDefaultX } from '../rendering/Helpers.js'
+import { rocketDefaultX, rocketDefaultY } from '../rendering/Helpers.js'
 const acceleration = 1
 
 class Player {
@@ -20,13 +13,6 @@ class Player {
   width = 300
   height = 130
   element = document.querySelector('#airfighter')
-
-  moveShipDown = function () {
-    moveShipDown(this)
-  }
-  moveShipUp = function () {
-    moveShipUp(this)
-  }
 
   health = {
     x: 0,
@@ -49,17 +35,23 @@ class Player {
   }
 
   render() {
-    updateSpeedometer(this.vx, this.ax)
+    updateSpeedometer(this.vx, this.ax, this.vy)
     this.vx += this.ax
     this.x += this.vx
+    this.y += this.vy
     if (rocket.velocity < 7) {
       rocket.x = this.x + rocketDefaultX
+      rocket.y = this.y + rocketDefaultY
     }
 
     if (this.x <= 0) {
       this.x = 0
       this.vx = 0
       this.ax = 0
+    }
+
+    if (this.y <= 0) {
+      this.y = 0
     }
 
     if (this.x + this.width >= screen.width) {
@@ -71,10 +63,10 @@ class Player {
     this.slowDown()
 
     if (this.isKeyUpPressed) {
-      this.moveShipUp()
+      this.vy = -10
     }
     if (this.isKeyDownPressed) {
-      this.moveShipDown()
+      this.vy = +10
     }
 
     if (this.isKeyLeftPressed) {
@@ -85,6 +77,9 @@ class Player {
     }
     if (!this.isKeyRightPressed && !this.isKeyLeftPressed) {
       this.ax = 0
+    }
+    if (!this.isKeyUpPressed && !this.isKeyDownPressed) {
+      this.vy = 0
     }
 
     this.element.style.left = this.x
@@ -99,6 +94,7 @@ class Player {
     this.healthtext.element.style.left = this.x
     this.healthtext.element.style.top = this.y - 35
     this.healthtext.element.style.width = this.width
+    playerDiesWhenCrashed(this)
   }
 
   resetLife() {
@@ -116,5 +112,11 @@ export let airfighter = new Player()
 export function playerDiesIfHpBelowZiro() {
   if (airfighter.health.element.value <= 0) {
     gameOver(airfighter)
+  }
+}
+
+function playerDiesWhenCrashed(player) {
+  if (player.y + player.height > window.innerHeight - 50) {
+    gameOver(player)
   }
 }
