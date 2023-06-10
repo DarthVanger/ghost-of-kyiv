@@ -23,9 +23,11 @@ npx madge --image graph.svg app.js
 ### Player movement keyboard events
 
 ![Player movement keyboard events](readme-img/player-movement-keyboard.jpg)
+
 [Edit this file with draw.io](https://drive.google.com/file/d/17JjDKf5k3iNQNzf0MutGCwYTEjpaeJgt/view?usp=sharing)
 
 ### Player movement logic
 
 ![Player movement logic](readme-img/player-movement-render.jpg)
+
 [Edit this file with draw.io](https://drive.google.com/file/d/1od5qwMfKvfQAfRvyyeb_UneAZNBaF3xy/view?usp=sharing)
