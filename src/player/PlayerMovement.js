@@ -7,8 +7,6 @@ import {
 } from '../music.js'
 import { rocket } from '../rocket.js'
 
-const acceleration = 1
-
 export function moveShipDown(player) {
   if (player.y + player.height > window.innerHeight - 50) {
     document.querySelector('#gameover-screen').style.display = ''
@@ -26,14 +24,6 @@ export function moveShipDown(player) {
   if (rocket.velocity < 7) {
     rocket.y += 10
   }
-}
-
-export function accelerateLeft(player) {
-  player.ax = -acceleration / 2
-}
-
-export function accelerateRight(player) {
-  player.ax = acceleration
 }
 
 export function moveShipUp(player) {

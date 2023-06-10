@@ -6,13 +6,9 @@ import {
   soundGameOver,
   soundboss,
 } from '../music.js'
-import {
-  moveShipDown,
-  accelerateLeft,
-  accelerateRight,
-  moveShipUp,
-} from './PlayerMovement.js'
+import { moveShipDown, moveShipUp } from './PlayerMovement.js'
 import { updateSpeedometer } from '../speedometer.js'
+const acceleration = 1
 
 class Player {
   x = 0
@@ -75,10 +71,10 @@ class Player {
     }
 
     if (this.isKeyLeftPressed) {
-      accelerateLeft(this)
+      this.ax = -acceleration / 2
     }
     if (this.isKeyRightPressed) {
-      accelerateRight(this)
+      this.ax = acceleration
     }
     if (!this.isKeyRightPressed && !this.isKeyLeftPressed) {
       this.ax = 0
