@@ -77,6 +77,9 @@ class Player {
     if (this.isKeyRightPressed) {
       accelerateRight(this)
     }
+    if (!this.isKeyRightPressed && !this.isKeyLeftPressed) {
+      this.ax = 0
+    }
 
     this.element.style.left = this.x
     this.element.style.top = this.y
