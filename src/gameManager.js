@@ -14,6 +14,7 @@ import { bossPopup } from './rendering/Helpers.js'
 import { resetBackground } from './background.js'
 import { initKeybordMovement } from './keyboard.js'
 import { levelCompleteScreen } from './levelCompleteScreen.js'
+import { speedometer } from './speedometer.js'
 
 let isGameStarted = false
 let introduction = document.querySelector('#introduction')
@@ -40,6 +41,8 @@ export function startGame() {
     levelState.levelNumber = 1
     startLevel1()
   }
+
+  document.body.append(speedometer)
 }
 
 function changeLevel() {

@@ -375,3 +375,13 @@ h1 sub {
     opacity: 1;
   }
 }
+
+#speedometer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: white;
+  background: black;
+  padding: 16px;
+  line-height: 2;
+}
