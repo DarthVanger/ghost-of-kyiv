@@ -64,19 +64,6 @@ export function Step() {
   renderRocket()
   airfighter.render()
 
-  if (airfighter.isShipMovingUp) {
-    airfighter.moveShipUp()
-  }
-  if (airfighter.isShipMovingDown) {
-    airfighter.moveShipDown()
-  }
-  if (airfighter.isShipMovingLeft) {
-    airfighter.moveShipLeft()
-  }
-  if (airfighter.isShipMovingRight) {
-    airfighter.moveShipRight()
-  }
-
   const lastEnemy = enemies[enemies.length - 1]
   const vuletivZaRamku = lastEnemy.x < 0 - lastEnemy.width
   if (vuletivZaRamku) {

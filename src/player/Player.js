@@ -54,16 +54,29 @@ class Player {
     element: document.querySelector('#playerHealthText'),
   }
   rocketMaxDistance = 1500
-  isShipMovingUp = false
-  isShipMovingLeft = false
-  isShipMovingRight = false
-  isShipMovingDown = false
+  isKeyUpPressed = false
+  isKeyLeftPressed = false
+  isKeyRightPressed = false
+  isKeyDownPressed = false
 
   render() {
     const afterForardDesccelerationCondition =
-      this.vx > 0 && this.isShipMovingRight == false
+      this.vx > 0 && this.isKeyRightPressed == false
     const afterBackDesccelerationCondition =
-      this.vx < 0 && this.isShipMovingLeft == false
+      this.vx < 0 && this.isKeyLeftPressed == false
+
+    if (this.isKeyUpPressed) {
+      this.moveShipUp()
+    }
+    if (this.isKeyDownPressed) {
+      this.moveShipDown()
+    }
+    if (this.isKeyLeftPressed) {
+      this.moveShipLeft()
+    }
+    if (this.isKeyRightPressed) {
+      this.moveShipRight()
+    }
 
     this.element.style.left = this.x
     this.element.style.top = this.y

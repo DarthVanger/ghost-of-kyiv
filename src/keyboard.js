@@ -9,28 +9,28 @@ export function initKeybordMovement() {
   document.addEventListener('keydown', handleKeyDown)
   document.addEventListener('keyup', handleKeyUp)
   mobileControls.leftButton.addEventListener('touchstart', function () {
-    airfighter.isShipMovingLeft = true
+    airfighter.isKeyLeftPressed = true
   })
   mobileControls.rightButton.addEventListener('touchstart', function () {
-    airfighter.isShipMovingRight = true
+    airfighter.isKeyRightPressed = true
   })
   mobileControls.topButton.addEventListener('touchstart', function () {
-    airfighter.isShipMovingUp = true
+    airfighter.isKeyUpPressed = true
   })
   mobileControls.bottomButton.addEventListener('touchstart', function () {
-    airfighter.isShipMovingDown = true
+    airfighter.isKeyDownPressed = true
   })
   mobileControls.leftButton.addEventListener('touchend', function () {
-    airfighter.isShipMovingLeft = false
+    airfighter.isKeyLeftPressed = false
   })
   mobileControls.rightButton.addEventListener('touchend', function () {
-    airfighter.isShipMovingRight = false
+    airfighter.isKeyRightPressed = false
   })
   mobileControls.topButton.addEventListener('touchend', function () {
-    airfighter.isShipMovingUp = false
+    airfighter.isKeyUpPressed = false
   })
   mobileControls.bottomButton.addEventListener('touchend', function () {
-    airfighter.isShipMovingDown = false
+    airfighter.isKeyDownPressed = false
   })
   mobileControls.fireButton.addEventListener('click', fireRocket)
 }
@@ -41,22 +41,22 @@ function handleKeyDown(event) {
   }
 
   if (event.key == 'a' || event.key == 'ф') {
-    airfighter.isShipMovingLeft = true
+    airfighter.isKeyLeftPressed = true
     airfighter.element.src = 'img/aifighter-Back.gif'
   }
 
   if (event.key == 's' || event.key == 'ы' || event.key == 'і') {
-    airfighter.isShipMovingDown = true
+    airfighter.isKeyDownPressed = true
     airfighter.element.src = 'img/aifighter-Down.gif'
   }
 
   if (event.key == 'w' || event.key == 'ц') {
-    airfighter.isShipMovingUp = true
+    airfighter.isKeyUpPressed = true
     airfighter.element.src = 'img/aifighter-Up.gif'
   }
 
   if (event.key == 'd' || event.key == 'в') {
-    airfighter.isShipMovingRight = true
+    airfighter.isKeyRightPressed = true
     airfighter.element.src = 'img/aifighter-Front-Accelerate.gif'
   }
 
@@ -70,22 +70,22 @@ function handleKeyDown(event) {
 
 function handleKeyUp(event) {
   if (event.key == 'a' || event.key == 'ф') {
-    airfighter.isShipMovingLeft = false
+    airfighter.isKeyLeftPressed = false
     airfighter.element.src = 'img/aifighter-Front.gif'
   }
 
   if (event.key == 's' || event.key == 'ы' || event.key == 'і') {
-    airfighter.isShipMovingDown = false
+    airfighter.isKeyDownPressed = false
     airfighter.element.src = 'img/aifighter-Front.gif'
   }
 
   if (event.key == 'w' || event.key == 'ц') {
-    airfighter.isShipMovingUp = false
+    airfighter.isKeyUpPressed = false
     airfighter.element.src = 'img/aifighter-Front.gif'
   }
 
   if (event.key == 'd' || event.key == 'в') {
-    airfighter.isShipMovingRight = false
+    airfighter.isKeyRightPressed = false
     airfighter.element.src = 'img/aifighter-Front.gif'
   }
 }
