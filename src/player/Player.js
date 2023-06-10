@@ -12,6 +12,7 @@ import {
   accelerateRight,
   moveShipUp,
 } from './PlayerMovement.js'
+import { updateSpeedometer } from '../speedometer.js'
 
 class Player {
   x = 0
@@ -51,6 +52,7 @@ class Player {
   }
 
   render() {
+    updateSpeedometer(this.vx, this.ax)
     this.vx += this.ax
 
     if (this.x >= 0) {
