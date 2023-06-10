@@ -6,7 +6,7 @@ import {
   soundGameOver,
   soundboss,
 } from '../music.js'
-import { moveShipDown, moveShipUp } from './PlayerMovement.js'
+import { gameOver, moveShipDown, moveShipUp } from './PlayerMovement.js'
 import { updateSpeedometer } from '../speedometer.js'
 import { rocketDefaultX } from '../rendering/Helpers.js'
 const acceleration = 1
@@ -115,15 +115,6 @@ export let airfighter = new Player()
 
 export function playerDiesIfHpBelowZiro() {
   if (airfighter.health.element.value <= 0) {
-    document.querySelector('#gameover-screen').style.display = ''
-    airfighter.x = 0
-    airfighter.y = 0
-    soundRocketHit.pause()
-    soundEnemyDieExplosion.play()
-    setTimeout(() => {
-      soundMainTheme.pause()
-      soundboss.pause()
-      soundGameOver.play()
-    }, 900)
+    gameOver(airfighter)
   }
 }
