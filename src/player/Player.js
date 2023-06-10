@@ -54,12 +54,15 @@ class Player {
   render() {
     updateSpeedometer(this.vx, this.ax)
     this.vx += this.ax
+    this.x += this.vx
+    if (rocket.velocity < 7) {
+      rocket.x += this.vx
+    }
 
-    if (this.x >= 0) {
-      this.x += this.vx
-      if (rocket.velocity < 7) {
-        rocket.x += this.vx
-      }
+    if (this.x <= 0) {
+      this.vx = 0
+      this.ax = 0
+      this.x = 0
     }
 
     this.slowDown()
