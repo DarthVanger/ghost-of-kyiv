@@ -41,9 +41,6 @@ class Player {
     this.y += this.vy
     if (rocket.velocity < 7) {
       rocket.x = this.x + rocketDefaultX
-    }
-
-    if (rocket.velocity < 7) {
       rocket.y = this.y + rocketDefaultY
     }
 
@@ -61,11 +58,6 @@ class Player {
       this.x = screen.width - this.width
       this.vx = 0
       this.ax = 0
-    }
-
-    if (this.y + this.height >= screen.height) {
-      this.y = screen.height - this.height
-      this.vy = 0
     }
 
     this.slowDown()
