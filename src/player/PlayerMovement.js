@@ -26,15 +26,19 @@ export function moveShipUp(player) {
 
 function playerDiesWhenCrashed(player) {
   if (player.y + player.height > window.innerHeight - 50) {
-    document.querySelector('#gameover-screen').style.display = ''
-    player.x = 0
-    player.y = 0
-    soundRocketHit.pause()
-    soundEnemyDieExplosion.play()
-    setTimeout(function () {
-      soundMainTheme.pause()
-      soundboss.pause()
-      soundGameOver.play()
-    }, 900)
+    gameOver(player)
   }
+}
+
+export function gameOver(player) {
+  document.querySelector('#gameover-screen').style.display = ''
+  player.x = 0
+  player.y = 0
+  soundRocketHit.pause()
+  soundEnemyDieExplosion.play()
+  setTimeout(function () {
+    soundMainTheme.pause()
+    soundboss.pause()
+    soundGameOver.play()
+  }, 900)
 }
