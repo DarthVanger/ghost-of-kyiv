@@ -65,6 +65,19 @@ class Player {
     const afterBackDesccelerationCondition =
       this.vx < 0 && this.isShipMovingLeft == false
 
+    if (this.isShipMovingUp) {
+      this.moveShipUp()
+    }
+    if (this.isShipMovingDown) {
+      this.moveShipDown()
+    }
+    if (this.isShipMovingLeft) {
+      this.moveShipLeft()
+    }
+    if (this.isShipMovingRight) {
+      this.moveShipRight()
+    }
+
     this.element.style.left = this.x
     this.element.style.top = this.y
     this.health.element.style.left = this.x
