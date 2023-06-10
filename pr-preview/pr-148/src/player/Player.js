@@ -6,13 +6,9 @@ import {
   soundGameOver,
   soundboss,
 } from '../music.js'
-import {
-  moveShipDown,
-  accelerateLeft,
-  accelerateRight,
-  moveShipUp,
-} from './PlayerMovement.js'
+import { moveShipDown, moveShipUp } from './PlayerMovement.js'
 import { updateSpeedometer } from '../speedometer.js'
+const acceleration = 1
 
 class Player {
   x = 0
@@ -48,18 +44,21 @@ class Player {
   isKeyDownPressed = false
 
   slowDown() {
-    this.vx = this.vx * 0.99
+    this.vx = this.vx * 0.96
   }
 
   render() {
     updateSpeedometer(this.vx, this.ax)
     this.vx += this.ax
+    this.x += this.vx
+    if (rocket.velocity < 7) {
+      rocket.x += this.vx
+    }
 
-    if (this.x >= 0) {
-      this.x += this.vx
-      if (rocket.velocity < 7) {
-        rocket.x += this.vx
-      }
+    if (this.x <= 0) {
+      this.vx = 0
+      this.ax = 0
+      this.x = 0
     }
 
     this.slowDown()
@@ -72,10 +71,13 @@ class Player {
     }
 
     if (this.isKeyLeftPressed) {
-      accelerateLeft(this)
+      this.ax = -acceleration / 2
     }
     if (this.isKeyRightPressed) {
-      accelerateRight(this)
+      this.ax = acceleration
+    }
+    if (!this.isKeyRightPressed && !this.isKeyLeftPressed) {
+      this.ax = 0
     }
 
     this.element.style.left = this.x
