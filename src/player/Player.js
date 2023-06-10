@@ -66,7 +66,6 @@ class Player {
       this.vy = -10
     }
     if (this.isKeyDownPressed) {
-      playerDiesWhenCrashed(this)
       this.vy = +10
     }
 
@@ -95,6 +94,7 @@ class Player {
     this.healthtext.element.style.left = this.x
     this.healthtext.element.style.top = this.y - 35
     this.healthtext.element.style.width = this.width
+    playerDiesWhenCrashed(this)
   }
 
   resetLife() {
