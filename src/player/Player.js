@@ -48,7 +48,7 @@ class Player {
   isKeyDownPressed = false
 
   slowDown() {
-    this.vx = this.vx * 0.99
+    this.vx = this.vx * 0.96
   }
 
   render() {
