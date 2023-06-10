@@ -6,38 +6,23 @@ import {
   soundGameOver,
   soundboss,
 } from '../music.js'
-import {
-  afterForardDescceleration,
-  afterBackDescceleration,
-  moveShipDown,
-  moveShipLeft,
-  moveShipRight,
-  moveShipUp,
-} from './PlayerMovement.js'
+import { moveShipDown, moveShipUp } from './PlayerMovement.js'
+import { updateSpeedometer } from '../speedometer.js'
+import { rocketDefaultX } from '../rendering/Helpers.js'
+const acceleration = 1
 
 class Player {
   x = 0
   y = 0
   vx = 0
   vy = 0
+  ax = 0
   width = 300
   height = 130
   element = document.querySelector('#airfighter')
 
-  afterForardDescceleration = function () {
-    afterForardDescceleration(this)
-  }
-  afterBackDescceleration = function () {
-    afterBackDescceleration(this)
-  }
   moveShipDown = function () {
     moveShipDown(this)
-  }
-  moveShipLeft = function () {
-    moveShipLeft(this)
-  }
-  moveShipRight = function () {
-    moveShipRight(this)
   }
   moveShipUp = function () {
     moveShipUp(this)
@@ -59,11 +44,31 @@ class Player {
   isKeyRightPressed = false
   isKeyDownPressed = false
 
+  slowDown() {
+    this.vx = this.vx * 0.96
+  }
+
   render() {
-    const afterForardDesccelerationCondition =
-      this.vx > 0 && this.isKeyRightPressed == false
-    const afterBackDesccelerationCondition =
-      this.vx < 0 && this.isKeyLeftPressed == false
+    updateSpeedometer(this.vx, this.ax)
+    this.vx += this.ax
+    this.x += this.vx
+    if (rocket.velocity < 7) {
+      rocket.x = this.x + rocketDefaultX
+    }
+
+    if (this.x <= 0) {
+      this.x = 0
+      this.vx = 0
+      this.ax = 0
+    }
+
+    if (this.x + this.width >= screen.width) {
+      this.x = screen.width - this.width
+      this.vx = 0
+      this.ax = 0
+    }
+
+    this.slowDown()
 
     if (this.isKeyUpPressed) {
       this.moveShipUp()
@@ -71,11 +76,15 @@ class Player {
     if (this.isKeyDownPressed) {
       this.moveShipDown()
     }
+
     if (this.isKeyLeftPressed) {
-      this.moveShipLeft()
+      this.ax = -acceleration / 2
     }
     if (this.isKeyRightPressed) {
-      this.moveShipRight()
+      this.ax = acceleration
+    }
+    if (!this.isKeyRightPressed && !this.isKeyLeftPressed) {
+      this.ax = 0
     }
 
     this.element.style.left = this.x
@@ -90,20 +99,6 @@ class Player {
     this.healthtext.element.style.left = this.x
     this.healthtext.element.style.top = this.y - 35
     this.healthtext.element.style.width = this.width
-
-    if (afterForardDesccelerationCondition) {
-      this.afterForardDescceleration()
-      if (rocket.velocity < 7) {
-        rocket.x += this.vx
-      }
-    }
-
-    if (afterBackDesccelerationCondition) {
-      this.afterBackDescceleration()
-      if (rocket.velocity < 7) {
-        rocket.x += this.vx
-      }
-    }
   }
 
   resetLife() {
