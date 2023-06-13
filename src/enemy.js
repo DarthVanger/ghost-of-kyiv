@@ -1,4 +1,8 @@
 import { addGatling } from './gatling.js'
+import performCollisionChecksForEnemy, {
+  checkEnemyShipCollision,
+  enemyCollisionWithBullet,
+} from './rendering/EnemyCollisionsChecks.js'
 
 export let enemies = []
 
@@ -108,7 +112,7 @@ export function renderEnemy(enemy) {
   renderEnemyImg(enemy)
 }
 
-export function moveEnemyRocket(enemy) {
+function moveEnemyRocket(enemy) {
   enemy.rocket.x += enemy.rocket.vx
 }
 
@@ -146,4 +150,28 @@ function renderEnemyImg(enemy) {
   enemy.element.style.top = enemy.y
   enemy.element.style.width = enemy.width
   enemy.element.style.height = enemy.height
+}
+
+export function updateEnemy(enemy) {
+  enemy.behavior?.()
+  renderEnemy(enemy)
+  renderEnemyRocket(enemy)
+  moveEnemy(enemy)
+  moveEnemyRocket(enemy)
+  checkEnemyShipCollision(enemy)
+  performCollisionChecksForEnemy(enemy)
+  launchRocketIfOnScreen(enemy)
+  enemyCollisionWithBullet(enemy)
+}
+
+function renderEnemyRocket(enemy) {
+  enemy.rocket.element.style.left = enemy.rocket.x
+  enemy.rocket.element.style.top = enemy.rocket.y
+}
+
+function moveEnemy(enemy) {
+  if (!enemy.isRocketLaunched) {
+    enemy.rocket.x += enemy.velocity
+  }
+  return (enemy.x += enemy.velocity)
 }
