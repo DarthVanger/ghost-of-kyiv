@@ -23,12 +23,7 @@ export const gameState = {
 }
 
 export function Step() {
-  enemies.forEach((enemy) => {
-    if (enemy.behavior) {
-      enemy.behavior()
-    }
-  })
-
+  enemies.forEach((enemy) => enemy.behavior?.())
   enemies.forEach(renderEnemy)
   enemies.forEach(renderEnemyRocket)
   enemies.forEach(moveEnemy)
