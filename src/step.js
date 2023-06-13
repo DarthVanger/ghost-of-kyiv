@@ -1,18 +1,8 @@
-import {
-  enemies,
-  renderEnemy,
-  moveEnemyRocket,
-  launchRocketIfOnScreen,
-} from './enemy.js'
+import { enemies, updateEnemy } from './enemy.js'
 import { rocket, renderRocket, moveRocket } from './rocket.js'
 import { bulletArray, gatling, moveBullet } from './gatling.js'
 import { airfighter } from './player/Player.js'
 import { soundMainTheme, soundLevelComplete } from './music.js'
-import { rocketDefaultX, rocketDefaultY } from './rendering/Helpers.js'
-import performCollisionChecksForEnemy, {
-  checkEnemyShipCollision,
-  enemyCollisionWithBullet,
-} from './rendering/EnemyCollisionsChecks.js'
 import { moveBackground } from './background.js'
 import { levelCompleteScreen } from './levelCompleteScreen.js'
 
@@ -23,27 +13,11 @@ export const gameState = {
 }
 
 export function Step() {
-  enemies.forEach((enemy) => enemy.behavior?.())
-  enemies.forEach(renderEnemy)
-  enemies.forEach(renderEnemyRocket)
-  enemies.forEach(moveEnemy)
-  enemies.forEach(moveEnemyRocket)
+  enemies.forEach(updateEnemy)
   bulletArray.forEach(moveBullet)
   moveRocket()
   changeAmmo()
-  enemies.forEach(checkEnemyShipCollision)
-  enemies.forEach(performCollisionChecksForEnemy)
-  enemies.forEach(launchRocketIfOnScreen)
-  enemies.forEach(enemyCollisionWithBullet)
   moveBackground(airfighter)
-
-  if (rocket.x > airfighter.x + airfighter.rocketMaxDistance) {
-    rocket.x = airfighter.x + rocketDefaultX
-    rocket.y = airfighter.y + rocketDefaultY
-    rocket.velocity -= 8
-    rocket.dmg = 50
-    rocket.element.src = 'img/Rocket.gif'
-  }
 
   renderRocket()
   airfighter.render()
@@ -58,18 +32,6 @@ export function Step() {
     soundMainTheme.currentTime = 0
     soundLevelComplete.play()
   }
-}
-
-function renderEnemyRocket(enemy) {
-  enemy.rocket.element.style.left = enemy.rocket.x
-  enemy.rocket.element.style.top = enemy.rocket.y
-}
-
-function moveEnemy(enemy) {
-  if (!enemy.isRocketLaunched) {
-    enemy.rocket.x += enemy.velocity
-  }
-  return (enemy.x += enemy.velocity)
 }
 
 function changeAmmo() {

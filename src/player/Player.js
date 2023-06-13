@@ -95,6 +95,7 @@ class Player {
     this.healthtext.element.style.top = this.y - 35
     this.healthtext.element.style.width = this.width
     playerDiesWhenCrashed(this)
+    returnRocketIfMaxDistance()
   }
 
   resetLife() {
@@ -118,5 +119,15 @@ export function playerDiesIfHpBelowZiro() {
 function playerDiesWhenCrashed(player) {
   if (player.y + player.height > window.innerHeight - 50) {
     gameOver()
+  }
+}
+
+function returnRocketIfMaxDistance() {
+  if (rocket.x > airfighter.x + airfighter.rocketMaxDistance) {
+    rocket.x = airfighter.x + rocketDefaultX
+    rocket.y = airfighter.y + rocketDefaultY
+    rocket.velocity -= 8
+    rocket.dmg = 50
+    rocket.element.src = 'img/Rocket.gif'
   }
 }
