@@ -16,7 +16,7 @@ And of course, Burn down the Kremlin.
 npx madge --image graph.svg app.js
 ```
 
-![dependensies graph](readme-img/graph.svg)
+![dependensies graph](https://darthvanger.github.io/ghost-of-kyiv/graph.svg)
 
 ## Diagrams
 

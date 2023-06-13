@@ -12,18 +12,27 @@ on:
     branches:
       - master
 jobs:
+
   deploy-master:
+    
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
       - name: Install and Build 🔧
-        run: |
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - run: |
           mkdir -p build
+          sudo apt update && sudo apt install -y graphviz
+          npx madge --image ./build/graph.svg app.js
           # Copy all files into build/ directory, but except the build dir itself
           # See https://unix.stackexchange.com/a/239365/286952
           cp -R $(ls | grep -v '^build$') build/
+
       - name: deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
