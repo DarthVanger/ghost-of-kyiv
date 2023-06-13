@@ -82,6 +82,9 @@ function introductionSkip() {
 }
 
 function startLevel1() {
+  airfighter.moveToInitalPosition()
+  airfighter.resetLife()
+  rocket.moveToInitialPosition()
   soundMainTheme.play()
   createEnemies(levelEnemies)
   gameState.gameIntervalId = setInterval(Step, 1000 / fps)

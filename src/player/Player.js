@@ -111,12 +111,12 @@ export let airfighter = new Player()
 
 export function playerDiesIfHpBelowZiro() {
   if (airfighter.health.element.value <= 0) {
-    gameOver(airfighter)
+    gameOver()
   }
 }
 
 function playerDiesWhenCrashed(player) {
   if (player.y + player.height > window.innerHeight - 50) {
-    gameOver(player)
+    gameOver()
   }
 }
