@@ -18,6 +18,8 @@ npx madge --image graph.svg app.js
 
 ![dependensies graph](https://darthvanger.github.io/ghost-of-kyiv/graph.svg)
 
+[View image in full screen](https://darthvanger.github.io/ghost-of-kyiv/graph.svg)
+
 ## Diagrams
 
 ### Player movement keyboard events
