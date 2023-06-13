@@ -82,6 +82,7 @@ function introductionSkip() {
 }
 
 function startLevel1() {
+  resetLevel()
   soundMainTheme.play()
   createEnemies(levelEnemies)
   gameState.gameIntervalId = setInterval(Step, 1000 / fps)
@@ -89,36 +90,34 @@ function startLevel1() {
 }
 
 function startLevel2() {
-  airfighter.moveToInitalPosition()
-  airfighter.resetLife()
-  rocket.moveToInitialPosition()
+  resetLevel()
   clearInterval(gameState.gameIntervalId)
   isGameStarted = false
-  deleteEnemies()
   createEnemies(levelEnemies)
-  resetAmmo(1500, 10)
-  resetBackground()
   gameState.gameIntervalId = setInterval(Step, 1000 / fps)
-  levelCompleteScreen.remove()
   introduction.style.display = 'block'
 }
 
 function startLevel3() {
-  airfighter.moveToInitalPosition()
-  airfighter.resetLife()
-  rocket.moveToInitialPosition()
+  resetLevel()
   clearInterval(gameState.gameIntervalId)
   isGameStarted = false
-  deleteEnemies()
   bossPopup()
   createBoss()
   soundMainTheme.pause()
   enemies.push(level3Boss)
-  resetAmmo(2000, 12)
-  resetBackground()
-  levelCompleteScreen.remove()
   introduction.style.display = 'block'
   gameState.gameIntervalId = setInterval(Step, 1000 / fps)
+}
+
+function resetLevel() {
+  airfighter.moveToInitalPosition()
+  airfighter.resetLife()
+  rocket.moveToInitialPosition()
+  deleteEnemies()
+  resetAmmo(2000, 16)
+  resetBackground()
+  levelCompleteScreen.remove()
 }
 
 levelCompleteScreen

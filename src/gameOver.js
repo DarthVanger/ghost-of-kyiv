@@ -4,12 +4,10 @@ import {
   soundMainTheme,
   soundGameOver,
   soundboss,
-} from '../music.js'
+} from './music.js'
 
-export function gameOver(player) {
+export function gameOver() {
   document.querySelector('#gameover-screen').style.display = ''
-  player.x = 0
-  player.y = 0
   soundRocketHit.pause()
   soundEnemyDieExplosion.play()
   setTimeout(function () {
