@@ -1,4 +1,9 @@
-import { enemies, renderEnemy } from './enemy.js'
+import {
+  enemies,
+  renderEnemy,
+  moveEnemyRocket,
+  launchRocketIfOnScreen,
+} from './enemy.js'
 import { rocket, renderRocket, moveRocket } from './rocket.js'
 import { bulletArray, gatling, moveBullet } from './gatling.js'
 import { airfighter } from './player/Player.js'
@@ -18,12 +23,7 @@ export const gameState = {
 }
 
 export function Step() {
-  enemies.forEach((enemy) => {
-    if (enemy.behavior) {
-      enemy.behavior()
-    }
-  })
-
+  enemies.forEach((enemy) => enemy.behavior?.())
   enemies.forEach(renderEnemy)
   enemies.forEach(renderEnemyRocket)
   enemies.forEach(moveEnemy)
@@ -36,22 +36,6 @@ export function Step() {
   enemies.forEach(launchRocketIfOnScreen)
   enemies.forEach(enemyCollisionWithBullet)
   moveBackground(airfighter)
-  function moveEnemyRocket(enemy) {
-    enemy.rocket.x += enemy.rocket.vx
-  }
-
-  function launchEnemyRocket(enemy) {
-    enemy.rocket.vx = -8
-  }
-
-  function launchRocketIfOnScreen(enemy) {
-    if (enemy.x < window.innerWidth) {
-      if (!enemy.isRocketLaunched) {
-        launchEnemyRocket(enemy)
-        enemy.isRocketLaunched = true
-      }
-    }
-  }
 
   if (rocket.x > airfighter.x + airfighter.rocketMaxDistance) {
     rocket.x = airfighter.x + rocketDefaultX
