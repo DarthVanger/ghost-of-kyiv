@@ -1,5 +1,5 @@
 import { rocket } from '../rocket.js'
-import { gameOver } from './PlayerMovement.js'
+import { gameOver } from '../gameOver.js'
 import { updateSpeedometer } from '../speedometer.js'
 import { rocketDefaultX, rocketDefaultY } from '../rendering/Helpers.js'
 const acceleration = 1

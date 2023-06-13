@@ -4,7 +4,7 @@ import {
   soundMainTheme,
   soundGameOver,
   soundboss,
-} from '../music.js'
+} from './music.js'
 
 export function gameOver() {
   document.querySelector('#gameover-screen').style.display = ''
