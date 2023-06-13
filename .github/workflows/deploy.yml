@@ -10,7 +10,7 @@ name: Deploy Master Branch
 on:
   push:
     branches:
-      - gen-image
+      - master
 jobs:
 
   deploy-master:
