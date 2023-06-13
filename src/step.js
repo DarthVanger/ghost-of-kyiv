@@ -4,6 +4,7 @@ import { bulletArray, gatling, moveBullet } from './gatling.js'
 import { airfighter } from './player/Player.js'
 import { moveBackground } from './background.js'
 import { levelOverIfLastEnemyOut } from './gameOver.js'
+import { renderAmmo } from './ammo.js'
 
 export const fps = 60
 export const gameState = {
@@ -15,7 +16,7 @@ export function Step() {
   enemies.forEach(updateEnemy)
   bulletArray.forEach(moveBullet)
   moveRocket()
-  changeAmmo()
+  renderAmmo()
   moveBackground(airfighter)
 
   renderRocket()
@@ -23,8 +24,4 @@ export function Step() {
 
   const lastEnemy = enemies[enemies.length - 1]
   levelOverIfLastEnemyOut(lastEnemy, gameState)
-}
-
-function changeAmmo() {
-  ammoElement.innerHTML = `<img class="ammoImg" src="img/ammo-gatling-img.gif"> ${gatling.ammo} <br> <img class="ammoImg" src="img/ammo-rocket-img.gif"> ${rocket.ammo}`
 }
