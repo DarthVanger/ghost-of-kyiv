@@ -84,6 +84,16 @@ p {
   top: 0;
   color: #ffffff;
   text-align-last: left;
+  display: flex;
+}
+
+#rocket-ammo,
+#gatling-ammo {
+  height: 50px;
+  width: 50px;
+  margin: 5px;
+  display: flex;
+  align-items: center; /* Align vertical */
 }
 
 .ammoImg {
