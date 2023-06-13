@@ -108,6 +108,23 @@ export function renderEnemy(enemy) {
   renderEnemyImg(enemy)
 }
 
+export function moveEnemyRocket(enemy) {
+  enemy.rocket.x += enemy.rocket.vx
+}
+
+export function launchRocketIfOnScreen(enemy) {
+  if (enemy.x < window.innerWidth) {
+    if (!enemy.isRocketLaunched) {
+      launchEnemyRocket(enemy)
+      enemy.isRocketLaunched = true
+    }
+  }
+}
+
+function launchEnemyRocket(enemy) {
+  enemy.rocket.vx = -8
+}
+
 function renderEnemyHealth(enemy) {
   enemy.enemyHealth.element.style.left = enemy.x
   enemy.enemyHealth.element.style.top = enemy.y - 20
