@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: '18.x'
       - run: |
-          sudo apt update && sudo apt install -y python-pydot python-pydot-ng graphviz
+          sudo apt update && sudo apt install -y graphviz
           npx madge --image graph.svg app.js
           mkdir -p build
           # Copy all files into build/ directory, but except the build dir itself
