@@ -8,7 +8,13 @@ export let soundMainTheme = new Audio()
 export let soundLevelComplete = new Audio()
 export let soundboss = new Audio()
 
-soundIntro.src = './music/soundIntro.mp3'
+let randomIntroMusic = Math.round(Math.random() * 2)
+let soundIntroArray = [
+  './music/soundIntro.mp3',
+  './music/soundIntro2.mp3',
+  './music/soundIntro3.mp3',
+]
+soundIntro.src = soundIntroArray[randomIntroMusic]
 soundGatling.src = 'music/soundGatling.mp3'
 soundRocketShot.src = 'music/soundRocketShot.mp3'
 soundRocketHit.src = 'music/soundRocketHit.mp3'
