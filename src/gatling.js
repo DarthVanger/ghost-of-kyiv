@@ -13,13 +13,13 @@ export let bulletArray = []
 function createBullet() {
   const bullet = {}
   bullet.element = document.createElement('img')
-  bullet.element.src = 'img/Bullet_h100px.png'
+  bullet.element.src = 'img/Bullet-With-Fireball.gif'
   bullet.element.className = 'bullet'
-  bullet.element.style.width = '20px'
+  bullet.element.style.width = '50px'
   document.body.append(bullet.element)
   bullet.velocity = 12
-  bullet.x = airfighter.x + airfighter.width + Math.random() * 4
-  bullet.y = airfighter.y + airfighter.height / 2
+  bullet.x = airfighter.x + airfighter.width + Math.random() * 4 - 25
+  bullet.y = airfighter.y + airfighter.height / 2 - 20
   bullet.margin = Math.random() * 2 - 1
   gatling.ammo -= 10
   bulletArray.push(bullet)
