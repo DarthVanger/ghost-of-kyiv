@@ -1,5 +1,4 @@
 import { airfighter } from './player/Player.js'
-
 import { soundGatling } from './music.js'
 
 export let gatling = {

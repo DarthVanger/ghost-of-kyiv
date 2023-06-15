@@ -1,6 +1,6 @@
 import { enemies, updateEnemy } from './enemy.js'
-import { rocket, renderRocket, moveRocket } from './rocket.js'
-import { bulletArray, gatling, moveBullet } from './gatling.js'
+import { rockets, renderRocket, moveRocket } from './rocket.js'
+import { bulletArray, moveBullet } from './gatling.js'
 import { airfighter } from './player/Player.js'
 import { moveBackground } from './background.js'
 import { levelOverIfLastEnemyOut } from './gameOver.js'
@@ -15,11 +15,11 @@ export const gameState = {
 export function Step() {
   enemies.forEach(updateEnemy)
   bulletArray.forEach(moveBullet)
-  moveRocket()
+  rockets.forEach(moveRocket)
+  rockets.forEach(renderRocket)
+
   renderAmmo()
   moveBackground(airfighter)
-
-  renderRocket()
   airfighter.render()
 
   const lastEnemy = enemies[enemies.length - 1]

@@ -1,4 +1,4 @@
-import { rocket } from './rocket.js'
+import { rocket, rockets } from './rocket.js'
 import { fireGatlingEnemy } from './gatling.js'
 import { airfighter } from './player/Player.js'
 import { mobileControls } from './touch.js'
@@ -91,15 +91,8 @@ function handleKeyUp(event) {
 }
 
 function fireRocket() {
-  if (rocket.velocity < 8) {
-    rocket.velocity += 8
-    rocket.ammo -= 1
-    rocket.element.src = 'img/Rocket.gif'
-    setTimeout(preRocket, 8)
-    soundRocketShot.play()
-  }
-}
-
-function preRocket() {
-  rocket.element.src = 'img/mrRocket.gif'
+  rocket.velocity = 8
+  rocket.ammo -= 1
+  rockets.push(rocket)
+  soundRocketShot.play()
 }

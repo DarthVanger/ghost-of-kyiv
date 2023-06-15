@@ -1,4 +1,7 @@
 import { rocketDefaultX, rocketDefaultY } from './rendering/Helpers.js'
+
+export let rockets = []
+
 class Rocket {
   x = 80
   y = 70
