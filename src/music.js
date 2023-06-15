@@ -10,9 +10,9 @@ export let soundboss = new Audio()
 
 let randomIntroMusic = Math.round(Math.random() * 2)
 let soundIntroArray = [
-  'music/soundIntro.mp3',
-  'music/soundIntro2.mp3',
-  'music/soundIntro3.mp3',
+  './music/soundIntro.mp3',
+  './music/soundIntro2.mp3',
+  './music/soundIntro3.mp3',
 ]
 soundIntro.src = soundIntroArray[randomIntroMusic]
 soundGatling.src = 'music/soundGatling.mp3'
