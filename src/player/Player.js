@@ -24,7 +24,6 @@ class Player {
     y: 0,
     element: document.querySelector('#playerHealthText'),
   }
-  rocketMaxDistance = 1500
   isKeyUpPressed = false
   isKeyLeftPressed = false
   isKeyRightPressed = false
@@ -95,7 +94,7 @@ class Player {
     this.healthtext.element.style.top = this.y - 35
     this.healthtext.element.style.width = this.width
     playerDiesWhenCrashed(this)
-    removeRocketIfMaxDistance(rocket)
+    rockets.filter(removeRocketIfMaxDistance(rocket))
   }
 
   resetLife() {
@@ -121,9 +120,8 @@ function playerDiesWhenCrashed(player) {
     gameOver()
   }
 }
+const removeRocket = rocket.x > window.width
 
 function removeRocketIfMaxDistance(i) {
-  if (rocket.x > window.width) {
-    rockets.slice(i)
-  }
+  if (i.x < window.width) return i
 }
