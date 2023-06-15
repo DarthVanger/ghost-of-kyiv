@@ -26,8 +26,6 @@ const levelState = {
 }
 
 export function startGame() {
-  soundIntro.play()
-
   console.log(`startGame, level :${levelState.levelNumber}`)
   initKeybordMovement()
   if (levelState.levelNumber == 1) {
