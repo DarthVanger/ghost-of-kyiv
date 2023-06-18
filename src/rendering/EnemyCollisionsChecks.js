@@ -12,9 +12,6 @@ import {
   soundRocketShot,
   soundRocketHit,
   soundEnemyDieExplosion,
-  soundMainTheme,
-  soundGameOver,
-  soundboss,
 } from '../music.js'
 
 export default function performCollisionChecksForEnemy(enemy) {

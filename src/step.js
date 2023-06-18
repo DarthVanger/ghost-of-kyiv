@@ -1,6 +1,6 @@
 import { enemies, updateEnemy } from './enemy.js'
-import { rocket, renderRocket, moveRocket } from './rocket.js'
-import { bulletArray, gatling, moveBullet } from './gatling.js'
+import { renderRocket, moveRocket } from './rocket.js'
+import { bulletArray, moveBullet } from './gatling.js'
 import { airfighter } from './player/Player.js'
 import { moveBackground } from './background.js'
 import { levelOverIfLastEnemyOut } from './gameOver.js'

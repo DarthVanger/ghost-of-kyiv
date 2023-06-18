@@ -48,7 +48,6 @@ export function startGame() {
 function changeLevel() {
   isGameStarted = false
   soundLevelComplete.pause()
-  document
   levelCompleteScreen.addEventListener('click', showIntroductionAndSetNewText)
 }
 
