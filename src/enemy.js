@@ -20,7 +20,7 @@ function deleteEnemyImg(enemy) {
 
 function createHealth(enemy, i, maxHealth) {
   enemy.enemyHealth = {}
-  enemy.enemyHealth.velocity = -2
+  enemy.enemyHealth.vx = -2
   enemy.enemyHealth.element = document.createElement('meter')
   enemy.enemyHealth.element.setAttribute('min', 0)
   enemy.enemyHealth.element.setAttribute('low', maxHealth / 3)
@@ -33,19 +33,15 @@ function createHealth(enemy, i, maxHealth) {
   document.body.append(enemy.enemyHealth.element)
 
   enemy.enemyHealthText = {}
-  enemy.enemyHealthText.velocity = -2
+  enemy.enemyHealthText.vx = -2
   enemy.enemyHealthText.element = document.createElement('div')
   enemy.enemyHealthText.element.id = 'healthBar200text-' + i
   enemy.enemyHealthText.element.className = 'healthBar200text'
   document.body.append(enemy.enemyHealthText.element)
 }
 
-function createEnemy(src, width, height, i, maxHealth) {
-  return new Enemy(src, width, height, i, maxHealth)
-}
-
 class Enemy {
-  constructor(src, width, height, i, maxHealth) {
+  constructor(src, width, height, i, maxHealth, behavior) {
     this.element = document.createElement('img')
     this.element.id = 'enemy' + i
     this.element.className = 'enemy'
@@ -54,21 +50,42 @@ class Enemy {
     this.y = Math.floor(Math.random() * (innerHeight - 200) + 50)
     this.width = width
     this.height = height
-    this.velocity = -2
+    this.vx = -2
+    this.vy = 0
     this.isAlive = true
+    this.behavior = behavior
     createHealth(this, i, maxHealth)
   }
+}
+
+function su3EnemyBehavior(enemy) {
+  const halfScreenX = window.innerWidth / 2
+  if (enemy.x < halfScreenX) {
+    enemy.vy = -2
+  }
+}
+
+function createSu3(i) {
+  return new Enemy('img/su-3.png', 250, 80, i, 50, su3EnemyBehavior)
+}
+
+function createSu27(i) {
+  return new Enemy('img/su-27.png', 270, 100, i, 100)
+}
+
+function createZ10(i) {
+  return new Enemy('img/z-10.png', 330, 200, i, 200)
 }
 
 export function createEnemies(maxEnemies) {
   for (let i = 0; i < maxEnemies; i++) {
     let enemy
     if (i < 5) {
-      enemy = createEnemy('img/su-3.png', 250, 80, i, 50)
+      enemy = createSu3(i)
     } else if (i >= 5 && i <= 9) {
-      enemy = createEnemy('img/su-27.png', 270, 100, i, 100)
+      enemy = createSu27(i)
     } else {
-      enemy = createEnemy('img/z-10.png', 330, 200, i, 200)
+      enemy = createZ10(i)
     }
     const defaultDamageBullet = 20
     createRocket(enemy, defaultDamageBullet)
@@ -153,7 +170,7 @@ function renderEnemyImg(enemy) {
 }
 
 export function updateEnemy(enemy) {
-  enemy.behavior?.()
+  enemy.behavior?.(enemy)
   renderEnemy(enemy)
   renderEnemyRocket(enemy)
   moveEnemy(enemy)
@@ -171,7 +188,8 @@ function renderEnemyRocket(enemy) {
 
 function moveEnemy(enemy) {
   if (!enemy.isRocketLaunched) {
-    enemy.rocket.x += enemy.velocity
+    enemy.rocket.x += enemy.vx
   }
-  return (enemy.x += enemy.velocity)
+  enemy.x += enemy.vx
+  enemy.y += enemy.vy
 }
