@@ -60,15 +60,27 @@ class Enemy {
   }
 }
 
+function createSu3(i) {
+  return createEnemy('img/su-3.png', 250, 80, i, 50)
+}
+
+function createSu27(i) {
+  return createEnemy('img/su-27.png', 270, 100, i, 100)
+}
+
+function createZ10(i) {
+  return createEnemy('img/z-10.png', 330, 200, i, 200)
+}
+
 export function createEnemies(maxEnemies) {
   for (let i = 0; i < maxEnemies; i++) {
     let enemy
     if (i < 5) {
-      enemy = createEnemy('img/su-3.png', 250, 80, i, 50)
+      enemy = createSu3(i)
     } else if (i >= 5 && i <= 9) {
-      enemy = createEnemy('img/su-27.png', 270, 100, i, 100)
+      enemy = createSu27(i)
     } else {
-      enemy = createEnemy('img/z-10.png', 330, 200, i, 200)
+      enemy = createZ10(i)
     }
     const defaultDamageBullet = 20
     createRocket(enemy, defaultDamageBullet)
