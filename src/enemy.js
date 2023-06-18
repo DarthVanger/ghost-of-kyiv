@@ -40,10 +40,6 @@ function createHealth(enemy, i, maxHealth) {
   document.body.append(enemy.enemyHealthText.element)
 }
 
-function createEnemy(src, width, height, i, maxHealth) {
-  return new Enemy(src, width, height, i, maxHealth)
-}
-
 class Enemy {
   constructor(src, width, height, i, maxHealth) {
     this.element = document.createElement('img')
@@ -61,15 +57,15 @@ class Enemy {
 }
 
 function createSu3(i) {
-  return createEnemy('img/su-3.png', 250, 80, i, 50)
+  return new Enemy('img/su-3.png', 250, 80, i, 50)
 }
 
 function createSu27(i) {
-  return createEnemy('img/su-27.png', 270, 100, i, 100)
+  return new Enemy('img/su-27.png', 270, 100, i, 100)
 }
 
 function createZ10(i) {
-  return createEnemy('img/z-10.png', 330, 200, i, 200)
+  return new Enemy('img/z-10.png', 330, 200, i, 200)
 }
 
 export function createEnemies(maxEnemies) {
