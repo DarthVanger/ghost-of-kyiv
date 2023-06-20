@@ -344,6 +344,7 @@ h1 sub {
 #bg-front {
   position: absolute;
   height: 100vh;
+  will-change: transform;
 }
 #bg-front {
   background: url('img/parallax-bg-front.png');
