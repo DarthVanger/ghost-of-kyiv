@@ -1,0 +1,40 @@
+{
+  "name": "ghost-of-kyiv",
+  "version": "1.0.0",
+  "description": "Ghost of Kyiv Browser Game.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarthVanger/ghost-of-kyiv.git"
+  },
+  "author": "vinogradarTeam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DarthVanger/ghost-of-kyiv/issues"
+  },
+  "homepage": "https://github.com/DarthVanger/ghost-of-kyiv#readme",
+  "devDependencies": {
+    "@electron-forge/cli": "^6.2.1",
+    "@electron-forge/maker-deb": "^6.2.1",
+    "@electron-forge/maker-rpm": "^6.2.1",
+    "@electron-forge/maker-squirrel": "^6.2.1",
+    "@electron-forge/maker-zip": "^6.2.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^6.2.1",
+    "electron": "^25.2.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "prettier": "^2.8.8"
+  },
+  "lint-staged": {
+    "**/*": "prettier --check"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0"
+  }
+}
