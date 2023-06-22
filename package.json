@@ -2,8 +2,9 @@
   "name": "ghost-of-kyiv",
   "version": "1.0.0",
   "description": "Ghost of Kyiv Browser Game.",
-  "main": "app.js",
+  "main": "main.js",
   "scripts": {
+    "start": "electron .",
     "prepare": "husky install"
   },
   "repository": {
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/DarthVanger/ghost-of-kyiv#readme",
   "devDependencies": {
+    "electron": "^25.2.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "prettier": "^2.8.8"
