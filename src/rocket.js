@@ -1,12 +1,16 @@
+import { airfighter } from './player/Player.js'
 import { rocketDefaultX, rocketDefaultY } from './rendering/Helpers.js'
+
+export let rockets = []
+
 class Rocket {
   x = 80
   y = 70
   width = 120
   ammo = 10
   dmg = 50
-  velocity = 0
-  element = document.querySelector('#rocket')
+  velocity = 8
+  element = document.createElement('img')
 
   moveToInitialPosition() {
     this.x = rocketDefaultX
@@ -17,10 +21,23 @@ class Rocket {
 export let rocket = new Rocket()
 
 export function renderRocket() {
-  rocket.element.style.left = rocket.x
-  rocket.element.style.top = rocket.y
+  for (let rocket of rockets) {
+    rocket.element.style.left = rocket.x
+    rocket.element.style.top = rocket.y
+  }
 }
 
 export function moveRocket() {
-  rocket.x += rocket.velocity
+  for (let rocket of rockets) {
+    rocket.x += rocket.velocity
+  }
+}
+
+export function createPlayerRocket() {
+  rocket.element.src = 'img/mrRocket.gif'
+  rocket.element.className = 'rocket'
+  rocket.x = airfighter.x + rocketDefaultX
+  rocket.y = airfighter.y + rocketDefaultY
+  document.body.append(rocket.element)
+  rockets.push(rocket)
 }

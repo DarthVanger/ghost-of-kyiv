@@ -1,4 +1,4 @@
-import { rocket } from '../rocket.js'
+import { rockets } from '../rocket.js'
 import { gameOver } from '../gameOver.js'
 import { updateSpeedometer } from '../speedometer.js'
 import { rocketDefaultX, rocketDefaultY } from '../rendering/Helpers.js'
@@ -39,10 +39,10 @@ class Player {
     this.vx += this.ax
     this.x += this.vx
     this.y += this.vy
-    if (rocket.velocity < 7) {
-      rocket.x = this.x + rocketDefaultX
-      rocket.y = this.y + rocketDefaultY
-    }
+    // if (rocket.velocity < 7) {
+    //   rocket.x = this.x + rocketDefaultX
+    //   rocket.y = this.y + rocketDefaultY
+    // }
 
     if (this.x <= 0) {
       this.x = 0
@@ -95,7 +95,7 @@ class Player {
     this.healthtext.element.style.top = this.y - 35
     this.healthtext.element.style.width = this.width
     playerDiesWhenCrashed(this)
-    returnRocketIfMaxDistance()
+    //returnRocketIfMaxDistance()
   }
 
   resetLife() {
@@ -123,11 +123,11 @@ function playerDiesWhenCrashed(player) {
 }
 
 function returnRocketIfMaxDistance() {
-  if (rocket.x > airfighter.x + airfighter.rocketMaxDistance) {
-    rocket.x = airfighter.x + rocketDefaultX
-    rocket.y = airfighter.y + rocketDefaultY
-    rocket.velocity -= 8
-    rocket.dmg = 50
-    rocket.element.src = 'img/Rocket.gif'
-  }
+  // if (rocket.x > airfighter.x + airfighter.rocketMaxDistance) {
+  //   rocket.x = airfighter.x + rocketDefaultX
+  //   rocket.y = airfighter.y + rocketDefaultY
+  //   rocket.velocity -= 8
+  //   rocket.dmg = 50
+  //   rocket.element.src = 'img/Rocket.gif'
+  // }
 }

@@ -1,4 +1,4 @@
-import { rocket } from './rocket.js'
+//import { rocket } from './rocket.js'
 import { airfighter } from './player/Player.js'
 import { deleteEnemies, createEnemies, enemies } from './enemy.js'
 import {
@@ -113,7 +113,7 @@ function startLevel3() {
 function resetLevel() {
   airfighter.moveToInitalPosition()
   airfighter.resetLife()
-  rocket.moveToInitialPosition()
+  // rocket.moveToInitialPosition()
   deleteEnemies()
   resetAmmo(2000, 16)
   resetBackground()
