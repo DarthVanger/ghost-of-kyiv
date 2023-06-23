@@ -25,9 +25,9 @@ export function moveBackground(airfighter) {
   backBgX += backBgVx
   middleBgX += middleBgVx
   frontBgX += frontBgVx
-  backBg.style.left = backBgX + 'px'
-  middleBg.style.left = middleBgX + 'px'
-  frontBg.style.left = frontBgX + 'px'
+  backBg.style.transform = `translate(${backBgX}px, 0)`
+  middleBg.style.transform = `translate(${middleBgX}px, 0)`
+  frontBg.style.transform = `translate(${frontBgX}px, 0)`
 }
 
 export function resetBackground() {
