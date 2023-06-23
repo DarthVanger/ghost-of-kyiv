@@ -1,3 +1,6 @@
+/**
+ * Electron config for creating installer for Windows/MacOS/Linux
+ */
 module.exports = {
   packagerConfig: {
     osxSign: {},
@@ -6,8 +9,8 @@ module.exports = {
       tool: 'notarytool',
       appleId: process.env.APPLE_ID,
       appleIdPassword: process.env.APPLE_PASSWORD,
-      teamId: process.env.APPLE_TEAM_ID
-    }
+      teamId: process.env.APPLE_TEAM_ID,
+    },
   },
   rebuildConfig: {},
   makers: [
@@ -34,4 +37,4 @@ module.exports = {
       config: {},
     },
   ],
-};
+}
