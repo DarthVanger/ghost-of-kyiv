@@ -33,3 +33,17 @@ npx madge --image graph.svg app.js
 ![Player movement logic](readme-img/player-movement-render.jpg)
 
 [Edit this file with draw.io](https://drive.google.com/file/d/1od5qwMfKvfQAfRvyyeb_UneAZNBaF3xy/view?usp=sharing)
+
+## Desktop application
+
+### Run locally
+
+```
+npm run start
+```
+
+### Create Windows installer using Electron
+
+```
+npm run make
+```
