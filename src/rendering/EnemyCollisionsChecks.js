@@ -6,7 +6,7 @@ import {
 } from './Helpers.js'
 import { bulletArray, removeBullet } from '../gatling.js'
 import { explosion } from '../rendering/Explosion.js'
-// import { rocket } from '../rocket.js'
+import { rockets, removePlayerRocket } from '../rocket.js'
 import { playerDiesIfHpBelowZiro } from '../player/Player.js'
 import {
   soundRocketShot,
@@ -15,10 +15,12 @@ import {
 } from '../music.js'
 
 export default function performCollisionChecksForEnemy(enemy) {
-  if (checkEnemyRocketCollision(enemy)) {
-    //enemy.enemyHealth.element.value -= rocket.dmg
-    // rocket.dmg = 0
-    soundRocketHit.play()
+  for (let rocket of rockets) {
+    if (checkEnemyRocketCollision(enemy, rocket)) {
+      enemy.enemyHealth.element.value -= rocket.dmg
+      removePlayerRocket(rocket)
+      soundRocketHit.play()
+    }
   }
 
   if (checkPlayerRocketCollision(enemy)) {
@@ -38,26 +40,19 @@ export default function performCollisionChecksForEnemy(enemy) {
       explosion.remove()
     }, 700)
   }
-  // if (rocket.dmg <= 0) {
-  //   rocket.x = airfighter.x + rocketDefaultX
-  //   rocket.y = airfighter.y + rocketDefaultY
-  //   rocket.velocity -= 8
-  //   rocket.dmg = 50
-  //   rocket.element.src = 'img/Rocket.gif'
-  // }
 }
 
-function checkEnemyRocketCollision(enemy) {
-  // if (
-  //   rocket.x > enemy.x &&
-  //   rocket.y > enemy.y &&
-  //   rocket.x < enemy.x + enemy.width &&
-  //   rocket.y < enemy.y + enemy.height
-  // ) {
-  //   soundRocketShot.pause()
-  //   soundRocketShot.currentTime = 0
-  //   return true
-  // }
+function checkEnemyRocketCollision(enemy, rocket) {
+  if (
+    rocket.x > enemy.x &&
+    rocket.y > enemy.y &&
+    rocket.x < enemy.x + enemy.width &&
+    rocket.y < enemy.y + enemy.height
+  ) {
+    soundRocketShot.pause()
+    soundRocketShot.currentTime = 0
+    return true
+  }
 }
 
 function checkPlayerRocketCollision(enemy) {

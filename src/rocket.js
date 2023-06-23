@@ -40,3 +40,9 @@ export function createPlayerRocket() {
   document.body.append(rocket.element)
   rockets.push(rocket)
 }
+
+export function removePlayerRocket(rocket) {
+  const index = rockets.indexOf(rocket)
+  rockets.splice(index, 1)
+  rocket.element.remove()
+}
