@@ -104,7 +104,7 @@ p {
   box-shadow: 0px 0px 4px #64b5f6, 0px 0px 2px #64b5f6, 0px 0px 6px #64b5f6;
 }
 
-#rocket {
+.rocket {
   position: absolute;
   width: 120px;
 }
