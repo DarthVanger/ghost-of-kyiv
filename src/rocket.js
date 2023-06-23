@@ -18,8 +18,6 @@ class Rocket {
   }
 }
 
-export let rocket = new Rocket()
-
 export function renderRocket() {
   for (let rocket of rockets) {
     rocket.element.style.left = rocket.x
@@ -34,6 +32,7 @@ export function moveRocket() {
 }
 
 export function createPlayerRocket() {
+  let rocket = new Rocket()
   rocket.element.src = 'img/mrRocket.gif'
   rocket.element.className = 'rocket'
   rocket.x = airfighter.x + rocketDefaultX
