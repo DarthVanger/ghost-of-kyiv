@@ -113,7 +113,7 @@ function resetLevel() {
   airfighter.moveToInitalPosition()
   airfighter.resetLife()
   deleteEnemies()
-  resetAmmo(2000, 16)
+  resetAmmo(2000)
   resetBackground()
   levelCompleteScreen.remove()
 }
