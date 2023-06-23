@@ -3,11 +3,12 @@ import { rocketDefaultX, rocketDefaultY } from './rendering/Helpers.js'
 
 export let rockets = []
 
+export let rocketAmmo = 10
+
 class Rocket {
   x = 80
   y = 70
   width = 120
-  ammo = 10
   dmg = 50
   velocity = 8
   element = document.createElement('img')
@@ -32,17 +33,24 @@ export function moveRocket() {
 }
 
 export function createPlayerRocket() {
-  let rocket = new Rocket()
-  rocket.element.src = 'img/mrRocket.gif'
-  rocket.element.className = 'rocket'
-  rocket.x = airfighter.x + rocketDefaultX
-  rocket.y = airfighter.y + rocketDefaultY
-  document.body.append(rocket.element)
-  rockets.push(rocket)
+  if (rocketAmmo > 0) {
+    let rocket = new Rocket()
+    rocket.element.src = 'img/mrRocket.gif'
+    rocket.element.className = 'rocket'
+    rocket.x = airfighter.x + rocketDefaultX
+    rocket.y = airfighter.y + rocketDefaultY
+    document.body.append(rocket.element)
+    rockets.push(rocket)
+    rocketAmmo -= 1
+  }
 }
 
 export function removePlayerRocket(rocket) {
   const index = rockets.indexOf(rocket)
   rockets.splice(index, 1)
   rocket.element.remove()
+}
+
+export function resetPlayerRocketAmmo() {
+  rocketAmmo = 10
 }

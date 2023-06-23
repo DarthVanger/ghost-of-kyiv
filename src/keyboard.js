@@ -1,4 +1,4 @@
-import { rockets, createPlayerRocket } from './rocket.js'
+import { createPlayerRocket } from './rocket.js'
 import { fireGatlingEnemy } from './gatling.js'
 import { airfighter } from './player/Player.js'
 import { mobileControls } from './touch.js'
@@ -92,7 +92,5 @@ function handleKeyUp(event) {
 
 function fireRocket() {
   createPlayerRocket()
-  //rocket.velocity += 8
-  //rocket.ammo -= 1
   soundRocketShot.play()
 }

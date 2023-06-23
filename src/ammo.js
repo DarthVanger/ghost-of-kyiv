@@ -1,9 +1,9 @@
 import { gatling } from './gatling.js'
-// import { rocket } from './rocket.js'
+import { resetPlayerRocketAmmo, rocketAmmo } from './rocket.js'
 
-export function resetAmmo(bullets, rockets) {
+export function resetAmmo(bullets) {
   gatling.ammo = bullets
-  // rocket.ammo = rockets
+  resetPlayerRocketAmmo()
 }
 
 const ammoElement = document.createElement('div')
@@ -34,8 +34,8 @@ function addAmmoImages() {
 }
 
 function renderAmmoCount() {
-  // ammoCountElement.innerHTML = `
-  //   <div id="gatling-ammo">${gatling.ammo}</div>
-  //   <div id="rocket-ammo">${rocket.ammo}</div>
-  // `
+  ammoCountElement.innerHTML = `
+    <div id="gatling-ammo">${gatling.ammo}</div>
+    <div id="rocket-ammo">${rocketAmmo}</div>
+  `
 }
