@@ -14,7 +14,8 @@ export let bulletArray = []
 function createBullet() {
   const bullet = {}
   bullet.element = document.createElement('img')
-  bullet.element.src = 'img/Bullet-With-Fireball.gif'
+  // Restart gif animation - https://stackoverflow.com/a/2831728
+  bullet.element.src = 'img/Bullet-With-Fireball.gif?rnd=' + Math.random()
   bullet.element.className = 'bullet'
   bullet.element.style.width = '50px'
   document.body.append(bullet.element)
