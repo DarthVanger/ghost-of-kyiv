@@ -2,7 +2,7 @@
   "name": "ghost-of-kyiv",
   "version": "1.0.0",
   "description": "Ghost of Kyiv Browser Game.",
-  "main": "main.js",
+  "main": "electron-app.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
