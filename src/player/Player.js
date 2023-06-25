@@ -1,6 +1,15 @@
-import { rockets, removePlayerRocket } from '../rocket.js'
+import {
+  rockets,
+  removePlayerRocket,
+  createPlayerRocket,
+  setCooldown,
+  cooldown,
+} from '../rocket.js'
 import { gameOver } from '../gameOver.js'
 import { updateSpeedometer } from '../speedometer.js'
+import { controls } from '../keyboard.js'
+import { soundRocketShot } from '../music.js'
+
 const acceleration = 1
 
 class Player {
@@ -57,24 +66,39 @@ class Player {
 
     this.slowDown()
 
-    if (this.isKeyUpPressed) {
+    if (controls.includes('w')) {
       this.vy = -10
+      airfighter.element.src = 'img/aifighter-Up.gif'
     }
-    if (this.isKeyDownPressed) {
+    if (controls.includes('s')) {
       this.vy = +10
+      airfighter.element.src = 'img/aifighter-Down.gif'
+    }
+    if (controls.includes('a')) {
+      this.ax = -acceleration / 2
+      airfighter.element.src = 'img/aifighter-Back.gif'
+    }
+    if (controls.includes('d')) {
+      this.ax = acceleration
+      airfighter.element.src = 'img/aifighter-Front-Accelerate.gif'
     }
 
-    if (this.isKeyLeftPressed) {
-      this.ax = -acceleration / 2
-    }
-    if (this.isKeyRightPressed) {
-      this.ax = acceleration
-    }
-    if (!this.isKeyRightPressed && !this.isKeyLeftPressed) {
+    if (!controls.includes('d') && !controls.includes('a')) {
       this.ax = 0
     }
-    if (!this.isKeyUpPressed && !this.isKeyDownPressed) {
+    if (!controls.includes('w') && !controls.includes('s')) {
       this.vy = 0
+    }
+    if (
+      !controls.includes('d') &&
+      !controls.includes('a') &&
+      !controls.includes('w') &&
+      !controls.includes('s')
+    ) {
+      airfighter.element.src = 'img/aifighter-Front.gif'
+    }
+    if (controls.includes('r')) {
+      fireRocket()
     }
 
     this.element.style.left = this.x
@@ -122,5 +146,16 @@ function removePlayerRocketIfMaxDistance() {
     if (rocket.x > window.innerWidth) {
       removePlayerRocket(rocket)
     }
+  }
+}
+
+function fireRocket() {
+  if (!cooldown) {
+    createPlayerRocket()
+    soundRocketShot.play()
+    setCooldown(true)
+    setTimeout(function () {
+      setCooldown(false)
+    }, 220)
   }
 }
