@@ -1,0 +1,88 @@
+<head>
+  <meta
+    name="viewport"
+    id="viewport"
+    content="width=1200, initial-scale=0.5, maximum-scale=0.5, user-scalable=no"
+  />
+  <link href="style.css" rel="stylesheet" />
+  <link rel="shortcut icon" href="img/Rocket.gif" />
+</head>
+<body>
+  <p>
+    x:0 <br />
+    y:0
+  </p>
+  <div id="game-background">
+    <img id="bg-back" src="img/parallax-bg-back.png" />
+    <img id="bg-middle" src="img/parallax-bg-middle.png" />
+    <div id="bg-front"></div>
+  </div>
+  <img id="airfighter" src="img/aifighter-Front.gif" />
+  <meter
+    id="playerHealth"
+    min="0"
+    max="100"
+    low="33"
+    high="66"
+    optimum="100"
+    value="100"
+  ></meter>
+  <p id="playerHealthText"></p>
+  <div class="left"></div>
+  <div class="bottom"></div>
+  <div class="right"></div>
+  <div class="top"></div>
+  <div class="fire"></div>
+  <div id="gifContainerExplosion"></div>
+
+  <div id="gameover-screen" style="display: none">
+    <img src="img/gameover.gif" />
+
+    <br />
+    <button type="button" id="endGameButton">Retry!</button>
+  </div>
+
+  <div id="introduction">
+    <h1>Ghost of Kyiv<sub>episode one: Gostomel</sub></h1>
+    <div id="titles">
+      <div id="titlecontent">
+        <div class="centr">
+          <span id="episode">EPISODE I</span><br />Gostomel
+        </div>
+
+        <div class="centr" id="backstoryEpisode">The war begins</div>
+
+        <div id="textEpisode">
+          On February 24 2022 russian invaders stepped in a free and independent
+          land of Ukraine. Without any warning and declaration of war they
+          started massive air attack , using air fghters, helicopters and
+          ballistic missiles. The excellence in aviation was ten to one in their
+          favor. But there was one man, a Ukranian pilot, who did the imposible
+          and took any fight to protect his motherland. No one knew what was his
+          name but people called him "Ghost of Kyiv"... Firstly russian troops
+          tried to land on Gostomel airport but they were imidiately stoped by
+          Ukranian airforces including air fighter "Ghost of Kiev"
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="start-screen" style="padding: 320px; color: rgb(231, 228, 34)">
+    <button type="button" id="startGameButton">Let's Play!</button>
+    <div id="keyboard-controls-help">
+      <br />Press F11 for big Screen in PC<br />
+      <br />
+      Сontrol keys:<br />
+      "W" - move airfighter up;<br />
+      "S" - move airfighter down;<br />
+      "A" - move airfighter left;<br />
+      "D" - move airfighter right;<br /><br />
+      "R" - rocket shot;<br />
+      "P" - game pause;
+    </div>
+  </div>
+
+  <div id="pause-screen">Game Paused</div>
+</body>
+
+<script type="module" src="app.js"></script>
