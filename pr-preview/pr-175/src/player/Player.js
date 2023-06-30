@@ -1,15 +1,10 @@
-import {
-  rockets,
-  removePlayerRocket,
-  createPlayerRocket,
-  setCooldown,
-  cooldown,
-} from '../rocket.js'
+import { rockets, removePlayerRocket, createPlayerRocket } from '../rocket.js'
 import { gameOver } from '../gameOver.js'
 import { updateSpeedometer } from '../speedometer.js'
 import { controls } from '../keyboard.js'
 import { soundRocketShot } from '../music.js'
 
+export let cooldown = false
 const acceleration = 1
 
 class Player {
@@ -158,4 +153,8 @@ function fireRocket() {
       setCooldown(false)
     }, 220)
   }
+}
+
+export function setCooldown(c) {
+  cooldown = c
 }
