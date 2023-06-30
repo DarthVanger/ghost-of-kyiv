@@ -136,7 +136,7 @@ export function playerDiesIfHpBelowZiro() {
 }
 
 function playerDiesWhenCrashed(player) {
-  if (player.y + player.height > window.innerHeight - 50) {
+  if (player.y + player.height / 2 > window.innerHeight) {
     gameOver()
   }
 }

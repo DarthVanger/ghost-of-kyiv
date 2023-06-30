@@ -1,4 +1,4 @@
-import { fireGatlingEnemy } from './gatling.js'
+import { fireGatlingPlayer } from './gatling.js'
 import { airfighter } from './player/Player.js'
 import { mobileControls } from './touch.js'
 import { gamePauseAction } from './gameMenuActions.js'
@@ -58,7 +58,7 @@ function handleKeyDown(event) {
     gamePauseAction()
   }
   if (controls.includes(' ')) {
-    fireGatlingEnemy()
+    fireGatlingPlayer()
   }
 }
 
