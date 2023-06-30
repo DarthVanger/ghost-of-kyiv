@@ -4,7 +4,7 @@ import {
   soundMainTheme,
   soundGameOver,
   soundboss,
-  soundLevelComplete
+  soundLevelComplete,
 } from './music.js'
 import { levelCompleteScreen } from './levelCompleteScreen.js'
 

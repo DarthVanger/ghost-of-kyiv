@@ -3,7 +3,7 @@ import { rocketDefaultX, rocketDefaultY } from './rendering/Helpers.js'
 
 export let rockets = []
 
-export let rocketAmmo = 10
+export let rocketAmmo = 50
 export let cooldown = false
 
 class Rocket {
@@ -52,7 +52,7 @@ export function removePlayerRocket(rocket) {
 }
 
 export function resetPlayerRocketAmmo() {
-  rocketAmmo = 10
+  rocketAmmo = 50
 }
 
 export function setCooldown(c) {
