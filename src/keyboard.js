@@ -91,6 +91,6 @@ function handleKeyUp(event) {
 }
 
 function fireRocket() {
-  createPlayerRocket()
+  createPlayerRocket(airfighter)
   soundRocketShot.play()
 }
