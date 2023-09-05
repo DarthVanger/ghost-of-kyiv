@@ -3,7 +3,11 @@ import performCollisionChecksForEnemy, {
   checkEnemyShipCollision,
   enemyCollisionWithBullet,
 } from './rendering/EnemyCollisionsChecks.js'
-
+import {
+  su3EnemyBehavior,
+  su27EnemyBehavior,
+  z10EnemyBehavior,
+} from './enemyManoeuvre.js'
 export let enemies = []
 
 export function deleteEnemies() {
@@ -59,38 +63,12 @@ class Enemy {
   }
 }
 
-function su3EnemyBehavior(enemy) {
-  const halfScreenX = window.innerWidth / 2
-  if (enemy.x < halfScreenX) {
-    enemy.vy = -2
-  }
-}
-
-function z10EnemyBehavior(enemy) {
-  const bottomYBound = window.innerHeight * 0.75
-  const topYBound = window.innerHeight * 0.25
-
-  if (enemy.x < window.innerWidth) {
-    if (enemy.vy === 0) {
-      enemy.vy = -1
-    }
-
-    if (enemy.y > bottomYBound) {
-      enemy.vy = -1
-    }
-
-    if (enemy.y < topYBound) {
-      enemy.vy = 1
-    }
-  }
-}
-
 function createSu3(i) {
   return new Enemy('img/su-3.png', 250, 80, i, 50, su3EnemyBehavior)
 }
 
 function createSu27(i) {
-  return new Enemy('img/su-27.png', 270, 100, i, 100)
+  return new Enemy('img/su-27.png', 270, 100, i, 100, su27EnemyBehavior)
 }
 
 function createZ10(i) {
