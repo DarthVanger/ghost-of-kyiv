@@ -1,6 +1,9 @@
 import { addGatling } from './gatling.js'
 import { createRocket } from './enemy.js'
-import { levelCompleteScreen, bossCompleteScreenText } from './levelCompleteScreen.js'
+import {
+  levelCompleteScreen,
+  bossCompleteScreenText,
+} from './levelCompleteScreen.js'
 export let level3Boss
 
 function createBossHp(boss, i, maxHealth) {
