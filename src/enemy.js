@@ -44,6 +44,7 @@ class Enemy {
   constructor(src, width, height, i, maxHealth, behavior) {
     this.element = document.createElement('img')
     this.element.id = 'enemy' + i
+    this.index = i
     this.element.className = 'enemy'
     this.element.src = src
     this.x = getRandomEnemyX(i)
@@ -65,6 +66,25 @@ function su3EnemyBehavior(enemy) {
   }
 }
 
+function z10EnemyBehavior(enemy) {
+  const bottomYBound = window.innerHeight * 0.75
+  const topYBound = window.innerHeight * 0.25
+
+  if (enemy.x < window.innerWidth) {
+    if (enemy.vy === 0) {
+      enemy.vy = -1
+    }
+
+    if (enemy.y > bottomYBound) {
+      enemy.vy = -1
+    }
+
+    if (enemy.y < topYBound) {
+      enemy.vy = 1
+    }
+  }
+}
+
 function createSu3(i) {
   return new Enemy('img/su-3.png', 250, 80, i, 50, su3EnemyBehavior)
 }
@@ -74,15 +94,15 @@ function createSu27(i) {
 }
 
 function createZ10(i) {
-  return new Enemy('img/z-10.png', 330, 200, i, 200)
+  return new Enemy('img/z-10.png', 330, 200, i, 200, z10EnemyBehavior)
 }
 
 export function createEnemies(maxEnemies) {
   for (let i = 0; i < maxEnemies; i++) {
     let enemy
-    if (i < 5) {
+    if (i < 3) {
       enemy = createSu3(i)
-    } else if (i >= 5 && i <= 9) {
+    } else if (i >= 3 && i <= 6) {
       enemy = createSu27(i)
     } else {
       enemy = createZ10(i)
