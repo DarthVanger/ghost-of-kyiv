@@ -346,11 +346,24 @@ h1 sub {
   height: 100vh;
   will-change: transform;
 }
+
 #bg-front {
   background: url('img/parallax-bg-front.png');
   background-size: contain;
   height: 100vh;
   width: 25000px;
+}
+
+#bg-middle {
+  background: url('img/parallax-bg-middle.png');
+  background-size: auto 100%;
+  height: 100vh;
+  width: 25000px;
+}
+
+#bg-middle.bg-bucha {
+  background: url('img/parallax-bg-middle-bucha.webp');
+  bottom: -150px;
 }
 
 #bossPopup {
