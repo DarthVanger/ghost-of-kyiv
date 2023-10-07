@@ -1,6 +1,6 @@
 // Create an SVG element
 const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-const circleInside = document.createElementNS(
+const innerCircle = document.createElementNS(
   'http://www.w3.org/2000/svg',
   'circle'
 )
@@ -11,8 +11,8 @@ const svgWidth = (20 / 100) * screenWidth
 const joystickRadius = svgWidth / 2
 const joystickNippleRadius = svgWidth / 8
 
-export const isMobileDevice = {
-  isShown: false,
+export const mobileJoystick = {
+  isMobileDevice: false,
   x: 0,
   y: 0,
   left: false,
@@ -30,7 +30,7 @@ export function createJoystick() {
   // Set the position to left bottom corner
   svg.style.position = 'fixed'
   svg.style.left = '5%'
-  svg.style.bottom = '5%'
+  svg.style.bottom = '10%'
 
   // Create a circle element
   const circle = document.createElementNS(
@@ -43,17 +43,17 @@ export function createJoystick() {
   circle.setAttribute('fill', 'lightgray')
   circle.setAttribute('fill-opacity', 0.2)
 
-  circleInside.setAttribute('cx', joystickRadius)
-  circleInside.setAttribute('cy', joystickRadius)
-  circleInside.setAttribute('r', joystickNippleRadius)
-  circleInside.setAttribute('fill-opacity', 0.7)
+  innerCircle.setAttribute('cx', joystickRadius)
+  innerCircle.setAttribute('cy', joystickRadius)
+  innerCircle.setAttribute('r', joystickNippleRadius)
+  innerCircle.setAttribute('fill-opacity', 0.7)
 
   // Append the circle element to the SVG element
   svg.appendChild(circle)
-  svg.appendChild(circleInside)
+  svg.appendChild(innerCircle)
   // Append the SVG element to the document body
   document.body.appendChild(svg)
-  isMobileDevice.isShown = true
+  mobileJoystick.isMobileDevice = true
 }
 
 svg.addEventListener('touchmove', function (event) {
@@ -73,11 +73,11 @@ svg.addEventListener('touchmove', function (event) {
       distanceFromCenterY * distanceFromCenterY
   )
   if (distanceToCenter < joystickRadius - joystickNippleRadius) {
-    circleInside.setAttribute('cx', xInsideSvg)
-    circleInside.setAttribute('cy', yInsideSvg)
+    innerCircle.setAttribute('cx', xInsideSvg)
+    innerCircle.setAttribute('cy', yInsideSvg)
 
-    isMobileDevice.x = distanceFromCenterX / maxDistance
-    isMobileDevice.y = distanceFromCenterY / maxDistance
+    mobileJoystick.x = distanceFromCenterX / maxDistance
+    mobileJoystick.y = distanceFromCenterY / maxDistance
   } else {
     const scaleFactor = maxDistance / distanceToCenter
     distanceFromCenterX *= scaleFactor
@@ -87,19 +87,19 @@ svg.addEventListener('touchmove', function (event) {
         distanceFromCenterY * distanceFromCenterY
     )
 
-    circleInside.setAttribute('cx', distanceFromCenterX + joystickRadius)
-    circleInside.setAttribute('cy', distanceFromCenterY + joystickRadius)
+    innerCircle.setAttribute('cx', distanceFromCenterX + joystickRadius)
+    innerCircle.setAttribute('cy', distanceFromCenterY + joystickRadius)
 
-    isMobileDevice.x = distanceFromCenterX / maxDistance
-    isMobileDevice.y = distanceFromCenterY / maxDistance
+    mobileJoystick.x = distanceFromCenterX / maxDistance
+    mobileJoystick.y = distanceFromCenterY / maxDistance
   }
-  circleInside.setAttribute('fill-opacity', 0.4)
+  innerCircle.setAttribute('fill-opacity', 0.4)
 })
 
 svg.addEventListener('touchend', function (event) {
-  isMobileDevice.x = 0
-  isMobileDevice.y = 0
-  circleInside.setAttribute('cx', joystickRadius)
-  circleInside.setAttribute('cy', joystickRadius)
-  circleInside.setAttribute('fill-opacity', 0.7)
+  mobileJoystick.x = 0
+  mobileJoystick.y = 0
+  innerCircle.setAttribute('cx', joystickRadius)
+  innerCircle.setAttribute('cy', joystickRadius)
+  innerCircle.setAttribute('fill-opacity', 0.7)
 })

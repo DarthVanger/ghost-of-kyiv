@@ -159,8 +159,8 @@ p {
 /* touch menu*/
 ._touch .fire {
   position: absolute;
-  bottom: 75px;
-  right: 75px;
+  bottom: 10%;
+  right: 5%;
   display: block;
   width: 100px;
   height: 100px;

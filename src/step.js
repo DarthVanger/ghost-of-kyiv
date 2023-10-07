@@ -5,8 +5,8 @@ import { airfighter } from './player/Player.js'
 import { moveBackground } from './background.js'
 import { levelOverIfLastEnemyOut } from './gameOver.js'
 import { renderAmmo } from './ammo.js'
-import { isMobileDevice } from './mobileJoystick.js'
-import { setAirfighterVelocityFromMobileJoystick } from './mobile/changeMobileSpeed.js'
+import { mobileJoystick } from './mobileJoystick.js'
+import { setAirfighterVelocityFromMobileJoystick } from './mobile/mobileVelocityController.js'
 
 export const fps = 60
 export const gameState = {
@@ -24,8 +24,8 @@ export function Step() {
   renderRocket()
   airfighter.render()
 
-  if (isMobileDevice.isShown) {
-    setAirfighterVelocityFromMobileJoystick(airfighter, isMobileDevice)
+  if (mobileJoystick.isMobileDevice) {
+    setAirfighterVelocityFromMobileJoystick(airfighter, mobileJoystick)
   }
 
   const lastEnemy = enemies[enemies.length - 1]
