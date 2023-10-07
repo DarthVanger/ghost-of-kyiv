@@ -8,30 +8,6 @@ import { soundRocketShot } from './music.js'
 export function initKeybordMovement() {
   document.addEventListener('keydown', handleKeyDown)
   document.addEventListener('keyup', handleKeyUp)
-  mobileControls.leftButton.addEventListener('touchstart', function () {
-    airfighter.isKeyLeftPressed = true
-  })
-  mobileControls.rightButton.addEventListener('touchstart', function () {
-    airfighter.isKeyRightPressed = true
-  })
-  mobileControls.topButton.addEventListener('touchstart', function () {
-    airfighter.isKeyUpPressed = true
-  })
-  mobileControls.bottomButton.addEventListener('touchstart', function () {
-    airfighter.isKeyDownPressed = true
-  })
-  mobileControls.leftButton.addEventListener('touchend', function () {
-    airfighter.isKeyLeftPressed = false
-  })
-  mobileControls.rightButton.addEventListener('touchend', function () {
-    airfighter.isKeyRightPressed = false
-  })
-  mobileControls.topButton.addEventListener('touchend', function () {
-    airfighter.isKeyUpPressed = false
-  })
-  mobileControls.bottomButton.addEventListener('touchend', function () {
-    airfighter.isKeyDownPressed = false
-  })
   mobileControls.fireButton.addEventListener('click', fireRocket)
 }
 

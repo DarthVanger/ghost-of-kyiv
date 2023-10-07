@@ -157,50 +157,6 @@ p {
 }
 
 /* touch menu*/
-._touch .bottom {
-  position: absolute;
-  bottom: 10px;
-  left: 120px;
-  border-left: 50px solid transparent;
-  border-right: 50px solid transparent;
-  border-top: 100px solid #fff;
-  z-index: 1;
-  opacity: 20%;
-}
-
-._touch .left {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  border-bottom: 50px solid transparent;
-  border-right: 100px solid #fff;
-  border-top: 50px solid transparent;
-  z-index: 1;
-  opacity: 20%;
-}
-
-._touch .right {
-  position: absolute;
-  bottom: 10px;
-  left: 230px;
-  border-bottom: 50px solid transparent;
-  border-left: 100px solid #fff;
-  border-top: 50px solid transparent;
-  z-index: 1;
-  opacity: 20%;
-}
-
-._touch .top {
-  position: absolute;
-  bottom: 120px;
-  left: 120px;
-  border-left: 50px solid transparent;
-  border-right: 50px solid transparent;
-  border-bottom: 100px solid #fff;
-  z-index: 1;
-  opacity: 20%;
-}
-
 ._touch .fire {
   position: absolute;
   bottom: 75px;
