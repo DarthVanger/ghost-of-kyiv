@@ -49,8 +49,8 @@ class Player {
       this.y = 0
     }
 
-    if (this.x + this.width >= screen.width) {
-      this.x = screen.width - this.width
+    if (this.x + this.width >= window.innerWidth) {
+      this.x = window.innerWidth - this.width
       this.vx = 0
       this.ax = 0
     }
