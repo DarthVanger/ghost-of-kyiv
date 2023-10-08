@@ -1,8 +1,6 @@
+import {createJoystick} from './mobileJoystick.js'
 export const mobileControls = {
-  leftButton: document.querySelector('.left'),
-  topButton: document.querySelector('.top'),
-  bottomButton: document.querySelector('.bottom'),
-  rightButton: document.querySelector('.right'),
+  
   fireButton: document.querySelector('.fire'),
 }
 
@@ -18,6 +16,7 @@ if (
 ) {
   document.body.classList.add('_touch')
   touch.style.display = 'none'
+  createJoystick()
   if (window.orientation === 0) {
     viewport.setAttribute(
       'content',
