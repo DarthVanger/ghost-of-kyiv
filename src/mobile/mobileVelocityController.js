@@ -3,25 +3,25 @@ export function setAirfighterVelocityFromMobileJoystick(
   airfighter,
   mobileJoystick
 ) {
-  if (mobileJoystick.x < 0) {
-    airfighter.isKeyLeftPressed = true
-    airfighter.vx *= mobileJoystick.x * -1
-  } else if (mobileJoystick.x > 0) {
-    airfighter.isKeyRightPressed = true
-    airfighter.vx *= mobileJoystick.x
-  } else {
-    airfighter.isKeyRightPressed = false
-    airfighter.isKeyLeftPressed = false
+  airfighter.vx += mobileJoystick.x
+  airfighter.vy += mobileJoystick.y*10
+  if(airfighter.vx == 0) {
+    airfighter.element.src = 'img/aifighter-Front.gif'
   }
-
-  if (mobileJoystick.y < 0) {
-    airfighter.isKeyUpPressed = true
-    airfighter.vy *= mobileJoystick.y * -1
-  } else if (mobileJoystick.y > 0) {
-    airfighter.isKeyDownPressed = true
-    airfighter.vy *= mobileJoystick.y
-  } else {
-    airfighter.isKeyUpPressed = false
-    airfighter.isKeyDownPressed = false
+  if(airfighter.vy == 0) {
+    airfighter.element.src = 'img/aifighter-Front.gif'
+  }
+  if(airfighter.vx < -1) {
+    airfighter.element.src = 'img/aifighter-Back.gif'
+  }
+  if(airfighter.vx > 1) {
+    airfighter.element.src = 'img/aifighter-Front-Accelerate.gif'
+  }
+  if(airfighter.vy < -1 ) {
+    airfighter.element.src = 'img/aifighter-Up.gif'
+  }
+  if(airfighter.vy > 1) {
+    airfighter.element.src = 'img/aifighter-Down.gif'
   }
 }
+
