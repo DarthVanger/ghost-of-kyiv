@@ -10,6 +10,8 @@ class Rocket {
   width = 120
   dmg = 50
   velocity = 8
+  critChance = Math.floor(Math.random()*100) < 25
+  crit = Math.random() + 1;
   element = document.createElement('img')
   moveToInitialPosition() {
     this.x = rocketDefaultX
