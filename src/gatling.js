@@ -1,5 +1,4 @@
-import { airfighter } from './player/Player.js'
-
+import { airfighter, setCooldown, cooldown } from './player/Player.js'
 import { soundGatling } from './music.js'
 
 export let gatling = {
@@ -18,13 +17,14 @@ function createBullet() {
   bullet.element.src = 'img/Bullet-With-Fireball.gif?rnd=' + Math.random()
   bullet.element.className = 'bullet'
   bullet.element.style.width = '50px'
-  document.body.append(bullet.element)
   bullet.velocity = 12
   bullet.x = airfighter.x + airfighter.width + Math.random() * 4 - 25
   bullet.y = airfighter.y + airfighter.height / 2 - 20
   bullet.margin = Math.random() * 2 - 1
-  gatling.ammo -= 10
+  document.body.append(bullet.element)
+  gatling.ammo -= 1
   bulletArray.push(bullet)
+  console.log(bulletArray)
 }
 
 export function removeBullet(bullet) {
@@ -32,23 +32,25 @@ export function removeBullet(bullet) {
   bulletArray = bulletArray.filter((anotherBullet) => anotherBullet !== bullet)
 }
 
-export function fireGatlingEnemy() {
-  if (gatling.ammo > 0) {
-    if (bulletArray.length < 10) {
-      createBullet()
-      soundGatling.play()
-    }
+export function fireGatlingPlayer() {
+  if (gatling.ammo > 0 && !cooldown) {
+    createBullet()
+    soundGatling.play()
+    setCooldown(true)
+    setTimeout(function () {
+      setCooldown(false)
+    }, 20)
   }
 }
 
 export function addGatling(enemy) {
   document
     .querySelector('#game-background')
-    .addEventListener('click', fireGatlingEnemy)
-  enemy.element.addEventListener('click', fireGatlingEnemy)
+    .addEventListener('click', fireGatlingPlayer)
+  enemy.element.addEventListener('click', fireGatlingPlayer)
   document
     .querySelector('#airfighter')
-    .addEventListener('click', fireGatlingEnemy)
+    .addEventListener('click', fireGatlingPlayer)
 }
 
 export function moveBullet(bullet) {
