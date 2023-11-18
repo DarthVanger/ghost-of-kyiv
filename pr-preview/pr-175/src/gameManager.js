@@ -94,6 +94,9 @@ function startLevel2() {
   createEnemies(levelEnemies)
   gameState.gameIntervalId = setInterval(Step, 1000 / fps)
   introduction.style.display = 'block'
+
+  const bgMiddle = document.querySelector('#bg-middle')
+  bgMiddle.classList.add('bg-bucha')
 }
 
 function startLevel3() {
