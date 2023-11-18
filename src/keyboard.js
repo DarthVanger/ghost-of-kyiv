@@ -1,9 +1,11 @@
-import { createPlayerRocket } from './rocket.js'
-import { fireGatlingEnemy } from './gatling.js'
+import { fireGatlingPlayer } from './gatling.js'
 import { airfighter } from './player/Player.js'
 import { mobileControls } from './touch.js'
 import { gamePauseAction } from './gameMenuActions.js'
+import { createPlayerRocket } from './rocket.js'
 import { soundRocketShot } from './music.js'
+
+export let controls = []
 
 export function initKeybordMovement() {
   document.addEventListener('keydown', handleKeyDown)
@@ -11,58 +13,40 @@ export function initKeybordMovement() {
   mobileControls.fireButton.addEventListener('click', fireRocket)
 }
 
+// prettier-ignore
 function handleKeyDown(event) {
-  if (event.key == 'r' || event.key == 'к') {
-    fireRocket()
+  if ((event.key === 'r' || event.key === 'к' ||
+      event.key === 'a' || event.key === 'ф' ||
+      event.key === 's' || event.key === 'ы' || event.key === 'і' ||
+      event.key === 'w' || event.key === 'ц' ||
+      event.key === 'd' || event.key === 'в' ||
+      event.key === 'p' || event.key === 'з' ||
+      event.key === ' ') &&
+      controls.indexOf(event.key) === -1
+    ) {
+      controls.push(event.key)
   }
 
-  if (event.key == 'a' || event.key == 'ф') {
-    airfighter.isKeyLeftPressed = true
-    airfighter.element.src = 'img/aifighter-Back.gif'
-  }
-
-  if (event.key == 's' || event.key == 'ы' || event.key == 'і') {
-    airfighter.isKeyDownPressed = true
-    airfighter.element.src = 'img/aifighter-Down.gif'
-  }
-
-  if (event.key == 'w' || event.key == 'ц') {
-    airfighter.isKeyUpPressed = true
-    airfighter.element.src = 'img/aifighter-Up.gif'
-  }
-
-  if (event.key == 'd' || event.key == 'в') {
-    airfighter.isKeyRightPressed = true
-    airfighter.element.src = 'img/aifighter-Front-Accelerate.gif'
-  }
-
-  if (event.key == 'p' || event.key == 'з') {
+  if (controls.includes('p')) {
     gamePauseAction()
   }
-  if (event.key == ' ') {
-    fireGatlingEnemy()
+
+  if (controls.includes(' ')) {
+    fireGatlingPlayer()
   }
 }
 
+// prettier-ignore
 function handleKeyUp(event) {
-  if (event.key == 'a' || event.key == 'ф') {
-    airfighter.isKeyLeftPressed = false
-    airfighter.element.src = 'img/aifighter-Front.gif'
-  }
-
-  if (event.key == 's' || event.key == 'ы' || event.key == 'і') {
-    airfighter.isKeyDownPressed = false
-    airfighter.element.src = 'img/aifighter-Front.gif'
-  }
-
-  if (event.key == 'w' || event.key == 'ц') {
-    airfighter.isKeyUpPressed = false
-    airfighter.element.src = 'img/aifighter-Front.gif'
-  }
-
-  if (event.key == 'd' || event.key == 'в') {
-    airfighter.isKeyRightPressed = false
-    airfighter.element.src = 'img/aifighter-Front.gif'
+  if (event.key === 'r' || event.key === 'к' ||
+  event.key === 'a' || event.key === 'ф' ||
+  event.key === 's' || event.key === 'ы' || event.key === 'і' ||
+  event.key === 'w' || event.key === 'ц' ||
+  event.key === 'd' || event.key === 'в' ||
+  event.key === 'p' || event.key === 'з' ||
+  event.key === ' '
+) {
+  controls.splice(controls.indexOf(event.key), 1)
   }
 }
 

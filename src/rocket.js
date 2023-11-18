@@ -2,7 +2,7 @@ import { rocketDefaultX, rocketDefaultY } from './rendering/Helpers.js'
 
 export let rockets = []
 
-export let rocketAmmo = 10
+export let rocketAmmo = 50
 
 class Rocket {
   x = 80
@@ -11,7 +11,6 @@ class Rocket {
   dmg = 50
   velocity = 8
   element = document.createElement('img')
-
   moveToInitialPosition() {
     this.x = rocketDefaultX
     this.y = rocketDefaultY
@@ -51,5 +50,5 @@ export function removePlayerRocket(rocket) {
 }
 
 export function resetPlayerRocketAmmo() {
-  rocketAmmo = 10
+  rocketAmmo = 50
 }
