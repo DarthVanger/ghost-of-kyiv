@@ -17,7 +17,11 @@ import {
 export default function performCollisionChecksForEnemy(enemy) {
   for (let rocket of rockets) {
     if (checkEnemyRocketCollision(enemy, rocket)) {
-      enemy.enemyHealth.element.value -= rocket.dmg
+      if(rocket.critChance) {
+        enemy.enemyHealth.element.value -= Math.floor(rocket.dmg * rocket.crit)
+      } else{
+        enemy.enemyHealth.element.value -= rocket.dmg
+      }
       removePlayerRocket(rocket)
       soundRocketHit.play()
     }
@@ -90,7 +94,11 @@ function checkBulletCollision(bullet, enemy) {
   const isCollisionWithRocket = checkCollision(bullet, enemy.rocket)
   const isOutOfScreen = bullet.x > window.innerWidth
   if (isCollisionWithEnemy) {
-    enemy.enemyHealth.element.value -= 5
+    if(bullet.critChance) {
+      enemy.enemyHealth.element.value -= (2*bullet.dmg)
+    } else{
+      enemy.enemyHealth.element.value -= bullet.dmg
+    }
   }
   if (isCollisionWithRocket) {
     enemy.rocket.x = deadEnemyXPosition
