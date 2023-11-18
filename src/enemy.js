@@ -3,7 +3,11 @@ import performCollisionChecksForEnemy, {
   checkEnemyShipCollision,
   enemyCollisionWithBullet,
 } from './rendering/EnemyCollisionsChecks.js'
-
+import {
+  su3EnemyBehavior,
+  su27EnemyBehavior,
+  z10EnemyBehavior,
+} from './enemyManoeuvre.js'
 export let enemies = []
 
 export function deleteEnemies() {
@@ -44,6 +48,7 @@ class Enemy {
   constructor(src, width, height, i, maxHealth, behavior) {
     this.element = document.createElement('img')
     this.element.id = 'enemy' + i
+    this.index = i
     this.element.className = 'enemy'
     this.element.src = src
     this.x = getRandomEnemyX(i)
@@ -58,31 +63,24 @@ class Enemy {
   }
 }
 
-function su3EnemyBehavior(enemy) {
-  const halfScreenX = window.innerWidth / 2
-  if (enemy.x < halfScreenX) {
-    enemy.vy = -2
-  }
-}
-
 function createSu3(i) {
   return new Enemy('img/su-3.png', 250, 80, i, 50, su3EnemyBehavior)
 }
 
 function createSu27(i) {
-  return new Enemy('img/su-27.png', 270, 100, i, 100)
+  return new Enemy('img/su-27.png', 270, 100, i, 100, su27EnemyBehavior)
 }
 
 function createZ10(i) {
-  return new Enemy('img/z-10.png', 330, 200, i, 200)
+  return new Enemy('img/z-10.png', 330, 200, i, 200, z10EnemyBehavior)
 }
 
 export function createEnemies(maxEnemies) {
   for (let i = 0; i < maxEnemies; i++) {
     let enemy
-    if (i < 5) {
+    if (i < 3) {
       enemy = createSu3(i)
-    } else if (i >= 5 && i <= 9) {
+    } else if (i >= 3 && i <= 6) {
       enemy = createSu27(i)
     } else {
       enemy = createZ10(i)

@@ -1,4 +1,3 @@
-import { airfighter } from './player/Player.js'
 import { rocketDefaultX, rocketDefaultY } from './rendering/Helpers.js'
 
 export let rockets = []
@@ -31,7 +30,7 @@ export function moveRocket() {
   }
 }
 
-export function createPlayerRocket() {
+export function createPlayerRocket(airfighter) {
   if (rocketAmmo > 0) {
     let rocket = new Rocket()
     rocket.element.src = 'img/mrRocket.gif'
