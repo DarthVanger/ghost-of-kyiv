@@ -4,7 +4,6 @@ import { soundGatling } from './music.js'
 export let gatling = {
   velocity: -2,
   ammo: 1500,
-  dmg: 10,
   element: document.querySelector('#gatling'),
 }
 
@@ -20,6 +19,8 @@ function createBullet() {
   bullet.velocity = 12
   bullet.x = airfighter.x + airfighter.width + Math.random() * 4 - 25
   bullet.y = airfighter.y + airfighter.height / 2 - 20
+  bullet.dmg = 5
+  bullet.critChance = Math.floor(Math.random()*100) < 10
   bullet.margin = Math.random() * 2 - 1
   document.body.append(bullet.element)
   gatling.ammo -= 1
