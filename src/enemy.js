@@ -103,7 +103,7 @@ export function createRocket(enemy, damage) {
 
   enemy.rocket = {
     x: enemy.x,
-    y: enemy.y + enemy.height-(enemy.height/5) ,
+    y: enemy.y + enemy.height-(enemy.height/5),
     width: 120,
     height: 12,
     dmg: damage,
