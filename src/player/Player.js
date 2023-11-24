@@ -118,7 +118,7 @@ class Player {
 
   moveToInitalPosition() {
     this.x = 0
-    this.y = 0
+    this.y = window.innerHeight / 2 - airfighter.height / 2
   }
 }
 
