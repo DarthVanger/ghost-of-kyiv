@@ -7,12 +7,14 @@ import {
 import { bulletArray, removeBullet } from '../gatling.js'
 import { explosion } from '../rendering/Explosion.js'
 import { rockets, removePlayerRocket } from '../rocket.js'
-import { playerDiesIfHpBelowZiro } from '../player/Player.js'
 import {
   soundRocketShot,
   soundRocketHit,
   soundEnemyDieExplosion,
 } from '../music.js'
+import { gameOver } from '../gameOver.js'
+
+
 
 export default function performCollisionChecksForEnemy(enemy) {
   const airfighter = gameState.airfighter
@@ -110,6 +112,12 @@ function checkBulletCollision(bullet, enemy) {
   }
   if (isOutOfScreen || isCollisionWithEnemy || isCollisionWithRocket) {
     removeBullet(bullet)
+  }
+}
+
+function playerDiesIfHpBelowZiro() {
+  if (gameState.airfighter.health.element.value <= 0) {
+    gameOver()
   }
 }
 

@@ -4,7 +4,7 @@ import { updateSpeedometer } from '../speedometer.js'
 import { controls } from '../keyboard.js'
 import { soundRocketShot } from '../music.js'
 import { gameState } from '../gameState.js'
-export let cooldown = false
+let rocketCooldown = false
 const acceleration = 1
 
 export class Player {
@@ -122,11 +122,7 @@ export class Player {
   }
 }
 
-export function playerDiesIfHpBelowZiro() {
-  if (gameState.airfighter.health.element.value <= 0) {
-    gameOver()
-  }
-}
+
 
 function playerDiesWhenCrashed(player) {
   if (player.y + player.height / 2 > window.innerHeight) {
@@ -143,16 +139,16 @@ function removePlayerRocketIfMaxDistance() {
 }
 
 function fireRocket() {
-  if (!cooldown) {
+  if (!rocketCooldown) {
     createPlayerRocket(gameState.airfighter)
     soundRocketShot.play()
-    setCooldown(true)
+    setRocketCooldown(true)
     setTimeout(function () {
-      setCooldown(false)
+      setRocketCooldown(false)
     }, 220)
   }
 }
 
-export function setCooldown(c) {
-  cooldown = c
+function setRocketCooldown(c) {
+  rocketCooldown = c
 }
