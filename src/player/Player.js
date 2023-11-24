@@ -1,6 +1,5 @@
 import { rockets, removePlayerRocket, createPlayerRocket } from '../rocket.js'
 import { gameOver } from '../gameOver.js'
-import { updateSpeedometer } from '../speedometer.js'
 import { controls } from '../keyboard.js'
 import { soundRocketShot } from '../music.js'
 import { gameState } from '../gameState.js'
@@ -38,7 +37,6 @@ export class Player {
   }
 
   render() {
-    updateSpeedometer(this.vx, this.ax, this.vy)
     this.vx += this.ax
     this.x += this.vx
     this.y += this.vy
@@ -121,8 +119,6 @@ export class Player {
     this.y = window.innerHeight / 2 - this.height / 2
   }
 }
-
-
 
 function playerDiesWhenCrashed(player) {
   if (player.y + player.height / 2 > window.innerHeight) {
