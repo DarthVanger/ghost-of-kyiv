@@ -1,4 +1,4 @@
-import { airfighter } from '../player/Player.js'
+import { gameState } from '../gameState.js'
 import {
   deadEnemyXPosition,
   rocketDefaultX,
@@ -15,6 +15,7 @@ import {
 } from '../music.js'
 
 export default function performCollisionChecksForEnemy(enemy) {
+  const airfighter = gameState.airfighter
   for (let rocket of rockets) {
     if (checkEnemyRocketCollision(enemy, rocket)) {
       if(rocket.critChance) {
@@ -60,6 +61,8 @@ function checkEnemyRocketCollision(enemy, rocket) {
 }
 
 function checkPlayerRocketCollision(enemy) {
+  const airfighter = gameState.airfighter
+
   if (
     airfighter.x + airfighter.width > enemy.rocket.x &&
     airfighter.x < enemy.rocket.x + enemy.rocket.width &&
@@ -120,6 +123,8 @@ function checkCollision(bullet, enemy) {
 }
 
 export function checkEnemyShipCollision(enemy) {
+const airfighter = gameState.airfighter
+
   if (
     airfighter.x + airfighter.width > enemy.x &&
     airfighter.x < enemy.x + enemy.width &&

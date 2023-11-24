@@ -1,5 +1,7 @@
-import { airfighter, setCooldown, cooldown } from './player/Player.js'
+import {  setCooldown, cooldown } from './player/Player.js'
 import { soundGatling } from './music.js'
+import { gameState } from './gameState.js'
+
 
 export let gatling = {
   velocity: -2,
@@ -10,6 +12,8 @@ export let gatling = {
 export let bulletArray = []
 
 function createBullet() {
+  const airfighter = gameState.airfighter
+
   const bullet = {}
   bullet.element = document.createElement('img')
   // Restart gif animation - https://stackoverflow.com/a/2831728
@@ -25,7 +29,6 @@ function createBullet() {
   document.body.append(bullet.element)
   gatling.ammo -= 1
   bulletArray.push(bullet)
-  console.log(bulletArray)
 }
 
 export function removeBullet(bullet) {

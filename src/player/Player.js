@@ -3,11 +3,11 @@ import { gameOver } from '../gameOver.js'
 import { updateSpeedometer } from '../speedometer.js'
 import { controls } from '../keyboard.js'
 import { soundRocketShot } from '../music.js'
-
+import { gameState } from '../gameState.js'
 export let cooldown = false
 const acceleration = 1
 
-class Player {
+export class Player {
   x = 0
   y = 0
   vx = 0
@@ -63,19 +63,19 @@ class Player {
 
     if (controls.includes('w')) {
       this.vy = -10
-      airfighter.element.src = 'img/aifighter-Up.gif'
+      this.element.src = 'img/aifighter-Up.gif'
     }
     if (controls.includes('s')) {
       this.vy = +10
-      airfighter.element.src = 'img/aifighter-Down.gif'
+      this.element.src = 'img/aifighter-Down.gif'
     }
     if (controls.includes('a')) {
       this.ax = -acceleration / 2
-      airfighter.element.src = 'img/aifighter-Back.gif'
+      this.element.src = 'img/aifighter-Back.gif'
     }
     if (controls.includes('d')) {
       this.ax = acceleration
-      airfighter.element.src = 'img/aifighter-Front-Accelerate.gif'
+      this.element.src = 'img/aifighter-Front-Accelerate.gif'
     }
 
     if (!controls.includes('d') && !controls.includes('a')) {
@@ -90,7 +90,7 @@ class Player {
       !controls.includes('w') &&
       !controls.includes('s')
     ) {
-      airfighter.element.src = 'img/aifighter-Front.gif'
+      this.element.src = 'img/aifighter-Front.gif'
     }
     if (controls.includes('r')) {
       fireRocket()
@@ -118,14 +118,12 @@ class Player {
 
   moveToInitalPosition() {
     this.x = 0
-    this.y = window.innerHeight / 2 - airfighter.height / 2
+    this.y = window.innerHeight / 2 - this.height / 2
   }
 }
 
-export let airfighter = new Player()
-
 export function playerDiesIfHpBelowZiro() {
-  if (airfighter.health.element.value <= 0) {
+  if (gameState.airfighter.health.element.value <= 0) {
     gameOver()
   }
 }
@@ -146,7 +144,7 @@ function removePlayerRocketIfMaxDistance() {
 
 function fireRocket() {
   if (!cooldown) {
-    createPlayerRocket(airfighter)
+    createPlayerRocket(gameState.airfighter)
     soundRocketShot.play()
     setCooldown(true)
     setTimeout(function () {

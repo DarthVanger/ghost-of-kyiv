@@ -1,9 +1,9 @@
 import { fireGatlingPlayer } from './gatling.js'
-import { airfighter } from './player/Player.js'
 import { mobileControls } from './touch.js'
 import { gamePauseAction } from './gameMenuActions.js'
 import { createPlayerRocket } from './rocket.js'
 import { soundRocketShot } from './music.js'
+import { gameState } from './gameState.js'
 
 export let controls = []
 
@@ -51,6 +51,6 @@ function handleKeyUp(event) {
 }
 
 function fireRocket() {
-  createPlayerRocket(airfighter)
+  createPlayerRocket(gameState.airfighter)
   soundRocketShot.play()
 }
