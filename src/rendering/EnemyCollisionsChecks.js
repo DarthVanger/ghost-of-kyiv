@@ -1,8 +1,6 @@
 import { gameState } from '../gameState.js'
 import {
   deadEnemyXPosition,
-  rocketDefaultX,
-  rocketDefaultY,
 } from './Helpers.js'
 import { bulletArray, removeBullet } from '../gatling.js'
 import { explosion } from '../rendering/Explosion.js'
