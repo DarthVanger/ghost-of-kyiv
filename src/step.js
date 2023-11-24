@@ -1,20 +1,21 @@
 import { enemies, updateEnemy } from './enemy.js'
 import { renderRocket, moveRocket } from './rocket.js'
 import { bulletArray, moveBullet } from './gatling.js'
-import { airfighter } from './player/Player.js'
 import { moveBackground } from './background.js'
 import { levelOverIfLastEnemyOut } from './gameOver.js'
 import { renderAmmo } from './ammo.js'
 import { mobileJoystick } from './mobileJoystick.js'
 import { setAirfighterVelocityFromMobileJoystick } from './mobile/mobileVelocityController.js'
-
+import { gameState } from './gameState.js'
 export const fps = 60
-export const gameState = {
-  isGamePaused: false,
-  gameIntervalId: undefined,
-}
+
+
+gameState.isGamePaused = false;
+gameState.gameIntervalId = undefined;
 
 export function Step() {
+  const airfighter = gameState.airfighter
+
   enemies.forEach(updateEnemy)
   bulletArray.forEach(moveBullet)
   moveRocket()
