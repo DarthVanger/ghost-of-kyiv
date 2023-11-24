@@ -28,14 +28,14 @@ export function moveBackground(airfighter) {
   backBgX += backBgVx
   middleBgX += middleBgVx
   frontBgX += frontBgVx
-  
-  frontBgY = (airfighter.y /window.innerHeight* 100)*-1
-  middleBgY = (airfighter.y /window.innerHeight* 100)/4
-  backBgY = (airfighter.y /window.innerHeight* 100)/8
 
-  backBg.style.transform = `translate(${backBgX}px, ${backBgY-20}px)`
+  frontBgY = (airfighter.y / window.innerHeight) * 100 * -1
+  middleBgY = ((airfighter.y / window.innerHeight) * 100) / 4
+  backBgY = ((airfighter.y / window.innerHeight) * 100) / 8
+
+  backBg.style.transform = `translate(${backBgX}px, ${backBgY - 20}px)`
   middleBg.style.transform = `translate(${middleBgX}px, ${middleBgY}px)`
-  frontBg.style.transform = `translate(${frontBgX}px, ${frontBgY+100}px)`
+  frontBg.style.transform = `translate(${frontBgX}px, ${frontBgY + 100}px)`
 }
 
 export function resetBackground() {
