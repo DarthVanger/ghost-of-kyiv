@@ -1,4 +1,3 @@
-import { airfighter } from './player/Player.js'
 import { deleteEnemies, createEnemies, enemies } from './enemy.js'
 import {
   soundMainTheme,
@@ -6,7 +5,7 @@ import {
   soundLevelComplete,
   soundboss,
 } from './music.js'
-import { Step, gameState, fps } from './step.js'
+import { Step, fps } from './step.js'
 import { resetAmmo } from './ammo.js'
 import { level3Boss, createBoss, changeWinText } from './Boss.js'
 import { bossPopup } from './rendering/Helpers.js'
@@ -14,6 +13,9 @@ import { resetBackground } from './background.js'
 import { initKeybordMovement } from './keyboard.js'
 import { levelCompleteScreen } from './levelCompleteScreen.js'
 import { speedometer } from './speedometer.js'
+import { gameState } from './gameState.js'
+import { Player } from './player/Player.js'
+
 
 let isGameStarted = false
 let introduction = document.querySelector('#introduction')
@@ -25,6 +27,8 @@ const levelState = {
 }
 
 export function startGame() {
+  gameState.airfighter = new Player()
+
   console.log(`startGame, level :${levelState.levelNumber}`)
   initKeybordMovement()
   if (levelState.levelNumber == 1) {
@@ -80,6 +84,7 @@ function introductionSkip() {
 }
 
 function startLevel1() {
+  
   resetLevel()
   soundMainTheme.play()
   createEnemies(levelEnemies)
@@ -113,8 +118,8 @@ function startLevel3() {
 }
 
 function resetLevel() {
-  airfighter.moveToInitalPosition()
-  airfighter.resetLife()
+  gameState.airfighter.moveToInitalPosition()
+  gameState.airfighter.resetLife()
   deleteEnemies()
   resetAmmo(2000)
   resetBackground()

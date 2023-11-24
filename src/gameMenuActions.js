@@ -1,4 +1,5 @@
-import { gameState, Step, fps } from './step.js'
+import {  Step, fps } from './step.js'
+import { gameState } from './gameState.js'
 
 const pauseScreen = document.querySelector('#pause-screen')
 

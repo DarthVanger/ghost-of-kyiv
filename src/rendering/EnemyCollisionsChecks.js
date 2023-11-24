@@ -1,20 +1,21 @@
-import { airfighter } from '../player/Player.js'
+import { gameState } from '../gameState.js'
 import {
   deadEnemyXPosition,
-  rocketDefaultX,
-  rocketDefaultY,
 } from './Helpers.js'
 import { bulletArray, removeBullet } from '../gatling.js'
 import { explosion } from '../rendering/Explosion.js'
 import { rockets, removePlayerRocket } from '../rocket.js'
-import { playerDiesIfHpBelowZiro } from '../player/Player.js'
 import {
   soundRocketShot,
   soundRocketHit,
   soundEnemyDieExplosion,
 } from '../music.js'
+import { gameOver } from '../gameOver.js'
+
+
 
 export default function performCollisionChecksForEnemy(enemy) {
+  const airfighter = gameState.airfighter
   for (let rocket of rockets) {
     if (checkEnemyRocketCollision(enemy, rocket)) {
       if(rocket.critChance) {
@@ -60,6 +61,8 @@ function checkEnemyRocketCollision(enemy, rocket) {
 }
 
 function checkPlayerRocketCollision(enemy) {
+  const airfighter = gameState.airfighter
+
   if (
     airfighter.x + airfighter.width > enemy.rocket.x &&
     airfighter.x < enemy.rocket.x + enemy.rocket.width &&
@@ -110,6 +113,12 @@ function checkBulletCollision(bullet, enemy) {
   }
 }
 
+function playerDiesIfHpBelowZiro() {
+  if (gameState.airfighter.health.element.value <= 0) {
+    gameOver()
+  }
+}
+
 function checkCollision(bullet, enemy) {
   return (
     bullet.x > enemy.x &&
@@ -120,6 +129,8 @@ function checkCollision(bullet, enemy) {
 }
 
 export function checkEnemyShipCollision(enemy) {
+const airfighter = gameState.airfighter
+
   if (
     airfighter.x + airfighter.width > enemy.x &&
     airfighter.x < enemy.x + enemy.width &&
