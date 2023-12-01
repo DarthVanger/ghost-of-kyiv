@@ -83,17 +83,21 @@ function startLevel1() {
   resetLevel()
   soundMainTheme.play()
   createEnemies(levelEnemies)
-  gameState.gameIntervalId = setInterval(Step, 1000 / fps)
+  startAnimationFrame()
 }
 
 function startLevel2() {
   resetLevel()
   createEnemies(levelEnemies)
-  gameState.gameIntervalId = setInterval(Step, 1000 / fps)
+  startAnimationFrame()
   introduction.style.display = 'block'
-
   const bgMiddle = document.querySelector('#bg-middle')
   bgMiddle.classList.add('bg-bucha')
+}
+
+function startAnimationFrame() {
+  gameState.isGamePaused = false
+  requestAnimationFrame(Step)
 }
 
 function startLevel3() {
@@ -104,7 +108,7 @@ function startLevel3() {
   soundMainTheme.pause()
   enemies.push(level3Boss)
   introduction.style.display = 'block'
-  gameState.gameIntervalId = setInterval(Step, 1000 / fps)
+  startAnimationFrame()
 }
 
 function resetLevel() {
@@ -114,9 +118,7 @@ function resetLevel() {
   resetAmmo(2000)
   resetBackground()
   levelCompleteScreen.remove()
-  gameState.isGamePaused = false
   isGameStarted = false
-  clearInterval(gameState.gameIntervalId)
 }
 
 levelCompleteScreen
