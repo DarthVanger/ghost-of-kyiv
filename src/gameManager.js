@@ -55,15 +55,15 @@ function showIntroductionAndSetNewText() {
   introduction.style.zIndex = 3
   soundMainTheme.play()
   if (levelState.levelNumber == 1) {
-    document.querySelector('#episode').innerHTML = 'EPISODE II'
-    document.querySelector('#backstoryEpisode').innerHTML =
+    document.querySelector('#episode').innerText = 'EPISODE II'
+    document.querySelector('#backstoryEpisode').innerText =
       'The battle for the borders of Gostomel'
   }
   if (levelState.levelNumber == 2) {
     soundMainTheme.pause()
     soundboss.play()
-    document.querySelector('#episode').innerHTML = 'EPISODE III'
-    document.querySelector('#backstoryEpisode').innerHTML = 'Helicopter Boss'
+    document.querySelector('#episode').innerText = 'EPISODE III'
+    document.querySelector('#backstoryEpisode').innerText = 'Helicopter Boss'
   }
 }
 

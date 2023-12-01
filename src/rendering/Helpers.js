@@ -5,7 +5,7 @@ export const rocketDefaultY = 70
 export function bossPopup() {
   let popup = document.createElement('div')
   popup.id = 'bossPopup'
-  popup.innerHTML = 'THE BOSS IS COMING!!!'
+  popup.innerText = 'THE BOSS IS COMING!!!'
   document.querySelector('#game-background').append(popup)
   setTimeout(() => {
     deletePopup(popup)
