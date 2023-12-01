@@ -102,7 +102,7 @@ export class Player {
     this.health.element.style.height = this.height * 0.1
     this.healthtext.element.value =
       this.health.element.value / this.health.element.max
-    this.healthtext.element.innerHTML = `${this.health.element.value} / ${this.health.element.max} HP`
+    this.healthtext.element.innerText = `${this.health.element.value} / ${this.health.element.max} HP`
     this.healthtext.element.style.left = this.x
     this.healthtext.element.style.top = this.y - 35
     this.healthtext.element.style.width = this.width

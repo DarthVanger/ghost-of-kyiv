@@ -154,7 +154,7 @@ function renderEnemyHealth(enemy) {
 function renderEnemyHealthText(enemy) {
   const currentHp = enemy.enemyHealth.element.value
   const maxHp = enemy.enemyHealth.element.max
-  enemy.enemyHealthText.element.innerHTML = `${currentHp} / ${maxHp} HP`
+  enemy.enemyHealthText.element.innerText = `${currentHp} / ${maxHp} HP`
   enemy.enemyHealthText.element.style.left = enemy.x
   enemy.enemyHealthText.element.style.top = enemy.y - 35
   enemy.enemyHealthText.element.style.width = enemy.width
