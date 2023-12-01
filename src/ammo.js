@@ -10,7 +10,18 @@ const ammoElement = document.createElement('div')
 
 const ammoImgContainer = document.createElement('div')
 const ammoCountElement = document.createElement('div')
+
+const gatlingAmmoElement = document.createElement('div')
+const rocketAmmoElement = document.createElement('div')
+gatlingAmmoElement.id = `gatling-ammo`
+rocketAmmoElement.id = `rocket-ammo`
+ammoCountElement.append(gatlingAmmoElement)
+ammoCountElement.append(rocketAmmoElement)
+
+gatlingAmmoElement.innerText = gatling.ammo
+rocketAmmoElement.innerText = rocketAmmo
 ammoCountElement.id = 'ammoCountElement'
+
 
 ammoElement.id = 'ammoElement'
 
@@ -34,8 +45,6 @@ function addAmmoImages() {
 }
 
 function renderAmmoCount() {
-  ammoCountElement.innerHTML = `
-    <div id="gatling-ammo">${gatling.ammo}</div>
-    <div id="rocket-ammo">${rocketAmmo}</div>
-  `
+  gatlingAmmoElement.innerText = gatling.ammo
+  rocketAmmoElement.innerText = rocketAmmo
 }
