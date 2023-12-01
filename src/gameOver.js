@@ -36,6 +36,5 @@ function fadeIn(element) {
 }
 
 function stopInterval(gameState) {
-  clearInterval(gameState.gameIntervalId)
   gameState.isGamePaused = true
 }
