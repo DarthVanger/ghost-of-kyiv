@@ -70,11 +70,11 @@ function showIntroductionAndSetNewText() {
 function introductionSkip() {
   if (!isGameStarted) {
     soundMainTheme.play()
-    introduction.style.display = 'none'
     introduction.style.zIndex = -1
     soundIntro.pause()
     levelState.levelNumber += 1
     startGame()
+    introduction.style.display = 'none'
     isGameStarted = true
   }
 }
@@ -84,13 +84,10 @@ function startLevel1() {
   soundMainTheme.play()
   createEnemies(levelEnemies)
   gameState.gameIntervalId = setInterval(Step, 1000 / fps)
-  isGameStarted = false
 }
 
 function startLevel2() {
   resetLevel()
-  clearInterval(gameState.gameIntervalId)
-  isGameStarted = false
   createEnemies(levelEnemies)
   gameState.gameIntervalId = setInterval(Step, 1000 / fps)
   introduction.style.display = 'block'
@@ -101,8 +98,6 @@ function startLevel2() {
 
 function startLevel3() {
   resetLevel()
-  clearInterval(gameState.gameIntervalId)
-  isGameStarted = false
   bossPopup()
   createBoss()
   changeWinText()
@@ -119,6 +114,9 @@ function resetLevel() {
   resetAmmo(2000)
   resetBackground()
   levelCompleteScreen.remove()
+  gameState.isGamePaused = false
+  isGameStarted = false
+  clearInterval(gameState.gameIntervalId)
 }
 
 levelCompleteScreen
