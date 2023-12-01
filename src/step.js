@@ -9,10 +9,6 @@ import { setAirfighterVelocityFromMobileJoystick } from './mobile/mobileVelocity
 import { gameState } from './gameState.js'
 export const fps = 60
 
-
-gameState.isGamePaused = false;
-gameState.gameIntervalId = undefined;
-
 export function Step() {
   const airfighter = gameState.airfighter
 
