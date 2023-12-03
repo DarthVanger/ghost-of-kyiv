@@ -301,25 +301,43 @@ h1 sub {
   position: absolute;
   height: 100vh;
   will-change: transform;
+  width: 25000px;
 }
 
 #bg-front {
   background: url('img/parallax-bg-front.png');
   background-size: contain;
-  height: 100vh;
   width: 25000px;
 }
 
 #bg-middle {
   background: url('img/parallax-bg-middle.png');
   background-size: auto 100%;
+  width: 25000px;
+}
+
+#bg-back {
+  background: url('img/parallax-bg-back.png');
+  background-size: auto 100%;
+}
+
+#bg-front.bg-bucha {
+  background: url('img/parallax-foreground-bucha.png');
+  background-size: contain;
   height: 100vh;
   width: 25000px;
 }
 
 #bg-middle.bg-bucha {
-  background: url('img/parallax-bg-middle-bucha.webp');
-  bottom: -150px;
+  background: url('img/parallax-middleground-bucha.png');
+  background-size: auto 100%;
+  bottom: 0px;
+}
+
+#bg-back.bg-bucha {
+  background: url('img/parallax-background-bucha.png');
+  background-size: 100% 100%;
+  width: 130vw;
 }
 
 #bossPopup {
