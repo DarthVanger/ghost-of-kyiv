@@ -30,7 +30,7 @@ export function startGame() {
   console.log(`startGame, level :${levelState.levelNumber}`)
   initKeybordMovement()
   if (levelState.levelNumber == 1) {
-    startLevel2()
+    startLevel1()
   }
   if (levelState.levelNumber == 2) {
     startLevel2()
