@@ -22,7 +22,6 @@ gatlingAmmoElement.innerText = gatling.ammo
 rocketAmmoElement.innerText = rocketAmmo
 ammoCountElement.id = 'ammoCountElement'
 
-
 ammoElement.id = 'ammoElement'
 
 ammoElement.append(ammoImgContainer)

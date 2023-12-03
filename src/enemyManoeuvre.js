@@ -30,3 +30,7 @@ export function manoeuvreZigzagAtQuarterScreen(enemy) {
     }
   }
 }
+
+export function manoeuvreStraightFast(enemy) {
+  enemy.vx = -15
+}
