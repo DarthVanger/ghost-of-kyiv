@@ -1,12 +1,13 @@
 import { addGatling } from './gatling.js'
+import {createRocket,updateEnemyRocketAtack} from './enemyRocketAtack.js'
 import performCollisionChecksForEnemy, {
   checkEnemyShipCollision,
   enemyCollisionWithBullet,
 } from './rendering/EnemyCollisionsChecks.js'
 import {
-  su3EnemyBehavior,
-  su27EnemyBehavior,
-  z10EnemyBehavior,
+  manoeuvreUpAtHalfScreen,
+  manoeuvreDownAtHalfScreen,
+  manoeuvreZigzagAtQuarterScreen,
 } from './enemyManoeuvre.js'
 export let enemies = []
 
@@ -45,7 +46,7 @@ function createHealth(enemy, i, maxHealth) {
 }
 
 class Enemy {
-  constructor(src, width, height, i, maxHealth, behavior) {
+  constructor(src, width, height, i, maxHealth, manoeuvre) {
     this.element = document.createElement('img')
     this.element.id = 'enemy' + i
     this.index = i
@@ -58,21 +59,21 @@ class Enemy {
     this.vx = -2
     this.vy = 0
     this.isAlive = true
-    this.behavior = behavior
+    this.manoeuvre = manoeuvre
     createHealth(this, i, maxHealth)
   }
 }
 
 function createSu3(i) {
-  return new Enemy('img/su-3.png', 250, 80, i, 50, su3EnemyBehavior)
+  return new Enemy('img/su-3.png', 250, 80, i, 50, manoeuvreUpAtHalfScreen)
 }
 
 function createSu27(i) {
-  return new Enemy('img/su-27.png', 270, 100, i, 100, su27EnemyBehavior)
+  return new Enemy('img/su-27.png', 270, 100, i, 100, manoeuvreDownAtHalfScreen)
 }
 
 function createZ10(i) {
-  return new Enemy('img/z-10.png', 330, 200, i, 200, z10EnemyBehavior)
+  return new Enemy('img/z-10.png', 330, 200, i, 200, manoeuvreZigzagAtQuarterScreen)
 }
 
 export function createEnemies(maxEnemies) {
@@ -93,26 +94,6 @@ export function createEnemies(maxEnemies) {
     enemies.push(enemy)
   }
 }
-
-export function createRocket(enemy, damage) {
-  const enemyRocketImg = document.createElement('img')
-  enemyRocketImg.className = 'enemyRocket'
-  enemyRocketImg.src = 'img/mrRocket.gif'
-  document.body.append(enemyRocketImg)
-  enemy.isRocketLaunched = false
-
-  enemy.rocket = {
-    x: enemy.x,
-    y: enemy.y + enemy.height-(enemy.height/5),
-    width: 120,
-    height: 12,
-    dmg: damage,
-    vx: 0,
-    vy: 0,
-    element: enemyRocketImg,
-  }
-}
-
 function getRandomEnemyX(enemyIndex) {
   if (enemyIndex < 1) {
     return Math.floor(Math.random() * 400) + 500
@@ -127,22 +108,6 @@ export function renderEnemy(enemy) {
   renderEnemyImg(enemy)
 }
 
-function moveEnemyRocket(enemy) {
-  enemy.rocket.x += enemy.rocket.vx
-}
-
-export function launchRocketIfOnScreen(enemy) {
-  if (enemy.x < window.innerWidth) {
-    if (!enemy.isRocketLaunched) {
-      launchEnemyRocket(enemy)
-      enemy.isRocketLaunched = true
-    }
-  }
-}
-
-function launchEnemyRocket(enemy) {
-  enemy.rocket.vx = -8
-}
 
 function renderEnemyHealth(enemy) {
   enemy.enemyHealth.element.style.left = enemy.x
@@ -168,21 +133,17 @@ function renderEnemyImg(enemy) {
 }
 
 export function updateEnemy(enemy) {
-  enemy.behavior?.(enemy)
+  updateEnemyRocketAtack(enemy)
+  enemy.manoeuvre(enemy)
   renderEnemy(enemy)
-  renderEnemyRocket(enemy)
+  
   moveEnemy(enemy)
-  moveEnemyRocket(enemy)
   checkEnemyShipCollision(enemy)
   performCollisionChecksForEnemy(enemy)
-  launchRocketIfOnScreen(enemy)
   enemyCollisionWithBullet(enemy)
 }
 
-function renderEnemyRocket(enemy) {
-  enemy.rocket.element.style.left = enemy.rocket.x
-  enemy.rocket.element.style.top = enemy.rocket.y
-}
+
 
 function moveEnemy(enemy) {
   if (!enemy.isRocketLaunched) {

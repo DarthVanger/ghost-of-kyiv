@@ -1,5 +1,5 @@
 import { addGatling } from './gatling.js'
-import { createRocket } from './enemy.js'
+import { createRocket } from './enemyRocketAtack.js'
 import {
   levelCompleteScreen,
   bossCompleteScreenText,
