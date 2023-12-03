@@ -1,4 +1,5 @@
 import { addGatling } from './gatling.js'
+import {createRocket,updateEnemyRocketAtack} from './enemyRocketAtack.js'
 import performCollisionChecksForEnemy, {
   checkEnemyShipCollision,
   enemyCollisionWithBullet,
@@ -93,26 +94,6 @@ export function createEnemies(maxEnemies) {
     enemies.push(enemy)
   }
 }
-
-export function createRocket(enemy, damage) {
-  const enemyRocketImg = document.createElement('img')
-  enemyRocketImg.className = 'enemyRocket'
-  enemyRocketImg.src = 'img/mrRocket.gif'
-  document.body.append(enemyRocketImg)
-  enemy.isRocketLaunched = false
-
-  enemy.rocket = {
-    x: enemy.x,
-    y: enemy.y + enemy.height-(enemy.height/5),
-    width: 120,
-    height: 12,
-    dmg: damage,
-    vx: 0,
-    vy: 0,
-    element: enemyRocketImg,
-  }
-}
-
 function getRandomEnemyX(enemyIndex) {
   if (enemyIndex < 1) {
     return Math.floor(Math.random() * 400) + 500
@@ -127,22 +108,6 @@ export function renderEnemy(enemy) {
   renderEnemyImg(enemy)
 }
 
-function moveEnemyRocket(enemy) {
-  enemy.rocket.x += enemy.rocket.vx
-}
-
-export function launchRocketIfOnScreen(enemy) {
-  if (enemy.x < window.innerWidth) {
-    if (!enemy.isRocketLaunched) {
-      launchEnemyRocket(enemy)
-      enemy.isRocketLaunched = true
-    }
-  }
-}
-
-function launchEnemyRocket(enemy) {
-  enemy.rocket.vx = -8
-}
 
 function renderEnemyHealth(enemy) {
   enemy.enemyHealth.element.style.left = enemy.x
@@ -168,21 +133,17 @@ function renderEnemyImg(enemy) {
 }
 
 export function updateEnemy(enemy) {
+  updateEnemyRocketAtack(enemy)
   enemy.manoeuvre(enemy)
   renderEnemy(enemy)
-  renderEnemyRocket(enemy)
+  
   moveEnemy(enemy)
-  moveEnemyRocket(enemy)
   checkEnemyShipCollision(enemy)
   performCollisionChecksForEnemy(enemy)
-  launchRocketIfOnScreen(enemy)
   enemyCollisionWithBullet(enemy)
 }
 
-function renderEnemyRocket(enemy) {
-  enemy.rocket.element.style.left = enemy.rocket.x
-  enemy.rocket.element.style.top = enemy.rocket.y
-}
+
 
 function moveEnemy(enemy) {
   if (!enemy.isRocketLaunched) {
