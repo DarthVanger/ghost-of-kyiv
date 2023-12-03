@@ -36,6 +36,15 @@ export class Player {
     this.vx = this.vx * 0.96
   }
 
+  getHitBox() {
+    return {
+      x: this.x + this.width - 220,
+      y: this.y + this.height / 2 - 80 / 2,
+      width: 220,
+      height: 56,
+    }
+  }
+
   render() {
     this.vx += this.ax
     this.x += this.vx

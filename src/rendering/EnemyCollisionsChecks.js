@@ -1,7 +1,5 @@
 import { gameState } from '../gameState.js'
-import {
-  deadEnemyXPosition,
-} from './Helpers.js'
+import { deadEnemyXPosition } from './Helpers.js'
 import { bulletArray, removeBullet } from '../gatling.js'
 import { explosion } from '../rendering/Explosion.js'
 import { rockets, removePlayerRocket } from '../rocket.js'
@@ -12,15 +10,13 @@ import {
 } from '../music.js'
 import { gameOver } from '../gameOver.js'
 
-
-
 export default function performCollisionChecksForEnemy(enemy) {
   const airfighter = gameState.airfighter
   for (let rocket of rockets) {
     if (checkEnemyRocketCollision(enemy, rocket)) {
-      if(rocket.critChance) {
+      if (rocket.critChance) {
         enemy.enemyHealth.element.value -= Math.floor(rocket.dmg * rocket.crit)
-      } else{
+      } else {
         enemy.enemyHealth.element.value -= rocket.dmg
       }
       removePlayerRocket(rocket)
@@ -61,19 +57,19 @@ function checkEnemyRocketCollision(enemy, rocket) {
 }
 
 function checkPlayerRocketCollision(enemy) {
-  const airfighter = gameState.airfighter
+  const airfighterHitBox = gameState.airfighter.getHitBox()
 
   if (
-    airfighter.x + airfighter.width > enemy.rocket.x &&
-    airfighter.x < enemy.rocket.x + enemy.rocket.width &&
-    airfighter.y + airfighter.height > enemy.rocket.y &&
-    airfighter.y < enemy.rocket.y + enemy.rocket.height
+    airfighterHitBox.x + airfighterHitBox.width > enemy.rocket.x &&
+    airfighterHitBox.x < enemy.rocket.x + enemy.rocket.width &&
+    airfighterHitBox.y + airfighterHitBox.height > enemy.rocket.y &&
+    airfighterHitBox.y < enemy.rocket.y + enemy.rocket.height
   ) {
     enemy.rocket.element.remove()
     enemy.rocket.x = deadEnemyXPosition
     soundRocketShot.pause()
     soundRocketShot.currentTime = 0
-    explosionEffect(airfighter)
+    explosionEffect(airfighterHitBox)
     return true
   }
   playerDiesIfHpBelowZiro()
@@ -97,9 +93,9 @@ function checkBulletCollision(bullet, enemy) {
   const isCollisionWithRocket = checkCollision(bullet, enemy.rocket)
   const isOutOfScreen = bullet.x > window.innerWidth
   if (isCollisionWithEnemy) {
-    if(bullet.critChance) {
-      enemy.enemyHealth.element.value -= (2*bullet.dmg)
-    } else{
+    if (bullet.critChance) {
+      enemy.enemyHealth.element.value -= 2 * bullet.dmg
+    } else {
       enemy.enemyHealth.element.value -= bullet.dmg
     }
   }
@@ -129,13 +125,14 @@ function checkCollision(bullet, enemy) {
 }
 
 export function checkEnemyShipCollision(enemy) {
-const airfighter = gameState.airfighter
+  const airfighterHitBox = gameState.airfighter.getHitBox()
+  const airfighter = gameState.airfighter
 
   if (
-    airfighter.x + airfighter.width > enemy.x &&
-    airfighter.x < enemy.x + enemy.width &&
-    airfighter.y + airfighter.height > enemy.y &&
-    airfighter.y < enemy.y + enemy.height
+    airfighterHitBox.x + airfighterHitBox.width > enemy.x &&
+    airfighterHitBox.x < enemy.x + enemy.width &&
+    airfighterHitBox.y + airfighterHitBox.height > enemy.y &&
+    airfighterHitBox.y < enemy.y + enemy.height
   ) {
     airfighter.health.element.value -= Math.floor(
       enemy.enemyHealth.element.value / 2
