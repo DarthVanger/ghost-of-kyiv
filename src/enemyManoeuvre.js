@@ -1,18 +1,18 @@
-export function su3EnemyManoeuvre(enemy) {
+export function manoeuvreUpAtHalfScreen(enemy) {
   const halfScreenX = window.innerWidth / 2
   if (enemy.x < halfScreenX) {
     enemy.vy = -2
   }
 }
 
-export function su27EnemyManoeuvre(enemy) {
+export function manoeuvreDownAtHalfScreen(enemy) {
   const halfScreenX = window.innerWidth / 2
   if (enemy.x < halfScreenX) {
     enemy.vy = 2
   }
 }
 
-export function z10EnemyManoeuvre(enemy) {
+export function manoeuvreZigzagAtQuarterScreen(enemy) {
   const bottomYBound = window.innerHeight * 0.75
   const topYBound = window.innerHeight * 0.25
 

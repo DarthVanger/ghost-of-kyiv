@@ -4,9 +4,9 @@ import performCollisionChecksForEnemy, {
   enemyCollisionWithBullet,
 } from './rendering/EnemyCollisionsChecks.js'
 import {
-  su3EnemyManoeuvre,
-  su27EnemyManoeuvre,
-  z10EnemyManoeuvre,
+  manoeuvreUpAtHalfScreen,
+  manoeuvreDownAtHalfScreen,
+  manoeuvreZigzagAtQuarterScreen,
 } from './enemyManoeuvre.js'
 export let enemies = []
 
@@ -64,15 +64,15 @@ class Enemy {
 }
 
 function createSu3(i) {
-  return new Enemy('img/su-3.png', 250, 80, i, 50, su3EnemyManoeuvre)
+  return new Enemy('img/su-3.png', 250, 80, i, 50, manoeuvreUpAtHalfScreen)
 }
 
 function createSu27(i) {
-  return new Enemy('img/su-27.png', 270, 100, i, 100, su27EnemyManoeuvre)
+  return new Enemy('img/su-27.png', 270, 100, i, 100, manoeuvreDownAtHalfScreen)
 }
 
 function createZ10(i) {
-  return new Enemy('img/z-10.png', 330, 200, i, 200, z10EnemyManoeuvre)
+  return new Enemy('img/z-10.png', 330, 200, i, 200, manoeuvreZigzagAtQuarterScreen)
 }
 
 export function createEnemies(maxEnemies) {
