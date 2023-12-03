@@ -4,9 +4,9 @@ import performCollisionChecksForEnemy, {
   enemyCollisionWithBullet,
 } from './rendering/EnemyCollisionsChecks.js'
 import {
-  su3EnemyBehavior,
-  su27EnemyBehavior,
-  z10EnemyBehavior,
+  su3EnemyManoeuvre,
+  su27EnemyManoeuvre,
+  z10EnemyManoeuvre,
 } from './enemyManoeuvre.js'
 export let enemies = []
 
@@ -45,7 +45,7 @@ function createHealth(enemy, i, maxHealth) {
 }
 
 class Enemy {
-  constructor(src, width, height, i, maxHealth, behavior) {
+  constructor(src, width, height, i, maxHealth, manoeuvre) {
     this.element = document.createElement('img')
     this.element.id = 'enemy' + i
     this.index = i
@@ -58,21 +58,21 @@ class Enemy {
     this.vx = -2
     this.vy = 0
     this.isAlive = true
-    this.behavior = behavior
+    this.manoeuvre = manoeuvre
     createHealth(this, i, maxHealth)
   }
 }
 
 function createSu3(i) {
-  return new Enemy('img/su-3.png', 250, 80, i, 50, su3EnemyBehavior)
+  return new Enemy('img/su-3.png', 250, 80, i, 50, su3EnemyManoeuvre)
 }
 
 function createSu27(i) {
-  return new Enemy('img/su-27.png', 270, 100, i, 100, su27EnemyBehavior)
+  return new Enemy('img/su-27.png', 270, 100, i, 100, su27EnemyManoeuvre)
 }
 
 function createZ10(i) {
-  return new Enemy('img/z-10.png', 330, 200, i, 200, z10EnemyBehavior)
+  return new Enemy('img/z-10.png', 330, 200, i, 200, z10EnemyManoeuvre)
 }
 
 export function createEnemies(maxEnemies) {
@@ -168,7 +168,7 @@ function renderEnemyImg(enemy) {
 }
 
 export function updateEnemy(enemy) {
-  enemy.behavior?.(enemy)
+  enemy.manoeuvre(enemy)
   renderEnemy(enemy)
   renderEnemyRocket(enemy)
   moveEnemy(enemy)

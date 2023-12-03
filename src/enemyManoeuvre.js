@@ -1,18 +1,18 @@
-export function su3EnemyBehavior(enemy) {
+export function su3EnemyManoeuvre(enemy) {
   const halfScreenX = window.innerWidth / 2
   if (enemy.x < halfScreenX) {
     enemy.vy = -2
   }
 }
 
-export function su27EnemyBehavior(enemy) {
+export function su27EnemyManoeuvre(enemy) {
   const halfScreenX = window.innerWidth / 2
   if (enemy.x < halfScreenX) {
     enemy.vy = 2
   }
 }
 
-export function z10EnemyBehavior(enemy) {
+export function z10EnemyManoeuvre(enemy) {
   const bottomYBound = window.innerHeight * 0.75
   const topYBound = window.innerHeight * 0.25
 
