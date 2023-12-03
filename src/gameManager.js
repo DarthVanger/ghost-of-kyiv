@@ -91,8 +91,12 @@ function startLevel2() {
   createEnemies(levelEnemies)
   startAnimationFrame()
   introduction.style.display = 'block'
+  const bgFront = document.querySelector('#bg-front')
   const bgMiddle = document.querySelector('#bg-middle')
+  const bgBack = document.querySelector('#bg-back')
+  bgFront.classList.add('bg-bucha')
   bgMiddle.classList.add('bg-bucha')
+  bgBack.classList.add('bg-bucha')
 }
 
 function startAnimationFrame() {
