@@ -27,7 +27,7 @@ export function Step() {
 
   const lastEnemy = enemies[enemies.length - 1]
   levelOverIfLastEnemyOut(lastEnemy, gameState)
-  if(!gameState.isGamePaused) {
+  if (!gameState.isGamePaused) {
     requestAnimationFrame(Step)
   }
 }

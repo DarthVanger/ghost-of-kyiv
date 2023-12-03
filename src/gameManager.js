@@ -18,7 +18,7 @@ import { Player } from './player/Player.js'
 let isGameStarted = false
 let introduction = document.querySelector('#introduction')
 introduction.addEventListener('click', introductionSkip)
-const levelEnemies = 11
+const levelEnemies = 12
 const levelState = {
   isLevelFinished: false,
   levelNumber: 0,

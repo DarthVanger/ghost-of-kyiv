@@ -1,5 +1,5 @@
 import { addGatling } from './gatling.js'
-import {createRocket,updateEnemyRocketAtack} from './enemyRocketAtack.js'
+import { createRocket, updateEnemyRocketAtack } from './enemyRocketAtack.js'
 import performCollisionChecksForEnemy, {
   checkEnemyShipCollision,
   enemyCollisionWithBullet,
@@ -8,6 +8,7 @@ import {
   manoeuvreUpAtHalfScreen,
   manoeuvreDownAtHalfScreen,
   manoeuvreZigzagAtQuarterScreen,
+  manoeuvreStraightFast,
 } from './enemyManoeuvre.js'
 export let enemies = []
 
@@ -73,7 +74,18 @@ function createSu27(i) {
 }
 
 function createZ10(i) {
-  return new Enemy('img/z-10.png', 330, 200, i, 200, manoeuvreZigzagAtQuarterScreen)
+  return new Enemy(
+    'img/z-10.png',
+    330,
+    200,
+    i,
+    200,
+    manoeuvreZigzagAtQuarterScreen
+  )
+}
+
+function createSu35(i) {
+  return new Enemy('img/su-35.png', 349, 91, i, 50, manoeuvreStraightFast)
 }
 
 export function createEnemies(maxEnemies) {
@@ -83,8 +95,10 @@ export function createEnemies(maxEnemies) {
       enemy = createSu3(i)
     } else if (i >= 3 && i <= 6) {
       enemy = createSu27(i)
+    } else if (i >= 7 && i <= 9) {
+      enemy = createSu35(i)
     } else {
-      enemy = createZ10(i)
+      enemy = createZ10(i - 3)
     }
     const defaultDamageBullet = 20
     createRocket(enemy, defaultDamageBullet)
@@ -107,7 +121,6 @@ export function renderEnemy(enemy) {
   renderEnemyHealthText(enemy)
   renderEnemyImg(enemy)
 }
-
 
 function renderEnemyHealth(enemy) {
   enemy.enemyHealth.element.style.left = enemy.x
@@ -133,17 +146,15 @@ function renderEnemyImg(enemy) {
 }
 
 export function updateEnemy(enemy) {
-  updateEnemyRocketAtack(enemy)
   enemy.manoeuvre(enemy)
+  updateEnemyRocketAtack(enemy)
   renderEnemy(enemy)
-  
+
   moveEnemy(enemy)
   checkEnemyShipCollision(enemy)
   performCollisionChecksForEnemy(enemy)
   enemyCollisionWithBullet(enemy)
 }
-
-
 
 function moveEnemy(enemy) {
   if (!enemy.isRocketLaunched) {
