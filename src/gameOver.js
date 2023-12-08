@@ -17,6 +17,7 @@ export function gameOver() {
     soundboss.pause()
     soundGameOver.play()
   }, 900)
+  gameState.isGamePaused = true
 }
 
 export function levelOverIfLastEnemyOut(lastEnemy, gameState) {

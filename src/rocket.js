@@ -54,3 +54,14 @@ export function removePlayerRocket(rocket) {
 export function resetPlayerRocketAmmo() {
   rocketAmmo = 50
 }
+
+export function deleteUselessEnemyRockets() {
+  let rockets = document.querySelectorAll('.enemyRocket');
+  rockets.forEach((rocket) => {
+      
+      let rocketPositionX = parseInt(rocket.style.left); 
+      if (rocketPositionX < -200 || rocket.style.left == "") {
+          rocket.remove(); 
+      }
+  });
+}

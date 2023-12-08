@@ -1,5 +1,5 @@
 import { enemies, updateEnemy } from './enemy.js'
-import { renderRocket, moveRocket } from './rocket.js'
+import { renderRocket, moveRocket, deleteUselessEnemyRockets } from './rocket.js'
 import { bulletArray, moveBullet } from './gatling.js'
 import { moveBackground } from './background.js'
 import { levelOverIfLastEnemyOut } from './gameOver.js'
@@ -30,4 +30,5 @@ export function Step() {
   if (!gameState.isGamePaused) {
     requestAnimationFrame(Step)
   }
+  deleteUselessEnemyRockets() 
 }

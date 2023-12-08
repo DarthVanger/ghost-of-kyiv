@@ -7,7 +7,7 @@ import {
 } from './music.js'
 import { Step, fps } from './step.js'
 import { resetAmmo } from './ammo.js'
-import { level3Boss, createBoss, changeWinText } from './Boss.js'
+import { createBoss , changeWinText } from './Boss.js'
 import { bossPopup } from './rendering/Helpers.js'
 import { resetBackground } from './background.js'
 import { initKeybordMovement } from './keyboard.js'
@@ -107,10 +107,9 @@ function startAnimationFrame() {
 function startLevel3() {
   resetLevel()
   bossPopup()
-  createBoss()
+  new createBoss()
   changeWinText()
   soundMainTheme.pause()
-  enemies.push(level3Boss)
   introduction.style.display = 'block'
   startAnimationFrame()
 }
