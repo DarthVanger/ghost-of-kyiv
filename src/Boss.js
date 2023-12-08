@@ -34,12 +34,12 @@ export class Boss {
       this.index = i
       this.element.className = 'boss'
       this.element.src = src
-      this.x = Math.floor(Math.random() * 200) + window.innerWidth
-      this.y = 50
       this.width = width
       this.height = height
+      this.x = Math.floor(Math.random() * 200) + window.innerWidth
+      this.y = 150 + Math.floor(Math.random() * (window.innerHeight-height-500))
       this.vx = -2
-      this.vy = 2
+      this.vy = 0
       this.isAlive = true
       this.manoeuvre = manoeuvre
       createBossHp(this, i, maxHealth)
@@ -69,7 +69,9 @@ export function createBoss() {
     const bossAppearance = this.x < window.innerWidth - this.width * 1.1
     if (bossAppearance) {
       this.vx = 0
-  
+      if(this.vy == 0) {
+        this.vy = 2
+      }
       const topMotionFrame = this.y < 0 + this.height / 2
       if (topMotionFrame) {
         this.vy *= -1
