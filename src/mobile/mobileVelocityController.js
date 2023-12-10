@@ -23,3 +23,9 @@ export function setAirfighterVelocityFromMobileJoystick(
     airfighter.element.src = 'img/aifighter-Down.gif'
   }
 }
+
+export function mobilePauseGame() {
+  let pauseButton = document.querySelector('.mobile-pause');
+  pauseButton.style.display = 'block';
+}
+

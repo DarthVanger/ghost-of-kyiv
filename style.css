@@ -383,3 +383,26 @@ h1 sub {
   padding: 16px;
   line-height: 2;
 }
+
+.mobile-pause{
+  display: none; 
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 7px;
+  height: 30px;
+  background-color: white;
+  z-index: 100;
+  
+}
+
+.mobile-pause::before {
+  content: "";
+    position: absolute;
+    right: 15px;
+    
+    width: 7px;
+    height: 30px;
+    background-color: white;
+    z-index: 99;
+}
