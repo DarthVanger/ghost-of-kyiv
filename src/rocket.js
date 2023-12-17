@@ -10,6 +10,7 @@ class Rocket {
   width = 120
   dmg = 50
   velocity = 8
+  accelerationX = 0.5
   critChance = Math.floor(Math.random() * 100) < 25
   crit = Math.random() + 1
   element = document.createElement('img')
@@ -28,6 +29,7 @@ export function renderRocket() {
 
 export function moveRocket() {
   for (let rocket of rockets) {
+    rocket.velocity += rocket.accelerationX
     rocket.x += rocket.velocity
   }
 }
@@ -56,12 +58,11 @@ export function resetPlayerRocketAmmo() {
 }
 
 export function deleteUselessEnemyRockets() {
-  let rockets = document.querySelectorAll('.enemyRocket');
+  let rockets = document.querySelectorAll('.enemyRocket')
   rockets.forEach((rocket) => {
-      
-      let rocketPositionX = parseInt(rocket.style.left); 
-      if (rocketPositionX < -200 || rocket.style.left == "") {
-          rocket.remove(); 
-      }
-  });
+    let rocketPositionX = parseInt(rocket.style.left)
+    if (rocketPositionX < -200 || rocket.style.left == '') {
+      rocket.remove()
+    }
+  })
 }
