@@ -1,10 +1,9 @@
 import { rockets, removePlayerRocket, createPlayerRocket } from '../rocket.js'
 import { gameOver } from '../gameOver.js'
-import { controls } from '../keyboard.js'
+import { controls, keyCode } from '../keyboard.js'
 import { soundRocketShot } from '../music.js'
 import { gameState } from '../gameState.js'
 import { fireGatlingPlayer } from '../gatling.js'
-
 let rocketCooldown = false
 const acceleration = 1
 
@@ -69,45 +68,50 @@ export class Player {
     }
 
     this.slowDown()
-
-    if (controls.includes('w')) {
+    const isPressedMovementKeyCode = {
+      left: controls.includes(keyCode.a) || controls.includes(keyCode.left),
+      right: controls.includes(keyCode.d) || controls.includes(keyCode.right),
+      up: controls.includes(keyCode.w) || controls.includes(keyCode.up),
+      down: controls.includes(keyCode.s) || controls.includes(keyCode.down),
+    }
+    if (isPressedMovementKeyCode.up) {
       this.vy = -10
       this.element.src = 'img/aifighter-Up.gif'
     }
-    if (controls.includes('s')) {
+    if (isPressedMovementKeyCode.down) {
       this.vy = +10
       this.element.src = 'img/aifighter-Down.gif'
     }
-    if (controls.includes(' ')) {
-      fireGatlingPlayer()
-    }
-    if (controls.includes('a')) {
+    if (isPressedMovementKeyCode.left) {
+
       this.ax = -acceleration / 2
       this.element.src = 'img/aifighter-Back.gif'
     }
-    if (controls.includes('d')) {
+    if (isPressedMovementKeyCode.right) {
       this.ax = acceleration
       this.element.src = 'img/aifighter-Front-Accelerate.gif'
     }
-
-    if (!controls.includes('d') && !controls.includes('a')) {
+    
+    if (!isPressedMovementKeyCode.right && !isPressedMovementKeyCode.left) {
       this.ax = 0
     }
-    if (!controls.includes('w') && !controls.includes('s')) {
+    if (!isPressedMovementKeyCode.up && !isPressedMovementKeyCode.down) {
       this.vy = 0
     }
     if (
-      !controls.includes('d') &&
-      !controls.includes('a') &&
-      !controls.includes('w') &&
-      !controls.includes('s')
+      !isPressedMovementKeyCode.right &&
+      !isPressedMovementKeyCode.left &&
+      !isPressedMovementKeyCode.up &&
+      !isPressedMovementKeyCode.down
     ) {
       this.element.src = 'img/aifighter-Front.gif'
     }
-    if (controls.includes('r')) {
+    if (controls.includes(keyCode.r)) {
       fireRocket()
     }
-
+    if (controls.includes(keyCode.space)) {
+      fireGatlingPlayer()
+    }
     this.element.style.left = this.x
     this.element.style.top = this.y
     this.health.element.style.left = this.x
