@@ -9,6 +9,7 @@ import {
   manoeuvreDownAtHalfScreen,
   manoeuvreZigzagAtQuarterScreen,
   manoeuvreStraightFast,
+  manoeuvreStayOnGround,
 } from './enemyManoeuvre.js'
 export let enemies = []
 
@@ -88,11 +89,16 @@ function createSu35(i) {
   return new Enemy('img/su-35.png', 349, 91, i, 50, manoeuvreStraightFast)
 }
 
+function createBuk(i) {
+  return new Enemy('img/buk-m2ye.png', 270, 100, i, 100, manoeuvreStayOnGround)
+}
+
 export function createEnemies(maxEnemies) {
   for (let i = 0; i < maxEnemies; i++) {
     let enemy
     if (i < 3) {
-      enemy = createSu3(i)
+      //enemy = createSu3(i)
+      enemy = createBuk(i)
     } else if (i >= 3 && i <= 6) {
       enemy = createSu27(i)
     } else if (i >= 7 && i <= 9) {

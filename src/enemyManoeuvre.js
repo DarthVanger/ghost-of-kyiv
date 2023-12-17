@@ -34,3 +34,8 @@ export function manoeuvreZigzagAtQuarterScreen(enemy) {
 export function manoeuvreStraightFast(enemy) {
   enemy.vx = -15
 }
+
+export function manoeuvreStayOnGround(enemy) {
+  enemy.y = window.innerHeight - enemy.height
+  enemy.vx = -2
+}
