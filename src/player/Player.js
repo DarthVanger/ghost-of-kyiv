@@ -3,6 +3,8 @@ import { gameOver } from '../gameOver.js'
 import { controls } from '../keyboard.js'
 import { soundRocketShot } from '../music.js'
 import { gameState } from '../gameState.js'
+import { fireGatlingPlayer } from '../gatling.js'
+
 let rocketCooldown = false
 const acceleration = 1
 
@@ -75,6 +77,9 @@ export class Player {
     if (controls.includes('s')) {
       this.vy = +10
       this.element.src = 'img/aifighter-Down.gif'
+    }
+    if (controls.includes(' ')) {
+      fireGatlingPlayer()
     }
     if (controls.includes('a')) {
       this.ax = -acceleration / 2

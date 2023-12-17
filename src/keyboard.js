@@ -30,10 +30,6 @@ function handleKeyDown(event) {
   if (controls.includes('p')) {
     gamePauseAction()
   }
-
-  if (controls.includes(' ')) {
-    fireGatlingPlayer()
-  }
 }
 
 // prettier-ignore
