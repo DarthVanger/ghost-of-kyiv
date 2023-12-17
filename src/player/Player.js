@@ -68,30 +68,30 @@ export class Player {
     }
 
     this.slowDown()
-
-    if (controls.includes(keyCode.w) || controls.includes(keyCode.up)) {
-      this.vy = -10
-      this.element.src = 'img/aifighter-Up.gif'
-    }
-    if (controls.includes(keyCode.s) || controls.includes(keyCode.down)) {
-      this.vy = +10
-      this.element.src = 'img/aifighter-Down.gif'
-    }
-    if (controls.includes(keyCode.a) || controls.includes(keyCode.left)) {
-
-      this.ax = -acceleration / 2
-      this.element.src = 'img/aifighter-Back.gif'
-    }
-    if (controls.includes(keyCode.d) || controls.includes(keyCode.right)) {
-      this.ax = acceleration
-      this.element.src = 'img/aifighter-Front-Accelerate.gif'
-    }
     const isPressedMovementKeyCode = {
       left: controls.includes(keyCode.a) || controls.includes(keyCode.left),
       right: controls.includes(keyCode.d) || controls.includes(keyCode.right),
       up: controls.includes(keyCode.w) || controls.includes(keyCode.up),
       down: controls.includes(keyCode.s) || controls.includes(keyCode.down),
     }
+    if (isPressedMovementKeyCode.up) {
+      this.vy = -10
+      this.element.src = 'img/aifighter-Up.gif'
+    }
+    if (isPressedMovementKeyCode.down) {
+      this.vy = +10
+      this.element.src = 'img/aifighter-Down.gif'
+    }
+    if (isPressedMovementKeyCode.left) {
+
+      this.ax = -acceleration / 2
+      this.element.src = 'img/aifighter-Back.gif'
+    }
+    if (isPressedMovementKeyCode.right) {
+      this.ax = acceleration
+      this.element.src = 'img/aifighter-Front-Accelerate.gif'
+    }
+    
     if (!isPressedMovementKeyCode.right && !isPressedMovementKeyCode.left) {
       this.ax = 0
     }
