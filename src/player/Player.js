@@ -78,6 +78,7 @@ export class Player {
       this.element.src = 'img/aifighter-Down.gif'
     }
     if (controls.includes(keyCode.a) || controls.includes(keyCode.left)) {
+
       this.ax = -acceleration / 2
       this.element.src = 'img/aifighter-Back.gif'
     }
