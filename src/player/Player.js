@@ -1,8 +1,9 @@
 import { rockets, removePlayerRocket, createPlayerRocket } from '../rocket.js'
 import { gameOver } from '../gameOver.js'
-import { controls } from '../keyboard.js'
+import { controls, keyCode } from '../keyboard.js'
 import { soundRocketShot } from '../music.js'
 import { gameState } from '../gameState.js'
+import { fireGatlingPlayer } from '../gatling.js'
 let rocketCooldown = false
 const acceleration = 1
 
@@ -68,41 +69,43 @@ export class Player {
 
     this.slowDown()
 
-    if (controls.includes('w')) {
+    if (controls.includes(keyCode.w)) {
       this.vy = -10
       this.element.src = 'img/aifighter-Up.gif'
     }
-    if (controls.includes('s')) {
+    if (controls.includes(keyCode.s)) {
       this.vy = +10
       this.element.src = 'img/aifighter-Down.gif'
     }
-    if (controls.includes('a')) {
+    if (controls.includes(keyCode.a)) {
       this.ax = -acceleration / 2
       this.element.src = 'img/aifighter-Back.gif'
     }
-    if (controls.includes('d')) {
+    if (controls.includes(keyCode.d)) {
       this.ax = acceleration
       this.element.src = 'img/aifighter-Front-Accelerate.gif'
     }
 
-    if (!controls.includes('d') && !controls.includes('a')) {
+    if (!controls.includes(keyCode.d) && !controls.includes(keyCode.a)) {
       this.ax = 0
     }
-    if (!controls.includes('w') && !controls.includes('s')) {
+    if (!controls.includes(keyCode.w) && !controls.includes(keyCode.s)) {
       this.vy = 0
     }
     if (
-      !controls.includes('d') &&
-      !controls.includes('a') &&
-      !controls.includes('w') &&
-      !controls.includes('s')
+      !controls.includes(keyCode.d) &&
+      !controls.includes(keyCode.a) &&
+      !controls.includes(keyCode.w) &&
+      !controls.includes(keyCode.s)
     ) {
       this.element.src = 'img/aifighter-Front.gif'
     }
-    if (controls.includes('r')) {
+    if (controls.includes(keyCode.r)) {
       fireRocket()
     }
-
+    if (controls.includes(keyCode.space)) {
+      fireGatlingPlayer()
+    }
     this.element.style.left = this.x
     this.element.style.top = this.y
     this.health.element.style.left = this.x
