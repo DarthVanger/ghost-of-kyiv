@@ -15,6 +15,10 @@ export const keyCode = {
   space: 32,
   r: 82,
   p: 80,
+  up: 38,
+  down: 40,
+  left: 37,
+  right: 39,
 }
 
 export function initKeybordMovement() {

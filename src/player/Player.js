@@ -69,34 +69,40 @@ export class Player {
 
     this.slowDown()
 
-    if (controls.includes(keyCode.w)) {
+    if (controls.includes(keyCode.w) || controls.includes(keyCode.up)) {
       this.vy = -10
       this.element.src = 'img/aifighter-Up.gif'
     }
-    if (controls.includes(keyCode.s)) {
+    if (controls.includes(keyCode.s) || controls.includes(keyCode.down)) {
       this.vy = +10
       this.element.src = 'img/aifighter-Down.gif'
     }
-    if (controls.includes(keyCode.a)) {
+    if (controls.includes(keyCode.a) || controls.includes(keyCode.left)) {
       this.ax = -acceleration / 2
       this.element.src = 'img/aifighter-Back.gif'
     }
-    if (controls.includes(keyCode.d)) {
+    if (controls.includes(keyCode.d) || controls.includes(keyCode.right)) {
       this.ax = acceleration
       this.element.src = 'img/aifighter-Front-Accelerate.gif'
     }
 
-    if (!controls.includes(keyCode.d) && !controls.includes(keyCode.a)) {
+    if (
+      !(controls.includes(keyCode.d) || controls.includes(keyCode.right)) &&
+      !(controls.includes(keyCode.a) || controls.includes(keyCode.left))
+    ) {
       this.ax = 0
     }
-    if (!controls.includes(keyCode.w) && !controls.includes(keyCode.s)) {
+    if (
+      !(controls.includes(keyCode.w) || controls.includes(keyCode.up)) &&
+      !(controls.includes(keyCode.s) || controls.includes(keyCode.down))
+    ) {
       this.vy = 0
     }
     if (
-      !controls.includes(keyCode.d) &&
-      !controls.includes(keyCode.a) &&
-      !controls.includes(keyCode.w) &&
-      !controls.includes(keyCode.s)
+      !(controls.includes(keyCode.d) || controls.includes(keyCode.right)) &&
+      !(controls.includes(keyCode.a) || controls.includes(keyCode.left)) &&
+      !(controls.includes(keyCode.w) || controls.includes(keyCode.up)) &&
+      !(controls.includes(keyCode.s) || controls.includes(keyCode.down))
     ) {
       this.element.src = 'img/aifighter-Front.gif'
     }
