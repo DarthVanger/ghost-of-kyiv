@@ -85,24 +85,23 @@ export class Player {
       this.ax = acceleration
       this.element.src = 'img/aifighter-Front-Accelerate.gif'
     }
-
-    if (
-      !(controls.includes(keyCode.d) || controls.includes(keyCode.right)) &&
-      !(controls.includes(keyCode.a) || controls.includes(keyCode.left))
-    ) {
+    const isPressedMovementKeyCode = {
+      left: controls.includes(keyCode.a) || controls.includes(keyCode.left),
+      right: controls.includes(keyCode.d) || controls.includes(keyCode.right),
+      up: controls.includes(keyCode.w) || controls.includes(keyCode.up),
+      down: controls.includes(keyCode.s) || controls.includes(keyCode.down),
+    }
+    if (!isPressedMovementKeyCode.right && !isPressedMovementKeyCode.left) {
       this.ax = 0
     }
-    if (
-      !(controls.includes(keyCode.w) || controls.includes(keyCode.up)) &&
-      !(controls.includes(keyCode.s) || controls.includes(keyCode.down))
-    ) {
+    if (!isPressedMovementKeyCode.up && !isPressedMovementKeyCode.down) {
       this.vy = 0
     }
     if (
-      !(controls.includes(keyCode.d) || controls.includes(keyCode.right)) &&
-      !(controls.includes(keyCode.a) || controls.includes(keyCode.left)) &&
-      !(controls.includes(keyCode.w) || controls.includes(keyCode.up)) &&
-      !(controls.includes(keyCode.s) || controls.includes(keyCode.down))
+      !isPressedMovementKeyCode.right &&
+      !isPressedMovementKeyCode.left &&
+      !isPressedMovementKeyCode.up &&
+      !isPressedMovementKeyCode.down
     ) {
       this.element.src = 'img/aifighter-Front.gif'
     }
