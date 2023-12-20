@@ -4,7 +4,7 @@ let frontBgX = 0
 let frontBgY = 0
 let middleBgY = 0
 let backBgY = 0
-let backBgVx = -0.1
+let backBgVx = 0.1
 let middleBgVx = -0.3
 let frontBgDefaultVx = -5
 let frontBg = document.querySelector('#bg-front')
@@ -13,7 +13,7 @@ export function moveBackground(airfighter) {
   let frontBgVx = frontBgDefaultVx - airfighter.vx / 4
   let backBg = document.querySelector('#bg-back')
   let middleBg = document.querySelector('#bg-middle')
-  if (backBgX < window.innerWidth - backBg.width) {
+  if (backBgX < window.innerWidth - backBg.getBoundingClientRect().width) {
     backBgVx *= -1
   }
   if (middleBgX < window.innerWidth - middleBg.width) {
