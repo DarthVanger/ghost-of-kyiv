@@ -15,6 +15,7 @@ export const keyCode = {
   space: 32,
   r: 82,
   p: 80,
+  esc: 27,
   up: 38,
   down: 40,
   left: 37,
@@ -35,7 +36,7 @@ function handleKeyDown(event) {
   ) {
     controls.push(event.keyCode)
   }
-  if (controls.includes(keyCode.p)) {
+  if (controls.includes(keyCode.p) || controls.includes(keyCode.esc)) {
     gamePauseAction()
   }
 }
