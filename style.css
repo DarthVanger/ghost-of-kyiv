@@ -301,7 +301,7 @@ h1 sub {
   position: absolute;
   height: 100vh;
   will-change: transform;
-  width: 25000px;
+  /* width: 25000px; */
 }
 
 #bg-front {
@@ -317,9 +317,27 @@ h1 sub {
 }
 
 #bg-back {
+height: 100vh;
+}
+
+/* #bg-back {
   background: url('img/parallax-bg-back.png');
   background-size: auto 100%;
+  background-repeat: no-repeat;
+  width: 150%;
 }
+#bg-back::after{
+  content: '';
+  background: url('img/parallax-bg-back.png');
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  transform: scaleX(-1);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0%;
+} */
 
 #bg-front.bg-bucha {
   background: url('img/parallax-foreground-bucha.png');
