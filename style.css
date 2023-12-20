@@ -281,6 +281,7 @@ h1 sub {
   bottom: 0;
   text-align: center;
   z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .explosion {
@@ -373,4 +374,30 @@ height: 100vh;
   background: black;
   padding: 16px;
   line-height: 2;
+}
+
+#controls img{
+  height: 5vh;
+  width: 5vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 2vh 2vh 0 0;
+  z-index: 5;
+  opacity: 0.3;
+}
+
+.continue{
+  position: absolute;
+  top: 10vh;
+  left: 20%;
+}
+.restart{
+  position: absolute;
+  top: 10vh;
+  right: 20%;
+}
+
+#play{
+  display: none;
 }
