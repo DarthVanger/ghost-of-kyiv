@@ -96,7 +96,7 @@ function startLevel2() {
   const bgBack = document.querySelector('#bg-back')
   bgFront.classList.add('bg-bucha')
   bgMiddle.classList.add('bg-bucha')
-  bgBack.classList.add('bg-bucha')
+  bgBack.src = '../img/parallax-background-bucha.png'
 }
 
 function startAnimationFrame() {
