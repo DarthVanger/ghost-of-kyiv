@@ -17,6 +17,10 @@
     <div id="bg-middle"></div>
     <div id="bg-front"></div>
   </div>
+  <div id="controls">
+    <img src="./img/buttons/pause.png" id="pause" alt="pause.png">
+    <img src="./img/buttons/play.png" id="play" alt="play.png">
+  </div>
   <img id="airfighter" src="img/aifighter-Front.gif" />
   <meter
     id="playerHealth"
@@ -79,7 +83,10 @@
     </div>
   </div>
 
-  <div id="pause-screen">Game Paused</div>
+  <div id="pause-screen">
+    <button class="continue">Continue</button>
+    <button class="restart">Restart</button>
+  </div>
 </body>
 
 <script type="module" src="app.js"></script>
