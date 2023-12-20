@@ -93,7 +93,7 @@ p {
   width: 50px;
   margin: 5px;
   display: flex;
-  align-items: center; /* Align vertical */
+  align-items: center; 
 }
 
 .ammoImg {
@@ -173,7 +173,7 @@ p {
 *::selection {
   background: transparent;
 }
-/*introduction*/
+
 #introduction {
   z-index: 4;
   position: absolute;
@@ -223,7 +223,6 @@ h1 sub {
   }
 }
 
-/* the interesting 3D scrolling stuff */
 #titles {
   position: absolute;
   width: 18em;
@@ -301,7 +300,6 @@ h1 sub {
   position: absolute;
   height: 100vh;
   will-change: transform;
-  /* width: 25000px; */
 }
 
 #bg-front {
@@ -320,25 +318,6 @@ h1 sub {
 height: 100vh;
 }
 
-/* #bg-back {
-  background: url('img/parallax-bg-back.png');
-  background-size: auto 100%;
-  background-repeat: no-repeat;
-  width: 150%;
-}
-#bg-back::after{
-  content: '';
-  background: url('img/parallax-bg-back.png');
-  background-size: auto 100%;
-  background-repeat: no-repeat;
-  transform: scaleX(-1);
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  left: 0%;
-} */
-
 #bg-front.bg-bucha {
   background: url('img/parallax-foreground-bucha.png');
   background-size: contain;
@@ -350,12 +329,6 @@ height: 100vh;
   background: url('img/parallax-middleground-bucha.png');
   background-size: auto 100%;
   bottom: 0px;
-}
-
-#bg-back.bg-bucha {
-  background: url('img/parallax-background-bucha.png');
-  background-size: 100% 100%;
-  width: 130vw;
 }
 
 #bossPopup {
