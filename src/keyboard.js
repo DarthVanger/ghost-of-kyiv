@@ -1,6 +1,6 @@
 import { mobileControls } from './touch.js'
 import { gamePauseAction } from './gameMenuActions.js'
-import { createPlayerRocket } from './rocket.js'
+import { createPlayerRocket } from './weapons/rocket.js'
 import { soundRocketShot } from './music.js'
 import { gameState } from './gameState.js'
 

@@ -1,4 +1,8 @@
-import { rockets, removePlayerRocket, createPlayerRocket } from '../rocket.js'
+import {
+  rockets,
+  removePlayerRocket,
+  createPlayerRocket,
+} from '../weapons/rocket.js'
 import { gameOver } from '../gameOver.js'
 import { controls, keyCode } from '../keyboard.js'
 import { soundRocketShot } from '../music.js'

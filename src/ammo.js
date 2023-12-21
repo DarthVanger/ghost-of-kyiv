@@ -1,5 +1,5 @@
 import { gatling } from './weapons/gatling.js'
-import { resetPlayerRocketAmmo, rocketAmmo } from './rocket.js'
+import { resetPlayerRocketAmmo, rocketAmmo } from './weapons/rocket.js'
 
 export function resetAmmo(bullets) {
   gatling.ammo = bullets

@@ -1,4 +1,4 @@
-import { rocketDefaultX, rocketDefaultY } from './rendering/Helpers.js'
+import { rocketDefaultX, rocketDefaultY } from '../rendering/Helpers.js'
 
 export let rockets = []
 

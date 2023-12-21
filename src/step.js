@@ -3,7 +3,7 @@ import {
   renderRocket,
   moveRocket,
   deleteUselessEnemyRockets,
-} from './rocket.js'
+} from './weapons/rocket.js'
 import { bulletArray, moveBullet } from './weapons/gatling.js'
 import { moveBackground } from './background.js'
 import { levelOverIfLastEnemyOut } from './gameOver.js'
