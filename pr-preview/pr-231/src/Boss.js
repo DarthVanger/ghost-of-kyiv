@@ -43,6 +43,7 @@ export class Boss {
       150 + Math.floor(Math.random() * (window.innerHeight - height - 500))
     this.vx = -2
     this.rockets = []
+    this.rocketDmg = 50
     this.vy = 0
     this.isAlive = true
     this.manoeuvre = manoeuvre
@@ -61,7 +62,7 @@ export function createBoss() {
   boss.isRocketLaunched = false
   document.body.append(bossRocketImg)
 
-  createRocket(boss, 50)
+  createRocket(boss)
   boss.behavior = bossbehavior
   addGatling(boss)
   document.body.append(boss.element)
