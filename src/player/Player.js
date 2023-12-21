@@ -3,7 +3,7 @@ import { gameOver } from '../gameOver.js'
 import { controls, keyCode } from '../keyboard.js'
 import { soundRocketShot } from '../music.js'
 import { gameState } from '../gameState.js'
-import { fireGatlingPlayer } from '../gatling.js'
+import { fireGatlingPlayer } from '../weapons/gatling.js'
 let rocketCooldown = false
 const acceleration = 1
 
@@ -83,7 +83,6 @@ export class Player {
       this.element.src = 'img/aifighter-Down.gif'
     }
     if (isPressedMovementKeyCode.left) {
-
       this.ax = -acceleration / 2
       this.element.src = 'img/aifighter-Back.gif'
     }
@@ -91,7 +90,7 @@ export class Player {
       this.ax = acceleration
       this.element.src = 'img/aifighter-Front-Accelerate.gif'
     }
-    
+
     if (!isPressedMovementKeyCode.right && !isPressedMovementKeyCode.left) {
       this.ax = 0
     }

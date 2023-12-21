@@ -1,4 +1,4 @@
-import { gatling } from './gatling.js'
+import { gatling } from './weapons/gatling.js'
 import { resetPlayerRocketAmmo, rocketAmmo } from './rocket.js'
 
 export function resetAmmo(bullets) {

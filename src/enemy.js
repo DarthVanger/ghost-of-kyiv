@@ -1,4 +1,4 @@
-import { addGatling } from './gatling.js'
+import { addGatling } from './weapons/gatling.js'
 import {
   createRocket,
   updateEnemyRocketAtack,
