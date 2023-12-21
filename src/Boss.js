@@ -42,6 +42,7 @@ export class Boss {
     this.y =
       150 + Math.floor(Math.random() * (window.innerHeight - height - 500))
     this.vx = -2
+    this.rockets = []
     this.vy = 0
     this.isAlive = true
     this.manoeuvre = manoeuvre
@@ -81,13 +82,6 @@ function bossbehavior() {
     const bottobMotionFrame = this.y > window.innerHeight - this.height * 2
     if (bottobMotionFrame) {
       this.vy *= -1
-    }
-
-    const restartRocket = this.rocket.x < 0 - this.rocket.width * 2
-    const ammoDamage = 50
-
-    if (restartRocket || this.rocket.dmg == 0) {
-      createRocket(this, ammoDamage)
     }
   }
 }

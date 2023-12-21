@@ -24,7 +24,9 @@ function deleteEnemyImg(enemy) {
   enemy.enemyHealth.element.remove()
   enemy.enemyHealthText.element.remove()
   enemy.element.remove()
-  enemy.rocket.element.remove()
+  enemy.rockets.forEach((rocket) => {
+  rocket.element.remove()
+  })
 }
 
 function createHealth(enemy, i, maxHealth) {
@@ -60,6 +62,7 @@ class Enemy {
     this.y = Math.floor(Math.random() * (innerHeight - 200) + 50)
     this.width = width
     this.height = height
+    this.rockets = []
     this.vx = -2
     this.vy = 0
     this.isAlive = true
@@ -103,7 +106,6 @@ export function createEnemies(maxEnemies) {
     } else {
       enemy = createZ10(i - 3)
     }
-
     createRocket(enemy)
 
     addGatling(enemy)
@@ -160,9 +162,6 @@ export function updateEnemy(enemy) {
 }
 
 function moveEnemy(enemy) {
-  if (!enemy.isRocketLaunched) {
-    enemy.rocket.x += enemy.vx
-  }
   enemy.x += enemy.vx
   enemy.y += enemy.vy
 }
