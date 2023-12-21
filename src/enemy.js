@@ -1,5 +1,8 @@
 import { addGatling } from './gatling.js'
-import { createRocket, updateEnemyRocketAtack } from './enemyRocketAtack.js'
+import {
+  createRocket,
+  updateEnemyRocketAtack,
+} from './weapons/enemyRocketAtack.js'
 import performCollisionChecksForEnemy, {
   checkEnemyShipCollision,
   enemyCollisionWithBullet,
