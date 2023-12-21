@@ -63,6 +63,7 @@ class Enemy {
     this.width = width
     this.height = height
     this.rockets = []
+    this.rocketDmg = 20
     this.vx = -2
     this.vy = 0
     this.isAlive = true

@@ -1,5 +1,5 @@
 
-export function createRocket(enemy, damage = 20) {
+export function createRocket(enemy) {
   const enemyRocketImg = document.createElement('img')
   enemyRocketImg.className = 'enemyRocket'
   enemyRocketImg.src = 'img/mrRocket.gif'
@@ -11,7 +11,7 @@ export function createRocket(enemy, damage = 20) {
     y: enemy.y + enemy.height - enemy.height / 5,
     width: 120,
     height: 12,
-    dmg: damage,
+    dmg: enemy.rocketDmg,
     vx: enemy.vx-8,
     vy: 0,
     element: enemyRocketImg,
