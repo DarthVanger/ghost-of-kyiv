@@ -1,6 +1,10 @@
 import { enemies, updateEnemy } from './enemy.js'
-import { renderRocket, moveRocket, deleteUselessEnemyRockets } from './rocket.js'
-import { bulletArray, moveBullet } from './gatling.js'
+import {
+  renderRocket,
+  moveRocket,
+  deleteUselessEnemyRockets,
+} from './weapons/rocket.js'
+import { bulletArray, moveBullet } from './weapons/gatling.js'
 import { moveBackground } from './background.js'
 import { levelOverIfLastEnemyOut } from './gameOver.js'
 import { renderAmmo } from './ammo.js'
@@ -30,5 +34,5 @@ export function Step() {
   if (!gameState.isGamePaused) {
     requestAnimationFrame(Step)
   }
-  deleteUselessEnemyRockets() 
+  deleteUselessEnemyRockets()
 }

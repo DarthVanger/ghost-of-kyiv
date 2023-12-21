@@ -1,7 +1,6 @@
-import { fireGatlingPlayer } from './gatling.js'
 import { mobileControls } from './touch.js'
 import { gamePauseAction } from './gameMenuActions.js'
-import { createPlayerRocket } from './rocket.js'
+import { createPlayerRocket } from './weapons/rocket.js'
 import { soundRocketShot } from './music.js'
 import { gameState } from './gameState.js'
 
@@ -29,11 +28,10 @@ export function initKeybordMovement() {
 }
 
 function handleKeyDown(event) {
-  const isGameControllKeyPressed =  Object.values(keyCode).includes(event.keyCode)
-  if (isGameControllKeyPressed
-    &&
-    controls.indexOf(event.keyCode) === -1
-  ) {
+  const isGameControllKeyPressed = Object.values(keyCode).includes(
+    event.keyCode
+  )
+  if (isGameControllKeyPressed && controls.indexOf(event.keyCode) === -1) {
     controls.push(event.keyCode)
   }
   if (controls.includes(keyCode.p) || controls.includes(keyCode.esc)) {
@@ -42,7 +40,9 @@ function handleKeyDown(event) {
 }
 
 function handleKeyUp(event) {
-  const isGameControllKeyUnpressed =  Object.values(keyCode).includes(event.keyCode)
+  const isGameControllKeyUnpressed = Object.values(keyCode).includes(
+    event.keyCode
+  )
   if (isGameControllKeyUnpressed) {
     controls.splice(controls.indexOf(event.keyCode), 1)
   }

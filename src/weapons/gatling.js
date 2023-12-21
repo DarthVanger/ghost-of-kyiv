@@ -1,5 +1,5 @@
-import { soundGatling } from './music.js'
-import { gameState } from './gameState.js'
+import { soundGatling } from '../music.js'
+import { gameState } from '../gameState.js'
 
 export let gatling = {
   velocity: -2,
