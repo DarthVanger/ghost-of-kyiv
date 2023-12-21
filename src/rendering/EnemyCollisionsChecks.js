@@ -23,12 +23,14 @@ export default function performCollisionChecksForEnemy(enemy) {
       soundRocketHit.play()
     }
   }
-
-  if (checkPlayerRocketCollision(enemy)) {
-    airfighter.health.element.value -= enemy.rocket.dmg
-    enemy.rocket.dmg = 0
+  enemy.rockets.forEach((rocket, index) => {
+  if (checkPlayerRocketCollision(rocket)) {
+    airfighter.health.element.value -= rocket.dmg
+    rocket.dmg = 0
+    enemy.rockets.splice(index)
     soundRocketHit.play()
   }
+ })
 
   if (enemy.enemyHealth.element.value <= 0 && enemy.isAlive) {
     document.querySelector('#gifContainerExplosion').append(explosion)
@@ -56,17 +58,17 @@ function checkEnemyRocketCollision(enemy, rocket) {
   }
 }
 
-function checkPlayerRocketCollision(enemy) {
+function checkPlayerRocketCollision(rocket) {
   const airfighterHitBox = gameState.airfighter.getHitBox()
 
   if (
-    airfighterHitBox.x + airfighterHitBox.width > enemy.rocket.x &&
-    airfighterHitBox.x < enemy.rocket.x + enemy.rocket.width &&
-    airfighterHitBox.y + airfighterHitBox.height > enemy.rocket.y &&
-    airfighterHitBox.y < enemy.rocket.y + enemy.rocket.height
+    airfighterHitBox.x + airfighterHitBox.width > rocket.x &&
+    airfighterHitBox.x < rocket.x + rocket.width &&
+    airfighterHitBox.y + airfighterHitBox.height > rocket.y &&
+    airfighterHitBox.y < rocket.y + rocket.height
   ) {
-    enemy.rocket.element.remove()
-    enemy.rocket.x = deadEnemyXPosition
+    rocket.element.remove()
+    rocket.x = deadEnemyXPosition
     soundRocketShot.pause()
     soundRocketShot.currentTime = 0
     explosionEffect(airfighterHitBox)
@@ -90,7 +92,7 @@ export function enemyCollisionWithBullet(enemy) {
 
 function checkBulletCollision(bullet, enemy) {
   const isCollisionWithEnemy = checkCollision(bullet, enemy)
-  const isCollisionWithRocket = checkCollision(bullet, enemy.rocket)
+  
   const isOutOfScreen = bullet.x > window.innerWidth
   if (isCollisionWithEnemy) {
     if (bullet.critChance) {
@@ -99,14 +101,17 @@ function checkBulletCollision(bullet, enemy) {
       enemy.enemyHealth.element.value -= bullet.dmg
     }
   }
-  if (isCollisionWithRocket) {
-    enemy.rocket.x = deadEnemyXPosition
-    enemy.rocket.vx = 0
-    enemy.rocket.element.remove()
-  }
-  if (isOutOfScreen || isCollisionWithEnemy || isCollisionWithRocket) {
-    removeBullet(bullet)
-  }
+  enemy.rockets.forEach((rocket) => {
+    const isCollisionWithRocket = checkCollision(bullet, rocket)
+    if (isCollisionWithRocket) {
+      rocket.x = deadEnemyXPosition
+      rocket.vx = 0
+      rocket.element.remove()
+    }
+    if (isOutOfScreen || isCollisionWithEnemy || isCollisionWithRocket) {
+      removeBullet(bullet)
+    }
+  })
 }
 
 function playerDiesIfHpBelowZiro() {
