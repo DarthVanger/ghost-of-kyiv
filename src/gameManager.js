@@ -55,14 +55,14 @@ function showIntroductionAndSetNewText() {
   introduction.style.zIndex = 3
   soundMainTheme.play()
   if (levelState.levelNumber == 1) {
-    document.querySelector('#episode').innerText = 'EPISODE II'
+    document.querySelector('#episode').innerHTML = 'EPISODE II<br />Bucha'
     document.querySelector('#backstoryEpisode').innerText =
-      'The battle for the borders of Gostomel'
+      'The battle for the Bucha'
   }
   if (levelState.levelNumber == 2) {
     soundMainTheme.pause()
     soundboss.play()
-    document.querySelector('#episode').innerText = 'EPISODE III'
+    document.querySelector('#episode').innerHTML = 'EPISODE III<br /> Irpin'
     document.querySelector('#backstoryEpisode').innerText = 'Helicopter Boss'
   }
 }
