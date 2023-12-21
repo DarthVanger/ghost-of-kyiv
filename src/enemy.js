@@ -103,8 +103,8 @@ export function createEnemies(maxEnemies) {
     } else {
       enemy = createZ10(i - 3)
     }
-    const defaultDamageBullet = 20
-    createRocket(enemy, defaultDamageBullet)
+
+    createRocket(enemy)
 
     addGatling(enemy)
     document.body.append(enemy.element)

@@ -1,9 +1,9 @@
-export function createRocket(enemy, damage) {
+export function createRocket(enemy, damage = 20) {
   const enemyRocketImg = document.createElement('img')
   enemyRocketImg.className = 'enemyRocket'
   enemyRocketImg.src = 'img/mrRocket.gif'
   document.body.append(enemyRocketImg)
-  enemy.isRocketLaunched = false
+  enemy.isRocketCooldown = false
 
   enemy.rocket = {
     x: enemy.x,
@@ -23,9 +23,13 @@ function moveEnemyRocket(enemy) {
 
 function launchRocketIfOnScreen(enemy) {
   if (enemy.x < window.innerWidth) {
-    if (!enemy.isRocketLaunched) {
+    if (!enemy.isRocketCooldown) {
       launchEnemyRocket(enemy)
-      enemy.isRocketLaunched = true
+      enemy.isRocketCooldown = true
+      setTimeout(() => {
+        enemy.isRocketCooldown = false
+        createRocket(enemy)
+      }, 3000)
     }
   }
 }
