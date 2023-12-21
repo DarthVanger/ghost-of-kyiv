@@ -1,42 +1,53 @@
-export function createRocket(enemy, damage) {
+
+export function createRocket(enemy) {
   const enemyRocketImg = document.createElement('img')
   enemyRocketImg.className = 'enemyRocket'
   enemyRocketImg.src = 'img/mrRocket.gif'
   document.body.append(enemyRocketImg)
-  enemy.isRocketLaunched = false
+  enemy.isRocketCooldown = false
 
-  enemy.rocket = {
+  const rocket = {
     x: enemy.x,
     y: enemy.y + enemy.height - enemy.height / 5,
     width: 120,
     height: 12,
-    dmg: damage,
-    vx: 0,
+    dmg: enemy.rocketDmg,
+    vx: enemy.vx-8,
     vy: 0,
     element: enemyRocketImg,
   }
+  enemy.rockets.push(rocket)
+  return rocket
 }
 
 function moveEnemyRocket(enemy) {
-  enemy.rocket.x += enemy.rocket.vx
+  enemy.rockets.forEach((rocket) => {
+    rocket.x += rocket.vx
+  })
 }
 
 function launchRocketIfOnScreen(enemy) {
   if (enemy.x < window.innerWidth) {
-    if (!enemy.isRocketLaunched) {
-      launchEnemyRocket(enemy)
-      enemy.isRocketLaunched = true
+    if (!enemy.isRocketCooldown) {
+      enemy.isRocketCooldown = true
+      setTimeout(() => {
+        enemy.isRocketCooldown = false
+        let newRocket = createRocket(enemy)
+        launchEnemyRocket(enemy, newRocket)
+      }, 3000)
     }
   }
 }
 
-function launchEnemyRocket(enemy) {
-  enemy.rocket.vx = enemy.vx - 8
+function launchEnemyRocket(enemy, rocket) {
+  rocket.vx = enemy.vx - 8
 }
 
 function renderEnemyRocket(enemy) {
-  enemy.rocket.element.style.left = enemy.rocket.x
-  enemy.rocket.element.style.top = enemy.rocket.y
+  enemy.rockets.forEach((rocket) => {
+    rocket.element.style.left = rocket.x
+    rocket.element.style.top = rocket.y
+  })
 }
 
 export function updateEnemyRocketAtack(enemy) {
