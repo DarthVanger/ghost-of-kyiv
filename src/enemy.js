@@ -2,7 +2,9 @@ import { addGatling } from './weapons/gatling.js'
 import {
   createRocket,
   updateEnemyRocketAtack,
+  updateEnemyGroundAtack,
 } from './weapons/enemyRocketAtack.js'
+import { createTargetedRocket } from './weapons/groundEnemyAttack.js'
 import performCollisionChecksForEnemy, {
   checkEnemyShipCollision,
   enemyCollisionWithBullet,
@@ -53,7 +55,7 @@ function createHealth(enemy, i, maxHealth) {
 }
 
 class Enemy {
-  constructor(src, width, height, i, maxHealth, manoeuvre) {
+  constructor(src, width, height, i, maxHealth, manoeuvre, attack) {
     this.element = document.createElement('img')
     this.element.id = 'enemy' + i
     this.index = i
@@ -69,16 +71,33 @@ class Enemy {
     this.vy = 0
     this.isAlive = true
     this.manoeuvre = manoeuvre
+    this.attack = attack
     createHealth(this, i, maxHealth)
   }
 }
 
 function createSu3(i) {
-  return new Enemy('img/su-3.png', 250, 80, i, 50, manoeuvreUpAtHalfScreen)
+  return new Enemy(
+    'img/su-3.png',
+    250,
+    80,
+    i,
+    50,
+    manoeuvreUpAtHalfScreen,
+    updateEnemyRocketAtack
+  )
 }
 
 function createSu27(i) {
-  return new Enemy('img/su-27.png', 270, 100, i, 100, manoeuvreDownAtHalfScreen)
+  return new Enemy(
+    'img/su-27.png',
+    270,
+    100,
+    i,
+    100,
+    manoeuvreDownAtHalfScreen,
+    updateEnemyRocketAtack
+  )
 }
 
 function createZ10(i) {
@@ -88,12 +107,33 @@ function createZ10(i) {
     200,
     i,
     200,
-    manoeuvreZigzagAtQuarterScreen
+    manoeuvreZigzagAtQuarterScreen,
+    updateEnemyRocketAtack
   )
 }
 
 function createSu35(i) {
-  return new Enemy('img/su-35.png', 349, 91, i, 50, manoeuvreStraightFast)
+  return new Enemy(
+    'img/su-35.png',
+    349,
+    91,
+    i,
+    50,
+    manoeuvreStraightFast,
+    updateEnemyRocketAtack
+  )
+}
+
+function createZrkTor(i) {
+  return new Enemy(
+    'img/zrk_tor.png',
+    349,
+    91,
+    i,
+    50,
+    manoeuvreOnGround,
+    updateEnemyGroundAtack
+  )
 }
 
 export function createEnemies(maxEnemies) {
@@ -103,10 +143,13 @@ export function createEnemies(maxEnemies) {
       enemy = createSu3(i)
     } else if (i >= 3 && i <= 6) {
       enemy = createSu27(i)
+      enemy = createZrkTor(i)
     } else if (i >= 7 && i <= 9) {
       enemy = createSu35(i)
-    } else {
+    } else if (i >= 10 && i <= 12) {
       enemy = createZ10(i - 3)
+    } else {
+      enemy = createSu27(i)
     }
     createRocket(enemy)
 
@@ -154,7 +197,7 @@ function renderEnemyImg(enemy) {
 
 export function updateEnemy(enemy) {
   enemy.manoeuvre(enemy)
-  updateEnemyRocketAtack(enemy)
+  enemy.attack(enemy)
   renderEnemy(enemy)
 
   moveEnemy(enemy)

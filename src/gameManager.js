@@ -7,7 +7,7 @@ import {
 } from './music.js'
 import { Step, fps } from './step.js'
 import { resetAmmo } from './ammo.js'
-import { createBoss , changeWinText } from './Boss.js'
+import { createBoss, changeWinText } from './Boss.js'
 import { bossPopup } from './rendering/Helpers.js'
 import { resetBackground } from './background.js'
 import { initKeybordMovement } from './keyboard.js'
@@ -18,7 +18,7 @@ import { Player } from './player/Player.js'
 let isGameStarted = false
 let introduction = document.querySelector('#introduction')
 introduction.addEventListener('click', introductionSkip)
-const levelEnemies = 12
+const levelEnemies = 15
 const levelState = {
   isLevelFinished: false,
   levelNumber: 0,
