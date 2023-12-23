@@ -1,3 +1,5 @@
+import { frontBgY } from './background.js'
+
 export function manoeuvreUpAtHalfScreen(enemy) {
   const halfScreenX = window.innerWidth / 2
   if (enemy.x < halfScreenX) {
@@ -33,4 +35,9 @@ export function manoeuvreZigzagAtQuarterScreen(enemy) {
 
 export function manoeuvreStraightFast(enemy) {
   enemy.vx = -15
+}
+export function manoeuvreOnGround(enemy) {
+  enemy.element.classList.add('ground-enemy')
+  enemy.y = window.innerHeight - enemy.height + frontBgY + 100
+  enemy.vx = -2
 }
