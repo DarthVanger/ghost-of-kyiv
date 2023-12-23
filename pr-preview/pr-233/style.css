@@ -93,7 +93,7 @@ p {
   width: 50px;
   margin: 5px;
   display: flex;
-  align-items: center; 
+  align-items: center;
 }
 
 .ammoImg {
@@ -316,7 +316,7 @@ h1 sub {
 }
 
 #bg-back {
-height: 100vh;
+  height: 100vh;
 }
 
 #bg-front.bg-bucha {
@@ -376,7 +376,7 @@ height: 100vh;
   line-height: 2;
 }
 
-#controls img{
+#controls img {
   height: 5vh;
   width: 5vh;
   position: absolute;
@@ -387,17 +387,30 @@ height: 100vh;
   opacity: 0.3;
 }
 
-.continue{
+.continue {
   position: absolute;
   top: 10vh;
   left: 20%;
 }
-.restart{
+.restart {
   position: absolute;
   top: 10vh;
   right: 20%;
 }
 
-#play{
+#play {
   display: none;
+}
+
+.ground-enemy {
+  animation: fadeIn 3s infinite;
+}
+
+@keyframes fadeIn {
+  0% {
+    filter: drop-shadow(0 0 0);
+  }
+  50% {
+    filter: drop-shadow(0 -25px 50px crimson);
+  }
 }

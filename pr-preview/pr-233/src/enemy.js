@@ -55,7 +55,16 @@ function createHealth(enemy, i, maxHealth) {
 }
 
 class Enemy {
-  constructor(src, width, height, i, maxHealth, manoeuvre, attack) {
+  constructor(
+    src,
+    width,
+    height,
+    i,
+    maxHealth,
+    manoeuvre,
+    attack,
+    createRocket
+  ) {
     this.element = document.createElement('img')
     this.element.id = 'enemy' + i
     this.index = i
@@ -72,6 +81,7 @@ class Enemy {
     this.isAlive = true
     this.manoeuvre = manoeuvre
     this.attack = attack
+    this.createRocket = createRocket
     createHealth(this, i, maxHealth)
   }
 }
@@ -84,7 +94,8 @@ function createSu3(i) {
     i,
     50,
     manoeuvreUpAtHalfScreen,
-    updateEnemyRocketAtack
+    updateEnemyRocketAtack,
+    createRocket
   )
 }
 
@@ -96,7 +107,8 @@ function createSu27(i) {
     i,
     100,
     manoeuvreDownAtHalfScreen,
-    updateEnemyRocketAtack
+    updateEnemyRocketAtack,
+    createRocket
   )
 }
 
@@ -108,7 +120,8 @@ function createZ10(i) {
     i,
     200,
     manoeuvreZigzagAtQuarterScreen,
-    updateEnemyRocketAtack
+    updateEnemyRocketAtack,
+    createRocket
   )
 }
 
@@ -120,7 +133,8 @@ function createSu35(i) {
     i,
     50,
     manoeuvreStraightFast,
-    updateEnemyRocketAtack
+    updateEnemyRocketAtack,
+    createRocket
   )
 }
 
@@ -132,7 +146,8 @@ function createZrkTor(i) {
     i,
     50,
     manoeuvreOnGround,
-    updateEnemyGroundAtack
+    updateEnemyGroundAtack,
+    createTargetedRocket
   )
 }
 
@@ -151,7 +166,7 @@ export function createEnemies(maxEnemies) {
     } else {
       enemy = createSu27(i)
     }
-    createRocket(enemy)
+    enemy.createRocket(enemy)
 
     addGatling(enemy)
     document.body.append(enemy.element)

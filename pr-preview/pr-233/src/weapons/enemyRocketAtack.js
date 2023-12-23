@@ -28,13 +28,13 @@ export function moveEnemyRocket(enemy) {
   })
 }
 
-export function launchRocketIfOnScreen(enemy, createRocketFunction) {
+export function launchRocketIfOnScreen(enemy) {
   if (enemy.x < window.innerWidth) {
     if (!enemy.isRocketCooldown) {
       enemy.isRocketCooldown = true
       setTimeout(() => {
         enemy.isRocketCooldown = false
-        createRocketFunction(enemy)
+        enemy.createRocket(enemy)
       }, 3000)
     }
   }
@@ -50,11 +50,11 @@ export function renderEnemyRocket(enemy) {
 export function updateEnemyRocketAtack(enemy) {
   renderEnemyRocket(enemy)
   moveEnemyRocket(enemy)
-  launchRocketIfOnScreen(enemy, createRocket)
+  launchRocketIfOnScreen(enemy)
 }
 
 export function updateEnemyGroundAtack(enemy) {
   renderEnemyRocket(enemy)
   moveEnemyRocket(enemy)
-  launchRocketIfOnScreen(enemy, createTargetedRocket)
+  launchRocketIfOnScreen(enemy)
 }
