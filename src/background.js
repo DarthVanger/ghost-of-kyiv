@@ -1,7 +1,7 @@
 let backBgX = 0
 let middleBgX = 0
-let frontBgX = 0
-let frontBgY = 0
+export let frontBgX = 0
+export let frontBgY = 0
 let middleBgY = 0
 let backBgY = 0
 let backBgVx = 0.1
