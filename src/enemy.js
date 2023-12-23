@@ -12,6 +12,7 @@ import {
   manoeuvreDownAtHalfScreen,
   manoeuvreZigzagAtQuarterScreen,
   manoeuvreStraightFast,
+  manoeuvreOnGround,
 } from './enemyManoeuvre.js'
 export let enemies = []
 
@@ -25,7 +26,7 @@ function deleteEnemyImg(enemy) {
   enemy.enemyHealthText.element.remove()
   enemy.element.remove()
   enemy.rockets.forEach((rocket) => {
-  rocket.element.remove()
+    rocket.element.remove()
   })
 }
 
