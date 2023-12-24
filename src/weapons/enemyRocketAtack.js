@@ -1,5 +1,3 @@
-import { createTargetedRocket } from './groundEnemyAttack.js'
-
 export function createRocket(enemy) {
   const enemyRocketImg = document.createElement('img')
   enemyRocketImg.className = 'enemyRocket'
