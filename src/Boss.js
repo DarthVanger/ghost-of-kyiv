@@ -4,8 +4,8 @@ import {
   levelCompleteScreen,
   bossCompleteScreenText,
 } from './levelCompleteScreen.js'
-import { enemies } from './enemy.js'
 export let level3Boss
+import { gameState } from './gameState.js'
 
 function createBossHp(boss, i, maxHealth) {
   boss.enemyHealth = {}
@@ -48,7 +48,7 @@ export class Boss {
     this.isAlive = true
     this.manoeuvre = manoeuvre
     createBossHp(this, i, maxHealth)
-    enemies.push(this)
+    gameState.enemies.push(this)
   }
 }
 
