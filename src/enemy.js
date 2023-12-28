@@ -42,14 +42,14 @@ function createHealth(enemy, i, maxHealth) {
 
 export class Enemy {
   constructor(
-    src,
+    {src,
     width,
     height,
     i,
     maxHealth,
     manoeuvre,
     attack,
-    createRocket
+    createRocket}
   ) {
     this.element = document.createElement('img')
     this.element.id = 'enemy' + i

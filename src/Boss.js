@@ -1,5 +1,8 @@
 import { addGatling } from './weapons/gatling.js'
-import { createRocket } from './weapons/enemyRocketAtack.js'
+import {
+  createRocket,
+  updateEnemyRocketAtack,
+} from './weapons/enemyRocketAtack.js'
 import {
   levelCompleteScreen,
   bossCompleteScreenText,
@@ -30,7 +33,7 @@ function createBossHp(boss, i, maxHealth) {
 }
 
 export class Boss {
-  constructor(src, width, height, i, maxHealth, manoeuvre) {
+  constructor({ src, width, height, i, maxHealth, manoeuvre }) {
     this.element = document.createElement('img')
     this.element.id = 'boss'
     this.index = i
@@ -44,9 +47,11 @@ export class Boss {
     this.vx = -2
     this.rockets = []
     this.rocketDmg = 50
+    this.attack = updateEnemyRocketAtack
     this.vy = 0
     this.isAlive = true
     this.manoeuvre = manoeuvre
+    this.createRocket = createRocket
     createBossHp(this, i, maxHealth)
     gameState.enemies.push(this)
   }
@@ -54,7 +59,14 @@ export class Boss {
 
 export function createBoss() {
   let boss
-  boss = new Boss('img/boss.webp', 250, 120, 1, 1000, bossbehavior)
+  boss = new Boss({
+    src: 'img/boss.webp',
+    width: 250,
+    height: 120,
+    i: 1,
+    maxHealth: 1000,
+    manoeuvre: bossbehavior,
+  })
 
   const bossRocketImg = document.createElement('img')
   bossRocketImg.className = 'enemyRocket'
