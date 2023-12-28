@@ -1,4 +1,4 @@
-import { enemies, updateEnemy } from './enemy.js'
+import { updateEnemy } from './enemy.js'
 import {
   renderRocket,
   moveRocket,
@@ -16,7 +16,7 @@ export const fps = 60
 export function Step() {
   const airfighter = gameState.airfighter
 
-  enemies.forEach(updateEnemy)
+  gameState.enemies.forEach(updateEnemy)
   bulletArray.forEach(moveBullet)
   moveRocket()
   renderAmmo()
@@ -29,7 +29,7 @@ export function Step() {
     setAirfighterVelocityFromMobileJoystick(airfighter, mobileJoystick)
   }
 
-  const lastEnemy = enemies[enemies.length - 1]
+  const lastEnemy = gameState.enemies[gameState.enemies.length - 1]
   levelOverIfLastEnemyOut(lastEnemy, gameState)
   if (!gameState.isGamePaused) {
     requestAnimationFrame(Step)

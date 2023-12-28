@@ -1,26 +1,12 @@
-import { addGatling } from './weapons/gatling.js'
-import {
-  createRocket,
-  updateEnemyRocketAtack,
-  updateEnemyGroundAtack,
-} from './weapons/enemyRocketAtack.js'
-import { createTargetedRocket } from './weapons/groundEnemyAttack.js'
 import performCollisionChecksForEnemy, {
   checkEnemyShipCollision,
   enemyCollisionWithBullet,
 } from './rendering/EnemyCollisionsChecks.js'
-import {
-  manoeuvreUpAtHalfScreen,
-  manoeuvreDownAtHalfScreen,
-  manoeuvreZigzagAtQuarterScreen,
-  manoeuvreStraightFast,
-  manoeuvreOnGround,
-} from './enemyManoeuvre.js'
-export let enemies = []
+import { gameState } from './gameState.js'
 
 export function deleteEnemies() {
-  enemies.forEach(deleteEnemyImg)
-  enemies = []
+  gameState.enemies.forEach(deleteEnemyImg)
+  gameState.enemies = []
 }
 
 function deleteEnemyImg(enemy) {
@@ -54,7 +40,7 @@ function createHealth(enemy, i, maxHealth) {
   document.body.append(enemy.enemyHealthText.element)
 }
 
-class Enemy {
+export class Enemy {
   constructor(
     src,
     width,
@@ -86,98 +72,15 @@ class Enemy {
   }
 }
 
-function createSu3(i) {
-  return new Enemy(
-    'img/su-3.png',
-    250,
-    80,
-    i,
-    50,
-    manoeuvreUpAtHalfScreen,
-    updateEnemyRocketAtack,
-    createRocket
-  )
-}
-
-function createSu27(i) {
-  return new Enemy(
-    'img/su-27.png',
-    270,
-    100,
-    i,
-    100,
-    manoeuvreDownAtHalfScreen,
-    updateEnemyRocketAtack,
-    createRocket
-  )
-}
-
-function createZ10(i) {
-  return new Enemy(
-    'img/z-10.png',
-    330,
-    200,
-    i,
-    200,
-    manoeuvreZigzagAtQuarterScreen,
-    updateEnemyRocketAtack,
-    createRocket
-  )
-}
-
-function createSu35(i) {
-  return new Enemy(
-    'img/su-35.png',
-    349,
-    91,
-    i,
-    50,
-    manoeuvreStraightFast,
-    updateEnemyRocketAtack,
-    createRocket
-  )
-}
-
-function createZrkTor(i) {
-  return new Enemy(
-    'img/zrk_tor.png',
-    349,
-    91,
-    i,
-    50,
-    manoeuvreOnGround,
-    updateEnemyGroundAtack,
-    createTargetedRocket
-  )
-}
-
-export function createEnemies(maxEnemies) {
-  for (let i = 0; i < maxEnemies; i++) {
-    let enemy
-    if (i < 3) {
-      enemy = createSu3(i)
-    } else if (i >= 3 && i <= 6) {
-      enemy = createSu27(i)
-      enemy = createZrkTor(i)
-    } else if (i >= 7 && i <= 9) {
-      enemy = createSu35(i)
-    } else if (i >= 10 && i <= 12) {
-      enemy = createZ10(i - 3)
-    } else {
-      enemy = createSu27(i)
-    }
-    enemy.createRocket(enemy)
-
-    addGatling(enemy)
-    document.body.append(enemy.element)
-    enemies.push(enemy)
-  }
-}
 function getRandomEnemyX(enemyIndex) {
   if (enemyIndex < 1) {
     return Math.floor(Math.random() * 400) + 500
   } else {
-    return Math.floor(Math.random() * 400) + 500 + enemies[enemyIndex - 1].x
+    return (
+      Math.floor(Math.random() * 400) +
+      500 +
+      gameState.enemies[enemyIndex - 1].x
+    )
   }
 }
 

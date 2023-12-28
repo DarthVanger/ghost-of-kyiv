@@ -1,4 +1,5 @@
-import { deleteEnemies, createEnemies, enemies } from './enemy.js'
+import { deleteEnemies } from './enemy.js'
+import { createEnemies } from './enemyManager.js'
 import {
   soundMainTheme,
   soundIntro,
