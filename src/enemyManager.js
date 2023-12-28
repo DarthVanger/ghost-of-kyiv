@@ -8,14 +8,13 @@ export function createEnemies(maxEnemies) {
     if (i < 3) {
       enemy = factory.createSu3(i)
     } else if (i >= 3 && i <= 6) {
-      enemy = factory.createSu27(i)
       enemy = factory.createZrkTor(i)
     } else if (i >= 7 && i <= 9) {
       enemy = factory.createSu35(i)
     } else if (i >= 10 && i <= 12) {
-      enemy = factory.createZ10(i - 3)
+      enemy = factory.createSu27(i - 3)
     } else {
-      enemy = factory.createSu27(i)
+      enemy = factory.createZ10(i)
     }
     enemy.createRocket(enemy)
 
