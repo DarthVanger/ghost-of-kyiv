@@ -15,66 +15,66 @@ import {
 } from './enemyManoeuvre.js'
 
 export function createSu3(i) {
-  return new Enemy(
-    'img/su-3.png',
-    250,
-    80,
+  return new Enemy({
+    src: 'img/su-3.png',
+    width: 250,
+    height: 80,
     i,
-    50,
-    manoeuvreUpAtHalfScreen,
-    updateEnemyRocketAtack,
-    createRocket
-  )
+    maxHealth: 50,
+    manoeuvre: manoeuvreUpAtHalfScreen,
+    attack: updateEnemyRocketAtack,
+    createRocket,
+  })
 }
 
 export function createSu27(i) {
-  return new Enemy(
-    'img/su-27.png',
-    270,
-    100,
+  return new Enemy({
+    src: 'img/su-27.png',
+    width: 270,
+    height: 100,
     i,
-    100,
-    manoeuvreDownAtHalfScreen,
-    updateEnemyRocketAtack,
-    createRocket
-  )
+    maxHealth: 100,
+    manoeuvre: manoeuvreDownAtHalfScreen,
+    attack: updateEnemyRocketAtack,
+    createRocket,
+  })
 }
 
 export function createZ10(i) {
-  return new Enemy(
-    'img/z-10.png',
-    330,
-    200,
+  return new Enemy({
+    src: 'img/z-10.png',
+    width: 330,
+    height: 200,
     i,
-    200,
-    manoeuvreZigzagAtQuarterScreen,
-    updateEnemyRocketAtack,
-    createRocket
-  )
+    maxHealth: 200,
+    manoeuvre: manoeuvreZigzagAtQuarterScreen,
+    attack: updateEnemyRocketAtack,
+    createRocket,
+  })
 }
 
 export function createSu35(i) {
-  return new Enemy(
-    'img/su-35.png',
-    349,
-    91,
+  return new Enemy({
+    src: 'img/su-35.png',
+    width: 349,
+    height: 91,
     i,
-    50,
-    manoeuvreStraightFast,
-    updateEnemyRocketAtack,
-    createRocket
-  )
+    maxHealth: 50,
+    manoeuvre: manoeuvreStraightFast,
+    attack: updateEnemyRocketAtack,
+    createRocket,
+  })
 }
 
 export function createZrkTor(i) {
-  return new Enemy(
-    'img/zrk_tor.png',
-    349,
-    91,
+  return new Enemy({
+    src: 'img/zrk_tor.png',
+    width: 349,
+    height: 91,
     i,
-    50,
-    manoeuvreOnGround,
-    updateEnemyGroundAtack,
-    createTargetedRocket
-  )
+    maxHealth: 50,
+    manoeuvre: manoeuvreOnGround,
+    attack: updateEnemyGroundAtack,
+    createRocket: createTargetedRocket,
+  })
 }
