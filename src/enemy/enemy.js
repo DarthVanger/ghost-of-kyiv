@@ -1,8 +1,8 @@
 import performCollisionChecksForEnemy, {
   checkEnemyShipCollision,
   enemyCollisionWithBullet,
-} from './rendering/EnemyCollisionsChecks.js'
-import { gameState } from './gameState.js'
+} from '/src/rendering/EnemyCollisionsChecks.js'
+import { gameState } from '/src/gameState.js'
 
 export function deleteEnemies() {
   gameState.enemies.forEach(deleteEnemyImg)
@@ -41,16 +41,16 @@ function createHealth(enemy, i, maxHealth) {
 }
 
 export class Enemy {
-  constructor(
-    {src,
+  constructor({
+    src,
     width,
     height,
     i,
     maxHealth,
     manoeuvre,
     attack,
-    createRocket}
-  ) {
+    createRocket,
+  }) {
     this.element = document.createElement('img')
     this.element.id = 'enemy' + i
     this.index = i

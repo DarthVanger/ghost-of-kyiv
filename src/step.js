@@ -1,4 +1,4 @@
-import { updateEnemy } from './enemy.js'
+import { updateEnemy } from './enemy/enemy.js'
 import {
   renderRocket,
   moveRocket,
