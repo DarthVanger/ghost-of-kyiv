@@ -11,6 +11,7 @@ import { renderAmmo } from './ammo.js'
 import { mobileJoystick } from './mobileJoystick.js'
 import { setAirfighterVelocityFromMobileJoystick } from './mobile/mobileVelocityController.js'
 import { gameState } from './gameState.js'
+
 export const fps = 60
 
 export function Step() {
@@ -35,4 +36,8 @@ export function Step() {
     requestAnimationFrame(Step)
   }
   deleteUselessEnemyRockets()
+
+  gameState.playerFlares.forEach((flare) => {
+    flare.render()
+  })
 }
