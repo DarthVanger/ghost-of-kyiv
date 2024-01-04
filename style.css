@@ -117,6 +117,18 @@ p {
   min-height: 100%;
 }
 
+#score {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  top: 1em;
+  color: #333;
+  font-size: bold;
+  height: 20px;
+  font-size: 20px;
+}
+
 .healthBar50,
 .healthBar100,
 .healthBar200 {
