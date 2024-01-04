@@ -1,6 +1,6 @@
 import * as factory from './enemyFactory.js'
-import { addGatling } from './weapons/gatling.js'
-import { gameState } from './gameState.js'
+import { gameState } from '/src/gameState.js'
+import { addGatling } from '/src/weapons/gatling.js'
 
 export function createEnemies(maxEnemies) {
   for (let i = 0; i < maxEnemies; i++) {

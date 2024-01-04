@@ -1,11 +1,11 @@
 import { Enemy } from './enemy.js'
-import { addGatling } from './weapons/gatling.js'
+import { addGatling } from '/src/weapons/gatling.js'
 import {
   createRocket,
   updateEnemyRocketAtack,
   updateEnemyGroundAtack,
-} from './weapons/enemyRocketAtack.js'
-import { createTargetedRocket } from './weapons/groundEnemyAttack.js'
+} from '/src/weapons/enemyRocketAtack.js'
+import { createTargetedRocket } from '/src/weapons/groundEnemyAttack.js'
 import {
   manoeuvreUpAtHalfScreen,
   manoeuvreDownAtHalfScreen,
