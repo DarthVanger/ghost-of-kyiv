@@ -1,4 +1,4 @@
-import { enemyDies } from '/src/enemy/enemy.js'
+import { enemyDies } from '../enemy/enemy.js'
 import { gameState } from '../gameState.js'
 import { deadEnemyXPosition } from './Helpers.js'
 import { bulletArray, removeBullet } from '../weapons/gatling.js'

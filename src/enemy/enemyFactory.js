@@ -1,12 +1,12 @@
-import { scoreBonuses } from '/src/scores/scores.js'
+import { scoreBonuses } from '../scores/scores.js'
 import { Enemy } from './enemy.js'
-import { addGatling } from '/src/weapons/gatling.js'
+import { addGatling } from '../weapons/gatling.js'
 import {
   createRocket,
   updateEnemyRocketAtack,
   updateEnemyGroundAtack,
-} from '/src/weapons/enemyRocketAtack.js'
-import { createTargetedRocket } from '/src/weapons/groundEnemyAttack.js'
+} from '../weapons/enemyRocketAtack.js'
+import { createTargetedRocket } from '../weapons/groundEnemyAttack.js'
 import {
   manoeuvreUpAtHalfScreen,
   manoeuvreDownAtHalfScreen,
