@@ -1,3 +1,4 @@
+import { renderCurrentScore } from './scores/currentGameScore.js'
 import { updateEnemy } from './enemy/enemy.js'
 import {
   renderRocket,
@@ -14,6 +15,7 @@ import { gameState } from './gameState.js'
 export const fps = 60
 
 export function Step() {
+  renderCurrentScore()
   const airfighter = gameState.airfighter
 
   gameState.enemies.forEach(updateEnemy)
