@@ -1,3 +1,4 @@
+import { enemyDies } from '../enemy/enemy.js'
 import { gameState } from '../gameState.js'
 import { deadEnemyXPosition } from './Helpers.js'
 import { bulletArray, removeBullet } from '../weapons/gatling.js'
@@ -24,24 +25,17 @@ export default function performCollisionChecksForEnemy(enemy) {
     }
   }
   enemy.rockets.forEach((rocket, index) => {
-  if (checkPlayerRocketCollision(rocket)) {
-    airfighter.health.element.value -= rocket.dmg
-    rocket.dmg = 0
-    enemy.rockets.splice(index)
-    soundRocketHit.play()
-  }
- })
+    if (checkPlayerRocketCollision(rocket)) {
+      airfighter.health.element.value -= rocket.dmg
+      rocket.dmg = 0
+      enemy.rockets.splice(index)
+      soundRocketHit.play()
+    }
+  })
 
-  if (enemy.enemyHealth.element.value <= 0 && enemy.isAlive) {
-    document.querySelector('#gifContainerExplosion').append(explosion)
-    explosion.style.left = enemy.x + enemy.width / 2 - explosion.width / 2
-    explosion.style.top = enemy.y + enemy.height / 2 - explosion.height / 2
-    enemy.isAlive = false
-    enemy.x = deadEnemyXPosition
-    soundEnemyDieExplosion.play()
-    setTimeout(() => {
-      explosion.remove()
-    }, 700)
+  const enemyHp = enemy.enemyHealth.element.value
+  if (enemyHp <= 0 && enemy.isAlive) {
+    enemyDies(enemy)
   }
 }
 
@@ -92,7 +86,7 @@ export function enemyCollisionWithBullet(enemy) {
 
 function checkBulletCollision(bullet, enemy) {
   const isCollisionWithEnemy = checkCollision(bullet, enemy)
-  
+
   const isOutOfScreen = bullet.x > window.innerWidth
   if (isCollisionWithEnemy) {
     if (bullet.critChance) {

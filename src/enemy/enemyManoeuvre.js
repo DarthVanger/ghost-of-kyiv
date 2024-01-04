@@ -1,4 +1,4 @@
-import { frontBgY } from '/src/background.js'
+import { frontBgY } from '../background.js'
 
 export function manoeuvreUpAtHalfScreen(enemy) {
   const halfScreenX = window.innerWidth / 2
