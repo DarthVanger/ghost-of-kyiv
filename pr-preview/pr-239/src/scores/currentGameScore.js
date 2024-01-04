@@ -1,4 +1,4 @@
-import { gameState } from '/src/gameState.js'
+import { gameState } from '../gameState.js'
 
 const scoreElement = document.createElement('div')
 scoreElement.id = 'score'
