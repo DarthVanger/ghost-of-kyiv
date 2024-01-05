@@ -125,17 +125,9 @@ export function updateEnemy(enemy) {
 }
 
 function removeEnemyIfHpBelowZero(enemy) {
-  if (enemy.enemyHealth.element.value <= 0 && enemy.isAlive) {
-    document.querySelector('#gifContainerExplosion').append(explosion)
-    explosion.style.left = enemy.x + enemy.width / 2 - explosion.width / 2
-    explosion.style.top = enemy.y + enemy.height / 2 - explosion.height / 2
-    enemy.isAlive = false
-    deleteEnemyImg(enemy)
-    enemy.x = deadEnemyXPosition
-    soundEnemyDieExplosion.play()
-    setTimeout(() => {
-      explosion.remove()
-    }, 700)
+  const enemyHp = enemy.enemyHealth.element.value
+  if (enemyHp <= 0 && enemy.isAlive) {
+    enemyDies(enemy)
   }
 }
 
@@ -144,11 +136,13 @@ function moveEnemy(enemy) {
   enemy.y += enemy.vy
 }
 
-export function enemyDies(enemy) {
+function enemyDies(enemy) {
   gameState.score += enemy.scoreForKill
   enemyDeathExplosion(enemy)
+  deleteEnemyImg(enemy)
   enemy.isAlive = false
   enemy.x = deadEnemyXPosition
+  soundEnemyDieExplosion.play()
 }
 
 function enemyDeathExplosion(enemy) {
