@@ -31,7 +31,6 @@ export class Player {
     y: 0,
     element: document.querySelector('#playerHealthText'),
   }
-  rocketMaxDistance = 1500
   isKeyUpPressed = false
   isKeyLeftPressed = false
   isKeyRightPressed = false
