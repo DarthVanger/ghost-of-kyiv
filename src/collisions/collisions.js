@@ -30,6 +30,7 @@ function checkCollision(obj1, obj2) {
   )
 }
 
+// player airplane <-> enemy airplane
 function playerCollisionWithEnemy() {
   for (const enemy of gameState.enemies) {
     if (checkCollision(gameState.airfighter, enemy)) {
@@ -38,6 +39,7 @@ function playerCollisionWithEnemy() {
   }
 }
 
+// enemy rocket <-> player airplane
 function playerCollisionWithEnemyRocket() {
   for (const enemy of gameState.enemies) {
     for (const enemyRocket of enemy.rockets) {
@@ -52,6 +54,7 @@ function playerCollisionWithEnemyRocket() {
   }
 }
 
+// player rocket <-> enemy airplane
 function playerRocketCollisionWithEnemy() {
   for (const playerRocket of rockets) {
     for (const enemy of gameState.enemies) {
@@ -62,6 +65,7 @@ function playerRocketCollisionWithEnemy() {
   }
 }
 
+// player bullet <-> enemy airplane
 function playerBulletCollisionWithEnemy() {
   for (const playerBullet of bulletArray) {
     for (const enemy of gameState.enemies) {
@@ -72,6 +76,7 @@ function playerBulletCollisionWithEnemy() {
   }
 }
 
+// player bullet <-> enemy rocket
 function playerBulletCollisionWithEnemyRocket() {
   for (const playerBullet of bulletArray) {
     for (const enemy of gameState.enemies) {
