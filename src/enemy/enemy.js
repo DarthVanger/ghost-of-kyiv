@@ -1,11 +1,7 @@
 import { deadEnemyXPosition } from '../rendering/Helpers.js'
 import { soundEnemyDieExplosion } from '../music.js'
-import { explosion } from '../rendering/Explosion.js'
 import { gameState } from '../gameState.js'
 import { explosion } from '../rendering/Explosion.js'
-import { deadEnemyXPosition } from '../rendering/Helpers.js'
-import { soundEnemyDieExplosion } from '../music.js'
-import { gameState } from '/src/gameState.js'
 
 export function deleteEnemies() {
   gameState.enemies.forEach(deleteEnemyImg)
