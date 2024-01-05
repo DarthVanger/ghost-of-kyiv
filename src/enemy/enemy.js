@@ -1,11 +1,11 @@
 import { deadEnemyXPosition } from '../rendering/Helpers.js'
 import { soundEnemyDieExplosion } from '../music.js'
 import { explosion } from '../rendering/Explosion.js'
-import performCollisionChecksForEnemy, {
-  checkEnemyShipCollision,
-  enemyCollisionWithBullet,
-} from '../rendering/EnemyCollisionsChecks.js'
 import { gameState } from '../gameState.js'
+import { explosion } from '../rendering/Explosion.js'
+import { deadEnemyXPosition } from '../rendering/Helpers.js'
+import { soundEnemyDieExplosion } from '../music.js'
+import { gameState } from '/src/gameState.js'
 
 export function deleteEnemies() {
   gameState.enemies.forEach(deleteEnemyImg)
@@ -124,9 +124,23 @@ export function updateEnemy(enemy) {
   renderEnemy(enemy)
 
   moveEnemy(enemy)
-  checkEnemyShipCollision(enemy)
-  performCollisionChecksForEnemy(enemy)
-  enemyCollisionWithBullet(enemy)
+
+  removeEnemyIfHpBelowZero(enemy)
+}
+
+function removeEnemyIfHpBelowZero(enemy) {
+  if (enemy.enemyHealth.element.value <= 0 && enemy.isAlive) {
+    document.querySelector('#gifContainerExplosion').append(explosion)
+    explosion.style.left = enemy.x + enemy.width / 2 - explosion.width / 2
+    explosion.style.top = enemy.y + enemy.height / 2 - explosion.height / 2
+    enemy.isAlive = false
+    deleteEnemyImg(enemy)
+    enemy.x = deadEnemyXPosition
+    soundEnemyDieExplosion.play()
+    setTimeout(() => {
+      explosion.remove()
+    }, 700)
+  }
 }
 
 function moveEnemy(enemy) {
