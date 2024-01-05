@@ -8,6 +8,7 @@ class Rocket {
   x = 80
   y = 70
   width = 120
+  height = 20
   dmg = 50
   velocity = 8
   accelerationX = 0.5
