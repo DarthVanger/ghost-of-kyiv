@@ -1,3 +1,5 @@
+import { gameState } from '../gameState.js'
+import { scoreBonuses } from '../scores/scores.js'
 import { removeBullet } from '../weapons/gatling.js'
 import { explosionEffect } from '../rendering/Explosion.js'
 import { deadEnemyXPosition } from '../rendering/Helpers.js'
@@ -60,4 +62,20 @@ export function handlePlayerBulletCollisionWithEnemyRocket(
   enemyRocket.x = deadEnemyXPosition
   enemyRocket.vx = 0
   enemyRocket.element.remove()
+
+  console.log('scoreBonuses.killRocket: ', scoreBonuses.killRocket)
+  gameState.score += scoreBonuses.killRocket
+}
+
+export function handlePlayerRocketCollisionWithEnemyRocket(
+  playerRocket,
+  enemyRocket
+) {
+  explosionEffect(enemyRocket)
+  enemyRocket.x = deadEnemyXPosition
+  enemyRocket.vx = 0
+  enemyRocket.element.remove()
+  removePlayerRocket(playerRocket)
+
+  gameState.score += scoreBonuses.killRocket
 }
