@@ -63,7 +63,6 @@ export function handlePlayerBulletCollisionWithEnemyRocket(
   enemyRocket.vx = 0
   enemyRocket.element.remove()
 
-  console.log('scoreBonuses.killRocket: ', scoreBonuses.killRocket)
   gameState.score += scoreBonuses.killRocket
 }
 

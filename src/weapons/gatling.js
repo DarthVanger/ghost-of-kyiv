@@ -62,8 +62,12 @@ export function addGatling(enemy) {
 }
 
 export function moveBullet(bullet) {
-  bullet.x += bullet.velocity
-  bullet.y += bullet.margin
-  bullet.element.style.left = bullet.x + 'px'
-  bullet.element.style.top = bullet.y + 'px'
+  if(bullet.x - bullet.width < window.innerWidth) {
+    bullet.x += bullet.velocity
+    bullet.y += bullet.margin
+    bullet.element.style.left = bullet.x + 'px'
+    bullet.element.style.top = bullet.y + 'px'
+  } else{
+    removeBullet(bullet)
+  }
 }
