@@ -1,6 +1,5 @@
 import { scoreBonuses } from '../scores/scores.js'
 import { Enemy } from './enemy.js'
-import { addGatling } from '../weapons/gatling.js'
 import {
   createRocket,
   updateEnemyRocketAtack,
