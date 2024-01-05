@@ -1,4 +1,5 @@
 import { renderCurrentScore } from './scores/currentGameScore.js'
+import { handleCollisions } from './collisions/collisions.js'
 import { updateEnemy } from './enemy/enemy.js'
 import {
   renderRocket,
@@ -7,7 +8,7 @@ import {
 } from './weapons/rocket.js'
 import { bulletArray, moveBullet } from './weapons/gatling.js'
 import { moveBackground } from './background.js'
-import { levelOverIfLastEnemyOut } from './gameOver.js'
+import { levelOverIfLastEnemyOut, gameOver } from './gameOver.js'
 import { renderAmmo } from './ammo.js'
 import { mobileJoystick } from './mobileJoystick.js'
 import { setAirfighterVelocityFromMobileJoystick } from './mobile/mobileVelocityController.js'
@@ -37,4 +38,13 @@ export function Step() {
     requestAnimationFrame(Step)
   }
   deleteUselessEnemyRockets()
+
+  handleCollisions()
+  playerDiesIfHpBelowZiro()
+}
+
+function playerDiesIfHpBelowZiro() {
+  if (gameState.airfighter.health.element.value <= 0) {
+    gameOver()
+  }
 }
