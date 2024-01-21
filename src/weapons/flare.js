@@ -6,7 +6,6 @@ const flameCooldown = 15
 class Flare {
   x = 80
   y = 70
-  radius = 120
   element = document.createElement('div')
   numFlames = 6
   flames = []
@@ -22,15 +21,21 @@ class Flare {
     }
 
     function launchFlame() {
+      const flareRadius = 100 * Math.random() + 20
       const flame = {
         x: gameState.airfighter.x + airfighter.width / 4,
         y: gameState.airfighter.y + airfighter.height / 2,
         vx: this.speedX * (Math.random() + 0.25),
         vy: this.speedY * (Math.random() - 0.25),
         element: document.createElement('img'),
+        width: flareRadius,
+        height: flareRadius,
       }
+
       flame.element.className = 'flare-flame'
-      flame.element.src = 'img/flare-flame.gif'
+      flame.element.src = 'img/flare.png'
+      flame.element.style.width = flame.width + 'px'
+      flame.element.style.height = flame.height + 'px'
       document.body.append(flame.element)
 
       this.flames.push(flame)
