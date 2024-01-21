@@ -1,17 +1,17 @@
 import { gameState } from '../gameState.js'
 
 export let flareAmmo = 10
-const flameCooldown = 200
+const flameCooldown = 15
 
 class Flare {
   x = 80
   y = 70
   radius = 120
-  velocity = 8
   element = document.createElement('div')
-  numFlames = 10
+  numFlames = 6
   flames = []
-  speedX = -2
+  g = 1
+  speedX = 20
   speedY = 10
 
   constructor() {
@@ -25,8 +25,8 @@ class Flare {
       const flame = {
         x: gameState.airfighter.x + airfighter.width / 4,
         y: gameState.airfighter.y + airfighter.height / 2,
-        vx: this.speedX,
-        vy: 0, //this.speedY - Math.random() * this.speedY - 3,
+        vx: this.speedX * (Math.random() + 0.25),
+        vy: this.speedY * (Math.random() - 0.25),
         element: document.createElement('img'),
       }
       flame.element.className = 'flare-flame'
@@ -39,8 +39,8 @@ class Flare {
 
   render() {
     this.flames.forEach((flame) => {
-      flame.vx *= 0.995
-      flame.vy += 0.25
+      flame.vx -= 0.5
+      flame.vy += 0.1
       flame.x += flame.vx
       flame.y += flame.vy
       flame.element.style.left = flame.x
