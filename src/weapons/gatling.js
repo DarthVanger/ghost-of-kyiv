@@ -17,11 +17,13 @@ function createBullet() {
   const airfighter = gameState.airfighter
 
   const bullet = {}
+  bullet.width = 50
+  bullet.height = 20
   bullet.element = document.createElement('img')
   // Restart gif animation - https://stackoverflow.com/a/2831728
   bullet.element.src = 'img/Bullet-With-Fireball.gif?rnd=' + Math.random()
   bullet.element.className = 'bullet'
-  bullet.element.style.width = '50px'
+  bullet.element.style.width = bullet.width + 'px'
   bullet.velocity = 12
   bullet.x = airfighter.x + airfighter.width + Math.random() * 4 - 25
   bullet.y = airfighter.y + airfighter.height / 2 - 20
@@ -60,8 +62,12 @@ export function addGatling(enemy) {
 }
 
 export function moveBullet(bullet) {
-  bullet.x += bullet.velocity
-  bullet.y += bullet.margin
-  bullet.element.style.left = bullet.x + 'px'
-  bullet.element.style.top = bullet.y + 'px'
+  if(bullet.x - bullet.width < window.innerWidth) {
+    bullet.x += bullet.velocity
+    bullet.y += bullet.margin
+    bullet.element.style.left = bullet.x + 'px'
+    bullet.element.style.top = bullet.y + 'px'
+  } else{
+    removeBullet(bullet)
+  }
 }
