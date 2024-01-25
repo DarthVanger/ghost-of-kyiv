@@ -62,7 +62,6 @@ export function createPlayerFlare(airfighter) {
     flare.y = airfighter.y + airfighter.height / 2
 
     document.body.append(flare.element)
-    //rockets.push(rocket)
     flareAmmo -= 1
   }
 }
