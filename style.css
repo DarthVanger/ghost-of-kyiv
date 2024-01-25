@@ -417,3 +417,7 @@ h1 sub {
     filter: drop-shadow(0 -25px 50px crimson);
   }
 }
+
+.flare-flame {
+  position: absolute;
+}
