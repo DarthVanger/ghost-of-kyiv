@@ -1,11 +1,11 @@
+import { scoreBonuses } from '../scores/scores.js'
 import { Enemy } from './enemy.js'
-import { addGatling } from '/src/weapons/gatling.js'
 import {
   createRocket,
   updateEnemyRocketAtack,
   updateEnemyGroundAtack,
-} from '/src/weapons/enemyRocketAtack.js'
-import { createTargetedRocket } from '/src/weapons/groundEnemyAttack.js'
+} from '../weapons/enemyRocketAtack.js'
+import { createTargetedRocket } from '../weapons/groundEnemyAttack.js'
 import {
   manoeuvreUpAtHalfScreen,
   manoeuvreDownAtHalfScreen,
@@ -24,6 +24,7 @@ export function createSu3(i) {
     manoeuvre: manoeuvreUpAtHalfScreen,
     attack: updateEnemyRocketAtack,
     createRocket,
+    scoreForKill: scoreBonuses.killEnemyLevelOne,
   })
 }
 
@@ -37,6 +38,7 @@ export function createSu27(i) {
     manoeuvre: manoeuvreDownAtHalfScreen,
     attack: updateEnemyRocketAtack,
     createRocket,
+    scoreForKill: scoreBonuses.killEnemyLevelTwo,
   })
 }
 
@@ -50,6 +52,7 @@ export function createZ10(i) {
     manoeuvre: manoeuvreZigzagAtQuarterScreen,
     attack: updateEnemyRocketAtack,
     createRocket,
+    scoreForKill: scoreBonuses.killEnemyLevelThree,
   })
 }
 
@@ -63,6 +66,7 @@ export function createSu35(i) {
     manoeuvre: manoeuvreStraightFast,
     attack: updateEnemyRocketAtack,
     createRocket,
+    scoreForKill: scoreBonuses.killEnemyLevelOne,
   })
 }
 
@@ -76,5 +80,6 @@ export function createZrkTor(i) {
     manoeuvre: manoeuvreOnGround,
     attack: updateEnemyGroundAtack,
     createRocket: createTargetedRocket,
+    scoreForKill: scoreBonuses.killEnemyLevelThree,
   })
 }

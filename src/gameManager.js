@@ -1,3 +1,4 @@
+import './scores/scores.js'
 import { deleteEnemies } from './enemy/enemy.js'
 import { createEnemies } from './enemy/enemyManager.js'
 import {

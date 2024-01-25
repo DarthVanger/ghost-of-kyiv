@@ -1,6 +1,6 @@
 import * as factory from './enemyFactory.js'
-import { gameState } from '/src/gameState.js'
-import { addGatling } from '/src/weapons/gatling.js'
+import { gameState } from '../gameState.js'
+import { addGatling } from '../weapons/gatling.js'
 
 export function createEnemies(maxEnemies) {
   for (let i = 0; i < maxEnemies; i++) {
@@ -8,7 +8,7 @@ export function createEnemies(maxEnemies) {
     if (i < 3) {
       enemy = factory.createSu3(i)
     } else if (i >= 3 && i <= 6) {
-      enemy = factory.createSu27(i)
+      // enemy = factory.createSu27(i)
       enemy = factory.createZrkTor(i)
     } else if (i >= 7 && i <= 9) {
       enemy = factory.createSu35(i)

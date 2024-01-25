@@ -3,4 +3,5 @@ export const gameState = {
   airfighter: null,
   enemies: [],
   playerFlares: [],
+  score: 0,
 }

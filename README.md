@@ -22,6 +22,10 @@ npx madge --image graph.svg app.js
 
 ## Diagrams
 
+### Collisions
+![Collisions](readme-img/collisions.png)
+[Edit this file with excalidraw.com](https://excalidraw.com/#json=VIGASU0jDWK7uSjROIqM_,up8VtLWwuvIVGKGqz6nvZw)
+
 ### Player movement keyboard events
 
 ![Player movement keyboard events](readme-img/player-movement-keyboard.jpg)

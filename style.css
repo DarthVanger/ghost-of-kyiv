@@ -38,17 +38,8 @@ button {
 p {
   position: absolute;
 }
-#enemy0,
-#enemy1,
-#enemy2,
-#enemy3,
-#enemy4,
-#enemy5,
-#enemy6,
-#enemy7,
-#enemy8,
-#enemy9,
-#enemy10 {
+
+.enemy{
   position: absolute;
 }
 
@@ -115,6 +106,18 @@ p {
   bottom: 0;
   min-width: 100%;
   min-height: 100%;
+}
+
+#score {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  top: 1em;
+  color: #333;
+  font-size: bold;
+  height: 20px;
+  font-size: 20px;
 }
 
 .healthBar50,
