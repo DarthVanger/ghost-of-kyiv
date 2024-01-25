@@ -3,12 +3,14 @@ import {
   removePlayerRocket,
   createPlayerRocket,
 } from '../weapons/rocket.js'
+import { createPlayerFlare } from '../weapons/flare.js'
 import { gameOver } from '../gameOver.js'
 import { controls, keyCode } from '../keyboard.js'
 import { soundRocketShot } from '../music.js'
 import { gameState } from '../gameState.js'
 import { fireGatlingPlayer } from '../weapons/gatling.js'
 let rocketCooldown = false
+let flareCooldown = false
 const acceleration = 1
 
 export class Player {
@@ -114,6 +116,10 @@ export class Player {
     if (controls.includes(keyCode.space)) {
       fireGatlingPlayer()
     }
+    if (controls.includes(keyCode.f)) {
+      releaseFlares()
+    }
+
     this.element.style.left = this.x
     this.element.style.top = this.y
     this.health.element.style.left = this.x
@@ -162,6 +168,16 @@ function fireRocket() {
     setTimeout(function () {
       setRocketCooldown(false)
     }, 220)
+  }
+}
+
+function releaseFlares() {
+  if (!flareCooldown) {
+    flareCooldown = true
+    createPlayerFlare(gameState.airfighter)
+    setTimeout(function () {
+      flareCooldown = false
+    }, 500)
   }
 }
 
