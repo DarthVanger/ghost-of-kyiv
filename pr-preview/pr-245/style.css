@@ -1,0 +1,441 @@
+@import url(https://fonts.googleapis.com/css?family=Droid+Sans:400,700);
+#start-screen {
+  padding: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  background: url('img/ghost-of-kyiv-art.jpg');
+  background-size: cover;
+  background-position: top center;
+  z-index: 6;
+}
+
+#keyboard-controls-help {
+  text-shadow: black 1px 1px 6px;
+  font-size: 16px;
+  font-family: sans-serif;
+  letter-spacing: 4px;
+  line-height: 1.5;
+  color: #e4ce06;
+  text-shadow: -2px -2px 4px #000, 2px -2px 4px #000, -2px 2px 4px #000, 2px 2px 4px #000;
+}
+
+@media (min-width: 1200px) {
+  #keyboard-controls-help {
+    font-size: 28px;
+  }
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+  min-width: 100%;
+  min-height: 100%;
+  cursor: crosshair;
+  overflow: hidden;
+}
+
+button {
+  display: inline-block;
+  font-size: 1.5em;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 13px 48px 13px 48px;
+  border-radius: 4px;
+  color: #ffffff;
+  background-color: #1bafdb;
+  border: 3px solid #ffffff;
+}
+
+p {
+  position: absolute;
+}
+
+.enemy{
+  position: absolute;
+}
+
+.enemyRocket {
+  position: absolute;
+  width: 120px;
+  height: 12px;
+  transform: rotate(180deg);
+}
+
+#airfighter {
+  position: absolute;
+  width: 300px;
+}
+
+#playerHealth {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+#playerHealthText {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #ffffff;
+  text-align-last: center;
+}
+
+#ammoElement {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #ffffff;
+  text-align-last: left;
+  display: flex;
+}
+
+#rocket-ammo,
+#gatling-ammo {
+  height: 50px;
+  width: 50px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.ammoImg {
+  position: relative;
+  height: 50;
+  width: 50;
+  margin: 5px;
+  box-shadow: 0px 0px 4px #64b5f6, 0px 0px 2px #64b5f6, 0px 0px 6px #64b5f6;
+}
+
+.rocket {
+  position: absolute;
+  width: 120px;
+}
+
+#game-background {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+#score {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  top: 1em;
+  color: #333;
+  font-size: bold;
+  height: 20px;
+  font-size: 20px;
+}
+
+.healthBar50,
+.healthBar100,
+.healthBar200 {
+  position: absolute;
+}
+
+.healthBar50text,
+.healthBar100text,
+.healthBar200text {
+  position: absolute;
+  color: #ffffff;
+  text-align-last: center;
+}
+
+#gameover-screen {
+  padding: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  background: black;
+  z-index: 2;
+}
+#levelComplete {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ffffff;
+  text-align-last: center;
+  z-index: 2;
+}
+
+/* touch menu*/
+._touch .fire {
+  position: absolute;
+  bottom: 10%;
+  right: 5%;
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #fff;
+  z-index: 1;
+  opacity: 20%;
+}
+
+*::selection {
+  background: transparent;
+}
+
+#introduction {
+  z-index: 4;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  font-family: 'Droid Sans', arial, verdana, sans-serif;
+  font-weight: 700;
+  color: #ff6;
+  background-image: url('img/star_wars_background.jpg');
+  overflow: hidden;
+}
+h1 {
+  padding: 10vh;
+  width: 5.6em;
+  margin: auto;
+  transform: translate(-50%, 0%);
+  font-size: 10em;
+  text-align: center;
+  line-height: 0.8em;
+  letter-spacing: -0.05em;
+  color: #000;
+  text-shadow: -2px -2px 0 #ff6, 2px -2px 0 #ff6, -2px 2px 0 #ff6,
+    2px 2px 0 #ff6;
+  opacity: 0;
+  z-index: 5;
+  animation: logo 5s ease-out 2.5s;
+}
+
+h1 sub {
+  display: block;
+  font-size: 0.3em;
+  letter-spacing: 0;
+  line-height: 0.8em;
+}
+
+@keyframes logo {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+}
+
+#titles {
+  position: absolute;
+  width: 18em;
+  height: 40em;
+  bottom: 0;
+  left: 50%;
+  margin-left: -9em;
+  font-size: 350%;
+  text-align: justify;
+  overflow: hidden;
+  transform-origin: 50% 100%;
+  transform: perspective(300px) rotateX(25deg);
+}
+
+#titles:after {
+  position: absolute;
+  content: ' ';
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 60%;
+  background-image: linear-gradient(top, rgba(0, 0, 0, 1) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+#titles div {
+  text-align: justify;
+  margin: 0.8em 0;
+}
+#titles div.centr {
+  text-align: center;
+}
+#titlecontent {
+  position: absolute;
+  top: 100%;
+  animation: scroll 60s linear 4s infinite;
+}
+
+@keyframes scroll {
+  0% {
+    top: 100%;
+  }
+  100% {
+    top: -70%;
+  }
+}
+
+#pause-screen {
+  padding: 320px;
+  display: none;
+  position: absolute;
+  color: #ff6;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.explosion {
+  position: absolute;
+  height: 130px;
+  width: 120px;
+}
+
+.bullet,
+.boss {
+  position: absolute;
+}
+
+#bg-back,
+#bg-middle,
+#bg-front {
+  position: absolute;
+  height: 100vh;
+  will-change: transform;
+}
+
+#bg-front {
+  background: url('img/parallax-bg-front.png');
+  background-size: contain;
+  width: 25000px;
+}
+
+#bg-middle {
+  background: url('img/parallax-bg-middle.png');
+  background-size: auto 100%;
+  width: 25000px;
+}
+
+#bg-back {
+  height: 100vh;
+}
+
+#bg-front.bg-bucha {
+  background: url('img/parallax-foreground-bucha.png');
+  background-size: contain;
+  height: 100vh;
+  width: 25000px;
+}
+
+#bg-middle.bg-bucha {
+  background: url('img/parallax-middleground-bucha.png');
+  background-size: auto 100%;
+  bottom: 0px;
+}
+
+#bossPopup {
+  display: block;
+  position: absolute;
+  color: red;
+  z-index: 4;
+  left: 50%;
+  bottom: 5%;
+  font-size: 1.5em;
+  transform: translate(-50%, 100%);
+  animation: changeSize 1.5s linear 1s infinite;
+}
+
+@keyframes changeSize {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(3);
+  }
+}
+
+.fadeIn {
+  animation: fadeInAnimation 0.5s forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#speedometer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: white;
+  background: black;
+  padding: 16px;
+  line-height: 2;
+}
+
+#controls img {
+  height: 5vh;
+  width: 5vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 2vh 2vh 0 0;
+  z-index: 5;
+  opacity: 0.3;
+}
+
+.continue {
+  position: absolute;
+  top: 10vh;
+  left: 20%;
+}
+.restart {
+  position: absolute;
+  top: 10vh;
+  right: 20%;
+}
+
+#play {
+  display: none;
+}
+
+.ground-enemy {
+  animation: fadeIn 3s infinite;
+}
+
+@keyframes fadeIn {
+  0% {
+    filter: drop-shadow(0 0 0);
+  }
+  50% {
+    filter: drop-shadow(0 -25px 50px crimson);
+  }
+}
+
+.flare-flame {
+  position: absolute;
+}
