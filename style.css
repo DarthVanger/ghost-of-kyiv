@@ -7,8 +7,25 @@
   left: 0;
   bottom: 0;
   text-align: center;
-  background: black;
+  background: url('img/ghost-of-kyiv-art.jpg');
+  background-size: cover;
+  background-position: top center;
   z-index: 6;
+}
+
+#keyboard-controls-help {
+  font-size: 16px;
+  font-family: sans-serif;
+  letter-spacing: 4px;
+  line-height: 1.5;
+  color: #e4ce06;
+  text-shadow: -2px -2px 4px #000, 2px -2px 4px #000, -2px 2px 4px #000, 2px 2px 4px #000;
+}
+
+@media (min-width: 1200px) {
+  #keyboard-controls-help {
+    font-size: 28px;
+  }
 }
 
 body {
