@@ -205,6 +205,12 @@ p {
   background-image: url('img/star_wars_background.jpg');
   overflow: hidden;
 }
+
+#introduction video {
+  width: 100%;
+  max-height: 100%;
+}
+
 h1 {
   padding: 10vh;
   width: 5.6em;
