@@ -1,15 +1,4 @@
-import { soundIntro } from './music.js'
+export const startScreen = document.querySelector('#start-screen')
 
-function handleStartGameBtnClick() {
-  soundIntro.play()
-  hideStartScreen()
-}
+export const startGameButton = document.querySelector('#startGameButton')
 
-function hideStartScreen() {
-  let startScreen = document.querySelector('#start-screen')
-  startScreen.remove()
-}
-
-const startGameButton = document.querySelector('#startGameButton')
-
-startGameButton.addEventListener('click', handleStartGameBtnClick)
