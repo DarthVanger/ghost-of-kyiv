@@ -1,4 +1,4 @@
-import { gameState } from "../gameState.js"
+import { gameState } from '../gameState.js'
 
 export function createRocket(enemy) {
   const enemyRocketImg = document.createElement('img')
@@ -33,27 +33,20 @@ export function moveEnemyTargetedRocket(enemy) {
     if (gameState.playerFlares.length) {
       moveToPlayerOrFlare(gameState.airfighter, gameState.playerFlares, rocket)
     }
-    else {
-      rocket.x += rocket.vx
-      rocket.y += rocket.vy
-    }
+    rocket.x += rocket.vx
+    rocket.y += rocket.vy
   })
 }
 
 function moveToPlayerOrFlare(player, flares, rocket) {
-  const targets = [
-    player,
-    ...flares
-  ]
+  const targets = [player, ...flares]
 
-  console.log('targets: ' , targets)
-
-  let smallestDist = Math.Infinity;
-  let closestTarget;
+  let smallestDist = Infinity
+  let closestTarget
 
   targets.forEach((el) => {
     const distToTarget = Math.hypot(el.x - rocket.x, el.y - rocket.y)
-    if(distToTarget <= smallestDist) {
+    if (distToTarget <= smallestDist) {
       smallestDist = distToTarget
       closestTarget = el
     }
