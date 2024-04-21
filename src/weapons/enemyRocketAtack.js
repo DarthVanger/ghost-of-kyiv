@@ -30,9 +30,10 @@ export function moveEnemyRocket(enemy) {
 
 export function moveEnemyTargetedRocket(enemy) {
   enemy.rockets.forEach((rocket) => {
-    if(gameState.playerFlares.length) {
-      moveToPlayerOrFlare(gameState.player, gameState.playerFlares, rocket)
-    } else {
+    if (gameState.playerFlares.length) {
+      moveToPlayerOrFlare(gameState.airfighter, gameState.playerFlares, rocket)
+    }
+    else {
       rocket.x += rocket.vx
       rocket.y += rocket.vy
     }
@@ -40,23 +41,16 @@ export function moveEnemyTargetedRocket(enemy) {
 }
 
 function moveToPlayerOrFlare(player, flares, rocket) {
-  console.log(flares)
-  let flames = []
-  for (const flare of flares) {
-    console.log(flare)
-    flames = [
-      ...flames,
-      ...flare.flames
-    ]
-  }
-
-  console.log(flames)
   const targets = [
     player,
-    ...flames
+    ...flares
   ]
+
+  console.log('targets: ' , targets)
+
   let smallestDist = Math.Infinity;
   let closestTarget;
+
   targets.forEach((el) => {
     const distToTarget = Math.hypot(el.x - rocket.x, el.y - rocket.y)
     if(distToTarget <= smallestDist) {

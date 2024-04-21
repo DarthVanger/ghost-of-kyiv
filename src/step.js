@@ -39,9 +39,11 @@ export function Step() {
     requestAnimationFrame(Step)
   }
   deleteUselessEnemyRockets()
+
   gameState.playerFlares.forEach((flare) => {
     flare.render()
   })
+
   handleCollisions()
   playerDiesIfHpBelowZiro()
 }
