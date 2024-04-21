@@ -1,3 +1,5 @@
+import { gameState } from "../gameState.js"
+
 export function createRocket(enemy) {
   const enemyRocketImg = document.createElement('img')
   enemyRocketImg.className = 'enemyRocket'
@@ -24,6 +26,56 @@ export function moveEnemyRocket(enemy) {
     rocket.x += rocket.vx
     rocket.y += rocket.vy
   })
+}
+
+export function moveEnemyTargetedRocket(enemy) {
+  enemy.rockets.forEach((rocket) => {
+    if(gameState.playerFlares.length) {
+      moveToPlayerOrFlare(gameState.player, gameState.playerFlares, rocket)
+    } else {
+      rocket.x += rocket.vx
+      rocket.y += rocket.vy
+    }
+  })
+}
+
+function moveToPlayerOrFlare(player, flares, rocket) {
+  console.log(flares)
+  let flames = []
+  for (const flare of flares) {
+    console.log(flare)
+    flames = [
+      ...flames,
+      ...flare.flames
+    ]
+  }
+
+  console.log(flames)
+  const targets = [
+    player,
+    ...flames
+  ]
+  let smallestDist = Math.Infinity;
+  let closestTarget;
+  targets.forEach((el) => {
+    const distToTarget = Math.hypot(el.x - rocket.x, el.y - rocket.y)
+    if(distToTarget <= smallestDist) {
+      smallestDist = distToTarget
+      closestTarget = el
+    }
+  })
+  const targetCenter = {
+    x: closestTarget.x + closestTarget.width / 2,
+    y: closestTarget.y + closestTarget.height / 2,
+  }
+  const distX = targetCenter.x - rocket.x
+  const distY = targetCenter.y - rocket.y
+  const dist = Math.sqrt(distX * distX + distY * distY)
+  rocket.vx = (8 * distX) / dist
+  rocket.vy = (8 * distY) / dist
+
+  rocket.rotationX = Math.atan2(distY, distX)
+  rocket.element.style.transform = `rotate(${rocket.rotationX}rad)`
 }
 
 export function launchRocketIfOnScreen(enemy) {
@@ -53,6 +105,6 @@ export function updateEnemyRocketAtack(enemy) {
 
 export function updateEnemyGroundAtack(enemy) {
   renderEnemyRocket(enemy)
-  moveEnemyRocket(enemy)
+  moveEnemyTargetedRocket(enemy)
   launchRocketIfOnScreen(enemy)
 }
