@@ -9,6 +9,7 @@ import {
   handlePlayerBulletColiisionWithEnemy,
   handlePlayerBulletCollisionWithEnemyRocket,
   handlePlayerRocketCollisionWithEnemyRocket,
+  handlePlayerFlareCollisionWithEnemyRocket,
 } from './collisionHandlers.js'
 
 export function handleCollisions() {
@@ -18,6 +19,7 @@ export function handleCollisions() {
   playerBulletCollisionWithEnemy()
   playerBulletCollisionWithEnemyRocket()
   playerRocketCollisionWithEnemyRocket()
+  playerFlareCollisionWithEnemyRocket()
 }
 
 function checkCollision(obj1, obj2) {
@@ -98,6 +100,19 @@ function playerRocketCollisionWithEnemyRocket() {
       for (const playerRocket of rockets) {
         if (checkCollision(playerRocket, enemyRocket)) {
           handlePlayerRocketCollisionWithEnemyRocket(playerRocket, enemyRocket)
+        }
+      }
+    }
+  }
+}
+
+// player flare <-> enemy rocket
+function playerFlareCollisionWithEnemyRocket() {
+  for (const enemy of gameState.enemies) {
+    for (const enemyRocket of enemy.rockets) {
+      for (const playerFlare of gameState.playerFlares) {
+        if (checkCollision(playerFlare, enemyRocket)) {
+          handlePlayerFlareCollisionWithEnemyRocket(playerFlare, enemyRocket)
         }
       }
     }
