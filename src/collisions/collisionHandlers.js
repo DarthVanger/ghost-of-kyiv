@@ -5,6 +5,7 @@ import { explosionEffect } from '../rendering/Explosion.js'
 import { deadEnemyXPosition } from '../rendering/Helpers.js'
 import { removePlayerRocket } from '../weapons/rocket.js'
 import { soundRocketHit, soundEnemyDieExplosion } from '../music.js'
+import { removePlayerFlare } from '../weapons/flare.js'
 
 // player airplane <-> enemy airplane
 export function handlePlayerCollisionWithEnemy(airfighter, enemy) {
@@ -75,6 +76,19 @@ export function handlePlayerRocketCollisionWithEnemyRocket(
   enemyRocket.vx = 0
   enemyRocket.element.remove()
   removePlayerRocket(playerRocket)
+
+  gameState.score += scoreBonuses.killRocket
+}
+
+export function handlePlayerFlareCollisionWithEnemyRocket(
+  playerFlare,
+  enemyRocket
+) {
+  explosionEffect(enemyRocket)
+  enemyRocket.x = deadEnemyXPosition
+  enemyRocket.vx = 0
+  enemyRocket.element.remove()
+  removePlayerFlare(playerFlare)
 
   gameState.score += scoreBonuses.killRocket
 }
