@@ -39,6 +39,7 @@ function createPackOfFlares(numFlares) {
       width: flareRadius,
       height: flareRadius,
       render() {
+        this.vx -=  0.25
         this.x += this.vx
         this.y += this.vy
         this.element.style.left = this.x
