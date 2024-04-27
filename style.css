@@ -7,7 +7,7 @@
   left: 0;
   bottom: 0;
   text-align: center;
-  background: url('img/ghost-of-kyiv-art.jpg');
+  background-image: url('img/start-screen/start-screen-bg-1200w.webp');
   background-size: cover;
   background-position: top center;
   z-index: 6;
@@ -25,6 +25,10 @@
 @media (min-width: 1200px) {
   #keyboard-controls-help {
     font-size: 28px;
+  }
+
+  #start-screen {
+    background-image: url('img/start-screen/start-screen-bg-1800w.webp');
   }
 }
 
