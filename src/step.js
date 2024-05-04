@@ -35,7 +35,7 @@ export function Step() {
 
   const lastEnemy = gameState.enemies[gameState.enemies.length - 1]
   levelOverIfLastEnemyOut(lastEnemy, gameState)
-  if (!gameState.isGamePaused) {
+  if (!gameState.isGamePaused && !gameState.isGameOver) {
     requestAnimationFrame(Step)
   }
   deleteUselessEnemyRockets()
@@ -50,6 +50,8 @@ export function Step() {
 
 function playerDiesIfHpBelowZiro() {
   if (gameState.airfighter.health.element.value <= 0) {
-    gameOver()
+    if (!gameState.isGameOver) {
+      gameOver()
+    }
   }
 }
