@@ -30,9 +30,7 @@ export function moveEnemyRocket(enemy) {
 
 export function moveEnemyTargetedRocket(enemy) {
   enemy.rockets.forEach((rocket) => {
-    if (gameState.playerFlares.length) {
-      moveToPlayerOrFlare(gameState.airfighter, gameState.playerFlares, rocket)
-    }
+    moveToPlayerOrFlare(gameState.airfighter, gameState.playerFlares, rocket)
     rocket.x += rocket.vx
     rocket.y += rocket.vy
   })
