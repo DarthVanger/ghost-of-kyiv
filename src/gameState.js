@@ -3,5 +3,6 @@ export const gameState = {
   airfighter: null,
   enemies: [],
   playerFlares: [],
+  playerRockets: [],
   score: 0,
 }

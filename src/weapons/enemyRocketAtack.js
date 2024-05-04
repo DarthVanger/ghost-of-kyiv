@@ -1,4 +1,5 @@
 import { gameState } from '../gameState.js'
+import { isOutOfScreen } from '../utils/geometry.js'
 
 export function createRocket(enemy) {
   const enemyRocketImg = document.createElement('img')
@@ -64,7 +65,7 @@ function moveToPlayerOrFlare(player, flares, rocket) {
 }
 
 export function launchRocketIfOnScreen(enemy) {
-  if (enemy.x < window.innerWidth) {
+  if (enemy.x - enemy.width < window.innerWidth) {
     if (!enemy.isRocketCooldown) {
       enemy.isRocketCooldown = true
       setTimeout(() => {
@@ -79,7 +80,17 @@ export function renderEnemyRocket(enemy) {
   enemy.rockets.forEach((rocket) => {
     rocket.element.style.left = rocket.x
     rocket.element.style.top = rocket.y
+
+    if (isOutOfScreen(rocket)) {
+      removeEnemyRocket(enemy, rocket)
+    }
   })
+}
+
+function removeEnemyRocket(enemy, rocket) {
+  rocket.element.remove()
+  enemy.rockets.splice(enemy.rockets.indexOf(rocket), 1)
+  console.debug(`Removed enemy rocket`)
 }
 
 export function updateEnemyRocketAtack(enemy) {

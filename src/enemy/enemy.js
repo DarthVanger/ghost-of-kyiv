@@ -12,9 +12,6 @@ function deleteEnemyImg(enemy) {
   enemy.enemyHealth.element.remove()
   enemy.enemyHealthText.element.remove()
   enemy.element.remove()
-  enemy.rockets.forEach((rocket) => {
-    rocket.element.remove()
-  })
 }
 
 function createHealth(enemy, i, maxHealth) {
@@ -122,6 +119,7 @@ export function updateEnemy(enemy) {
   moveEnemy(enemy)
 
   removeEnemyIfHpBelowZero(enemy)
+  removeEnemyIfOutOfScreen(enemy)
 }
 
 function removeEnemyIfHpBelowZero(enemy) {
@@ -129,6 +127,28 @@ function removeEnemyIfHpBelowZero(enemy) {
   if (enemyHp <= 0 && enemy.isAlive) {
     enemyDies(enemy)
   }
+}
+
+function removeEnemyIfOutOfScreen(enemy) {
+  if (enemy.x + enemy.width < 0) {
+   removeEnemy(enemy)
+  }
+}
+
+function removeEnemy(enemy) {
+  deleteEnemyImg(enemy)
+  gameState.enemies.splice(gameState.enemies.indexOf(enemy), 1)
+  console.debug('Enemy removed')
+
+  removeEnemyRockets(enemy)
+}
+
+function removeEnemyRockets(enemy) {
+  console.debug(`Removing ${enemy.rockets.length} enemy rockets`)
+  for (const rocket of enemy.rockets) {
+    rocket.element.remove()
+  }
+  enemy.rockets = []
 }
 
 function moveEnemy(enemy) {

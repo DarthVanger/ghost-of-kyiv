@@ -1,5 +1,4 @@
 import { gameState } from '../gameState.js'
-import { rockets } from '../weapons/rocket.js'
 import { bulletArray } from '../weapons/gatling.js'
 
 import {
@@ -60,7 +59,7 @@ function playerCollisionWithEnemyRocket() {
 
 // player rocket <-> enemy airplane
 function playerRocketCollisionWithEnemy() {
-  for (const playerRocket of rockets) {
+  for (const playerRocket of gameState.playerRockets) {
     for (const enemy of gameState.enemies) {
       if (checkCollision(playerRocket, enemy)) {
         handlePlayerRocketCollisionWithEnemy(playerRocket, enemy)
@@ -97,7 +96,7 @@ function playerBulletCollisionWithEnemyRocket() {
 function playerRocketCollisionWithEnemyRocket() {
   for (const enemy of gameState.enemies) {
     for (const enemyRocket of enemy.rockets) {
-      for (const playerRocket of rockets) {
+      for (const playerRocket of gameState.playerRockets) {
         if (checkCollision(playerRocket, enemyRocket)) {
           handlePlayerRocketCollisionWithEnemyRocket(playerRocket, enemyRocket)
         }
