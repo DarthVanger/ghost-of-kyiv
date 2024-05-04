@@ -23,19 +23,15 @@ export function gameOver() {
 export function levelOverIfLastEnemyOut(lastEnemy, gameState) {
   const vuletivZaRamku = lastEnemy.x < 0 - lastEnemy.width
   if (vuletivZaRamku) {
-    stopInterval(gameState)
     document.body.append(levelCompleteScreen)
     fadeIn(levelCompleteScreen)
     soundMainTheme.pause()
     soundMainTheme.currentTime = 0
     soundLevelComplete.play()
+    gameState.isGamePaused = true
   }
 }
 
 function fadeIn(element) {
   element.className = 'fadeIn'
-}
-
-function stopInterval(gameState) {
-  gameState.isGamePaused = true
 }
