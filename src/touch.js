@@ -1,6 +1,9 @@
 import { createJoystick } from './mobileJoystick.js'
 export const mobileControls = {
-  fireButton: document.querySelector('.fire'),
+  fireRocket: document.querySelector('.fire-rocket'),
+  fireBullet: document.querySelector('.fire-bullet'),
+  fireFlare: document.querySelector('.fire-flare'),
+
 }
 
 let checkDevice = navigator.userAgent

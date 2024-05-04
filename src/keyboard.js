@@ -4,6 +4,7 @@ import { createPlayerRocket } from './weapons/rocket.js'
 import { soundRocketShot } from './music.js'
 import { gameState } from './gameState.js'
 
+
 export let controls = []
 
 export const keyCode = {
@@ -25,8 +26,21 @@ export const keyCode = {
 export function initKeybordMovement() {
   document.addEventListener('keydown', handleKeyDown)
   document.addEventListener('keyup', handleKeyUp)
-  mobileControls.fireButton.addEventListener('click', fireRocket)
+  mobileControls.fireRocket.addEventListener('touchstart', () => handleTouch(keyCode.r))
+  mobileControls.fireBullet.addEventListener('touchstart', () => handleTouch(keyCode.space))
+  mobileControls.fireFlare.addEventListener('touchstart', () => handleTouch(keyCode.f))
+  mobileControls.fireRocket.addEventListener('touchend', () => handleTouchEnd(keyCode.r))
+  mobileControls.fireBullet.addEventListener('touchend', () => handleTouchEnd(keyCode.space))
+  mobileControls.fireFlare.addEventListener('touchend', () => handleTouchEnd(keyCode.f))
 }
+function handleTouch(numKeyKode) {
+  controls.push(numKeyKode)
+}
+
+function handleTouchEnd(numKeyKode) {
+  controls.splice(controls.indexOf(numKeyKode), 1)
+}
+
 
 function handleKeyDown(event) {
   const isGameControllKeyPressed = Object.values(keyCode).includes(
