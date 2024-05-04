@@ -5,19 +5,19 @@ import {
   soundGameOver,
   soundboss,
   soundLevelComplete,
+  soundRocketShot,
 } from './music.js'
 import { levelCompleteScreen } from './levelCompleteScreen.js'
+import { gameState } from './gameState.js'
 
 export function gameOver() {
   document.querySelector('#gameover-screen').style.display = ''
   soundRocketHit.pause()
-  soundEnemyDieExplosion.play()
-  setTimeout(function () {
-    soundMainTheme.pause()
-    soundboss.pause()
-    soundGameOver.play()
-  }, 900)
-  gameState.isGamePaused = true
+  soundMainTheme.pause()
+  soundRocketShot.pause()
+  soundboss.pause()
+  soundGameOver.play()
+  gameState.isGameOver = true
 }
 
 export function levelOverIfLastEnemyOut(lastEnemy, gameState) {
