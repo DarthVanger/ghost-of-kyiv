@@ -1,5 +1,4 @@
 import {
-  rockets,
   removePlayerRocket,
   createPlayerRocket,
 } from '../weapons/rocket.js'
@@ -153,7 +152,7 @@ function playerDiesWhenCrashed(player) {
 }
 
 function removePlayerRocketIfMaxDistance() {
-  for (let rocket of rockets) {
+  for (let rocket of gameState.playerRockets) {
     if (rocket.x > window.innerWidth) {
       removePlayerRocket(rocket)
     }
