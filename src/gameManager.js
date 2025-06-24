@@ -16,29 +16,15 @@ import { initKeybordMovement } from './keyboard.js'
 import { levelCompleteScreen } from './levelCompleteScreen.js'
 import { gameState } from './gameState.js'
 import { Player } from './player/Player.js'
-import { startGameButton, startScreen } from './startScreen.js'
 
 let isGameStarted = false
-
-const introduction = document.querySelector('#introduction')
-const introVideo = introduction.querySelector('video')
-const introVideoDurationMillisec = 69000
-
+let introduction = document.querySelector('#introduction')
+introduction.addEventListener('click', introductionSkip)
 const levelEnemies = 15
 const levelState = {
   isLevelFinished: false,
   levelNumber: 0,
 }
-
-introduction.addEventListener('click', introductionSkip)
-startGameButton.addEventListener('click', handleStartGameBtnClick)
-
-function handleStartGameBtnClick() {
-  startScreen.remove()
-  introVideo.play()
-  setTimeout(introductionSkip, introVideoDurationMillisec)
-}
-
 
 export function startGame() {
   gameState.airfighter = new Player()
@@ -67,22 +53,6 @@ function changeLevel() {
 }
 
 function showIntroductionAndSetNewText() {
-  const introductionElement = document.querySelector('#introduction')
-
-  introductionElement.innerHTML = `
-    <h1>Ghost of Kyiv</h1>
-    <div id="titles">
-      <div id="titlecontent">
-        <div class="centr">
-          <span id="episode"></span>
-        </div>
-        <div class="centr" id="backstoryEpisode"></div>
-        <div id="textEpisode">
-        </div>
-      </div>
-    </div>
-  `
-
   introduction.style.display = 'block'
   introduction.style.zIndex = 3
   soundMainTheme.play()
@@ -94,7 +64,6 @@ function showIntroductionAndSetNewText() {
       In war-torn Bucha, a mysterious force emerges — the Ghost of Kyiv. Neither alive nor dead, it silently moves through the devastated streets, offering solace and hope. This spectral guardian becomes a symbol of courage, fighting for both the safety and spirit of the people. Can the Ghost change the course of war and inspire a resilient future? The story unfolds in the shadows, a testament to the enduring strength of the human spirit.
     `
   }
-
   if (levelState.levelNumber == 2) {
     soundMainTheme.pause()
     soundboss.play()
@@ -116,7 +85,6 @@ function introductionSkip() {
     soundMainTheme.play()
     introduction.style.zIndex = -1
     soundIntro.pause()
-    introVideo.remove()
     levelState.levelNumber += 1
     startGame()
     introduction.style.display = 'none'
