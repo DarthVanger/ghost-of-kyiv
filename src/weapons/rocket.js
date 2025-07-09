@@ -1,4 +1,6 @@
 import { rocketDefaultX, rocketDefaultY } from '../rendering/Helpers.js'
+import { gameState } from '../gameState.js'
+
 
 export let rockets = []
 
@@ -59,11 +61,12 @@ export function resetPlayerRocketAmmo() {
 }
 
 export function deleteUselessEnemyRockets() {
-  let rockets = document.querySelectorAll('.enemyRocket')
-  rockets.forEach((rocket) => {
-    let rocketPositionX = parseInt(rocket.style.left)
-    if (rocketPositionX < -200 || rocket.style.left == '') {
-      rocket.remove()
+  for (const enemy of gameState.enemies) {
+    for (const enemyRocket of enemy.rockets) {
+      if (enemyRocket.x < -200 ) {
+        const index = enemy.rockets.indexOf(enemyRocket)
+        enemy.rockets.splice(index, 1)
+      }
     }
-  })
+  }
 }
