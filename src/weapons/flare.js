@@ -1,4 +1,5 @@
 import { gameState } from '../gameState.js'
+import { isOutOfScreen } from '../utils/geometry.js'
 
 export let flareAmmo = 10
 const flameCooldown = 15
@@ -30,6 +31,7 @@ function createPackOfFlares(numFlares) {
   const packOfFlares = []
   for (let i = 0; i < numFlares; i++) {
     const flareRadius = 100 * Math.random() + 20
+    
     const flare = {
       x: gameState.airfighter.x + airfighter.width / 4,
       y: gameState.airfighter.y + airfighter.height / 2,
@@ -38,12 +40,15 @@ function createPackOfFlares(numFlares) {
       element: document.createElement('img'),
       width: flareRadius,
       height: flareRadius,
+
       render() {
         this.vx -=  0.25
         this.x += this.vx
         this.y += this.vy
         this.element.style.left = this.x
         this.element.style.top = this.y
+
+        removePlayerFlareIfOutOfScreen(this)
       },
     }
 
@@ -62,4 +67,12 @@ export function removePlayerFlare(flare) {
   const index = gameState.playerFlares.indexOf(flare)
   gameState.playerFlares.splice(index, 1)
   flare.element.remove()
+  
+  console.debug('Removed player flare')
+}
+
+function removePlayerFlareIfOutOfScreen(flare) {
+  if (isOutOfScreen(flare)) {
+    removePlayerFlare(flare)
+  }
 }

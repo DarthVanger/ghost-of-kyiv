@@ -2,8 +2,8 @@ import { renderCurrentScore } from './scores/currentGameScore.js'
 import { handleCollisions } from './collisions/collisions.js'
 import { updateEnemy } from './enemy/enemy.js'
 import {
-  renderRocket,
-  moveRocket,
+  renderPlayerRocket,
+  movePlayerRocket,
   deleteUselessEnemyRockets,
 } from './weapons/rocket.js'
 import { bulletArray, moveBullet } from './weapons/gatling.js'
@@ -22,11 +22,11 @@ export function Step() {
 
   gameState.enemies.forEach(updateEnemy)
   bulletArray.forEach(moveBullet)
-  moveRocket()
+  movePlayerRocket()
   renderAmmo()
   moveBackground(airfighter)
 
-  renderRocket()
+  renderPlayerRocket()
   airfighter.render()
 
   if (mobileJoystick.isMobileDevice) {
@@ -38,7 +38,6 @@ export function Step() {
   if (!gameState.isGamePaused && !gameState.isGameOver) {
     requestAnimationFrame(Step)
   }
-  deleteUselessEnemyRockets()
 
   gameState.playerFlares.forEach((flare) => {
     flare.render()
@@ -46,6 +45,7 @@ export function Step() {
 
   handleCollisions()
   playerDiesIfHpBelowZiro()
+  deleteUselessEnemyRockets()
 }
 
 function playerDiesIfHpBelowZiro() {

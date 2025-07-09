@@ -1,6 +1,6 @@
 import { rocketDefaultX, rocketDefaultY } from '../rendering/Helpers.js'
-
-export let rockets = []
+import { isOutOfScreen } from '../utils/geometry.js'
+import { gameState } from '../gameState.js'
 
 export let rocketAmmo = 50
 
@@ -21,15 +21,24 @@ class Rocket {
   }
 }
 
-export function renderRocket() {
-  for (let rocket of rockets) {
+export function renderPlayerRocket() {
+  for (let rocket of gameState.playerRockets) {
     rocket.element.style.left = rocket.x
     rocket.element.style.top = rocket.y
+
+    removePlayerRocketIfOutOfScreen(rocket)
   }
 }
 
-export function moveRocket() {
-  for (let rocket of rockets) {
+
+function removePlayerRocketIfOutOfScreen(rocket) {
+  if (isOutOfScreen(rocket)) {
+    removePlayerRocket(rocket)
+  }
+}
+
+export function movePlayerRocket() {
+  for (let rocket of gameState.playerRockets) {
     rocket.velocity += rocket.accelerationX
     rocket.x += rocket.velocity
   }
@@ -43,15 +52,17 @@ export function createPlayerRocket(airfighter) {
     rocket.x = airfighter.x + rocketDefaultX
     rocket.y = airfighter.y + rocketDefaultY
     document.body.append(rocket.element)
-    rockets.push(rocket)
+    gameState.playerRockets.push(rocket)
     rocketAmmo -= 1
   }
 }
 
 export function removePlayerRocket(rocket) {
-  const index = rockets.indexOf(rocket)
-  rockets.splice(index, 1)
+  const index = gameState.playerRockets.indexOf(rocket)
+  gameState.playerRockets.splice(index, 1)
   rocket.element.remove()
+
+  console.debug('Removed player rocket')
 }
 
 export function resetPlayerRocketAmmo() {
@@ -59,11 +70,11 @@ export function resetPlayerRocketAmmo() {
 }
 
 export function deleteUselessEnemyRockets() {
-  let rockets = document.querySelectorAll('.enemyRocket')
-  rockets.forEach((rocket) => {
+    let rockets = document.querySelectorAll('.enemyRocket')
+    rockets.forEach((rocket) => {
     let rocketPositionX = parseInt(rocket.style.left)
-    if (rocketPositionX < -200 || rocket.style.left == '') {
-      rocket.remove()
+     if (rocketPositionX < -200 || rocket.style.left == '') {
+       rocket.remove()
     }
   })
 }
