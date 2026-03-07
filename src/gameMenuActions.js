@@ -1,4 +1,4 @@
-import { Step, fps } from './step.js'
+import { startGameLoop } from './step.js'
 import { gameState } from './gameState.js'
 
 const pauseScreen = document.querySelector('#pause-screen');
@@ -20,7 +20,7 @@ export function gamePauseAction() {
 }
 
 function unPauseGame() {
-  requestAnimationFrame(Step)
+  startGameLoop()
   pauseScreen.style.display = 'none'
   gameState.isGamePaused = false
 }
