@@ -7,7 +7,7 @@ import {
   soundLevelComplete,
   soundboss,
 } from './music.js'
-import { Step, fps } from './step.js'
+import { startGameLoop } from './step.js'
 import { resetAmmo } from './ammo.js'
 import { createBoss, changeWinText } from './Boss.js'
 import { bossPopup } from './rendering/Helpers.js'
@@ -114,7 +114,7 @@ function startLevel2() {
 
 function startAnimationFrame() {
   gameState.isGamePaused = false
-  requestAnimationFrame(Step)
+  startGameLoop()
 }
 
 function startLevel3() {

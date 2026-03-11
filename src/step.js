@@ -15,6 +15,11 @@ import { setAirfighterVelocityFromMobileJoystick } from './mobile/mobileVelocity
 import { gameState } from './gameState.js'
 
 export const fps = 60
+const frameDurationMs = 1000 / fps
+
+let lastTimestamp = 0
+let accumulatorMs = 0
+let isLoopRunning = false
 
 export function Step() {
   renderCurrentScore()
@@ -34,10 +39,10 @@ export function Step() {
   }
 
   const lastEnemy = gameState.enemies[gameState.enemies.length - 1]
-  levelOverIfLastEnemyOut(lastEnemy, gameState)
-  if (!gameState.isGamePaused && !gameState.isGameOver) {
-    requestAnimationFrame(Step)
+  if (lastEnemy) {
+    levelOverIfLastEnemyOut(lastEnemy, gameState)
   }
+
   deleteUselessEnemyRockets()
 
   gameState.playerFlares.forEach((flare) => {
@@ -46,6 +51,46 @@ export function Step() {
 
   handleCollisions()
   playerDiesIfHpBelowZiro()
+}
+
+function gameLoop(timestamp) {
+  if (gameState.isGamePaused || gameState.isGameOver) {
+    isLoopRunning = false
+    lastTimestamp = 0
+    accumulatorMs = 0
+    return
+  }
+
+  if (!lastTimestamp) {
+    lastTimestamp = timestamp
+  }
+
+  let delta = timestamp - lastTimestamp
+
+  if (delta > 1000) {
+    delta = frameDurationMs
+  }
+
+  lastTimestamp = timestamp
+  accumulatorMs += delta
+
+  while (accumulatorMs >= frameDurationMs) {
+    Step()
+    accumulatorMs -= frameDurationMs
+  }
+
+  requestAnimationFrame(gameLoop)
+}
+
+export function startGameLoop() {
+  if (isLoopRunning) {
+    return
+  }
+
+  isLoopRunning = true
+  lastTimestamp = 0
+  accumulatorMs = 0
+  requestAnimationFrame(gameLoop)
 }
 
 function playerDiesIfHpBelowZiro() {
