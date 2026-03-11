@@ -64,8 +64,12 @@ export function deleteUselessEnemyRockets() {
     for (const enemyRocket of enemy.rockets) {
       if (enemyRocket.x < -200 ) {
         const index = enemy.rockets.indexOf(enemyRocket)
-        enemy.rockets.splice(index, 1)
-        enemy.element.remove()
+        if (index !== -1) {
+          enemy.rockets.splice(index, 1)
+        }
+        if (enemyRocket.element) {
+          enemyRocket.element.remove()
+        }
       }
     }
   }
